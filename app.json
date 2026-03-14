@@ -1,0 +1,136 @@
+{
+  "expo": {
+    "name": "AyurTwin",
+    "slug": "ayurtwin",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ayurtwin.app",
+      "buildNumber": "1.0.0",
+      "infoPlist": {
+        "NSFaceIDUsageDescription": "Allow AyurTwin to use Face ID for secure authentication",
+        "NSHealthShareUsageDescription": "AyurTwin needs to read health data for monitoring your wellness",
+        "NSHealthUpdateUsageDescription": "AyurTwin will write health data to track your metrics",
+        "NSBluetoothAlwaysUsageDescription": "AyurTwin uses Bluetooth to connect with your health wristband",
+        "NSBluetoothPeripheralUsageDescription": "AyurTwin uses Bluetooth to connect with your health wristband",
+        "NSCameraUsageDescription": "AyurTwin uses camera for profile picture",
+        "NSPhotoLibraryUsageDescription": "AyurTwin needs access to photo library for profile pictures",
+        "UIBackgroundModes": [
+          "bluetooth-central",
+          "bluetooth-peripheral",
+          "fetch",
+          "remote-notification"
+        ]
+      },
+      "config": {
+        "usesNonExemptEncryption": false
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FFFFFF"
+      },
+      "package": "com.ayurtwin.app",
+      "versionCode": 1,
+      "permissions": [
+        "android.permission.BLUETOOTH",
+        "android.permission.BLUETOOTH_ADMIN",
+        "android.permission.BLUETOOTH_CONNECT",
+        "android.permission.BLUETOOTH_SCAN",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECEIVE_BOOT_COMPLETED",
+        "android.permission.VIBRATE",
+        "android.permission.SCHEDULE_EXACT_ALARM",
+        "android.permission.POST_NOTIFICATIONS"
+      ],
+      "softwareKeyboardLayoutMode": "pan"
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/notification-icon.png",
+          "color": "#FF9933",
+          "sounds": ["./assets/sounds/notification.wav"]
+        }
+      ],
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "Allow AyurTwin to use Face ID for secure authentication"
+        }
+      ],
+      [
+        "expo-bluetooth",
+        {
+          "bluetoothAlwaysPermission": "Allow AyurTwin to connect with your health wristband"
+        }
+      ],
+      [
+        "expo-sensors",
+        {
+          "motionPermission": "Allow AyurTwin to access motion sensors for activity tracking"
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "your-eas-project-id-here"
+      }
+    },
+    "owner": "ayurtwin",
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/your-project-id",
+      "fallbackToCacheTimeout": 0,
+      "enabled": true,
+      "checkAutomatically": "ON_LOAD"
+    },
+    "notification": {
+      "icon": "./assets/notification-icon.png",
+      "color": "#FF9933",
+      "iosDisplayInForeground": true,
+      "androidMode": "default",
+      "androidCollapsedTitle": "AyurTwin"
+    },
+    "hooks": {
+      "postPublish": [
+        {
+          "file": "sentry-expo/upload-sourcemaps",
+          "config": {
+            "organization": "ayurtwin",
+            "project": "ayurtwin-mobile",
+            "authToken": "your-sentry-auth-token"
+          }
+        }
+      ]
+    },
+    "developmentClient": {
+      "silentLaunch": false
+    }
+  }
+}
