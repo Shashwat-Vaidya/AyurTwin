@@ -1,11 +1,11 @@
 import { Platform, PermissionsAndroid } from 'react-native';
-import { BleManager } from 'react-native-ble-plx';
+// import { BleManager } from 'react-native-ble-plx'; // Dynamic import below
 import { Buffer } from 'buffer';
 import * as Location from 'expo-location';
 
 class BluetoothService {
   constructor() {
-    this.manager = new BleManager();
+    this.manager = null;
     this.device = null;
     this.connected = false;
     this.scanning = false;
@@ -32,6 +32,19 @@ class BluetoothService {
       stress: '12345678-1234-5678-1234-56789ABCDEF4',
       activity: '12345678-1234-5678-1234-56789ABCDEF5',
     };
+
+    // Initialize BleManager dynamically to avoid import errors in Expo Go
+    this.initializeBleManager();
+  }
+
+  async initializeBleManager() {
+    try {
+      const { BleManager } = await import('react-native-ble-plx');
+      this.manager = new BleManager();
+    } catch (error) {
+      console.warn('BleManager not available in this environment:', error);
+      this.manager = null;
+    }
   }
 
   async requestPermissions() {

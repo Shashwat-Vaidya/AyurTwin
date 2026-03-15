@@ -1,5 +1,6 @@
 import { DefaultTheme } from 'react-native-paper';
 import colors from './colors';
+import typography from '../../styles/typography';
 
 export const theme = {
   ...DefaultTheme,
@@ -11,35 +12,27 @@ export const theme = {
     surface: colors.cardBeige,
     text: colors.textPrimary,
     error: colors.alertRed,
-    success: colors.successGreen,
-    warning: colors.warningYellow,
-    disabled: colors.disabled,
-    placeholder: colors.textTertiary,
-    backdrop: colors.overlay,
   },
   fonts: {
     ...DefaultTheme.fonts,
     regular: {
-      fontFamily: 'System',
+      fontFamily: 'sans-serif',
       fontWeight: '400',
     },
     medium: {
-      fontFamily: 'System',
+      fontFamily: 'sans-serif-medium',
       fontWeight: '500',
     },
-    semiBold: {
-      fontFamily: 'System',
-      fontWeight: '600',
+    light: {
+      fontFamily: 'sans-serif-light',
+      fontWeight: '300',
     },
-    bold: {
-      fontFamily: 'System',
-      fontWeight: '700',
+    thin: {
+      fontFamily: 'sans-serif-thin',
+      fontWeight: '100',
     },
   },
   roundness: 24,
-  animation: {
-    scale: 1.0,
-  },
 };
 
 export default theme;

@@ -4,7 +4,13 @@
     "slug": "ayurtwin",
     "version": "1.0.0",
     "orientation": "portrait",
+    
     "userInterfaceStyle": "light",
+    "splash": {
+      
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -13,13 +19,17 @@
       "bundleIdentifier": "com.ayurtwin.app"
     },
     "android": {
+      
       "package": "com.ayurtwin.app"
+    },
+    "web": {
+    
     },
     "plugins": [
       "expo-notifications",
       "expo-local-authentication",
-      "expo-sensors"
-      
+      "expo-sensors",
+      "expo-location"
     ]
   }
 }
