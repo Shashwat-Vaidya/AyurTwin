@@ -75,7 +75,6 @@ const Card = ({
   );
 };
 
-// Card Header Component
 export const CardHeader = ({ title, subtitle, rightIcon, onRightPress, style }) => (
   <View style={[styles.header, style]}>
     <View style={styles.headerLeft}>
@@ -90,17 +89,14 @@ export const CardHeader = ({ title, subtitle, rightIcon, onRightPress, style }) 
   </View>
 );
 
-// Card Body Component
 export const CardBody = ({ children, style }) => (
   <View style={[styles.body, style]}>{children}</View>
 );
 
-// Card Footer Component
 export const CardFooter = ({ children, style }) => (
   <View style={[styles.footer, style]}>{children}</View>
 );
 
-// Card Image Component
 export const CardImage = ({ source, style, height = 200 }) => (
   <Image 
     source={source} 
@@ -109,12 +105,10 @@ export const CardImage = ({ source, style, height = 200 }) => (
   />
 );
 
-// Card Divider Component
 export const CardDivider = ({ style }) => (
   <View style={[styles.divider, style]} />
 );
 
-// Card Row Component
 export const CardRow = ({ left, right, style }) => (
   <View style={[styles.row, style]}>
     <View style={styles.rowLeft}>{left}</View>
@@ -122,7 +116,6 @@ export const CardRow = ({ left, right, style }) => (
   </View>
 );
 
-// Metric Card Component
 export const MetricCard = ({ icon, value, label, color, onPress }) => (
   <Card onPress={onPress} style={styles.metricCard}>
     <View style={[styles.metricIcon, { backgroundColor: `${color}20` }]}>
@@ -133,7 +126,6 @@ export const MetricCard = ({ icon, value, label, color, onPress }) => (
   </Card>
 );
 
-// Stats Card Component
 export const StatsCard = ({ title, value, change, icon, color }) => (
   <Card style={styles.statsCard}>
     <View style={styles.statsHeader}>
@@ -161,7 +153,6 @@ export const StatsCard = ({ title, value, change, icon, color }) => (
   </Card>
 );
 
-// Info Card Component
 export const InfoCard = ({ title, message, type = 'info' }) => {
   const getIcon = () => {
     switch(type) {

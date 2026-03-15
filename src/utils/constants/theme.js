@@ -20,19 +20,19 @@ export const theme = {
   fonts: {
     ...DefaultTheme.fonts,
     regular: {
-      fontFamily: 'Inter-Regular',
+      fontFamily: 'System',
       fontWeight: '400',
     },
     medium: {
-      fontFamily: 'Inter-Medium',
+      fontFamily: 'System',
       fontWeight: '500',
     },
     semiBold: {
-      fontFamily: 'Inter-SemiBold',
+      fontFamily: 'System',
       fontWeight: '600',
     },
     bold: {
-      fontFamily: 'Inter-Bold',
+      fontFamily: 'System',
       fontWeight: '700',
     },
   },

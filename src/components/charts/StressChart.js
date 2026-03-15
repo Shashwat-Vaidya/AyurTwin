@@ -1,322 +1,227 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import {
-  VictoryChart,
-  VictoryLine,
-  VictoryAxis,
-  VictoryScatter,
-  VictoryTooltip,
-  VictoryVoronoiContainer,
-  VictoryArea,
-} from 'victory-native';
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
+
 import colors from '../../utils/constants/colors';
 
 const { width } = Dimensions.get('window');
 
 const StressChart = ({
-  data = [],
-  currentStress = 45,
-  minStress = 20,
-  maxStress = 78,
-  avgStress = 48,
-  timeRange = '24h', // '6h', '12h', '24h', 'week'
-  onDataPointPress,
+  data,
+  timeRange = 'week',
+  showStats = true,
+  height = 200,
+  width: chartWidth = width - 40,
 }) => {
-  // Default mock data if none provided
-  const defaultData = [
-    { x: '6h', y: 35 },
-    { x: '12h', y: 48 },
-    { x: '18h', y: 62 },
-    { x: '24h', y: 41 },
-  ];
-
-  const chartData = data.length ? data : defaultData;
-
-  // Format y-axis ticks (stress 0-100)
-  const yTickValues = [0, 25, 50, 75, 100];
-
-  // Get stress level description
-  const getStressLevel = (value) => {
-    if (value < 30) return 'Low';
-    if (value < 60) return 'Moderate';
-    if (value < 80) return 'High';
-    return 'Severe';
+  // Default data if none provided
+  const chartData = {
+    labels: data?.labels || ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [{
+      data: data?.values || [45, 52, 48, 55, 49, 47, 44],
+      color: (opacity = 1) => `rgba(155, 107, 158, ${opacity})`,
+      strokeWidth: 2,
+    }],
+    legend: ['Stress Level'],
   };
 
-  const stressLevel = getStressLevel(currentStress);
-  const stressColor = 
-    stressLevel === 'Low' ? colors.successGreen :
-    stressLevel === 'Moderate' ? colors.warningYellow :
-    stressLevel === 'High' ? colors.tempOrange : colors.alertRed;
+  // Calculate stats
+  const values = chartData.datasets[0].data;
+  const min = Math.min(...values);
+  const max = Math.max(...values);
+  const avg = Math.round(values.reduce((a, b) => a + b, 0) / values.length);
+
+  // Determine stress level
+  const getStressLevel = (level) => {
+    if (avg <= 30) return { text: 'Low', color: colors.successGreen };
+    if (avg <= 50) return { text: 'Moderate', color: colors.warningYellow };
+    if (avg <= 70) return { text: 'High', color: colors.tempOrange };
+    return { text: 'Severe', color: colors.alertRed };
+  };
+
+  const stressLevel = getStressLevel(avg);
+
+  const chartConfig = {
+    backgroundColor: 'white',
+    backgroundGradientFrom: 'white',
+    backgroundGradientTo: 'white',
+    decimalPlaces: 0,
+    color: (opacity = 1) => `rgba(155, 107, 158, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(90, 107, 122, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+    propsForDots: {
+      r: '4',
+      strokeWidth: '2',
+      stroke: colors.stressPurple,
+    },
+    propsForBackgroundLines: {
+      strokeDasharray: '',
+      stroke: 'rgba(0,0,0,0.03)',
+    },
+    formatYLabel: (yValue) => `${yValue}`,
+  };
 
   return (
     <View style={styles.container}>
-      {/* Header with current stress and level */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.currentLabel}>Current Stress</Text>
-          <View style={styles.currentRow}>
-            <Text style={[styles.currentValue, { color: stressColor }]}>
-              {currentStress}
-            </Text>
-            <View style={[styles.levelBadge, { backgroundColor: `${stressColor}20` }]}>
-              <Text style={[styles.levelText, { color: stressColor }]}>
-                {stressLevel}
+      {showStats && (
+        <View style={styles.statsContainer}>
+          <View style={styles.statItem}>
+            <Text style={styles.statLabel}>Average</Text>
+            <Text style={[styles.statValue, { color: stressLevel.color }]}>{avg}</Text>
+          </View>
+          <View style={styles.statItem}>
+            <Text style={styles.statLabel}>Level</Text>
+            <View style={[styles.levelBadge, { backgroundColor: `${stressLevel.color}20` }]}>
+              <Text style={[styles.levelText, { color: stressLevel.color }]}>
+                {stressLevel.text}
               </Text>
             </View>
           </View>
-        </View>
-        <View style={styles.statsContainer}>
           <View style={styles.statItem}>
-            <Ionicons name="arrow-down" size={14} color={colors.successGreen} />
-            <Text style={styles.statValue}>{minStress}</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Ionicons name="remove" size={14} color={colors.textSecondary} />
-            <Text style={styles.statValue}>{avgStress}</Text>
-          </View>
-          <View style={styles.statItem}>
-            <Ionicons name="arrow-up" size={14} color={colors.alertRed} />
-            <Text style={styles.statValue}>{maxStress}</Text>
+            <Text style={styles.statLabel}>Range</Text>
+            <Text style={styles.statValue}>{min}-{max}</Text>
           </View>
         </View>
-      </View>
+      )}
 
-      {/* Chart */}
-      <VictoryChart
-        width={width - 64}
-        height={200}
-        padding={{ top: 20, bottom: 30, left: 40, right: 20 }}
-        containerComponent={
-          <VictoryVoronoiContainer
-            voronoiDimension="x"
-            onActivated={(points) => {
-              if (onDataPointPress) onDataPointPress(points[0]);
-            }}
-            labels={({ datum }) => `Stress: ${datum.y}`}
-            labelComponent={
-              <VictoryTooltip
-                style={{ fill: 'white', fontSize: 10 }}
-                flyoutStyle={{
-                  fill: colors.stressPurple,
-                  stroke: 'white',
-                  strokeWidth: 1,
-                }}
-              />
-            }
-          />
-        }
-      >
-        {/* Area fill for better visualization */}
-        <VictoryArea
-          data={chartData}
-          style={{
-            data: {
-              fill: `${colors.stressPurple}30`,
-              stroke: 'transparent',
-            },
-          }}
-          interpolation="natural"
-        />
-        {/* Main line */}
-        <VictoryLine
-          data={chartData}
-          style={{
-            data: {
-              stroke: colors.stressPurple,
-              strokeWidth: 3,
-            },
-          }}
-          interpolation="natural"
-        />
-        {/* Scatter points */}
-        <VictoryScatter
-          data={chartData}
-          size={5}
-          style={{
-            data: {
-              fill: colors.stressPurple,
-              stroke: 'white',
-              strokeWidth: 2,
-            },
-          }}
-        />
-        {/* Axes */}
-        <VictoryAxis
-          style={{
-            axis: { stroke: colors.border },
-            ticks: { stroke: colors.border, size: 5 },
-            tickLabels: {
-              fill: colors.textSecondary,
-              fontSize: 10,
-              fontFamily: 'Inter-Regular',
-            },
-          }}
-          tickValues={chartData.map(d => d.x)}
-        />
-        <VictoryAxis
-          dependentAxis
-          style={{
-            axis: { stroke: colors.border },
-            ticks: { stroke: colors.border, size: 5 },
-            tickLabels: {
-              fill: colors.textSecondary,
-              fontSize: 10,
-              fontFamily: 'Inter-Regular',
-            },
-          }}
-          tickValues={yTickValues}
-        />
-      </VictoryChart>
+      <LineChart
+        data={chartData}
+        width={chartWidth}
+        height={height}
+        chartConfig={chartConfig}
+        bezier
+        style={styles.chart}
+        withDots={true}
+        withShadow={false}
+        withInnerLines={true}
+        withOuterLines={true}
+        withVerticalLines={false}
+        withHorizontalLines={true}
+      />
 
-      {/* Stress zones legend */}
-      <View style={styles.legendContainer}>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.successGreen }]} />
-          <Text style={styles.legendText}>Low (0-30)</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.warningYellow }]} />
-          <Text style={styles.legendText}>Moderate (31-60)</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.tempOrange }]} />
-          <Text style={styles.legendText}>High (61-80)</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.alertRed }]} />
-          <Text style={styles.legendText}>Severe (81+)</Text>
-        </View>
-      </View>
-
-      {/* Time range indicator */}
-      <View style={styles.timeRangeContainer}>
-        {['6h', '12h', '18h', '24h'].map((range) => (
-          <View
-            key={range}
-            style={[styles.timeRangeDot, timeRange === range && styles.timeRangeDotActive]}
-          >
-            <Text style={[styles.timeRangeText, timeRange === range && styles.timeRangeTextActive]}>
-              {range}
-            </Text>
+      <View style={styles.footer}>
+        <Text style={styles.timeRange}>
+          {timeRange === 'day' ? 'Today' : timeRange === 'week' ? 'This Week' : 'This Month'}
+        </Text>
+        <View style={styles.zones}>
+          <View style={styles.zoneItem}>
+            <View style={[styles.zoneDot, { backgroundColor: colors.successGreen }]} />
+            <Text style={styles.zoneText}>Low</Text>
           </View>
-        ))}
+          <View style={styles.zoneItem}>
+            <View style={[styles.zoneDot, { backgroundColor: colors.warningYellow }]} />
+            <Text style={styles.zoneText}>Mod</Text>
+          </View>
+          <View style={styles.zoneItem}>
+            <View style={[styles.zoneDot, { backgroundColor: colors.tempOrange }]} />
+            <Text style={styles.zoneText}>High</Text>
+          </View>
+          <View style={styles.zoneItem}>
+            <View style={[styles.zoneDot, { backgroundColor: colors.alertRed }]} />
+            <Text style={styles.zoneText}>Sev</Text>
+          </View>
+        </View>
       </View>
     </View>
   );
 };
 
+// Preset variants
+export const SmallStressChart = (props) => (
+  <StressChart
+    height={120}
+    showStats={false}
+    {...props}
+  />
+);
+
+export const StressDetailChart = (props) => (
+  <StressChart
+    height={250}
+    showStats={true}
+    {...props}
+  />
+);
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.cardBeige,
-    borderRadius: 24,
-    padding: 20,
-    marginHorizontal: 16,
-    marginVertical: 8,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 3,
   },
-  header: {
+  statsContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    justifyContent: 'space-around',
     marginBottom: 16,
   },
-  currentLabel: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: colors.textSecondary,
-  },
-  currentRow: {
-    flexDirection: 'row',
+  statItem: {
     alignItems: 'center',
   },
-  currentValue: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 32,
-    marginRight: 8,
+  statLabel: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    color: colors.textTertiary,
+    marginBottom: 2,
+  },
+  statValue: {
+    fontFamily: 'Inter-SemiBold',
+    fontSize: 16,
+    color: colors.textPrimary,
   },
   levelBadge: {
     paddingHorizontal: 8,
-    paddingVertical: 4,
+    paddingVertical: 2,
     borderRadius: 12,
   },
   levelText: {
     fontFamily: 'Inter-Medium',
     fontSize: 12,
   },
-  statsContainer: {
-    flexDirection: 'row',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
+  chart: {
+    borderRadius: 16,
+    marginVertical: 8,
   },
-  statItem: {
+  footer: {
     flexDirection: 'row',
-    alignItems: 'center',
-    marginHorizontal: 6,
-  },
-  statValue: {
-    fontFamily: 'Inter-Medium',
-    fontSize: 14,
-    color: colors.textPrimary,
-    marginLeft: 2,
-  },
-  legendContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 12,
-    marginBottom: 8,
-    paddingHorizontal: 4,
   },
-  legendItem: {
+  timeRange: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    color: colors.textTertiary,
+  },
+  zones: {
+    flexDirection: 'row',
+  },
+  zoneItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
-    width: '48%',
+    marginLeft: 12,
   },
-  legendDot: {
+  zoneDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
     marginRight: 4,
   },
-  legendText: {
+  zoneText: {
     fontFamily: 'Inter-Regular',
     fontSize: 10,
-    color: colors.textSecondary,
-  },
-  timeRangeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 12,
-  },
-  timeRangeDot: {
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-  },
-  timeRangeDotActive: {
-    backgroundColor: colors.stressPurple,
-  },
-  timeRangeText: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 12,
-    color: colors.textSecondary,
-  },
-  timeRangeTextActive: {
-    color: 'white',
+    color: colors.textTertiary,
   },
 });
 

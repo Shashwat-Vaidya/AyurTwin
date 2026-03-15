@@ -233,7 +233,6 @@ const Input = ({
   );
 };
 
-// Preset input types
 export const EmailInput = (props) => (
   <Input
     keyboardType="email-address"

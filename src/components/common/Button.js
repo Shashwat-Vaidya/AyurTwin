@@ -22,7 +22,7 @@ const Button = ({
   gradient = false,
   icon,
   iconPosition = 'left',
-  size = 'medium', // small, medium, large
+  size = 'medium',
   fullWidth = false,
   rounded = true,
   backgroundColor,
@@ -47,7 +47,7 @@ const Button = ({
           fontSize: 18,
           iconSize: 24,
         };
-      default: // medium
+      default:
         return {
           paddingVertical: 12,
           paddingHorizontal: 24,
@@ -166,47 +166,12 @@ const Button = ({
   );
 };
 
-// Preset button variants
-export const PrimaryButton = (props) => (
-  <Button gradient {...props} />
-);
-
-export const SecondaryButton = (props) => (
-  <Button outline {...props} />
-);
-
-export const DangerButton = (props) => (
-  <Button 
-    backgroundColor={colors.alertRed} 
-    textColor="white" 
-    {...props} 
-  />
-);
-
-export const SuccessButton = (props) => (
-  <Button 
-    backgroundColor={colors.successGreen} 
-    textColor="white" 
-    {...props} 
-  />
-);
-
-export const WarningButton = (props) => (
-  <Button 
-    backgroundColor={colors.warningYellow} 
-    textColor="white" 
-    {...props} 
-  />
-);
-
-export const TextButton = (props) => (
-  <Button 
-    outline 
-    borderColor="transparent" 
-    textColor={colors.textSecondary} 
-    {...props} 
-  />
-);
+export const PrimaryButton = (props) => <Button gradient {...props} />;
+export const SecondaryButton = (props) => <Button outline {...props} />;
+export const DangerButton = (props) => <Button backgroundColor={colors.alertRed} textColor="white" {...props} />;
+export const SuccessButton = (props) => <Button backgroundColor={colors.successGreen} textColor="white" {...props} />;
+export const WarningButton = (props) => <Button backgroundColor={colors.warningYellow} textColor="white" {...props} />;
+export const TextButton = (props) => <Button outline borderColor="transparent" textColor={colors.textSecondary} {...props} />;
 
 export const IconButton = ({ icon, onPress, size = 'medium', color, style }) => {
   const iconSizes = {

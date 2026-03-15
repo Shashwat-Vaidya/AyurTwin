@@ -1,325 +1,183 @@
 import React from 'react';
-import { View, Text, StyleSheet, Dimensions } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import {
-  VictoryChart,
-  VictoryLine,
-  VictoryAxis,
-  VictoryScatter,
-  VictoryTooltip,
-  VictoryVoronoiContainer,
-  VictoryArea,
-} from 'victory-native';
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+} from 'react-native';
+import { LineChart } from 'react-native-chart-kit';
 import { Ionicons } from '@expo/vector-icons';
+
 import colors from '../../utils/constants/colors';
 
 const { width } = Dimensions.get('window');
 
 const TemperatureChart = ({
-  data = [],
-  currentTemp = 36.6,
-  minTemp = 36.2,
-  maxTemp = 37.1,
-  avgTemp = 36.7,
-  timeRange = '24h', // '6h', '12h', '24h', 'week'
-  onDataPointPress,
+  data,
+  timeRange = '24h',
+  showStats = true,
+  height = 200,
+  width: chartWidth = width - 40,
 }) => {
-  // Default mock data if none provided
-  const defaultData = [
-    { x: '6h', y: 36.4 },
-    { x: '12h', y: 36.8 },
-    { x: '18h', y: 37.0 },
-    { x: '24h', y: 36.5 },
-  ];
-
-  const chartData = data.length ? data : defaultData;
-
-  // Format y-axis ticks (temperature range 35-39)
-  const yTickValues = [35, 36, 37, 38, 39];
-
-  // Get temperature status
-  const getTempStatus = (value) => {
-    if (value < 36.1) return { label: 'Low', color: colors.spO2Blue };
-    if (value <= 37.2) return { label: 'Normal', color: colors.successGreen };
-    if (value <= 38.0) return { label: 'Elevated', color: colors.warningYellow };
-    return { label: 'High', color: colors.alertRed };
+  const chartData = {
+    labels: data?.labels || ['12am', '4am', '8am', '12pm', '4pm', '8pm', '11pm'],
+    datasets: [{
+      data: data?.values || [36.4, 36.2, 36.1, 36.5, 36.8, 36.6, 36.3],
+      color: (opacity = 1) => `rgba(255, 140, 66, ${opacity})`,
+      strokeWidth: 2,
+    }],
+    legend: ['Temperature'],
   };
 
-  const status = getTempStatus(currentTemp);
+  const values = chartData.datasets[0].data;
+  const min = Math.min(...values).toFixed(1);
+  const max = Math.max(...values).toFixed(1);
+  const avg = (values.reduce((a, b) => a + b, 0) / values.length).toFixed(1);
+
+  const chartConfig = {
+    backgroundColor: 'white',
+    backgroundGradientFrom: 'white',
+    backgroundGradientTo: 'white',
+    decimalPlaces: 1,
+    color: (opacity = 1) => `rgba(255, 140, 66, ${opacity})`,
+    labelColor: (opacity = 1) => `rgba(90, 107, 122, ${opacity})`,
+    style: {
+      borderRadius: 16,
+    },
+    propsForDots: {
+      r: '4',
+      strokeWidth: '2',
+      stroke: colors.tempOrange,
+    },
+    propsForBackgroundLines: {
+      strokeDasharray: '',
+      stroke: 'rgba(0,0,0,0.03)',
+    },
+    formatYLabel: (yValue) => `${yValue}°C`,
+  };
+
+  const getStatusColor = (value) => {
+    if (value < 36.0) return colors.alertRed;
+    if (value > 37.5) return colors.alertRed;
+    return colors.successGreen;
+  };
 
   return (
     <View style={styles.container}>
-      {/* Header with current temperature and status */}
-      <View style={styles.header}>
-        <View>
-          <Text style={styles.currentLabel}>Temperature</Text>
-          <View style={styles.currentRow}>
-            <Text style={[styles.currentValue, { color: status.color }]}>
-              {currentTemp.toFixed(1)}
-            </Text>
-            <Text style={styles.unit}>°C</Text>
-            <View style={[styles.statusBadge, { backgroundColor: `${status.color}20` }]}>
-              <Text style={[styles.statusText, { color: status.color }]}>
-                {status.label}
-              </Text>
-            </View>
-          </View>
-        </View>
+      {showStats && (
         <View style={styles.statsContainer}>
           <View style={styles.statItem}>
-            <Ionicons name="arrow-down" size={14} color={colors.spO2Blue} />
-            <Text style={styles.statValue}>{minTemp.toFixed(1)}</Text>
+            <Ionicons name="arrow-down" size={14} color={colors.successGreen} />
+            <Text style={styles.statLabel}>Min</Text>
+            <Text style={styles.statValue}>{min}°C</Text>
           </View>
           <View style={styles.statItem}>
-            <Ionicons name="remove" size={14} color={colors.textSecondary} />
-            <Text style={styles.statValue}>{avgTemp.toFixed(1)}</Text>
+            <Ionicons name="remove" size={14} color={colors.warningYellow} />
+            <Text style={styles.statLabel}>Avg</Text>
+            <Text style={styles.statValue}>{avg}°C</Text>
           </View>
           <View style={styles.statItem}>
-            <Ionicons name="arrow-up" size={14} color={colors.tempOrange} />
-            <Text style={styles.statValue}>{maxTemp.toFixed(1)}</Text>
+            <Ionicons name="arrow-up" size={14} color={colors.alertRed} />
+            <Text style={styles.statLabel}>Max</Text>
+            <Text style={styles.statValue}>{max}°C</Text>
           </View>
         </View>
-      </View>
+      )}
 
-      {/* Chart */}
-      <VictoryChart
-        width={width - 64}
-        height={200}
-        padding={{ top: 20, bottom: 30, left: 40, right: 20 }}
-        containerComponent={
-          <VictoryVoronoiContainer
-            voronoiDimension="x"
-            onActivated={(points) => {
-              if (onDataPointPress) onDataPointPress(points[0]);
-            }}
-            labels={({ datum }) => `${datum.y}°C`}
-            labelComponent={
-              <VictoryTooltip
-                style={{ fill: 'white', fontSize: 10 }}
-                flyoutStyle={{
-                  fill: colors.tempOrange,
-                  stroke: 'white',
-                  strokeWidth: 1,
-                }}
-              />
-            }
-          />
-        }
-      >
-        {/* Area fill for temperature range */}
-        <VictoryArea
-          data={chartData}
-          style={{
-            data: {
-              fill: `${colors.tempOrange}20`,
-              stroke: 'transparent',
-            },
-          }}
-          interpolation="natural"
-        />
-        {/* Main line */}
-        <VictoryLine
-          data={chartData}
-          style={{
-            data: {
-              stroke: colors.tempOrange,
-              strokeWidth: 3,
-            },
-          }}
-          interpolation="natural"
-        />
-        {/* Scatter points */}
-        <VictoryScatter
-          data={chartData}
-          size={5}
-          style={{
-            data: {
-              fill: colors.tempOrange,
-              stroke: 'white',
-              strokeWidth: 2,
-            },
-          }}
-        />
-        {/* Axes */}
-        <VictoryAxis
-          style={{
-            axis: { stroke: colors.border },
-            ticks: { stroke: colors.border, size: 5 },
-            tickLabels: {
-              fill: colors.textSecondary,
-              fontSize: 10,
-              fontFamily: 'Inter-Regular',
-            },
-          }}
-          tickValues={chartData.map(d => d.x)}
-        />
-        <VictoryAxis
-          dependentAxis
-          style={{
-            axis: { stroke: colors.border },
-            ticks: { stroke: colors.border, size: 5 },
-            tickLabels: {
-              fill: colors.textSecondary,
-              fontSize: 10,
-              fontFamily: 'Inter-Regular',
-            },
-          }}
-          tickValues={yTickValues}
-        />
-      </VictoryChart>
+      <LineChart
+        data={chartData}
+        width={chartWidth}
+        height={height}
+        chartConfig={chartConfig}
+        bezier
+        style={styles.chart}
+        withDots={true}
+        withShadow={false}
+        withInnerLines={true}
+        withOuterLines={true}
+        withVerticalLines={false}
+        withHorizontalLines={true}
+      />
 
-      {/* Temperature zones legend */}
-      <View style={styles.legendContainer}>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.spO2Blue }]} />
-          <Text style={styles.legendText}>Low (&lt;36.1°C)</Text>
+      <View style={styles.footer}>
+        <Text style={styles.timeRange}>Last {timeRange}</Text>
+        <View style={styles.normalRange}>
+          <View style={[styles.rangeDot, { backgroundColor: colors.successGreen }]} />
+          <Text style={styles.rangeText}>Normal 36.1-37.2°C</Text>
         </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.successGreen }]} />
-          <Text style={styles.legendText}>Normal (36.1-37.2°C)</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.warningYellow }]} />
-          <Text style={styles.legendText}>Elevated (37.3-38.0°C)</Text>
-        </View>
-        <View style={styles.legendItem}>
-          <View style={[styles.legendDot, { backgroundColor: colors.alertRed }]} />
-          <Text style={styles.legendText}>High (&gt;38.0°C)</Text>
-        </View>
-      </View>
-
-      {/* Time range indicator */}
-      <View style={styles.timeRangeContainer}>
-        {['6h', '12h', '18h', '24h'].map((range) => (
-          <View
-            key={range}
-            style={[styles.timeRangeDot, timeRange === range && styles.timeRangeDotActive]}
-          >
-            <Text style={[styles.timeRangeText, timeRange === range && styles.timeRangeTextActive]}>
-              {range}
-            </Text>
-          </View>
-        ))}
       </View>
     </View>
   );
 };
 
+export const SmallTempChart = (props) => (
+  <TemperatureChart height={120} showStats={false} {...props} />
+);
+
+export const TempDetailChart = (props) => (
+  <TemperatureChart height={250} showStats={true} {...props} />
+);
+
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.cardBeige,
-    borderRadius: 24,
-    padding: 20,
-    marginHorizontal: 16,
-    marginVertical: 8,
+    backgroundColor: 'white',
+    borderRadius: 20,
+    padding: 16,
     shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
     shadowRadius: 8,
     elevation: 3,
   },
-  header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 16,
-  },
-  currentLabel: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: colors.textSecondary,
-  },
-  currentRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  currentValue: {
-    fontFamily: 'Inter-Bold',
-    fontSize: 32,
-  },
-  unit: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 16,
-    color: colors.textTertiary,
-    marginLeft: 2,
-    marginRight: 8,
-  },
-  statusBadge: {
-    paddingHorizontal: 8,
-    paddingVertical: 4,
-    borderRadius: 12,
-  },
-  statusText: {
-    fontFamily: 'Inter-Medium',
-    fontSize: 12,
-  },
   statsContainer: {
     flexDirection: 'row',
-    backgroundColor: 'white',
-    borderRadius: 20,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.03,
-    shadowRadius: 4,
+    justifyContent: 'space-around',
+    marginBottom: 16,
   },
   statItem: {
-    flexDirection: 'row',
     alignItems: 'center',
-    marginHorizontal: 6,
+  },
+  statLabel: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    color: colors.textTertiary,
+    marginTop: 2,
   },
   statValue: {
-    fontFamily: 'Inter-Medium',
+    fontFamily: 'Inter-SemiBold',
     fontSize: 14,
     color: colors.textPrimary,
-    marginLeft: 2,
+    marginTop: 2,
   },
-  legendContainer: {
+  chart: {
+    borderRadius: 16,
+    marginVertical: 8,
+  },
+  footer: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
     justifyContent: 'space-between',
+    alignItems: 'center',
     marginTop: 12,
-    marginBottom: 8,
-    paddingHorizontal: 4,
   },
-  legendItem: {
+  timeRange: {
+    fontFamily: 'Inter-Regular',
+    fontSize: 12,
+    color: colors.textTertiary,
+  },
+  normalRange: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: 4,
-    width: '48%',
   },
-  legendDot: {
+  rangeDot: {
     width: 8,
     height: 8,
     borderRadius: 4,
     marginRight: 4,
   },
-  legendText: {
+  rangeText: {
     fontFamily: 'Inter-Regular',
     fontSize: 10,
-    color: colors.textSecondary,
-  },
-  timeRangeContainer: {
-    flexDirection: 'row',
-    justifyContent: 'space-around',
-    marginTop: 12,
-  },
-  timeRangeDot: {
-    paddingVertical: 4,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-  },
-  timeRangeDotActive: {
-    backgroundColor: colors.tempOrange,
-  },
-  timeRangeText: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 12,
-    color: colors.textSecondary,
-  },
-  timeRangeTextActive: {
-    color: 'white',
+    color: colors.textTertiary,
   },
 });
 

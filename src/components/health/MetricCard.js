@@ -1,171 +1,176 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { LinearGradient } from 'expo-linear-gradient';
+
 import colors from '../../utils/constants/colors';
 
-const MetricCard = ({
-  title,
-  value,
-  unit,
-  icon,
-  color = colors.primarySaffron,
-  trend,
-  trendValue,
-  subtitle,
-  onPress,
-  size = 'medium', // 'small', 'medium', 'large'
-}) => {
-  // Determine size styles
-  const getSizeStyles = () => {
-    switch (size) {
-      case 'small':
-        return {
-          container: { width: 100, height: 100 },
-          valueFont: 24,
-          titleFont: 12,
-        };
-      case 'large':
-        return {
-          container: { width: '100%', height: 140 },
-          valueFont: 42,
-          titleFont: 16,
-        };
-      default: // medium
-        return {
-          container: { width: 160, height: 130 },
-          valueFont: 32,
-          titleFont: 14,
-        };
-    }
-  };
-
-  const sizeStyles = getSizeStyles();
-
-  // Get trend icon
-  const getTrendIcon = () => {
-    if (trend === 'up') return 'arrow-up';
-    if (trend === 'down') return 'arrow-down';
-    return 'remove';
-  };
-
-  // Get trend color
-  const getTrendColor = () => {
-    if (trend === 'up') return colors.alertRed;
-    if (trend === 'down') return colors.successGreen;
-    return colors.textSecondary;
-  };
+const MetricCard = ({ metric, onPress, selected = false }) => {
+  const { id, label, value, unit, icon, color } = metric;
 
   return (
     <TouchableOpacity
-      style={[styles.container, sizeStyles.container]}
+      style={[styles.container, selected && styles.selectedContainer]}
       onPress={onPress}
       activeOpacity={0.7}
-      disabled={!onPress}
     >
       <LinearGradient
-        colors={[colors.cardBeige, '#FFFFFF']}
+        colors={selected ? [color, `${color}CC`] : ['white', '#FAFAFA']}
         start={{ x: 0, y: 0 }}
         end={{ x: 1, y: 1 }}
-        style={styles.gradient}
+        style={[styles.gradient, selected && styles.selectedGradient]}
       >
-        {/* Icon and title row */}
-        <View style={styles.header}>
-          <View style={[styles.iconContainer, { backgroundColor: `${color}20` }]}>
-            <Ionicons name={icon} size={size === 'small' ? 16 : 20} color={color} />
-          </View>
-          <Text style={[styles.title, { fontSize: sizeStyles.titleFont }]} numberOfLines={1}>
-            {title}
-          </Text>
+        <View style={[styles.iconContainer, { backgroundColor: selected ? 'white' : `${color}20` }]}>
+          <Ionicons 
+            name={icon} 
+            size={24} 
+            color={selected ? color : color} 
+          />
         </View>
-
-        {/* Value and unit */}
-        <View style={styles.valueContainer}>
-          <Text style={[styles.value, { fontSize: sizeStyles.valueFont, color }]}>
-            {value}
-          </Text>
-          <Text style={styles.unit}>{unit}</Text>
-        </View>
-
-        {/* Subtitle or trend */}
-        {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
-
-        {trend && (
-          <View style={styles.trendContainer}>
-            <Ionicons name={getTrendIcon()} size={14} color={getTrendColor()} />
-            <Text style={[styles.trendValue, { color: getTrendColor() }]}>{trendValue}</Text>
-          </View>
-        )}
+        <Text style={[styles.value, { color: selected ? 'white' : color }]}>
+          {value}
+        </Text>
+        <Text style={[styles.unit, { color: selected ? 'rgba(255,255,255,0.8)' : colors.textTertiary }]}>
+          {unit}
+        </Text>
+        <Text style={[styles.label, { color: selected ? 'white' : colors.textSecondary }]}>
+          {label}
+        </Text>
       </LinearGradient>
     </TouchableOpacity>
   );
 };
 
+// Preset metric cards
+export const HeartMetric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'heart',
+      label: 'Heart Rate',
+      icon: 'heart',
+      color: colors.heartRate,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
+export const SpO2Metric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'spo2',
+      label: 'SpO₂',
+      icon: 'fitness',
+      color: colors.spO2Blue,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
+export const TemperatureMetric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'temp',
+      label: 'Temperature',
+      icon: 'thermometer',
+      color: colors.tempOrange,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
+export const StressMetric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'stress',
+      label: 'Stress',
+      icon: 'flash',
+      color: colors.stressPurple,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
+export const SleepMetric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'sleep',
+      label: 'Sleep',
+      icon: 'moon',
+      color: colors.sleepIndigo,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
+export const ActivityMetric = (props) => (
+  <MetricCard
+    metric={{
+      id: 'activity',
+      label: 'Activity',
+      icon: 'walk',
+      color: colors.primaryGreen,
+      ...props.metric,
+    }}
+    {...props}
+  />
+);
+
 const styles = StyleSheet.create({
   container: {
-    borderRadius: 20,
+    width: '31%',
+    borderRadius: 16,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.05,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  selectedContainer: {
+    shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 3,
-    margin: 6,
+    elevation: 5,
   },
   gradient: {
-    flex: 1,
     padding: 12,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.5)',
+    alignItems: 'center',
   },
-  header: {
-    flexDirection: 'row',
+  selectedGradient: {
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
+  },
+  iconContainer: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8,
   },
-  iconContainer: {
-    width: 32,
-    height: 32,
-    borderRadius: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 8,
-  },
-  title: {
-    fontFamily: 'Inter-Medium',
-    color: colors.textSecondary,
-    flex: 1,
-  },
-  valueContainer: {
-    flexDirection: 'row',
-    alignItems: 'baseline',
-    marginBottom: 4,
-  },
   value: {
     fontFamily: 'Inter-Bold',
-    lineHeight: undefined,
+    fontSize: 20,
+    marginBottom: 2,
   },
   unit: {
     fontFamily: 'Inter-Regular',
-    fontSize: 14,
-    color: colors.textTertiary,
-    marginLeft: 4,
+    fontSize: 10,
+    marginBottom: 4,
   },
-  subtitle: {
-    fontFamily: 'Inter-Regular',
-    fontSize: 12,
-    color: colors.textTertiary,
-    marginTop: 2,
-  },
-  trendContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginTop: 4,
-  },
-  trendValue: {
+  label: {
     fontFamily: 'Inter-Medium',
     fontSize: 12,
-    marginLeft: 2,
+    textAlign: 'center',
   },
 });
 
