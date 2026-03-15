@@ -4,9 +4,25 @@
     "slug": "ayurtwin",
     "version": "1.0.0",
     "orientation": "portrait",
-    "userInterfaceStyle": "light",
-    "assetBundlePatterns": ["**/*"],
-    "ios": { "supportsTablet": true },
-    "android": { "package": "com.ayurtwin.app" }
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ayurtwin.app"
+    },
+    "android": {
+      "package": "com.ayurtwin.app"
+    },
+    "web": {},
+    "plugins": [
+      "expo-notifications",
+      "expo-local-authentication",
+      "expo-sensors"
+    ]
   }
 }
