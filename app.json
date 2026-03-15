@@ -18,8 +18,8 @@
     "plugins": [
       "expo-notifications",
       "expo-local-authentication",
-      "expo-sensors"
-      
+      "expo-sensors",
+      "react-native-ble-plx"
     ]
   }
 }
