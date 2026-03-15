@@ -11,7 +11,7 @@ import {
 import { useNavigation } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { LinearGradient } from 'expo-linear-gradient';
-import * as Bluetooth from 'expo-bluetooth';
+//import * as Bluetooth from 'expo-bluetooth';
 
 import { ROUTES } from '../../navigation/types';
 import colors from '../../utils/constants/colors';

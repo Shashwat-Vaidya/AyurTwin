@@ -396,14 +396,14 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   title: {
-    fontFamily: 'Inter-Bold',
+    fontFamily: 'sans-serif', fontWeight: 'bold',
     fontSize: 42,
     color: colors.textPrimary,
     letterSpacing: 1,
     marginBottom: 4,
   },
   subtitle: {
-    fontFamily: 'Inter-Medium',
+    fontFamily: 'sans-serif', fontWeight: '500',
     fontSize: 18,
     color: colors.primaryGreen,
     marginBottom: 16,
@@ -412,7 +412,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   tagline: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'sans-serif', fontWeight: 'normal',
     fontSize: 16,
     color: colors.textSecondary,
     textAlign: 'center',
@@ -439,7 +439,7 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   featureText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'sans-serif', fontWeight: 'normal',
     fontSize: 12,
     color: colors.textSecondary,
     textAlign: 'center',
@@ -462,7 +462,7 @@ const styles = StyleSheet.create({
     elevation: 8,
   },
   getStartedText: {
-    fontFamily: 'Inter-SemiBold',
+    fontFamily: 'sans-serif', fontWeight: '600',
     fontSize: 18,
     color: 'white',
     marginRight: 8,
@@ -477,12 +477,12 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   signInText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'sans-serif', fontWeight: 'normal',
     fontSize: 14,
     color: colors.textSecondary,
   },
   signInLink: {
-    fontFamily: 'Inter-SemiBold',
+    fontFamily: 'sans-serif', fontWeight: '600',
     fontSize: 14,
     color: colors.primarySaffron,
     textDecorationLine: 'underline',
@@ -492,7 +492,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
   },
   footerText: {
-    fontFamily: 'Inter-Regular',
+    fontFamily: 'sans-serif', fontWeight: 'normal',
     fontSize: 12,
     color: colors.textTertiary,
     textAlign: 'center',

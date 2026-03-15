@@ -14,8 +14,8 @@ export default function* rootSaga() {
     fork(authSaga),
     fork(healthDataSaga),
     fork(alertsSaga),
-    fork(deviceSaga),
-    fork(syncSaga),
+    // fork(deviceSaga), // Disabled for Expo Go compatibility
+    // fork(syncSaga), // Disabled for Expo Go compatibility
     fork(notificationSaga),
   ]);
 }

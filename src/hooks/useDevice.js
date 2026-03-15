@@ -5,7 +5,7 @@ import * as Application from 'expo-application';
 import * as Network from 'expo-network';
 import * as Battery from 'expo-battery';
 
-import bluetoothService from '../services/sensors/bluetoothService';
+// import bluetoothService from '../services/sensors/bluetoothService';
 import storageService from '../services/storage/asyncStorage';
 
 export const useDevice = () => {
@@ -119,12 +119,11 @@ export const useDevice = () => {
   // Load bluetooth information
   const loadBluetoothInfo = useCallback(async () => {
     try {
-      // This would require actual Bluetooth implementation
-      // For now, using mock data
+      // Bluetooth not supported in Expo Go
       setBluetoothInfo({
-        isAvailable: true,
-        isEnabled: true,
-        connectedDevice: bluetoothService.getConnectedDevice(),
+        isAvailable: false,
+        isEnabled: false,
+        connectedDevice: null,
       });
     } catch (error) {
       console.error('Error loading bluetooth info:', error);

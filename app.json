@@ -5,6 +5,10 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#FFFFFF"
+    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -15,11 +19,11 @@
     "android": {
       "package": "com.ayurtwin.app"
     },
+    "web": {},
     "plugins": [
       "expo-notifications",
       "expo-local-authentication",
-      "expo-sensors",
-      "react-native-ble-plx"
+      "expo-sensors"
     ]
   }
 }

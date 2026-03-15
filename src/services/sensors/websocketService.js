@@ -1,4 +1,4 @@
-import io from 'socket.io-client';
+// import io from 'socket.io-client'; // Dynamic import below
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { Platform } from 'react-native';
 
@@ -15,6 +15,18 @@ class WebSocketService {
     this.pendingSubscriptions = new Set();
     this.heartbeatInterval = null;
     this.messageQueue = [];
+
+    // Initialize socket.io dynamically
+    this.initializeSocketIO();
+  }
+
+  async initializeSocketIO() {
+    try {
+      const io = (await import('socket.io-client')).default;
+      // Socket will be created when connect() is called
+    } catch (error) {
+      console.warn('socket.io-client not available:', error);
+    }
   }
 
   async connect() {
@@ -22,22 +34,27 @@ class WebSocketService {
       return;
     }
 
-    const token = await AsyncStorage.getItem('@auth:token');
-    
-    this.socket = io(SOCKET_URL, {
-      transports: ['websocket'],
-      query: {
-        token,
-        platform: Platform.OS,
-        version: '1.0.0',
-      },
-      reconnection: true,
-      reconnectionAttempts: this.maxReconnectAttempts,
-      reconnectionDelay: this.reconnectDelay,
-      timeout: 10000,
-    });
+    try {
+      const io = (await import('socket.io-client')).default;
+      const token = await AsyncStorage.getItem('@auth:token');
+      
+      this.socket = io(SOCKET_URL, {
+        transports: ['websocket'],
+        query: {
+          token,
+          platform: Platform.OS,
+          version: '1.0.0',
+        },
+        reconnection: true,
+        reconnectionAttempts: this.maxReconnectAttempts,
+        reconnectionDelay: this.reconnectDelay,
+        timeout: 10000,
+      });
 
-    this.setupEventHandlers();
+      this.setupEventHandlers();
+    } catch (error) {
+      console.warn('Failed to connect websocket:', error);
+    }
   }
 
   setupEventHandlers() {
