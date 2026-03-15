@@ -1,35 +1,12 @@
-{
+﻿{
   "expo": {
     "name": "AyurTwin",
     "slug": "ayurtwin",
     "version": "1.0.0",
     "orientation": "portrait",
-    
     "userInterfaceStyle": "light",
-    "splash": {
-      
-      "resizeMode": "contain",
-      "backgroundColor": "#FFFFFF"
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true,
-      "bundleIdentifier": "com.ayurtwin.app"
-    },
-    "android": {
-      
-      "package": "com.ayurtwin.app"
-    },
-    "web": {
-    
-    },
-    "plugins": [
-      "expo-notifications",
-      "expo-local-authentication",
-      "expo-sensors",
-      "expo-location"
-    ]
+    "assetBundlePatterns": ["**/*"],
+    "ios": { "supportsTablet": true },
+    "android": { "package": "com.ayurtwin.app" }
   }
 }

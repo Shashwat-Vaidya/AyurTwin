@@ -1,3 +1,4 @@
+import { StatusBar } from "react-native";
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
