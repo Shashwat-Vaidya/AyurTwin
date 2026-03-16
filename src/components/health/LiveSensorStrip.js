@@ -45,12 +45,12 @@ const LiveSensorStrip = ({
           Animated.timing(pulseAnims[index], {
             toValue: 1.2,
             duration: 1000,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
           Animated.timing(pulseAnims[index], {
             toValue: 1,
             duration: 1000,
-            useNativeDriver: true,
+            useNativeDriver: false,
           }),
         ])
       ).start();

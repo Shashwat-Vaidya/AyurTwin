@@ -75,7 +75,7 @@ const RiskMeter = ({
       Animated.timing(animatedValue, {
         toValue: percentage / 100,
         duration: animationDuration,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else {
       animatedValue.setValue(percentage / 100);

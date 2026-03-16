@@ -42,7 +42,7 @@ const ProgressCircle = ({
         toValue: progress / 100,
         duration: animationDuration,
         easing: Easing.ease,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else {
         animatedValue.setValue(progress / 100);

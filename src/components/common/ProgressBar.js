@@ -156,7 +156,7 @@ export const CircularProgress = ({
       toValue: progress / 100,
       duration: 1000,
       easing: Easing.ease,
-      useNativeDriver: true,
+      useNativeDriver: false,
     }).start();
   }, [progress]);
 

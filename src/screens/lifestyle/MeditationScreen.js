@@ -32,6 +32,10 @@ const MeditationScreen = () => {
   const [favoriteMeditations, setFavoriteMeditations] = useState([]);
 
   const progressAnim = useRef(new Animated.Value(0)).current;
+  const progressWidth = progressAnim.interpolate({
+  inputRange: [0, 100],
+  outputRange: [0, width - 80], // adjust based on container padding
+  });
   const timerRef = useRef(null);
 
   const categories = [
@@ -337,15 +341,13 @@ const MeditationScreen = () => {
             {selectedMeditation?.id === meditation.id && isPlaying && (
               <View style={styles.playerContainer}>
                 <View style={styles.progressContainer}>
-                  <Animated.View 
+                  <Animated.View
                     style={[
                       styles.progressBar,
-                      { width: progressAnim.interpolate({
-                          inputRange: [0, 100],
-                          outputRange: ['0%', '100%']
-                        })
-                      }
-                    ]} 
+                    {
+                    width: progressWidth,
+                    },
+                  ]}
                   />
                 </View>
                 <View style={styles.playerControls}>

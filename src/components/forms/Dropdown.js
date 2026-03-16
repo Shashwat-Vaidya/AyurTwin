@@ -80,20 +80,20 @@ const Dropdown = ({
       Animated.timing(fadeAnim, {
         toValue: 1,
         duration: 200,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start();
     } else if (animationType === 'slide') {
       Animated.parallel([
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 200,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
         Animated.spring(slideAnim, {
           toValue: 0,
           friction: 8,
           tension: 40,
-          useNativeDriver: true,
+          useNativeDriver: false,
         }),
       ]).start();
     }
@@ -104,7 +104,7 @@ const Dropdown = ({
       Animated.timing(fadeAnim, {
         toValue: 0,
         duration: 150,
-        useNativeDriver: true,
+        useNativeDriver: false,
       }).start(() => {
         setVisible(false);
         setSearchText('');
