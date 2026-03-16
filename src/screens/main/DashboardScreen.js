@@ -18,7 +18,7 @@ import colors from '../../utils/constants/colors';
 import SensorCard from '../../components/health/SensorCard';
 import AlertCard from '../../components/health/AlertCard';
 import RiskPredictionCard from '../../components/health/RiskPredictionCard';
-import { mockSensorData } from '../../services/sensors/mockDataGenerator';
+import { generateCurrentReadings } from '../../services/sensors/mockDataGenerator';
 
 const { width } = Dimensions.get('window');
 
@@ -74,9 +74,7 @@ const DashboardScreen = () => {
   };
 
   const loadMockData = () => {
-    // Load mock sensor data
-    const mockData = mockSensorData();
-    // Dispatch to Redux would go here
+    const mockData = generateCurrentReadings();
     console.log('Mock data loaded:', mockData);
   };
 

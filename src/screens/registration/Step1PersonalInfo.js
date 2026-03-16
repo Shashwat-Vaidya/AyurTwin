@@ -278,12 +278,14 @@ const Step1PersonalInfo = () => {
             <TouchableOpacity
               style={[styles.inputContainer, errors.dateOfBirth && touched.dateOfBirth && styles.inputError]}
               onPress={() => setShowDatePicker(true)}
-            >
+>
               <Ionicons name="calendar-outline" size={20} color={colors.textTertiary} style={styles.inputIcon} />
               <Text style={[styles.input, !dateOfBirth && styles.placeholderText]}>
-                {dateOfBirth ? dateOfBirth.toLocaleDateString() : 'Select date'}
-              </Text>
-            </TouchableOpacity>
+              {dateOfBirth
+              ? new Date(dateOfBirth).toLocaleDateString()
+              : 'Select date'}
+          </Text>
+      </TouchableOpacity>
             {errors.dateOfBirth && touched.dateOfBirth && (
               <Text style={styles.errorText}>{errors.dateOfBirth}</Text>
             )}
@@ -438,13 +440,13 @@ const Step1PersonalInfo = () => {
 
       {showDatePicker && (
         <DateTimePicker
-          value={dateOfBirth || new Date(2000, 0, 1)}
+          value={dateOfBirth ? new Date(dateOfBirth) : new Date(2000, 0, 1)}
           mode="date"
           display={Platform.OS === 'ios' ? 'spinner' : 'default'}
           onChange={handleDateChange}
           maximumDate={new Date()}
         />
-      )}
+    )}
     </View>
   );
 };

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 
 import AuthStack from "./AuthStack";
 import MainTabNavigator from "./MainTabNavigator";
-import RegistrationStack from "./RegistrationStack";
+import RegistrationNavigator from "../screens/registration/RegistrationNavigator";
 import { navigationRef } from "./NavigationService";
 import { ROUTES } from "./types";
 
@@ -18,7 +18,7 @@ export default function AppNavigator() {
   const [isRegistrationComplete, setIsRegistrationComplete] = useState(false);
 
   useEffect(() => {
-    setIsRegistrationComplete(currentStep > 8);
+    setIsRegistrationComplete(currentStep >= 8);
   }, [currentStep]);
 
   return (
@@ -31,11 +31,14 @@ export default function AppNavigator() {
         }}
       >
         {!isAuthenticated ? (
-          <Stack.Screen name="AuthStack" component={AuthStack} />
+          <Stack.Screen
+            name="AuthStack"
+            component={AuthStack}
+          />
         ) : !isRegistrationComplete ? (
           <Stack.Screen
             name={ROUTES.REGISTRATION_NAVIGATOR}
-            component={RegistrationStack}
+            component={RegistrationNavigator}
           />
         ) : (
           <Stack.Screen

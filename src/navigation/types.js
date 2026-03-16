@@ -6,9 +6,8 @@ export const ROUTES = {
   FORGOT_PASSWORD: 'ForgotPassword',
   RESET_PASSWORD: 'ResetPassword',
   BIOMETRIC: 'Biometric',
-  
+
   // Registration Stack
-  REGISTRATION: 'Registration',
   REGISTRATION_NAVIGATOR: 'RegistrationNavigator',
   STEP1_PERSONAL_INFO: 'Step1PersonalInfo',
   STEP2_LIFESTYLE: 'Step2Lifestyle',
@@ -19,7 +18,7 @@ export const ROUTES = {
   STEP7_PRAKRITI: 'Step7Prakriti',
   STEP8_CREDENTIALS: 'Step8Credentials',
   REGISTRATION_COMPLETE: 'RegistrationComplete',
-  
+
   // Main Tabs
   MAIN_TABS: 'MainTabs',
   DASHBOARD: 'Dashboard',
@@ -32,7 +31,7 @@ export const ROUTES = {
   LIFESTYLE_STACK: 'LifestyleStack',
   MORE: 'More',
   MORE_STACK: 'MoreStack',
-  
+
   // Dashboard Stack
   DASHBOARD_MAIN: 'DashboardMain',
   HEART_RATE_DETAIL: 'HeartRateDetail',
@@ -41,18 +40,18 @@ export const ROUTES = {
   STRESS_DETAIL: 'StressDetail',
   SLEEP_DETAIL: 'SleepDetail',
   ACTIVITY_DETAIL: 'ActivityDetail',
-  
+
   // Metrics Stack
   METRICS_MAIN: 'MetricsMain',
   SENSOR_LOG: 'SensorLog',
   CHARTS_DETAIL: 'ChartsDetail',
-  
+
   // Alerts Stack
   ALERTS_MAIN: 'AlertsMain',
   ALERT_DETAIL: 'AlertDetail',
   ALERT_HISTORY: 'AlertHistory',
   ALERT_SETTINGS: 'AlertSettings',
-  
+
   // Lifestyle Stack
   LIFESTYLE_MAIN: 'LifestyleMain',
   DINACHARYA: 'Dinacharya',
@@ -62,7 +61,7 @@ export const ROUTES = {
   STRESS_RELIEF: 'StressRelief',
   EXERCISE_SUGGESTIONS: 'ExerciseSuggestions',
   DAILY_CHECKLIST: 'DailyChecklist',
-  
+
   // More Stack
   MORE_MAIN: 'MoreMain',
   PROFILE: 'Profile',
