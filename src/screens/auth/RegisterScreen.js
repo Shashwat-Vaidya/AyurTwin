@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
   Alert, KeyboardAvoidingView, Platform, Switch
@@ -13,13 +13,20 @@ import { calculateBMI } from '../../utils/healthCalculations';
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const GENDERS = ['Male', 'Female', 'Other'];
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation, route }) => {
   const { state, dispatch, updateRegistration } = useApp();
   const isPatient = state.userType === 'patient';
   const totalSteps = isPatient ? 8 : 2;
 
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(false);
+
+  // Advance to step 8 when prakriti result is set and we're at step 7
+  useEffect(() => {
+    if (state.prakritiResult && step === 7) {
+      setStep(8);
+    }
+  }, [state.prakritiResult, step]);
 
   // Step 0 — Role (already selected on landing, but can change)
   // Step 1 — Personal Info
@@ -176,20 +183,19 @@ const RegisterScreen = ({ navigation }) => {
     try {
       const { registerUser } = require('../../services/api');
       const result = await registerUser(fullData);
+      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
+      
       if (result.success) {
-        const { login } = require('../../context/AppContext');
         // Login the user
-        const AsyncStorage = require('@react-native-async-storage/async-storage').default;
         await AsyncStorage.setItem('ayurtwin_user', JSON.stringify(result.data));
         dispatch({ type: 'SET_USER', payload: result.data });
       } else {
         // If Supabase fails, still allow local usage
         const mockUser = { id: 'local_' + Date.now(), ...fullData };
-        const AsyncStorage = require('@react-native-async-storage/async-storage').default;
         await AsyncStorage.setItem('ayurtwin_user', JSON.stringify(mockUser));
         dispatch({ type: 'SET_USER', payload: mockUser });
       }
-    } catch {
+    } catch (err) {
       // Fallback: save locally
       const mockUser = { id: 'local_' + Date.now(), ...fullData };
       const AsyncStorage = require('@react-native-async-storage/async-storage').default;
@@ -198,6 +204,12 @@ const RegisterScreen = ({ navigation }) => {
     }
 
     setLoading(false);
+    
+    // Clear registration data after successful login
+    dispatch({ type: 'SET_REGISTRATION_DATA', payload: {} });
+    dispatch({ type: 'SET_REGISTRATION_STEP', payload: 0 });
+    
+    // AppNavigator will automatically switch to home screen when isAuthenticated becomes true
   };
 
   const renderSlider = (label, value, setValue, min = 0, max = 10) => (

@@ -58,6 +58,7 @@ const PrakritiQuizScreen = ({ navigation }) => {
   };
 
   const handleFinish = () => {
+    // Pop back to Register screen - this will keep us in the registration flow
     navigation.goBack();
   };
 
