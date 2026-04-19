@@ -1,49 +1,88 @@
 import React, { useState, useEffect, useRef } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Dimensions,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Dimensions, Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
 import {
-  generateSimulatedVitals, generateDiseaseRisks, calculateHealthScore,
-  detectDoshaImbalance, generateAlerts, generateTimelineData,
+  generateDiseaseRisks, calculateHealthScore,
+  detectDoshaImbalance, generateAlerts,
 } from '../../utils/healthCalculations';
+import { getLatestSensorReading } from '../../services/api';
 
 const { width } = Dimensions.get('window');
 
 const DashboardScreen = ({ navigation }) => {
-  const { state } = useApp();
+  const { state, logout } = useApp();
   const user = state.user || {};
   const fadeAnim = useRef(new Animated.Value(0)).current;
 
-  const [vitals, setVitals] = useState({});
+  const [sensorData, setSensorData] = useState(null);
   const [risks, setRisks] = useState({});
   const [healthScore, setHealthScore] = useState(0);
   const [doshaBalance, setDoshaBalance] = useState({});
   const [alerts, setAlerts] = useState([]);
 
+  // Fetch sensor data from Supabase every 5 seconds
   useEffect(() => {
     Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }).start();
     loadDashboardData();
-    const interval = setInterval(loadDashboardData, 30000); // Refresh every 30s
-    return () => clearInterval(interval);
+    fetchSensorData();
+    const sensorInterval = setInterval(fetchSensorData, 5000); // Sensor refresh every 5s
+    const dashInterval = setInterval(loadDashboardData, 30000); // Dashboard refresh every 30s
+    return () => {
+      clearInterval(sensorInterval);
+      clearInterval(dashInterval);
+    };
   }, []);
+
+  const fetchSensorData = async () => {
+    if (!user?.id) return;
+    const result = await getLatestSensorReading(user.id);
+    if (result.success && result.data) {
+      setSensorData(result.data);
+    }
+  };
 
   const loadDashboardData = () => {
     const profile = { ...user, ...(state.registrationData || {}) };
-    const v = generateSimulatedVitals(profile);
+    const vitals = sensorData
+      ? { heartRate: sensorData.heart_rate, temperature: sensorData.temperature, spo2: sensorData.spo2, stressIndex: 45 }
+      : { heartRate: 72, temperature: 36.6, spo2: 98, stressIndex: 45 };
     const r = generateDiseaseRisks(profile);
     const hs = calculateHealthScore(profile);
     const db = detectDoshaImbalance(state.prakritiResult, profile);
-    const a = generateAlerts(v, r, db);
+    const a = generateAlerts(vitals, r, db);
 
-    setVitals(v);
     setRisks(r);
     setHealthScore(hs);
     setDoshaBalance(db);
     setAlerts(a);
+  };
+
+  const handleLogout = () => {
+    Alert.alert('Logout', 'Are you sure you want to logout?', [
+      { text: 'Cancel', style: 'cancel' },
+      { text: 'Logout', onPress: logout, style: 'destructive' },
+    ]);
+  };
+
+  // Compute movement magnitude from accelerometer
+  const getMovementLabel = () => {
+    if (!sensorData) return { label: 'Resting', value: '0.0' };
+    const ax = sensorData.accel_x || 0;
+    const ay = sensorData.accel_y || 0;
+    const az = sensorData.accel_z || 0;
+    // magnitude minus gravity (~9.81), gives net body movement
+    const magnitude = Math.abs(Math.sqrt(ax * ax + ay * ay + az * az) - 9.81);
+    const rounded = magnitude.toFixed(2);
+    let label = 'Resting';
+    if (magnitude > 2.0) label = 'High Activity';
+    else if (magnitude > 0.5) label = 'Walking';
+    else if (magnitude > 0.1) label = 'Light Movement';
+    return { label, value: rounded };
   };
 
   const getGreeting = () => {
@@ -75,9 +114,14 @@ const DashboardScreen = ({ navigation }) => {
             <Text style={styles.greeting}>{getGreeting()},</Text>
             <Text style={styles.userName}>{user.first_name || user.username || 'User'}</Text>
           </View>
-          <TouchableOpacity onPress={() => navigation.navigate('MoreTab', { screen: 'Profile' })} style={styles.profileBtn}>
-            <Text style={styles.profileIcon}>👤</Text>
-          </TouchableOpacity>
+          <View style={styles.headerActions}>
+            <TouchableOpacity onPress={() => navigation.navigate('MoreTab', { screen: 'Profile' })} style={styles.profileBtn}>
+              <Text style={styles.profileIcon}>👤</Text>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
+              <Text style={styles.logoutIcon}>🚪</Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.doshaBadge}>
           <Text style={styles.doshaBadgeText}>🔺 {getDoshaBadge()}</Text>
@@ -104,13 +148,13 @@ const DashboardScreen = ({ navigation }) => {
           </View>
         </Card>
 
-        {/* Live Health Cards */}
-        <Text style={styles.sectionTitle}>Live Health Metrics</Text>
+        {/* Live Health Cards - fetched from Supabase every 5s */}
+        <Text style={styles.sectionTitle}>Live Sensor Data</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.vitalScroll}>
-          <VitalCard icon="❤️" label="Heart Rate" value={`${vitals.heartRate || 72}`} unit="bpm" color={COLORS.heart} />
-          <VitalCard icon="🌡️" label="Temperature" value={`${vitals.temperature || 36.6}`} unit="°C" color={COLORS.temp} />
-          <VitalCard icon="🫁" label="SpO2" value={`${vitals.spo2 || 98}`} unit="%" color={COLORS.spo2} />
-          <VitalCard icon="😰" label="Stress" value={`${vitals.stressIndex || 45}`} unit="idx" color={COLORS.stress} />
+          <VitalCard icon="❤️" label="Heart Rate" value={`${sensorData?.heart_rate || '--'}`} unit="bpm" color={COLORS.heart} />
+          <VitalCard icon="🌡️" label="Temperature" value={`${sensorData?.temperature || '--'}`} unit="°C" color={COLORS.temp} />
+          <VitalCard icon="🫁" label="SpO2" value={`${sensorData?.spo2 || '--'}`} unit="%" color={COLORS.spo2} />
+          <VitalCard icon="🏃" label="Body Motion" value={getMovementLabel().value} unit={getMovementLabel().label} color={COLORS.stress} />
         </ScrollView>
 
         {/* Recent Alerts */}
@@ -165,8 +209,10 @@ const DashboardScreen = ({ navigation }) => {
           <Card style={styles.insightCard}>
             <Text style={styles.insightIcon}>💡</Text>
             <Text style={styles.insightText}>
-              {vitals.stressIndex > 60
-                ? 'Your stress is elevated this week. Try deep breathing exercises.'
+              {sensorData?.heart_rate > 90
+                ? 'Your heart rate is elevated. Take a break and practice deep breathing.'
+                : sensorData?.spo2 < 96
+                ? 'Your SpO2 is low. Practice deep breathing exercises and get fresh air.'
                 : healthScore < 60
                 ? 'Your health score needs improvement. Focus on sleep and exercise.'
                 : 'You are doing well! Keep maintaining your healthy habits.'}
@@ -232,8 +278,11 @@ const styles = StyleSheet.create({
   headerContent: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
   greeting: { fontSize: 14, color: '#FFFFFFCC', fontWeight: '500' },
   userName: { fontSize: 24, fontWeight: '800', color: '#FFF' },
+  headerActions: { flexDirection: 'row', gap: 8 },
   profileBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#FFFFFF30', alignItems: 'center', justifyContent: 'center' },
   profileIcon: { fontSize: 22 },
+  logoutBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#FFFFFF30', alignItems: 'center', justifyContent: 'center' },
+  logoutIcon: { fontSize: 20 },
   doshaBadge: { marginTop: 12, alignSelf: 'flex-start', backgroundColor: '#FFFFFF30', paddingHorizontal: 14, paddingVertical: 6, borderRadius: 16 },
   doshaBadgeText: { color: '#FFF', fontWeight: '700', fontSize: 13 },
   content: { padding: SIZES.screenPadding, paddingTop: 16 },

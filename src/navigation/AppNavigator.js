@@ -37,6 +37,16 @@ import HelpScreen from '../screens/main/HelpScreen';
 import AboutScreen from '../screens/main/AboutScreen';
 import DoshaDetailScreen from '../screens/main/DoshaDetailScreen';
 
+// Innovative Feature Screens
+import FoodRecommendationsScreen from '../screens/main/FoodRecommendationsScreen';
+import YogaScreen from '../screens/main/YogaScreen';
+import DoshaClockScreen from '../screens/main/DoshaClockScreen';
+import PanchakarmaScreen from '../screens/main/PanchakarmaScreen';
+import NadiParikshaScreen from '../screens/main/NadiParikshaScreen';
+import RitucharyaScreen from '../screens/main/RitucharyaScreen';
+import ViruddhaAharaScreen from '../screens/main/ViruddhaAharaScreen';
+import DiseasePreventionScreen from '../screens/main/DiseasePreventionScreen';
+
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const DashboardStack = createStackNavigator();
@@ -73,6 +83,14 @@ const MetricsStackScreen = () => (
 const LifestyleStackScreen = () => (
   <LifestyleStack.Navigator screenOptions={{ headerShown: false }}>
     <LifestyleStack.Screen name="LifestyleHome" component={LifestyleScreen} />
+    <LifestyleStack.Screen name="FoodRecommendations" component={FoodRecommendationsScreen} />
+    <LifestyleStack.Screen name="Yoga" component={YogaScreen} />
+    <LifestyleStack.Screen name="DoshaClock" component={DoshaClockScreen} />
+    <LifestyleStack.Screen name="Panchakarma" component={PanchakarmaScreen} />
+    <LifestyleStack.Screen name="NadiPariksha" component={NadiParikshaScreen} />
+    <LifestyleStack.Screen name="Ritucharya" component={RitucharyaScreen} />
+    <LifestyleStack.Screen name="ViruddhaAhara" component={ViruddhaAharaScreen} />
+    <LifestyleStack.Screen name="DiseasePrevention" component={DiseasePreventionScreen} />
   </LifestyleStack.Navigator>
 );
 
@@ -92,6 +110,14 @@ const MoreStackScreen = () => (
     <MoreStack.Screen name="Family" component={FamilyDashboard} />
     <MoreStack.Screen name="Leaderboard" component={LeaderboardScreen} />
     <MoreStack.Screen name="Social" component={SocialFeedScreen} />
+    <MoreStack.Screen name="FoodRecommendations" component={FoodRecommendationsScreen} />
+    <MoreStack.Screen name="Yoga" component={YogaScreen} />
+    <MoreStack.Screen name="DoshaClock" component={DoshaClockScreen} />
+    <MoreStack.Screen name="Panchakarma" component={PanchakarmaScreen} />
+    <MoreStack.Screen name="NadiPariksha" component={NadiParikshaScreen} />
+    <MoreStack.Screen name="Ritucharya" component={RitucharyaScreen} />
+    <MoreStack.Screen name="ViruddhaAhara" component={ViruddhaAharaScreen} />
+    <MoreStack.Screen name="DiseasePrevention" component={DiseasePreventionScreen} />
   </MoreStack.Navigator>
 );
 

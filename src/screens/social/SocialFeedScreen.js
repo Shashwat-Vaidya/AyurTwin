@@ -1,67 +1,121 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, ActivityIndicator,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
+import { getSocialFeed, createPost, likePost } from '../../services/api';
 
 const SocialFeedScreen = () => {
   const { state } = useApp();
   const user = state.user || {};
   const [newPost, setNewPost] = useState('');
   const [showCompose, setShowCompose] = useState(false);
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [likedPosts, setLikedPosts] = useState({});
 
-  const [posts, setPosts] = useState([
-    {
-      id: 1, user: 'Arjun S.', type: 'achievement', avatar: 'A',
-      content: 'Just completed 30 days of consistent meditation! My stress score dropped from 78 to 42. AyurTwin tracking really helped me stay motivated!',
-      likes: 24, comments: 5, time: '2h ago', liked: false,
-    },
-    {
-      id: 2, user: 'Priya M.', type: 'milestone', avatar: 'P',
-      content: 'My health score reached 88 today! Following Pitta-balancing diet and cooling exercises made a huge difference.',
-      likes: 18, comments: 3, time: '4h ago', liked: false,
-    },
-    {
-      id: 3, user: 'Rahul K.', type: 'tip', avatar: 'R',
-      content: 'Tip: Warm turmeric milk before bed has improved my sleep quality by 30%. Try it if you have Vata imbalance!',
-      likes: 32, comments: 8, time: '6h ago', liked: false,
-    },
-    {
-      id: 4, user: 'Sneha R.', type: 'general', avatar: 'S',
-      content: 'Started Dinacharya routine today. Woke up at 5:30 AM, did yoga, and had a healthy breakfast. Feeling amazing already!',
-      likes: 15, comments: 2, time: '8h ago', liked: false,
-    },
-  ]);
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
-  const handleLike = (postId) => {
-    setPosts(posts.map(p => p.id === postId ? {
-      ...p, liked: !p.liked, likes: p.liked ? p.likes - 1 : p.likes + 1,
-    } : p));
+  const fetchPosts = async () => {
+    setLoading(true);
+    const result = await getSocialFeed();
+    if (result.success && result.data) {
+      const formatted = result.data.map(post => ({
+        id: post.id,
+        userId: post.user?.id,
+        user: `${post.user?.first_name || ''} ${post.user?.last_name?.charAt(0) || ''}.`,
+        avatar: (post.user?.first_name || 'U')[0],
+        type: post.post_type || 'general',
+        content: post.content,
+        likes: post.likes_count || 0,
+        comments: post.comments_count || 0,
+        time: getTimeAgo(post.created_at),
+        liked: false,
+      }));
+      setPosts(formatted);
+    }
+    setLoading(false);
   };
 
-  const handlePost = () => {
+  const getTimeAgo = (dateStr) => {
+    const now = new Date();
+    const date = new Date(dateStr);
+    const diffMs = now - date;
+    const diffMins = Math.floor(diffMs / 60000);
+    if (diffMins < 1) return 'Just now';
+    if (diffMins < 60) return `${diffMins}m ago`;
+    const diffHours = Math.floor(diffMins / 60);
+    if (diffHours < 24) return `${diffHours}h ago`;
+    const diffDays = Math.floor(diffHours / 24);
+    return `${diffDays}d ago`;
+  };
+
+  const handleLike = async (postId) => {
+    const alreadyLiked = likedPosts[postId];
+    if (alreadyLiked) return; // prevent double-like
+
+    setPosts(posts.map(p => p.id === postId ? { ...p, liked: true, likes: p.likes + 1 } : p));
+    setLikedPosts({ ...likedPosts, [postId]: true });
+
+    if (user.id) {
+      await likePost(postId, user.id);
+    }
+  };
+
+  const handlePost = async () => {
     if (!newPost.trim()) return;
-    const post = {
-      id: posts.length + 1,
-      user: user.first_name || user.username || 'You',
-      avatar: (user.first_name || 'U')[0],
-      type: 'general',
-      content: newPost.trim(),
-      likes: 0, comments: 0, time: 'Just now', liked: false,
-    };
-    setPosts([post, ...posts]);
+
+    if (user.id) {
+      const result = await createPost(user.id, newPost.trim(), 'general');
+      if (result.success) {
+        // Add to top of feed immediately
+        const post = {
+          id: result.data.id,
+          userId: user.id,
+          user: `${user.first_name || user.username || 'You'} ${user.last_name?.charAt(0) || ''}.`,
+          avatar: (user.first_name || 'U')[0],
+          type: 'general',
+          content: newPost.trim(),
+          likes: 0, comments: 0, time: 'Just now', liked: false,
+        };
+        setPosts([post, ...posts]);
+      }
+    } else {
+      // Fallback for local user
+      const post = {
+        id: Date.now().toString(),
+        user: user.first_name || user.username || 'You',
+        avatar: (user.first_name || 'U')[0],
+        type: 'general',
+        content: newPost.trim(),
+        likes: 0, comments: 0, time: 'Just now', liked: false,
+      };
+      setPosts([post, ...posts]);
+    }
+
     setNewPost('');
     setShowCompose(false);
   };
 
   const getTypeColor = (type) => {
-    const colors = { achievement: COLORS.success, milestone: COLORS.primary, tip: COLORS.info, general: COLORS.textSecondary };
+    const colors = { achievement: COLORS.success, milestone: COLORS.primary, tip: COLORS.info, general: COLORS.textSecondary, yoga: COLORS.kapha, recipe: COLORS.warning, challenge: COLORS.pitta };
     return colors[type] || COLORS.textSecondary;
   };
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={{ marginTop: 12, color: COLORS.textSecondary }}>Loading community posts...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -92,6 +146,13 @@ const SocialFeedScreen = () => {
         )}
 
         {/* Feed */}
+        {posts.length === 0 && (
+          <View style={styles.emptyState}>
+            <Text style={styles.emptyIcon}>📝</Text>
+            <Text style={styles.emptyText}>No posts yet. Be the first to share!</Text>
+          </View>
+        )}
+
         {posts.map((post) => (
           <Card key={post.id} variant="elevated" style={styles.postCard}>
             <View style={styles.postHeader}>
@@ -111,7 +172,7 @@ const SocialFeedScreen = () => {
 
             <View style={styles.postActions}>
               <TouchableOpacity style={styles.actionBtn} onPress={() => handleLike(post.id)}>
-                <Text style={[styles.actionIcon, post.liked && styles.actionIconActive]}>
+                <Text style={styles.actionIcon}>
                   {post.liked ? '❤️' : '🤍'}
                 </Text>
                 <Text style={[styles.actionText, post.liked && styles.actionTextActive]}>{post.likes}</Text>
@@ -148,6 +209,10 @@ const styles = StyleSheet.create({
   composeIcon: { fontSize: 18 },
   composeCard: { marginTop: 10 },
   composeInput: { borderWidth: 1, borderColor: COLORS.border, borderRadius: 10, padding: 12, marginBottom: 12, fontSize: 14, minHeight: 80, textAlignVertical: 'top' },
+  // Empty
+  emptyState: { alignItems: 'center', paddingVertical: 40 },
+  emptyIcon: { fontSize: 48, marginBottom: 12 },
+  emptyText: { fontSize: 14, color: COLORS.textLight },
   // Post
   postCard: { marginTop: 12 },
   postHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 10 },
@@ -165,7 +230,6 @@ const styles = StyleSheet.create({
   postActions: { flexDirection: 'row', gap: 20, borderTopWidth: 0.5, borderTopColor: COLORS.border, paddingTop: 10 },
   actionBtn: { flexDirection: 'row', alignItems: 'center', gap: 4 },
   actionIcon: { fontSize: 16 },
-  actionIconActive: {},
   actionText: { fontSize: 13, color: COLORS.textSecondary },
   actionTextActive: { color: COLORS.error },
 });

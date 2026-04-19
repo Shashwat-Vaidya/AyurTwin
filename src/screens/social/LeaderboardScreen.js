@@ -1,27 +1,52 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
-import { calculateHealthScore } from '../../utils/healthCalculations';
+import { getLeaderboard } from '../../services/api';
 
 const LeaderboardScreen = () => {
   const { state } = useApp();
   const user = state.user || {};
-  const myScore = calculateHealthScore({ ...user, ...(state.registrationData || {}) });
+  const [leaderboard, setLeaderboard] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  // Simulated leaderboard
-  const leaderboard = [
-    { rank: 1, name: 'Arjun S.', score: 92, improvement: 15, consistency: 95, badge: '🥇' },
-    { rank: 2, name: 'Priya M.', score: 88, improvement: 12, consistency: 90, badge: '🥈' },
-    { rank: 3, name: 'Rahul K.', score: 85, improvement: 18, consistency: 85, badge: '🥉' },
-    { rank: 4, name: user.first_name || 'You', score: myScore, improvement: 8, consistency: 70, badge: '👤', isUser: true },
-    { rank: 5, name: 'Sneha R.', score: 72, improvement: 10, consistency: 80, badge: '' },
-    { rank: 6, name: 'Vikram T.', score: 70, improvement: 5, consistency: 75, badge: '' },
-    { rank: 7, name: 'Anjali P.', score: 68, improvement: 7, consistency: 72, badge: '' },
-    { rank: 8, name: 'Karan D.', score: 65, improvement: 3, consistency: 65, badge: '' },
-  ].sort((a, b) => b.score - a.score).map((item, idx) => ({ ...item, rank: idx + 1 }));
+  useEffect(() => {
+    fetchLeaderboard();
+  }, []);
+
+  const fetchLeaderboard = async () => {
+    setLoading(true);
+    const result = await getLeaderboard();
+    if (result.success && result.data) {
+      const formatted = result.data.map((entry, idx) => ({
+        rank: idx + 1,
+        name: `${entry.user?.first_name || ''} ${entry.user?.last_name?.charAt(0) || ''}.`,
+        userId: entry.user?.id,
+        score: entry.total_score,
+        healthScore: entry.health_score,
+        improvement: entry.improvement_score,
+        consistency: entry.consistency_score,
+        streak: entry.streak_days,
+        badge: idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '',
+        isUser: entry.user?.id === user.id,
+      }));
+      setLeaderboard(formatted);
+    }
+    setLoading(false);
+  };
+
+  const myEntry = leaderboard.find(e => e.isUser);
+
+  if (loading) {
+    return (
+      <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={COLORS.primary} />
+        <Text style={{ marginTop: 12, color: COLORS.textSecondary }}>Loading leaderboard...</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
@@ -32,21 +57,23 @@ const LeaderboardScreen = () => {
 
       <View style={styles.content}>
         {/* Top 3 Podium */}
-        <View style={styles.podium}>
-          {leaderboard.slice(0, 3).map((item, idx) => (
-            <View key={item.rank} style={[styles.podiumItem, idx === 0 && styles.podiumFirst]}>
-              <Text style={styles.podiumBadge}>{item.badge}</Text>
-              <LinearGradient
-                colors={idx === 0 ? COLORS.gradient.saffron : idx === 1 ? ['#C0C0C0', '#D0D0D0'] : ['#CD7F32', '#DDA15E']}
-                style={[styles.podiumAvatar, idx === 0 && styles.podiumAvatarFirst]}
-              >
-                <Text style={styles.podiumAvatarText}>{item.name[0]}</Text>
-              </LinearGradient>
-              <Text style={styles.podiumName}>{item.name}</Text>
-              <Text style={styles.podiumScore}>{item.score}</Text>
-            </View>
-          ))}
-        </View>
+        {leaderboard.length >= 3 && (
+          <View style={styles.podium}>
+            {leaderboard.slice(0, 3).map((item, idx) => (
+              <View key={item.rank} style={[styles.podiumItem, idx === 0 && styles.podiumFirst]}>
+                <Text style={styles.podiumBadge}>{item.badge}</Text>
+                <LinearGradient
+                  colors={idx === 0 ? COLORS.gradient.saffron : idx === 1 ? ['#C0C0C0', '#D0D0D0'] : ['#CD7F32', '#DDA15E']}
+                  style={[styles.podiumAvatar, idx === 0 && styles.podiumAvatarFirst]}
+                >
+                  <Text style={styles.podiumAvatarText}>{item.name[0]}</Text>
+                </LinearGradient>
+                <Text style={styles.podiumName}>{item.name}</Text>
+                <Text style={styles.podiumScore}>{item.score}</Text>
+              </View>
+            ))}
+          </View>
+        )}
 
         {/* Ranking List */}
         <Text style={styles.sectionTitle}>Full Rankings</Text>
@@ -57,7 +84,7 @@ const LeaderboardScreen = () => {
               <Text style={styles.rankAvatarText}>{item.name[0]}</Text>
             </View>
             <View style={styles.rankInfo}>
-              <Text style={[styles.rankName, item.isUser && styles.rankNameUser]}>{item.name}</Text>
+              <Text style={[styles.rankName, item.isUser && styles.rankNameUser]}>{item.name}{item.isUser ? ' (You)' : ''}</Text>
               <View style={styles.rankMeta}>
                 <Text style={styles.rankMetaText}>+{item.improvement}% improvement</Text>
                 <Text style={styles.rankMetaText}>{item.consistency}% consistency</Text>
@@ -72,12 +99,17 @@ const LeaderboardScreen = () => {
         ))}
 
         {/* Score Breakdown */}
-        <Text style={styles.sectionTitle}>Your Score Breakdown</Text>
-        <Card variant="elevated">
-          <ScoreRow label="Health Score" value={myScore} max={100} color={COLORS.success} />
-          <ScoreRow label="Improvement" value={8} max={20} color={COLORS.primary} />
-          <ScoreRow label="Consistency" value={70} max={100} color={COLORS.info} />
-        </Card>
+        {myEntry && (
+          <>
+            <Text style={styles.sectionTitle}>Your Score Breakdown</Text>
+            <Card variant="elevated">
+              <ScoreRow label="Health Score" value={myEntry.healthScore} max={100} color={COLORS.success} />
+              <ScoreRow label="Improvement" value={myEntry.improvement} max={20} color={COLORS.primary} />
+              <ScoreRow label="Consistency" value={myEntry.consistency} max={100} color={COLORS.info} />
+              <ScoreRow label="Streak" value={myEntry.streak} max={100} color={COLORS.warning} />
+            </Card>
+          </>
+        )}
       </View>
     </ScrollView>
   );

@@ -9,30 +9,66 @@ import {
 } from '../utils/healthCalculations';
 
 // =====================================================
+// BACKEND API BASE
+// =====================================================
+// Override via EXPO_PUBLIC_API_URL env var for production deployments.
+export const API_BASE_URL =
+  process.env.EXPO_PUBLIC_API_URL || 'http://localhost:4000/api';
+
+const apiRequest = async (path, options = {}) => {
+  try {
+    const res = await fetch(`${API_BASE_URL}${path}`, {
+      headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+      ...options,
+      body: options.body ? JSON.stringify(options.body) : undefined,
+    });
+    const json = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(json.error || `Request failed (${res.status})`);
+    return { success: true, data: json };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+// =====================================================
 // AUTH SERVICE
 // =====================================================
 export const registerUser = async (userData) => {
   try {
+    const isFamily = userData.user_type === 'family_member';
+    const insertData = isFamily
+      ? {
+          username: userData.username,
+          email: userData.email,
+          password_hash: userData.password,
+          user_type: 'family_member',
+          first_name: userData.first_name,
+          last_name: userData.last_name,
+          age: userData.age,
+          relationship: userData.relationship,
+        }
+      : {
+          username: userData.username,
+          email: userData.email,
+          password_hash: userData.password,
+          user_type: 'patient',
+          first_name: userData.first_name,
+          middle_name: userData.middle_name,
+          last_name: userData.last_name,
+          phone: userData.phone,
+          date_of_birth: userData.date_of_birth,
+          age: userData.age,
+          gender: userData.gender,
+          blood_group: userData.blood_group,
+          height_cm: userData.height_cm,
+          weight_kg: userData.weight_kg,
+          bmi: userData.bmi,
+          bmi_category: userData.bmi_category,
+        };
+
     const { data, error } = await supabase
       .from('users')
-      .insert([{
-        username: userData.username,
-        email: userData.email,
-        password_hash: userData.password, // In production: hash this server-side
-        user_type: userData.user_type,
-        first_name: userData.first_name,
-        middle_name: userData.middle_name,
-        last_name: userData.last_name,
-        phone: userData.phone,
-        date_of_birth: userData.date_of_birth,
-        age: userData.age,
-        gender: userData.gender,
-        blood_group: userData.blood_group,
-        height_cm: userData.height_cm,
-        weight_kg: userData.weight_kg,
-        bmi: userData.bmi,
-        bmi_category: userData.bmi_category,
-      }])
+      .insert([insertData])
       .select()
       .single();
 
@@ -228,11 +264,13 @@ export const getSocialFeed = async () => {
   try {
     const { data, error } = await supabase
       .from('social_posts')
-      .select('*, user:user_id(first_name, last_name, username)')
+      .select('*, user:user_id(id, first_name, last_name, username, user_type)')
       .order('created_at', { ascending: false })
       .limit(50);
     if (error) throw error;
-    return { success: true, data };
+    // Only show posts from registered patients
+    const patientPosts = (data || []).filter(post => post.user?.user_type === 'patient');
+    return { success: true, data: patientPosts };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -259,11 +297,13 @@ export const getLeaderboard = async () => {
   try {
     const { data, error } = await supabase
       .from('leaderboard')
-      .select('*, user:user_id(first_name, last_name, username)')
+      .select('*, user:user_id(id, first_name, last_name, username, user_type)')
       .order('total_score', { ascending: false })
       .limit(50);
     if (error) throw error;
-    return { success: true, data };
+    // Only include patients in leaderboard
+    const patients = (data || []).filter(entry => entry.user?.user_type === 'patient');
+    return { success: true, data: patients };
   } catch (error) {
     return { success: false, error: error.message };
   }
@@ -311,6 +351,138 @@ export const saveChatMessage = async (userId, message, sender) => {
       .insert([{ user_id: userId, message, sender }]);
     if (error) throw error;
     return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const sendChatToBackend = (userId, message) =>
+  apiRequest('/chat', { method: 'POST', body: { user_id: userId, message } });
+
+// =====================================================
+// COMPREHENSIVE DASHBOARD (backend engine)
+// =====================================================
+export const getBackendDashboard = (userId) =>
+  apiRequest(`/dashboard/${userId}`);
+
+// =====================================================
+// FOOD RECOMMENDATIONS
+// =====================================================
+export const getFoodRecommendations = (userId) =>
+  apiRequest(`/food/recommendations/${userId}`);
+
+export const checkFoodCompatibility = (foods) =>
+  apiRequest('/food/check-compatibility', { method: 'POST', body: { foods } });
+
+export const getFoodDatabase = (filters = {}) => {
+  const qs = new URLSearchParams(filters).toString();
+  return apiRequest(`/food/database${qs ? `?${qs}` : ''}`);
+};
+
+// =====================================================
+// YOGA RECOMMENDATIONS
+// =====================================================
+export const getYogaRecommendations = (userId, sessionType = 'morning') =>
+  apiRequest(`/yoga/recommendations/${userId}?sessionType=${sessionType}`);
+
+export const buildYogaSession = (userId, sessionType, duration) =>
+  apiRequest('/yoga/session', {
+    method: 'POST',
+    body: { userId, sessionType, duration },
+  });
+
+// =====================================================
+// DISEASE PREVENTION
+// =====================================================
+export const getPreventionPlans = (userId) =>
+  apiRequest(`/prevention/${userId}`);
+
+// =====================================================
+// NADI PARIKSHA
+// =====================================================
+export const analyzeNadi = (userId, pulseData) =>
+  apiRequest('/nadi/analyze', { method: 'POST', body: { userId, ...pulseData } });
+
+export const getNadiHistory = (userId) =>
+  apiRequest(`/nadi/history/${userId}`);
+
+// =====================================================
+// RITUCHARYA (SEASONAL)
+// =====================================================
+export const getRitucharya = (userId) =>
+  apiRequest(`/ritucharya/${userId}`);
+
+// =====================================================
+// PANCHAKARMA
+// =====================================================
+export const getPanchakarmaAssessment = (userId) =>
+  apiRequest(`/panchakarma/${userId}`);
+
+// =====================================================
+// DOSHA CLOCK (KALA CHAKRA)
+// =====================================================
+export const getDoshaClock = (userId) =>
+  apiRequest(`/dosha-clock/${userId}`);
+
+export const logDoshaClockActivity = (userId, activity) =>
+  apiRequest('/dosha-clock/log', {
+    method: 'POST',
+    body: { userId, ...activity },
+  });
+
+// =====================================================
+// SENSOR READINGS (Supabase direct)
+// Sensors: temperature, spo2, heart_rate, accel_x, accel_y, accel_z
+// =====================================================
+export const getLatestSensorReading = async (userId) => {
+  try {
+    const { data, error } = await supabase
+      .from('sensor_readings')
+      .select('*')
+      .eq('user_id', userId)
+      .order('recorded_at', { ascending: false })
+      .limit(1)
+      .single();
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const getSensorHistory = async (userId, limit = 20) => {
+  try {
+    const { data, error } = await supabase
+      .from('sensor_readings')
+      .select('*')
+      .eq('user_id', userId)
+      .order('recorded_at', { ascending: false })
+      .limit(limit);
+    if (error) throw error;
+    return { success: true, data };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+export const ingestSensorData = async (userId, sensorData) => {
+  try {
+    const { data, error } = await supabase
+      .from('sensor_readings')
+      .insert([{
+        user_id: userId,
+        device_id: sensorData.device_id || 'ATB-200',
+        temperature: sensorData.temperature,
+        spo2: sensorData.spo2,
+        heart_rate: sensorData.heart_rate,
+        accel_x: sensorData.accel_x,
+        accel_y: sensorData.accel_y,
+        accel_z: sensorData.accel_z,
+      }])
+      .select()
+      .single();
+    if (error) throw error;
+    return { success: true, data };
   } catch (error) {
     return { success: false, error: error.message };
   }

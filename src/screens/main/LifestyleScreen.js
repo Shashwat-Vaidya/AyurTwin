@@ -9,7 +9,7 @@ import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
 import { calculateCalories, getSeasonalAdvice } from '../../utils/healthCalculations';
 
-const LifestyleScreen = () => {
+const LifestyleScreen = ({ navigation }) => {
   const { state } = useApp();
   const user = state.user || {};
   const regData = state.registrationData || {};
@@ -97,6 +97,30 @@ const LifestyleScreen = () => {
       </View>
 
       <View style={styles.content}>
+        {/* Ayurvedic Feature Tiles */}
+        <Text style={styles.sectionTitle}>🕉️ Ayurvedic Tools</Text>
+        <View style={styles.tileGrid}>
+          {[
+            { label: 'Foods', icon: '🍽️', screen: 'FoodRecommendations', color: '#FF6B35' },
+            { label: 'Yoga', icon: '🧘', screen: 'Yoga', color: '#2D6A4F' },
+            { label: 'Dosha Clock', icon: '🕐', screen: 'DoshaClock', color: '#7B68EE' },
+            { label: 'Panchakarma', icon: '🌿', screen: 'Panchakarma', color: '#40916C' },
+            { label: 'Nadi Pariksha', icon: '💓', screen: 'NadiPariksha', color: '#E74C3C' },
+            { label: 'Ritucharya', icon: '🍂', screen: 'Ritucharya', color: '#FFB347' },
+            { label: 'Food Compat.', icon: '⚠️', screen: 'ViruddhaAhara', color: '#FFC107' },
+            { label: 'Prevention', icon: '🛡️', screen: 'DiseasePrevention', color: '#17A2B8' },
+          ].map((t) => (
+            <TouchableOpacity
+              key={t.screen}
+              style={[styles.tile, { borderTopColor: t.color }]}
+              onPress={() => navigation?.navigate?.(t.screen)}
+            >
+              <Text style={styles.tileIcon}>{t.icon}</Text>
+              <Text style={styles.tileLabel}>{t.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
+
         {/* Dinacharya */}
         <Text style={styles.sectionTitle}>🌅 Dinacharya (Daily Routine)</Text>
         <Card variant="elevated">
@@ -330,6 +354,10 @@ const styles = StyleSheet.create({
   toolDesc: { fontSize: 12, color: COLORS.textSecondary },
   toolArrow: { fontSize: 24, color: COLORS.textLight },
   disclaimer: { fontSize: 10, color: COLORS.textLight, textAlign: 'center', marginTop: 24, lineHeight: 14 },
+  tileGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 16 },
+  tile: { width: '30%', backgroundColor: COLORS.surface, padding: 12, borderRadius: 12, alignItems: 'center', borderTopWidth: 3, elevation: 2, shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 4, shadowOffset: { width: 0, height: 2 } },
+  tileIcon: { fontSize: 28, marginBottom: 4 },
+  tileLabel: { fontSize: 11, fontWeight: '600', color: COLORS.text, textAlign: 'center' },
 });
 
 export default LifestyleScreen;

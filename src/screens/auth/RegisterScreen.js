@@ -13,6 +13,8 @@ import { calculateBMI } from '../../utils/healthCalculations';
 const BLOOD_GROUPS = ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-'];
 const GENDERS = ['Male', 'Female', 'Other'];
 
+const RELATIONSHIPS = ['Parent', 'Brother', 'Sister', 'Child', 'Spouse'];
+
 const RegisterScreen = ({ navigation, route }) => {
   const { state, dispatch, updateRegistration } = useApp();
   const isPatient = state.userType === 'patient';
@@ -40,6 +42,10 @@ const RegisterScreen = ({ navigation, route }) => {
   const [bloodGroup, setBloodGroup] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+
+  // Family member specific fields
+  const [familyAge, setFamilyAge] = useState('');
+  const [relationship, setRelationship] = useState('');
 
   // Step 2 — Lifestyle
   const [physicalActivity, setPhysicalActivity] = useState('moderate');
@@ -99,9 +105,17 @@ const RegisterScreen = ({ navigation, route }) => {
   const validateStep = () => {
     const errs = {};
     if (step === 1) {
-      if (!firstName.trim()) errs.firstName = 'Required';
-      if (!lastName.trim()) errs.lastName = 'Required';
-      if (!email.trim()) errs.email = 'Required';
+      if (isPatient) {
+        if (!firstName.trim()) errs.firstName = 'Required';
+        if (!lastName.trim()) errs.lastName = 'Required';
+        if (!email.trim()) errs.email = 'Required';
+      } else {
+        // Family member: name, age, relationship
+        if (!firstName.trim()) errs.firstName = 'Required';
+        if (!lastName.trim()) errs.lastName = 'Required';
+        if (!familyAge.trim()) errs.familyAge = 'Required';
+        if (!relationship) errs.relationship = 'Required';
+      }
     }
     if (step === (isPatient ? 8 : 2)) {
       if (!username.trim()) errs.username = 'Required';
@@ -118,13 +132,22 @@ const RegisterScreen = ({ navigation, route }) => {
 
     // Save step data
     if (step === 1) {
-      updateRegistration({
-        first_name: firstName, middle_name: middleName, last_name: lastName,
-        email, phone, date_of_birth: dob, gender, blood_group: bloodGroup,
-        height_cm: parseFloat(height), weight_kg: parseFloat(weight),
-        bmi: bmiData.value, bmi_category: bmiData.category,
-        age: dob ? new Date().getFullYear() - new Date(dob).getFullYear() : null,
-      });
+      if (isPatient) {
+        updateRegistration({
+          first_name: firstName, middle_name: middleName, last_name: lastName,
+          email, phone, date_of_birth: dob, gender, blood_group: bloodGroup,
+          height_cm: parseFloat(height), weight_kg: parseFloat(weight),
+          bmi: bmiData.value, bmi_category: bmiData.category,
+          age: dob ? new Date().getFullYear() - new Date(dob).getFullYear() : null,
+        });
+      } else {
+        // Family member: minimal data
+        updateRegistration({
+          first_name: firstName, last_name: lastName,
+          age: parseInt(familyAge), relationship: relationship.toLowerCase(),
+          email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@ayurtwin.com`,
+        });
+      }
     }
     if (step === 2) {
       updateRegistration({
@@ -441,11 +464,25 @@ const RegisterScreen = ({ navigation, route }) => {
     </View>
   );
 
+  const renderFamilyStep1 = () => (
+    <View>
+      <Text style={styles.stepTitle}>Family Member Info</Text>
+      <Text style={styles.stepDesc}>Enter your basic details to create a family account</Text>
+      <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="👤" error={errors.firstName} />
+      <InputField label="Last Name *" value={lastName} onChangeText={setLastName} placeholder="Last name" error={errors.lastName} />
+      <InputField label="Age *" value={familyAge} onChangeText={setFamilyAge} placeholder="Your age" keyboardType="numeric" icon="🎂" error={errors.familyAge} />
+
+      <Text style={styles.fieldLabel}>Relationship *</Text>
+      {renderChipSelector(RELATIONSHIPS, relationship, setRelationship)}
+      {errors.relationship && <Text style={{ color: COLORS.error, fontSize: 12, marginTop: -8, marginBottom: 8 }}>{errors.relationship}</Text>}
+    </View>
+  );
+
   const renderCurrentStep = () => {
     if (!isPatient) {
-      // Family member: Step 0 → Step 1 → Step 8 (credentials)
+      // Family member: Step 0 → Step 1 (simple info) → Step 2 (credentials)
       if (step === 0) return renderStep0();
-      if (step === 1) return renderStep1();
+      if (step === 1) return renderFamilyStep1();
       if (step === 2) return renderStep8();
     }
     switch (step) {
