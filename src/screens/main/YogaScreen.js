@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { getYogaRecommendations } from '../../services/api';
 
 const TABS = [
-  { key: 'morning', label: '🌅 Morning' },
-  { key: 'evening', label: '🌙 Evening' },
-  { key: 'therapeutic', label: '💊 Therapeutic' },
+  { key: 'morning',     label: 'Morning',     ion: 'sunny-outline' },
+  { key: 'evening',     label: 'Evening',     ion: 'moon-outline' },
+  { key: 'therapeutic', label: 'Therapeutic', ion: 'medical-outline' },
 ];
 
 export default function YogaScreen({ navigation }) {
@@ -32,7 +33,10 @@ export default function YogaScreen({ navigation }) {
         <TouchableOpacity onPress={() => navigation?.goBack?.()} style={styles.back}>
           <Text style={styles.backText}>← Back</Text>
         </TouchableOpacity>
-        <Text style={styles.title}>🧘 Yoga & Meditation</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <Ionicons name="body-outline" size={22} color="#FFF" style={{ marginRight: 8 }} />
+          <Text style={styles.title}>Yoga & Meditation</Text>
+        </View>
         <Text style={styles.subtitle}>
           {data ? `Personalized for prakriti: ${cap(data.prakriti)} · dominant: ${cap(data.dominant_dosha)}` : ' '}
         </Text>
@@ -41,6 +45,7 @@ export default function YogaScreen({ navigation }) {
       <View style={styles.tabRow}>
         {TABS.map(t => (
           <TouchableOpacity key={t.key} style={[styles.tab, tab === t.key && styles.tabActive]} onPress={() => setTab(t.key)}>
+            <Ionicons name={t.ion} size={16} color={tab === t.key ? '#FFF' : COLORS.text} style={{ marginBottom: 2 }} />
             <Text style={[styles.tabLabel, tab === t.key && styles.tabLabelActive]}>{t.label}</Text>
           </TouchableOpacity>
         ))}
@@ -64,7 +69,10 @@ export default function YogaScreen({ navigation }) {
               </View>
               <Text style={styles.meta}>{cap(y.type)} · {y.duration_min} min</Text>
               {y.benefits?.length > 0 && (
-                <Text style={styles.benefits}>✨ {y.benefits.join(' · ')}</Text>
+                <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 6 }}>
+                  <Ionicons name="sparkles-outline" size={12} color={COLORS.primary} style={{ marginRight: 4 }} />
+                  <Text style={[styles.benefits, { marginTop: 0 }]}>{y.benefits.join(' · ')}</Text>
+                </View>
               )}
               <View style={styles.scoreBar}>
                 <View style={[styles.scoreFill, { width: `${(y.score || 0) * 100}%` }]} />

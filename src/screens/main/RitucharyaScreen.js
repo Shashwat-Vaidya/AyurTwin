@@ -1,26 +1,27 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { getRitucharya } from '../../services/api';
 
 const SEASON_INFO = {
-  summer:  { icon: '☀️', sanskrit: 'Grishma',  hint: 'Cooling foods, hydration, light meals' },
-  monsoon: { icon: '🌧️', sanskrit: 'Varsha',   hint: 'Warm cooked food, ginger tea, boost agni' },
-  autumn:  { icon: '🍂', sanskrit: 'Sharad',    hint: 'Reduce pitta — sweet, bitter, astringent' },
-  winter:  { icon: '❄️', sanskrit: 'Hemanta',  hint: 'Warming, oily, nourishing rasayanas' },
-  spring:  { icon: '🌸', sanskrit: 'Vasanta',  hint: 'Light, dry, bitter — burn off kapha' },
+  summer:  { ion: 'sunny-outline',     sanskrit: 'Grishma', hint: 'Cooling foods, hydration, light meals' },
+  monsoon: { ion: 'rainy-outline',     sanskrit: 'Varsha',  hint: 'Warm cooked food, ginger tea, boost agni' },
+  autumn:  { ion: 'leaf-outline',      sanskrit: 'Sharad',  hint: 'Reduce pitta — sweet, bitter, astringent' },
+  winter:  { ion: 'snow-outline',      sanskrit: 'Hemanta', hint: 'Warming, oily, nourishing rasayanas' },
+  spring:  { ion: 'flower-outline',    sanskrit: 'Vasanta', hint: 'Light, dry, bitter — burn off kapha' },
 };
 
 const COLORS_BUCKET = {
   best: '#16A34A', good: '#65A30D', moderate: '#D97706', avoid: '#DC2626',
 };
 const LABEL_BUCKET = {
-  best: '✅ Best — eat freely',
-  good: '👍 Good',
-  moderate: '⚖️ Moderate — sometimes',
-  avoid: '❌ Avoid in this season',
+  best:     { ion: 'checkmark-circle', text: 'Best — eat freely' },
+  good:     { ion: 'thumbs-up-outline', text: 'Good' },
+  moderate: { ion: 'remove-circle-outline', text: 'Moderate — sometimes' },
+  avoid:    { ion: 'close-circle-outline',  text: 'Avoid in this season' },
 };
 
 export default function RitucharyaScreen({ navigation }) {
@@ -44,12 +45,15 @@ export default function RitucharyaScreen({ navigation }) {
     <ScrollView style={styles.container}>
       <LinearGradient colors={COLORS.gradient.saffron} style={styles.header}>
         <TouchableOpacity onPress={() => navigation?.goBack?.()}><Text style={styles.back}>← Back</Text></TouchableOpacity>
-        <Text style={styles.title}>🍂 Ritucharya</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 8 }}>
+          <Ionicons name="calendar-outline" size={22} color="#FFF" style={{ marginRight: 8 }} />
+          <Text style={styles.title}>Ritucharya</Text>
+        </View>
         <Text style={styles.subtitle}>Seasonal diet for {cap(data?.prakriti)} (dominant: {cap(data?.dominant_dosha)})</Text>
       </LinearGradient>
 
       <View style={styles.hero}>
-        <Text style={styles.heroIcon}>{info.icon}</Text>
+        <Ionicons name={info.ion} size={56} color={COLORS.primary} style={{ marginBottom: 6 }} />
         <Text style={styles.heroSeason}>{cap(seasonKey)}</Text>
         <Text style={styles.heroSanskrit}>({info.sanskrit})</Text>
         <Text style={styles.heroHint}>{info.hint}</Text>
@@ -57,9 +61,12 @@ export default function RitucharyaScreen({ navigation }) {
 
       {['best', 'good', 'moderate', 'avoid'].map(bucket => (
         <View key={bucket} style={styles.section}>
-          <Text style={[styles.sectionTitle, { color: COLORS_BUCKET[bucket] }]}>
-            {LABEL_BUCKET[bucket]}  ({(data?.[bucket] || []).length})
-          </Text>
+          <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 8 }}>
+            <Ionicons name={LABEL_BUCKET[bucket].ion} size={16} color={COLORS_BUCKET[bucket]} style={{ marginRight: 6 }} />
+            <Text style={[styles.sectionTitle, { color: COLORS_BUCKET[bucket], marginBottom: 0 }]}>
+              {LABEL_BUCKET[bucket].text}  ({(data?.[bucket] || []).length})
+            </Text>
+          </View>
           {(data?.[bucket] || []).slice(0, 30).map((f, i) => (
             <View key={`${bucket}-${i}`} style={[styles.foodChip, { borderColor: COLORS_BUCKET[bucket] + '55' }]}>
               <Text style={styles.foodName}>{f.name}</Text>

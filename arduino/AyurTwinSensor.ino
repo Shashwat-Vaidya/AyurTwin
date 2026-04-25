@@ -30,11 +30,11 @@ const char* WIFI_SSID     = "YOUR_WIFI_SSID";
 const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
 
 // Supabase project — REST endpoint for sensor_data table
-const char* SUPABASE_URL  = "https://vfmskkfcsxbsvghbqbrk.supabase.co";
+const char* SUPABASE_URL  = "https://vfmskkfcsxbsvghbqbrk.supabase.co/rest/v1/sensor_data";
 const char* SUPABASE_KEY  = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZmbXNra2Zjc3hic3ZnaGJxYnJrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcwNDUxMjcsImV4cCI6MjA5MjYyMTEyN30.iuvEeedrrij_4UnJ2xmO3OjFIDgjH_42nFi5J5K-OTQ";
 
 // Patient UUID (run `select id from users where username='shashwat';` in Supabase)
-const char* USER_ID       = "11111111-1111-1111-1111-111111111111";
+const char* USER_ID       = "8fca9a37-6120-4e70-bcf1-6c57c1e41cfb";
 // ───────────────────────────────────────────────────────────────────────────
 
 // ── HARDWARE PINS ──────────────────────────────────────────────────────────

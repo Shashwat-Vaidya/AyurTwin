@@ -4,6 +4,7 @@ import {
   ScrollView, KeyboardAvoidingView, Platform, Animated,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../config/theme';
 import { sendChat } from '../services/api';
 import { useApp } from '../context/AppContext';
@@ -49,7 +50,7 @@ const ChatBot = () => {
       <Animated.View style={[styles.fab, { transform: [{ scale: scaleAnim }] }]}>
         <TouchableOpacity onPress={handlePress} activeOpacity={0.8}>
           <LinearGradient colors={COLORS.gradient.saffron} style={styles.fabGradient}>
-            <Text style={styles.fabIcon}>🤖</Text>
+            <Ionicons name="chatbubbles-outline" size={28} color="#FFF" />
           </LinearGradient>
         </TouchableOpacity>
       </Animated.View>
@@ -62,7 +63,7 @@ const ChatBot = () => {
             <LinearGradient colors={COLORS.gradient.saffron} style={styles.chatHeader}>
               <View style={styles.chatHeaderContent}>
                 <View style={styles.botAvatar}>
-                  <Text style={styles.botAvatarText}>🤖</Text>
+                  <Ionicons name="chatbubbles-outline" size={22} color="#FFF" />
                 </View>
                 <View>
                   <Text style={styles.chatTitle}>AyurBot</Text>
@@ -70,7 +71,7 @@ const ChatBot = () => {
                 </View>
               </View>
               <TouchableOpacity onPress={() => setVisible(false)} style={styles.closeBtn}>
-                <Text style={styles.closeBtnText}>✕</Text>
+                <Ionicons name="close" size={22} color="#FFF" />
               </TouchableOpacity>
             </LinearGradient>
 
@@ -103,7 +104,7 @@ const ChatBot = () => {
               />
               <TouchableOpacity onPress={handleSend} style={styles.sendBtn}>
                 <LinearGradient colors={COLORS.gradient.saffron} style={styles.sendGradient}>
-                  <Text style={styles.sendIcon}>➤</Text>
+                  <Ionicons name="send" size={18} color="#FFF" />
                 </LinearGradient>
               </TouchableOpacity>
             </View>

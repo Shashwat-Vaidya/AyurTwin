@@ -4,6 +4,7 @@ import {
   KeyboardAvoidingView, Platform, Modal,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../../config/theme';
 import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
@@ -91,7 +92,7 @@ const FamilyDashboard = ({ navigation }) => {
               <Text style={styles.headerSubtitle}>{isFamily ? 'Watch over your loved ones' : 'People who monitor your health'}</Text>
             </View>
             <TouchableOpacity onPress={logout} style={styles.logoutBtn}>
-              <Text style={styles.logoutText}>🚪</Text>
+              <Ionicons name="log-out-outline" size={20} color="#FFF" />
             </TouchableOpacity>
           </View>
         </LinearGradient>

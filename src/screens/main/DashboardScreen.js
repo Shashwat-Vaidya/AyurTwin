@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, Animated, Dimensions, Alert,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
@@ -105,15 +106,16 @@ const DashboardScreen = ({ navigation }) => {
           </View>
           <View style={styles.headerActions}>
             <TouchableOpacity onPress={() => navigation.navigate('MoreTab', { screen: 'Profile' })} style={styles.profileBtn}>
-              <Text style={styles.profileIcon}>👤</Text>
+              <Ionicons name="person-circle-outline" size={26} color="#FFF" />
             </TouchableOpacity>
             <TouchableOpacity onPress={handleLogout} style={styles.logoutBtn}>
-              <Text style={styles.logoutIcon}>🚪</Text>
+              <Ionicons name="log-out-outline" size={24} color="#FFF" />
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.doshaBadge}>
-          <Text style={styles.doshaBadgeText}>🔺 {getDoshaBadge()}</Text>
+          <Ionicons name="triangle-outline" size={14} color="#FFF" style={{ marginRight: 6 }} />
+          <Text style={styles.doshaBadgeText}>{getDoshaBadge()}</Text>
         </View>
       </LinearGradient>
 
@@ -142,10 +144,10 @@ const DashboardScreen = ({ navigation }) => {
         {/* Live Health Cards - fetched from Supabase every 5s */}
         <Text style={styles.sectionTitle}>Live Sensor Data</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.vitalScroll}>
-          <VitalCard icon="❤️" label="Heart Rate" value={`${sensorData?.heart_rate || '--'}`} unit="bpm" color={COLORS.heart} />
-          <VitalCard icon="🌡️" label="Temperature" value={`${sensorData?.temperature || '--'}`} unit="°C" color={COLORS.temp} />
-          <VitalCard icon="🫁" label="SpO2" value={`${sensorData?.spo2 || '--'}`} unit="%" color={COLORS.spo2} />
-          <VitalCard icon="🏃" label="Body Motion" value={getMovementLabel().value} unit={getMovementLabel().label} color={COLORS.stress} />
+          <VitalCard ion="heart-outline" label="Heart Rate" value={`${sensorData?.heart_rate || '--'}`} unit="bpm" color={COLORS.heart} />
+          <VitalCard ion="thermometer-outline" label="Temperature" value={`${sensorData?.temperature || '--'}`} unit="°C" color={COLORS.temp} />
+          <VitalCard ion="pulse-outline" label="SpO2" value={`${sensorData?.spo2 || '--'}`} unit="%" color={COLORS.spo2} />
+          <VitalCard ion="walk-outline" label="Body Motion" value={getMovementLabel().value} unit={getMovementLabel().label} color={COLORS.stress} />
         </ScrollView>
 
         {/* Recent Alerts */}
@@ -164,15 +166,15 @@ const DashboardScreen = ({ navigation }) => {
         {/* Feature Cards */}
         <Text style={styles.sectionTitle}>Features</Text>
         <View style={styles.featureGrid}>
-          <FeatureCard icon="🧠" title="AI Disease Prediction" desc="ML-powered risk analysis" onPress={() => navigation.navigate('MetricsTab')} />
-          <FeatureCard icon="🔺" title="Dosha Detail" desc="Track your Ayurvedic profile" onPress={() => navigation.navigate('DoshaDetail')} />
-          <FeatureCard icon="🌿" title="Lifestyle Guidance" desc="Personalized routines" onPress={() => navigation.navigate('LifestyleTab')} />
-          <FeatureCard icon="📊" title="Smart Monitoring" desc="Real-time health tracking" onPress={() => navigation.navigate('MetricsTab')} />
-          <FeatureCard icon="📈" title="Health Journey" desc="Track your progress" onPress={() => navigation.navigate('HealthJourney')} />
-          <FeatureCard icon="💡" title="Smart Insights" desc="Personalized intelligence" onPress={() => navigation.navigate('SmartInsights')} />
-          <FeatureCard icon="👨‍👩‍👧" title="Family Dashboard" desc="Monitor loved ones" onPress={() => navigation.navigate('Family')} />
-          <FeatureCard icon="🏆" title="Leaderboard" desc="Community motivation" onPress={() => navigation.navigate('Leaderboard')} />
-          <FeatureCard icon="🌐" title="Social Feed" desc="Share achievements" onPress={() => navigation.navigate('Social')} />
+          <FeatureCard ion="medkit-outline" title="AI Disease Prediction" desc="ML-powered risk analysis" onPress={() => navigation.navigate('MetricsTab')} />
+          <FeatureCard ion="triangle-outline" title="Dosha Detail" desc="Track your Ayurvedic profile" onPress={() => navigation.navigate('DoshaDetail')} />
+          <FeatureCard ion="leaf-outline" title="Lifestyle Guidance" desc="Personalized routines" onPress={() => navigation.navigate('LifestyleTab')} color={COLORS.success} />
+          <FeatureCard ion="stats-chart-outline" title="Smart Monitoring" desc="Real-time health tracking" onPress={() => navigation.navigate('MetricsTab')} />
+          <FeatureCard ion="trending-up-outline" title="Health Journey" desc="Track your progress" onPress={() => navigation.navigate('HealthJourney')} />
+          <FeatureCard ion="bulb-outline" title="Smart Insights" desc="Personalized intelligence" onPress={() => navigation.navigate('SmartInsights')} color={COLORS.warning} />
+          <FeatureCard ion="people-outline" title="Family Dashboard" desc="Monitor loved ones" onPress={() => navigation.navigate('Family')} />
+          <FeatureCard ion="trophy-outline" title="Leaderboard" desc="Community motivation" onPress={() => navigation.navigate('Leaderboard')} color={COLORS.warning} />
+          <FeatureCard ion="globe-outline" title="Social Feed" desc="Share achievements" onPress={() => navigation.navigate('Social')} />
         </View>
 
         {/* Top 3 Disease Risks */}
@@ -199,7 +201,7 @@ const DashboardScreen = ({ navigation }) => {
         <TouchableOpacity onPress={() => navigation.navigate('SmartInsights')} activeOpacity={0.8}>
           <Text style={styles.sectionTitle}>Smart Insights →</Text>
           <Card style={styles.insightCard}>
-            <Text style={styles.insightIcon}>💡</Text>
+            <Ionicons name="bulb-outline" size={28} color={COLORS.warning} style={{ marginRight: 12 }} />
             <Text style={styles.insightText}>
               {sensorData?.heart_rate > 90
                 ? 'Your heart rate is elevated. Take a break and practice deep breathing.'
@@ -240,18 +242,18 @@ const DashboardScreen = ({ navigation }) => {
   );
 };
 
-const VitalCard = ({ icon, label, value, unit, color }) => (
+const VitalCard = ({ ion, label, value, unit, color }) => (
   <View style={[styles.vitalCard, { borderTopColor: color }]}>
-    <Text style={styles.vitalIcon}>{icon}</Text>
+    <Ionicons name={ion} size={26} color={color} style={{ marginBottom: 6 }} />
     <Text style={[styles.vitalValue, { color }]}>{value}</Text>
     <Text style={styles.vitalUnit}>{unit}</Text>
     <Text style={styles.vitalLabel}>{label}</Text>
   </View>
 );
 
-const FeatureCard = ({ icon, title, desc, onPress }) => (
+const FeatureCard = ({ ion, title, desc, onPress, color }) => (
   <TouchableOpacity style={styles.featureCard} onPress={onPress} activeOpacity={0.7}>
-    <Text style={styles.featureIcon}>{icon}</Text>
+    <Ionicons name={ion} size={28} color={color || COLORS.primary} style={{ marginBottom: 8 }} />
     <Text style={styles.featureTitle}>{title}</Text>
     <Text style={styles.featureDesc}>{desc}</Text>
   </TouchableOpacity>
@@ -278,7 +280,7 @@ const styles = StyleSheet.create({
   profileIcon: { fontSize: 22 },
   logoutBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#FFFFFF30', alignItems: 'center', justifyContent: 'center' },
   logoutIcon: { fontSize: 20 },
-  doshaBadge: { marginTop: 12, alignSelf: 'flex-start', backgroundColor: '#FFFFFF30', paddingHorizontal: 14, paddingVertical: 6, borderRadius: 16 },
+  doshaBadge: { marginTop: 12, alignSelf: 'flex-start', flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFFFFF30', paddingHorizontal: 14, paddingVertical: 6, borderRadius: 16 },
   doshaBadgeText: { color: '#FFF', fontWeight: '700', fontSize: 13 },
   content: { padding: SIZES.screenPadding, paddingTop: 16 },
   sectionTitle: { fontSize: 18, fontWeight: '700', color: COLORS.text, marginBottom: 12, marginTop: 20 },

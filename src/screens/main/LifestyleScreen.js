@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Switch,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
@@ -98,23 +99,23 @@ const LifestyleScreen = ({ navigation }) => {
 
       <View style={styles.content}>
         {/* Ayurvedic Feature Tiles */}
-        <Text style={styles.sectionTitle}>🕉️ Ayurvedic Tools</Text>
+        <Text style={styles.sectionTitle}>Ayurvedic Tools</Text>
         <View style={styles.tileGrid}>
           {[
-            { label: 'Foods', icon: '🍽️', screen: 'FoodRecommendations', color: '#FF6B35' },
-            { label: 'Yoga', icon: '🧘', screen: 'Yoga', color: '#2D6A4F' },
-            { label: 'Dosha Clock', icon: '🕐', screen: 'DoshaClock', color: '#7B68EE' },
-            { label: 'Panchakarma', icon: '🌿', screen: 'Panchakarma', color: '#40916C' },
-            { label: 'Ritucharya', icon: '🍂', screen: 'Ritucharya', color: '#FFB347' },
-            { label: 'Food Compat.', icon: '⚠️', screen: 'ViruddhaAhara', color: '#FFC107' },
-            { label: 'Prevention', icon: '🛡️', screen: 'DiseasePrevention', color: '#17A2B8' },
+            { label: 'Foods',        ion: 'restaurant-outline',      screen: 'FoodRecommendations', color: '#FF6B35' },
+            { label: 'Yoga',         ion: 'body-outline',            screen: 'Yoga',               color: '#2D6A4F' },
+            { label: 'Dosha Clock',  ion: 'time-outline',            screen: 'DoshaClock',         color: '#7B68EE' },
+            { label: 'Panchakarma',  ion: 'flower-outline',          screen: 'Panchakarma',        color: '#40916C' },
+            { label: 'Ritucharya',   ion: 'calendar-outline',        screen: 'Ritucharya',         color: '#FFB347' },
+            { label: 'Food Compat.', ion: 'warning-outline',         screen: 'ViruddhaAhara',      color: '#FFC107' },
+            { label: 'Prevention',   ion: 'shield-checkmark-outline',screen: 'DiseasePrevention',  color: '#17A2B8' },
           ].map((t) => (
             <TouchableOpacity
               key={t.screen}
               style={[styles.tile, { borderTopColor: t.color }]}
               onPress={() => navigation?.navigate?.(t.screen)}
             >
-              <Text style={styles.tileIcon}>{t.icon}</Text>
+              <Ionicons name={t.ion} size={28} color={t.color} style={{ marginBottom: 6 }} />
               <Text style={styles.tileLabel}>{t.label}</Text>
             </TouchableOpacity>
           ))}

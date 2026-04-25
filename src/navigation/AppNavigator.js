@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../config/theme';
 import { useApp } from '../context/AppContext';
 
@@ -55,9 +56,9 @@ const MoreStack = createStackNavigator();
 const MetricsStack = createStackNavigator();
 const LifestyleStack = createStackNavigator();
 
-const TabIcon = ({ name, icon, focused }) => (
+const TabIcon = ({ name, ion, focused }) => (
   <View style={styles.tabItem}>
-    <Text style={[styles.tabIcon, focused && styles.tabIconActive]}>{icon}</Text>
+    <Ionicons name={ion} size={22} color={focused ? COLORS.primary : '#999'} />
     <Text style={[styles.tabLabel, focused && styles.tabLabelActive]}>{name}</Text>
   </View>
 );
@@ -133,27 +134,27 @@ const MainTabs = () => (
     <Tab.Screen
       name="DashboardTab"
       component={DashboardStackScreen}
-      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Home" icon="🏠" focused={focused} /> }}
+      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Home" ion="home-outline" focused={focused} /> }}
     />
     <Tab.Screen
       name="MetricsTab"
       component={MetricsStackScreen}
-      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Metrics" icon="📊" focused={focused} /> }}
+      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Metrics" ion="stats-chart-outline" focused={focused} /> }}
     />
     <Tab.Screen
       name="AlertsTab"
       component={AlertsScreen}
-      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Alerts" icon="🚨" focused={focused} /> }}
+      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Alerts" ion="notifications-outline" focused={focused} /> }}
     />
     <Tab.Screen
       name="LifestyleTab"
       component={LifestyleStackScreen}
-      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Lifestyle" icon="🌿" focused={focused} /> }}
+      options={{ tabBarIcon: ({ focused }) => <TabIcon name="Lifestyle" ion="leaf-outline" focused={focused} /> }}
     />
     <Tab.Screen
       name="MoreTab"
       component={MoreStackScreen}
-      options={{ tabBarIcon: ({ focused }) => <TabIcon name="More" icon="📂" focused={focused} /> }}
+      options={{ tabBarIcon: ({ focused }) => <TabIcon name="More" ion="grid-outline" focused={focused} /> }}
     />
   </Tab.Navigator>
 );
