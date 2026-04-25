@@ -1,45 +1,27 @@
-/**
- * Leaderboard Routes
- */
 const express = require('express');
-const router = express.Router();
 const db = require('../services/db');
+const { authenticate } = require('../middleware/auth');
 
-// GET /api/leaderboard
-router.get('/', async (req, res) => {
-  try {
-    const { data, error } = await db.getLeaderboard();
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    // Only include patients
-    const patients = (data || []).filter(entry => entry.user?.user_type === 'patient');
-    res.json({ success: true, data: patients });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+const router = express.Router();
 
-// GET /api/leaderboard/:userId
-router.get('/:userId', async (req, res) => {
-  try {
-    const { data, error } = await db.getLeaderboardEntry(req.params.userId);
-    if (error && error.code !== 'PGRST116') {
-      return res.status(400).json({ success: false, error: error.message });
-    }
-    res.json({ success: true, data: data || null });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+router.get('/', authenticate, async (req, res) => {
+    const [dummy, mine] = await Promise.all([
+        db.listLeaderboardDummy(),
+        db.getLatestHealthScore(req.user.id),
+    ]);
+    const { data: user } = await db.getUserById(req.user.id);
 
-// PUT /api/leaderboard/:userId
-router.put('/:userId', async (req, res) => {
-  try {
-    const { data, error } = await db.upsertLeaderboard({ user_id: req.params.userId, ...req.body });
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+    const entries = (dummy.data || []).map(d => ({
+        rank: d.rank, display_name: d.display_name, score: d.score, is_me: false,
+    }));
+    const myScore = mine.data?.score || 0;
+    // insert current user by score
+    const myEntry = { display_name: user?.full_name || user?.username || 'You', score: myScore, is_me: true };
+    const merged = [...entries, myEntry].sort((a, b) => b.score - a.score);
+    merged.forEach((e, i) => e.rank = i + 1);
+
+    const myRank = merged.find(e => e.is_me)?.rank;
+    res.json({ top: merged.slice(0, 11), my_rank: myRank, my_score: myScore });
 });
 
 module.exports = router;

@@ -1,112 +1,103 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity } from 'react-native';
-import { COLORS, FONTS, SIZES, SHADOWS } from '../../config/theme';
-import { useApp } from '../../context/AppContext';
+import { LinearGradient } from 'expo-linear-gradient';
+import { COLORS } from '../../config/theme';
+import Card from '../../components/common/Card';
 import { getRitucharya } from '../../services/api';
 
-const RitucharyaScreen = ({ navigation }) => {
-  const { state } = useApp();
-  const userId = state.user?.id;
+const SEASON_INFO = {
+  summer:  { icon: '☀️', sanskrit: 'Grishma',  hint: 'Cooling foods, hydration, light meals' },
+  monsoon: { icon: '🌧️', sanskrit: 'Varsha',   hint: 'Warm cooked food, ginger tea, boost agni' },
+  autumn:  { icon: '🍂', sanskrit: 'Sharad',    hint: 'Reduce pitta — sweet, bitter, astringent' },
+  winter:  { icon: '❄️', sanskrit: 'Hemanta',  hint: 'Warming, oily, nourishing rasayanas' },
+  spring:  { icon: '🌸', sanskrit: 'Vasanta',  hint: 'Light, dry, bitter — burn off kapha' },
+};
+
+const COLORS_BUCKET = {
+  best: '#16A34A', good: '#65A30D', moderate: '#D97706', avoid: '#DC2626',
+};
+const LABEL_BUCKET = {
+  best: '✅ Best — eat freely',
+  good: '👍 Good',
+  moderate: '⚖️ Moderate — sometimes',
+  avoid: '❌ Avoid in this season',
+};
+
+export default function RitucharyaScreen({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [err, setErr] = useState(null);
 
-  useEffect(() => {
-    (async () => {
-      if (!userId) return;
-      const res = await getRitucharya(userId);
-      if (res.success) setData(res.data);
-      setLoading(false);
-    })();
-  }, [userId]);
+  useEffect(() => { (async () => {
+    const r = await getRitucharya();
+    if (r.success) setData(r.data); else setErr(r.error);
+    setLoading(false);
+  })(); }, []);
 
-  if (loading) return <View style={styles.center}><ActivityIndicator size="large" color={COLORS.primary} /></View>;
+  if (loading) return <View style={styles.center}><ActivityIndicator color={COLORS.primary} /></View>;
+  if (err)     return <View style={styles.center}><Text>{err}</Text></View>;
 
-  const r = data?.ritucharya;
+  const seasonKey = data?.season || 'autumn';
+  const info = SEASON_INFO[seasonKey] || SEASON_INFO.autumn;
 
   return (
     <ScrollView style={styles.container}>
-      <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation?.goBack?.()}><Text style={styles.back}>←</Text></TouchableOpacity>
+      <LinearGradient colors={COLORS.gradient.saffron} style={styles.header}>
+        <TouchableOpacity onPress={() => navigation?.goBack?.()}><Text style={styles.back}>← Back</Text></TouchableOpacity>
         <Text style={styles.title}>🍂 Ritucharya</Text>
-        <View style={{ width: 24 }} />
+        <Text style={styles.subtitle}>Seasonal diet for {cap(data?.prakriti)} (dominant: {cap(data?.dominant_dosha)})</Text>
+      </LinearGradient>
+
+      <View style={styles.hero}>
+        <Text style={styles.heroIcon}>{info.icon}</Text>
+        <Text style={styles.heroSeason}>{cap(seasonKey)}</Text>
+        <Text style={styles.heroSanskrit}>({info.sanskrit})</Text>
+        <Text style={styles.heroHint}>{info.hint}</Text>
       </View>
 
-      {r && (
-        <>
-          <View style={styles.hero}>
-            <Text style={styles.heroIcon}>{r.icon || '🌱'}</Text>
-            <Text style={styles.heroSeason}>{r.season?.english}</Text>
-            <Text style={styles.heroSanskrit}>{r.season?.sanskrit}</Text>
-            <Text style={styles.heroMonths}>{r.season?.months}</Text>
-          </View>
-
-          <View style={styles.card}>
-            <Text style={styles.sectionTitle}>🌡️ Dosha Behavior</Text>
-            <Text style={styles.bodyText}>{r.dosha_behavior}</Text>
-          </View>
-
-          {r.favor?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={[styles.sectionTitle, { color: COLORS.success }]}>✅ Favor</Text>
-              {r.favor.map((f, i) => <Text key={i} style={styles.bullet}>• {f}</Text>)}
+      {['best', 'good', 'moderate', 'avoid'].map(bucket => (
+        <View key={bucket} style={styles.section}>
+          <Text style={[styles.sectionTitle, { color: COLORS_BUCKET[bucket] }]}>
+            {LABEL_BUCKET[bucket]}  ({(data?.[bucket] || []).length})
+          </Text>
+          {(data?.[bucket] || []).slice(0, 30).map((f, i) => (
+            <View key={`${bucket}-${i}`} style={[styles.foodChip, { borderColor: COLORS_BUCKET[bucket] + '55' }]}>
+              <Text style={styles.foodName}>{f.name}</Text>
+              {f.properties?.length > 0 && (
+                <Text style={styles.foodProps}>· {f.properties.join(' · ')}</Text>
+              )}
             </View>
-          )}
+          ))}
+          {!data?.[bucket]?.length && <Text style={styles.empty}>—</Text>}
+        </View>
+      ))}
 
-          {r.avoid?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={[styles.sectionTitle, { color: COLORS.error }]}>⛔ Avoid</Text>
-              {r.avoid.map((f, i) => <Text key={i} style={styles.bullet}>• {f}</Text>)}
-            </View>
-          )}
-
-          {r.foods?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>🍲 Seasonal Foods</Text>
-              <Text style={styles.bodyText}>{r.foods.join(', ')}</Text>
-            </View>
-          )}
-
-          {r.activities?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>🏃 Activities</Text>
-              {r.activities.map((a, i) => <Text key={i} style={styles.bullet}>• {a}</Text>)}
-            </View>
-          )}
-
-          {r.herbs?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>🌿 Recommended Herbs</Text>
-              <Text style={styles.bodyText}>{r.herbs.join(', ')}</Text>
-            </View>
-          )}
-
-          {r.lifestyle_tips?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>💫 Lifestyle Tips</Text>
-              {r.lifestyle_tips.map((t, i) => <Text key={i} style={styles.bullet}>• {t}</Text>)}
-            </View>
-          )}
-        </>
-      )}
+      <Text style={styles.footer}>
+        Computed from current season + your prakriti + digestion strength + body-temp tendency. Backend re-evaluates every refresh.
+      </Text>
     </ScrollView>
   );
-};
+}
+
+function cap(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : '—'; }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background },
+  container: { flex: 1, backgroundColor: '#FAFAFA' },
   center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: SIZES.screenPadding, paddingTop: 50 },
-  back: { fontSize: 28 },
-  title: { ...FONTS.title, fontSize: 20 },
-  hero: { backgroundColor: COLORS.secondary, margin: SIZES.md, padding: SIZES.lg, borderRadius: SIZES.borderRadiusLg, alignItems: 'center' },
-  heroIcon: { fontSize: 64 },
-  heroSeason: { color: '#fff', fontSize: 24, fontWeight: '800', marginTop: 4 },
-  heroSanskrit: { color: '#fff', fontStyle: 'italic', opacity: 0.9 },
-  heroMonths: { color: '#fff', fontSize: 12, marginTop: 4, opacity: 0.8 },
-  card: { backgroundColor: COLORS.surface, margin: SIZES.md, padding: SIZES.md, borderRadius: SIZES.borderRadius, ...SHADOWS.small },
-  sectionTitle: { ...FONTS.bold, marginBottom: SIZES.sm },
-  bodyText: { ...FONTS.regular, lineHeight: 20 },
-  bullet: { ...FONTS.caption, marginTop: 4 },
+  header: { padding: 24, paddingTop: 56, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
+  back: { color: '#FFF', fontWeight: '700' },
+  title: { color: '#FFF', fontSize: 22, fontWeight: '800', marginTop: 8 },
+  subtitle: { color: '#FFFFFFCC', fontSize: 12, marginTop: 2 },
+  hero: { alignItems: 'center', padding: 24, backgroundColor: '#FFF', margin: 16, borderRadius: 16 },
+  heroIcon: { fontSize: 56 },
+  heroSeason: { fontSize: 22, fontWeight: '800', color: COLORS.text, marginTop: 6 },
+  heroSanskrit: { fontSize: 13, color: COLORS.textSecondary },
+  heroHint: { fontSize: 12, color: COLORS.text, marginTop: 8, textAlign: 'center', fontStyle: 'italic' },
+  section: { marginHorizontal: 16, marginBottom: 16 },
+  sectionTitle: { fontSize: 14, fontWeight: '800', marginBottom: 8 },
+  foodChip: { backgroundColor: '#FFF', borderRadius: 10, paddingHorizontal: 12, paddingVertical: 8, marginBottom: 6, borderWidth: 1, flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center' },
+  foodName: { fontSize: 13, fontWeight: '700', color: COLORS.text },
+  foodProps: { fontSize: 10, color: COLORS.textSecondary, marginLeft: 6 },
+  empty: { color: COLORS.textSecondary, fontStyle: 'italic' },
+  footer: { fontSize: 11, color: COLORS.textSecondary, fontStyle: 'italic', textAlign: 'center', padding: 16 },
 });
-
-export default RitucharyaScreen;

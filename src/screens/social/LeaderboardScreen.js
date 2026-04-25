@@ -19,18 +19,14 @@ const LeaderboardScreen = () => {
   const fetchLeaderboard = async () => {
     setLoading(true);
     const result = await getLeaderboard();
-    if (result.success && result.data) {
-      const formatted = result.data.map((entry, idx) => ({
-        rank: idx + 1,
-        name: `${entry.user?.first_name || ''} ${entry.user?.last_name?.charAt(0) || ''}.`,
-        userId: entry.user?.id,
-        score: entry.total_score,
-        healthScore: entry.health_score,
-        improvement: entry.improvement_score,
-        consistency: entry.consistency_score,
-        streak: entry.streak_days,
-        badge: idx === 0 ? '🥇' : idx === 1 ? '🥈' : idx === 2 ? '🥉' : '',
-        isUser: entry.user?.id === user.id,
+    if (result.success && result.data?.top) {
+      const formatted = result.data.top.map((entry) => ({
+        rank: entry.rank,
+        name: entry.display_name,
+        score: entry.score,
+        badge: entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '',
+        isUser: entry.is_me,
+        improvement: 0, consistency: 0, streak: 0,
       }));
       setLeaderboard(formatted);
     }

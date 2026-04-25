@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, Alert, Platform, Linking,
 } from 'react-native';
+import * as FileSystem from 'expo-file-system';
+import * as Sharing from 'expo-sharing';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
+import { getReportPdfUrl } from '../../services/api';
 import {
   calculateHealthScore, generateDiseaseRisks, detectDoshaImbalance,
   generateSimulatedVitals, generateTimelineData,
@@ -17,6 +20,31 @@ const TABS = ['Weekly', 'Monthly', 'Stress', 'Dosha', 'Risk'];
 const ReportsScreen = ({ navigation }) => {
   const { state } = useApp();
   const [activeTab, setActiveTab] = useState('Weekly');
+  const [downloading, setDownloading] = useState(false);
+
+  const handleDownloadPdf = async () => {
+    try {
+      setDownloading(true);
+      const { url, token } = await getReportPdfUrl();
+      const fname = `ayurtwin-report-${Date.now()}.pdf`;
+      const dest = FileSystem.documentDirectory + fname;
+      const res = await FileSystem.downloadAsync(url, dest, {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (res.status !== 200) throw new Error(`download failed (${res.status})`);
+      if (await Sharing.isAvailableAsync()) {
+        await Sharing.shareAsync(res.uri, { mimeType: 'application/pdf', dialogTitle: 'AyurTwin Health Report' });
+      } else if (Platform.OS === 'web') {
+        Linking.openURL(res.uri);
+      } else {
+        Alert.alert('Saved', `Report saved to ${res.uri}`);
+      }
+    } catch (e) {
+      Alert.alert('Download failed', e.message || 'Please try again');
+    } finally {
+      setDownloading(false);
+    }
+  };
   const profile = { ...state.user, ...(state.registrationData || {}) };
   const healthScore = calculateHealthScore(profile);
   const risks = generateDiseaseRisks(profile);
@@ -273,6 +301,9 @@ const ReportsScreen = ({ navigation }) => {
           <Text style={styles.backText}>← Back</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Reports</Text>
+        <TouchableOpacity onPress={handleDownloadPdf} disabled={downloading} style={styles.downloadBtn}>
+          <Text style={styles.downloadText}>{downloading ? 'Preparing…' : '⬇︎ Download PDF'}</Text>
+        </TouchableOpacity>
       </LinearGradient>
 
       {/* Tabs */}
@@ -391,6 +422,8 @@ const getDateRange = (type) => {
 };
 
 const styles = StyleSheet.create({
+  downloadBtn: { marginTop: 12, alignSelf: 'flex-start', backgroundColor: '#FFFFFF33', paddingHorizontal: 14, paddingVertical: 8, borderRadius: 8 },
+  downloadText: { color: '#FFF', fontWeight: '700', fontSize: 13 },
   container: { flex: 1, backgroundColor: COLORS.background },
   header: { paddingTop: 50, paddingBottom: 20, paddingHorizontal: SIZES.screenPadding, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
   backBtn: { marginBottom: 6 },

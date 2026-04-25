@@ -8,9 +8,10 @@ import { PRAKRITI_QUESTIONS, calculatePrakriti } from '../../data/prakritiQuesti
 import GradientButton from '../../components/common/GradientButton';
 import ProgressBar from '../../components/common/ProgressBar';
 import { useApp } from '../../context/AppContext';
+import { submitPrakritiQuiz } from '../../services/api';
 
 const PrakritiQuizScreen = ({ navigation }) => {
-  const { dispatch, updateRegistration } = useApp();
+  const { state, dispatch, updateRegistration } = useApp();
   const [currentQ, setCurrentQ] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -36,7 +37,6 @@ const PrakritiQuizScreen = ({ navigation }) => {
     if (currentQ < PRAKRITI_QUESTIONS.length - 1) {
       setCurrentQ(currentQ + 1);
     } else {
-      // Calculate result
       const prakritiResult = calculatePrakriti(newAnswers);
       setResult(prakritiResult);
       setShowResult(true);
@@ -45,6 +45,16 @@ const PrakritiQuizScreen = ({ navigation }) => {
         prakriti_data: prakritiResult,
         prakriti: prakritiResult.prakriti,
       });
+      // If logged in (retake from dashboard), persist immediately
+      if (state.isAuthenticated) {
+        submitPrakritiQuiz({
+          vata: prakritiResult.vata_percent,
+          pitta: prakritiResult.pitta_percent,
+          kapha: prakritiResult.kapha_percent,
+          prakriti: (prakritiResult.prakriti || '').toLowerCase(),
+          answers: newAnswers,
+        });
+      }
     }
   };
 
@@ -165,6 +175,12 @@ const PrakritiQuizScreen = ({ navigation }) => {
 
       <ScrollView style={styles.questionSection} contentContainerStyle={styles.questionContent}>
         <Text style={styles.questionText}>{question.question}</Text>
+        {question.explanation && (
+          <View style={styles.explainBox}>
+            <Text style={styles.explainIcon}>💡</Text>
+            <Text style={styles.explainText}>{question.explanation}</Text>
+          </View>
+        )}
 
         {question.options.map((option) => (
           <TouchableOpacity
@@ -220,6 +236,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12, paddingVertical: 4, borderRadius: 12, marginBottom: 8,
   },
   categoryText: { fontSize: 12, fontWeight: '600', color: COLORS.primary },
+  explainBox: { flexDirection: 'row', backgroundColor: '#FEF3C7', borderRadius: 10, padding: 10, marginVertical: 10 },
+  explainIcon: { fontSize: 16, marginRight: 8 },
+  explainText: { flex: 1, fontSize: 12, color: '#78350F', lineHeight: 17, fontStyle: 'italic' },
   questionSection: { flex: 1 },
   questionContent: { paddingHorizontal: SIZES.screenPadding, paddingVertical: 16 },
   questionText: { fontSize: 18, fontWeight: '700', color: COLORS.text, lineHeight: 26, marginBottom: 24 },

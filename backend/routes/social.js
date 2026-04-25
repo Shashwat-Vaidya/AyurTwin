@@ -1,44 +1,32 @@
-/**
- * Social Routes - Feed, Posts, Likes
- */
 const express = require('express');
-const router = express.Router();
 const db = require('../services/db');
+const { authenticate } = require('../middleware/auth');
 
-// GET /api/social/feed
-router.get('/feed', async (req, res) => {
-  try {
-    const { data, error } = await db.getSocialFeed();
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    // Only show posts from registered patients
-    const patientPosts = (data || []).filter(post => post.user?.user_type === 'patient');
-    res.json({ success: true, data: patientPosts });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+const router = express.Router();
+
+// Community feed
+router.get('/', async (_req, res) => {
+    const { data } = await db.listPosts();
+    res.json({ posts: data || [] });
 });
 
-// POST /api/social/post
-router.post('/post', async (req, res) => {
-  try {
-    const { user_id, content, post_type, image_url } = req.body;
-    const { data, error } = await db.createPost({ user_id, content, post_type, image_url });
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    res.json({ success: true, data });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+// Create a post (must be logged in)
+router.post('/', authenticate, async (req, res) => {
+    const { title, body, tags } = req.body;
+    if (!body) return res.status(400).json({ error: 'body required' });
+    const { data: user } = await db.getUserById(req.user.id);
+    const { data, error } = await db.createPost({
+        user_id: req.user.id,
+        author_name: user?.full_name || user?.username,
+        title, body, tags: tags || [],
+    });
+    if (error) return res.status(400).json({ error: error.message });
+    res.status(201).json({ post: data });
 });
 
-// POST /api/social/like
-router.post('/like', async (req, res) => {
-  try {
-    const { post_id, user_id } = req.body;
-    await db.likePost(post_id, user_id);
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+router.post('/:id/like', authenticate, async (req, res) => {
+    await db.likePost(req.params.id);
+    res.json({ ok: true });
 });
 
 module.exports = router;

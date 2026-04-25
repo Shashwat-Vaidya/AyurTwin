@@ -16,7 +16,7 @@ const GENDERS = ['Male', 'Female', 'Other'];
 const RELATIONSHIPS = ['Parent', 'Brother', 'Sister', 'Child', 'Spouse'];
 
 const RegisterScreen = ({ navigation, route }) => {
-  const { state, dispatch, updateRegistration } = useApp();
+  const { state, dispatch, updateRegistration, login } = useApp();
   const isPatient = state.userType === 'patient';
   const totalSteps = isPatient ? 8 : 2;
 
@@ -46,11 +46,12 @@ const RegisterScreen = ({ navigation, route }) => {
   // Family member specific fields
   const [familyAge, setFamilyAge] = useState('');
   const [relationship, setRelationship] = useState('');
+  const [familyEmail, setFamilyEmail] = useState('');
 
   // Step 2 — Lifestyle
   const [physicalActivity, setPhysicalActivity] = useState('moderate');
   const [workType, setWorkType] = useState('sitting');
-  const [dietType, setDietType] = useState('');
+  const [dietType, setDietType] = useState('veg');
   const [smoking, setSmoking] = useState(false);
   const [alcohol, setAlcohol] = useState(false);
   const [waterIntake, setWaterIntake] = useState(5);
@@ -110,9 +111,9 @@ const RegisterScreen = ({ navigation, route }) => {
         if (!lastName.trim()) errs.lastName = 'Required';
         if (!email.trim()) errs.email = 'Required';
       } else {
-        // Family member: name, age, relationship
         if (!firstName.trim()) errs.firstName = 'Required';
         if (!lastName.trim()) errs.lastName = 'Required';
+        if (!familyEmail.trim()) errs.familyEmail = 'Email required so patient can invite you';
         if (!familyAge.trim()) errs.familyAge = 'Required';
         if (!relationship) errs.relationship = 'Required';
       }
@@ -141,11 +142,10 @@ const RegisterScreen = ({ navigation, route }) => {
           age: dob ? new Date().getFullYear() - new Date(dob).getFullYear() : null,
         });
       } else {
-        // Family member: minimal data
         updateRegistration({
           first_name: firstName, last_name: lastName,
           age: parseInt(familyAge), relationship: relationship.toLowerCase(),
-          email: `${firstName.toLowerCase()}.${lastName.toLowerCase()}@ayurtwin.com`,
+          email: familyEmail.trim().toLowerCase(),
         });
       }
     }
@@ -193,46 +193,79 @@ const RegisterScreen = ({ navigation, route }) => {
     if (!validateStep()) return;
     setLoading(true);
 
-    const fullData = {
-      ...state.registrationData,
-      user_type: state.userType,
+    const d = state.registrationData;
+
+    // Build backend payload matching new schema
+    const health_profile = isPatient ? {
+      physical_activity: d.physical_activity,
+      work_type: d.work_type,
+      smoking: !!d.smoking,
+      alcohol: d.alcohol ? 'occasional' : 'none',
+      water_intake_l: d.water_intake_liters,
+      junk_food_frequency: d.junk_food_frequency >= 7 ? 'high' : d.junk_food_frequency >= 4 ? 'medium' : 'low',
+      exercise_frequency: Math.min(7, Math.round((d.exercise_minutes || 0) / 30)),
+      sleep_hours: d.sleep_duration_hours,
+      sleep_time: d.sleep_time,
+      wake_time: d.wake_time,
+      daytime_sleepiness: d.daytime_sleepiness >= 7 ? 'high' : d.daytime_sleepiness >= 4 ? 'medium' : 'low',
+      stress_level: Math.min(10, Math.max(1, d.stress_level || 5)),
+      anxiety_level: Math.min(10, Math.max(1, d.anxiety_level || 5)),
+      fh_diabetes: !!d.family_history?.diabetes,
+      fh_heart_disease: !!d.family_history?.heart_disease,
+      fh_hypertension: !!d.family_history?.hypertension,
+      fh_arthritis: !!d.family_history?.arthritis,
+      fh_asthma: !!d.family_history?.asthma,
+      sym_frequent_thirst: !!d.frequent_thirst,
+      sym_frequent_urination: !!d.frequent_urination,
+      sym_joint_pain: !!d.joint_pain,
+      sym_breathing_difficulty: !!d.breathing_difficulty,
+      sym_digestive_issue: !!d.digestive_issues,
+      sym_fatigue_level: Math.min(10, Math.max(1, d.fatigue_level || 5)),
+      digestion_strength: (d.digestion_strength || 5) >= 7 ? 'strong' : (d.digestion_strength || 5) <= 3 ? 'weak' : 'medium',
+      appetite: (d.appetite || 5) >= 7 ? 'high' : (d.appetite || 5) <= 3 ? 'low' : 'normal',
+      sweating: (d.sweating || 5) >= 7 ? 'high' : (d.sweating || 5) <= 3 ? 'low' : 'normal',
+      body_temp_tendency: d.body_temperature || 'normal',
+      stress_response: d.stress_response || 'calm',
+    } : null;
+
+    const payload = {
+      email: d.email,
       username,
       password,
+      role: isPatient ? 'patient' : 'family',
+      full_name: `${d.first_name || ''} ${d.last_name || ''}`.trim(),
+      age: d.age,
+      gender: (d.gender || '').toLowerCase() || null,
+      height_cm: d.height_cm,
+      weight_kg: d.weight_kg,
+      diet_type: dietType,
+      prakriti: state.prakritiResult?.prakriti?.toLowerCase() || null,
+      health_profile,
+      prakriti_quiz: state.prakritiResult ? {
+        vata: state.prakritiResult.vata_percent,
+        pitta: state.prakritiResult.pitta_percent,
+        kapha: state.prakritiResult.kapha_percent,
+        prakriti: state.prakritiResult.prakriti?.toLowerCase(),
+        answers: state.prakritiResult.answers || null,
+      } : null,
     };
 
-    dispatch({ type: 'SET_REGISTRATION_DATA', payload: fullData });
-
-    // For now, save to local and navigate
     try {
       const { registerUser } = require('../../services/api');
-      const result = await registerUser(fullData);
-      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-      
-      if (result.success) {
-        // Login the user
-        await AsyncStorage.setItem('ayurtwin_user', JSON.stringify(result.data));
-        dispatch({ type: 'SET_USER', payload: result.data });
-      } else {
-        // If Supabase fails, still allow local usage
-        const mockUser = { id: 'local_' + Date.now(), ...fullData };
-        await AsyncStorage.setItem('ayurtwin_user', JSON.stringify(mockUser));
-        dispatch({ type: 'SET_USER', payload: mockUser });
+      const res = await registerUser(payload);
+      if (!res.success) {
+        Alert.alert('Registration failed', res.error || 'Please try again');
+        setLoading(false);
+        return;
       }
+      await login(res.data.user, res.data.token);
+      dispatch({ type: 'RESET_REGISTRATION' });
+      dispatch({ type: 'SET_PRAKRITI_RESULT', payload: null });
     } catch (err) {
-      // Fallback: save locally
-      const mockUser = { id: 'local_' + Date.now(), ...fullData };
-      const AsyncStorage = require('@react-native-async-storage/async-storage').default;
-      await AsyncStorage.setItem('ayurtwin_user', JSON.stringify(mockUser));
-      dispatch({ type: 'SET_USER', payload: mockUser });
+      Alert.alert('Registration failed', err.message);
+    } finally {
+      setLoading(false);
     }
-
-    setLoading(false);
-    
-    // Clear registration data after successful login
-    dispatch({ type: 'SET_REGISTRATION_DATA', payload: {} });
-    dispatch({ type: 'SET_REGISTRATION_STEP', payload: 0 });
-    
-    // AppNavigator will automatically switch to home screen when isAuthenticated becomes true
   };
 
   const renderSlider = (label, value, setValue, min = 0, max = 10) => (
@@ -359,7 +392,11 @@ const RegisterScreen = ({ navigation, route }) => {
         { label: '🔄 Mixed', value: 'mixed' },
       ], workType, setWorkType)}
 
-      <InputField label="Diet Type" value={dietType} onChangeText={setDietType} placeholder="Vegetarian, Non-veg, Vegan..." icon="🍽" />
+      <Text style={styles.fieldLabel}>Diet Type *</Text>
+      {renderChipSelector([
+        { label: '🌱 Vegetarian', value: 'veg' },
+        { label: '🍗 Non-Vegetarian', value: 'nonveg' },
+      ], dietType, setDietType)}
 
       {renderToggle('Smoking', smoking, setSmoking)}
       {renderToggle('Alcohol Consumption', alcohol, setAlcohol)}
@@ -470,6 +507,7 @@ const RegisterScreen = ({ navigation, route }) => {
       <Text style={styles.stepDesc}>Enter your basic details to create a family account</Text>
       <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="👤" error={errors.firstName} />
       <InputField label="Last Name *" value={lastName} onChangeText={setLastName} placeholder="Last name" error={errors.lastName} />
+      <InputField label="Email *" value={familyEmail} onChangeText={setFamilyEmail} placeholder="Email (patient invites you here)" keyboardType="email-address" icon="📧" autoCapitalize="none" error={errors.familyEmail} />
       <InputField label="Age *" value={familyAge} onChangeText={setFamilyAge} placeholder="Your age" keyboardType="numeric" icon="🎂" error={errors.familyAge} />
 
       <Text style={styles.fieldLabel}>Relationship *</Text>

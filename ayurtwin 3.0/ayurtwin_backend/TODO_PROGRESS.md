@@ -1,1 +1,0 @@
-# Project Run Progress&#10;&#10;- [x] 1. Create virtual environment (ayurtwin_backend/venv)&#10;- [x] 2. Activate venv and install requirements&#10;- [x] 3. Run uvicorn server&#10;- [x] 4. Test endpoints (visit http://localhost:8000/docs)

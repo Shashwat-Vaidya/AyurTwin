@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
+import { getDashboard } from '../../services/api';
 import { detectDoshaImbalance } from '../../utils/healthCalculations';
 
 const doshaData = {
@@ -52,10 +53,34 @@ const doshaData = {
 
 const DoshaDetailScreen = ({ navigation }) => {
   const { state } = useApp();
-  const prakriti = state.prakritiResult || {};
+  const [dash, setDash] = useState(null);
+
+  useEffect(() => { (async () => {
+    const r = await getDashboard();
+    if (r.success) setDash(r.data);
+  })(); }, []);
+
+  if (!dash) {
+    return (
+      <View style={[styles.container, { alignItems: 'center', justifyContent: 'center', flex: 1 }]}>
+        <ActivityIndicator color={COLORS.primary} />
+      </View>
+    );
+  }
+
+  // backend's quiz row + live dosha balance
+  const quiz = dash.prakriti_quiz || {};
+  const live = dash.dosha || { vata: 33, pitta: 33, kapha: 33 };
+  const userPrakriti = (dash.user?.prakriti || quiz.prakriti || 'vata').toLowerCase();
+  const prakriti = {
+    prakriti: capitalize(userPrakriti.replace('-', '-')),
+    vata_percent: quiz.vata_score ?? live.vata,
+    pitta_percent: quiz.pitta_score ?? live.pitta,
+    kapha_percent: quiz.kapha_score ?? live.kapha,
+  };
   const profile = { ...state.user, ...(state.registrationData || {}) };
   const dosha = detectDoshaImbalance(prakriti, profile);
-  const primaryDosha = prakriti.prakriti?.split('-')[0] || 'Vata';
+  const primaryDosha = capitalize(userPrakriti.split('-')[0]);
   const data = doshaData[primaryDosha] || doshaData.Vata;
 
   return (
@@ -173,6 +198,8 @@ const DoshaDetailScreen = ({ navigation }) => {
     </ScrollView>
   );
 };
+
+function capitalize(s) { return s ? s.charAt(0).toUpperCase() + s.slice(1) : ''; }
 
 const ScoreCircle = ({ label, percent, color }) => (
   <View style={styles.scoreCircleItem}>

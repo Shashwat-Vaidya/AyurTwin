@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { submitDinacharya, getTodayDinacharya } from '../../services/api';
 import {
   View,
   Text,
@@ -152,11 +153,17 @@ const DinacharyaScreen = () => {
     },
   ];
 
-  const handleToggle = (id) => {
-    setChecklist(prev => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  // Load today's saved checklist from backend
+  useEffect(() => { (async () => {
+    const r = await getTodayDinacharya();
+    if (r.success && r.data?.entry?.tasks) setChecklist(prev => ({ ...prev, ...r.data.entry.tasks }));
+  })(); }, []);
+
+  // Persist after every toggle so the health-score engine picks it up
+  const handleToggle = async (id) => {
+    const next = { ...checklist, [id]: !checklist[id] };
+    setChecklist(next);
+    await submitDinacharya(next);
   };
 
   const handleReset = () => {

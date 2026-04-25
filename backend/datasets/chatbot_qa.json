@@ -1,0 +1,3137 @@
+[
+  {
+    "keywords": [
+      "vata",
+      "wind",
+      "air"
+    ],
+    "question": "What is Vata dosha?",
+    "answer": "Vata is the dosha of air and space. It governs movement - breathing, nerve impulses, circulation, elimination. Vata types are typically thin, quick, creative, and prone to anxiety and dryness when imbalanced. Favor warm, oily, grounding foods."
+  },
+  {
+    "keywords": [
+      "pitta",
+      "fire",
+      "heat"
+    ],
+    "question": "What is Pitta dosha?",
+    "answer": "Pitta is the dosha of fire and water. It governs transformation - digestion, metabolism, intellect, body temperature. Pitta types are medium-built, sharp, focused, and prone to anger and inflammation. Favor cooling, sweet, bitter foods."
+  },
+  {
+    "keywords": [
+      "kapha",
+      "water",
+      "earth"
+    ],
+    "question": "What is Kapha dosha?",
+    "answer": "Kapha is the dosha of earth and water. It governs structure - bones, muscles, lubrication, immunity. Kapha types are sturdy, calm, loyal, prone to weight gain and lethargy. Favor warm, light, spicy, pungent foods."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "three",
+      "tridosha"
+    ],
+    "question": "What are the three doshas?",
+    "answer": "The three doshas are Vata (air/space), Pitta (fire/water), and Kapha (earth/water). Everyone has all three - your prakriti is their unique ratio. Imbalance in any dosha causes disease; balance brings health."
+  },
+  {
+    "keywords": [
+      "prakriti",
+      "constitution",
+      "nature"
+    ],
+    "question": "What is prakriti?",
+    "answer": "Prakriti is your natural, birth-determined constitution - the ratio of Vata, Pitta, and Kapha you're born with. It doesn't change. Knowing it guides lifelong diet, lifestyle, and routine choices."
+  },
+  {
+    "keywords": [
+      "vikriti",
+      "imbalance",
+      "current state"
+    ],
+    "question": "What is vikriti?",
+    "answer": "Vikriti is your current state of doshic imbalance - how much you've drifted from prakriti due to stress, diet, season. It changes often and is what Ayurvedic treatment addresses."
+  },
+  {
+    "keywords": [
+      "agni",
+      "digestive fire",
+      "digestion"
+    ],
+    "question": "What is Agni in Ayurveda?",
+    "answer": "Agni is the digestive fire - responsible for transforming food into nutrients and energy. Strong agni = good digestion, immunity, clear mind. Weak agni = toxin (ama) buildup and disease. Protect it with warm cooked foods and regular meal times."
+  },
+  {
+    "keywords": [
+      "ama",
+      "toxins",
+      "undigested"
+    ],
+    "question": "What is Ama?",
+    "answer": "Ama is the sticky toxin formed from improperly digested food. It clogs channels and causes disease. Signs: coated tongue, bad breath, fatigue, heaviness. Cure: strengthen agni with ginger, fasting, light foods."
+  },
+  {
+    "keywords": [
+      "ojas",
+      "immunity",
+      "vitality"
+    ],
+    "question": "What is Ojas?",
+    "answer": "Ojas is the refined essence of perfect digestion - the substance of immunity, vitality, and glow. Built by nourishing foods (milk, ghee, almonds, dates), sleep, joy, and contentment. Destroyed by stress, overwork, poor digestion."
+  },
+  {
+    "keywords": [
+      "dinacharya",
+      "daily routine",
+      "routine"
+    ],
+    "question": "What is Dinacharya?",
+    "answer": "Dinacharya is the Ayurvedic daily routine. Key steps: wake before sunrise, drink warm water, tongue scraping, oil pulling, abhyanga (self-massage), yoga + pranayama, meditation, main meal at noon, light dinner, sleep by 10pm."
+  },
+  {
+    "keywords": [
+      "ritucharya",
+      "seasonal"
+    ],
+    "question": "What is Ritucharya?",
+    "answer": "Ritucharya is the seasonal regimen - adjusting diet and routine to the 6 Ayurvedic seasons. E.g. cooling foods in summer (grishma), warming oily foods in winter (hemanta), light easy-to-digest foods in monsoon (varsha)."
+  },
+  {
+    "keywords": [
+      "panchakarma",
+      "detox",
+      "cleansing"
+    ],
+    "question": "What is Panchakarma?",
+    "answer": "Panchakarma is a 5-step deep detoxification: Vamana (therapeutic vomiting), Virechana (purgation), Basti (medicated enema), Nasya (nasal therapy), Raktamokshana (bloodletting). Must be done under expert supervision, typically 7-21 days."
+  },
+  {
+    "keywords": [
+      "abhyanga",
+      "oil massage",
+      "self-massage"
+    ],
+    "question": "What is Abhyanga?",
+    "answer": "Abhyanga is daily self-massage with warm herbal oil (usually sesame for vata, coconut for pitta, mustard for kapha). Nourishes skin, improves circulation, calms nerves, promotes longevity. Do before bath, 10-15 minutes."
+  },
+  {
+    "keywords": [
+      "oil pulling",
+      "gandusha",
+      "kavala"
+    ],
+    "question": "What is oil pulling?",
+    "answer": "Swishing 1 tbsp of sesame or coconut oil in the mouth for 10-15 minutes (don't swallow), then spit out. Cleanses mouth, strengthens teeth/gums, removes toxins, improves oral health. Part of dinacharya."
+  },
+  {
+    "keywords": [
+      "tongue scraping",
+      "jihwa nirlekhana"
+    ],
+    "question": "What is tongue scraping?",
+    "answer": "Scraping the tongue with a copper/steel scraper each morning to remove ama (overnight toxins). Stimulates digestive organs, freshens breath, removes bacteria. A core dinacharya practice."
+  },
+  {
+    "keywords": [
+      "ashwagandha",
+      "withania"
+    ],
+    "question": "What is Ashwagandha?",
+    "answer": "Ashwagandha (Withania somnifera) is a rasayana (rejuvenating) adaptogen. Reduces stress and cortisol, improves sleep, boosts immunity, supports thyroid, builds strength. Typical dose: 300-500mg daily."
+  },
+  {
+    "keywords": [
+      "triphala",
+      "three fruits"
+    ],
+    "question": "What is Triphala?",
+    "answer": "Triphala is a blend of three fruits: Amalaki (amla), Bibhitaki, Haritaki. Gentle detox, balances all 3 doshas, improves digestion, mild laxative, antioxidant. Take 1-2 tsp with warm water at bedtime."
+  },
+  {
+    "keywords": [
+      "brahmi",
+      "bacopa"
+    ],
+    "question": "What is Brahmi?",
+    "answer": "Brahmi (Bacopa monnieri) is a brain tonic - enhances memory, reduces anxiety, supports focus, calms the mind. Used for students, in meditation, for anxiety. Can be taken as tea, powder, or ghee-infused."
+  },
+  {
+    "keywords": [
+      "turmeric",
+      "haridra",
+      "curcumin"
+    ],
+    "question": "What are the benefits of turmeric?",
+    "answer": "Turmeric (Haridra) is golden-healing - anti-inflammatory, antioxidant, liver support, blood purifier, wound healing, immune booster. Take with black pepper + fat for absorption. Golden milk is ideal."
+  },
+  {
+    "keywords": [
+      "ghee",
+      "clarified butter"
+    ],
+    "question": "What are the benefits of ghee?",
+    "answer": "Ghee is the most revered Ayurvedic food - nourishes ojas, improves digestion (in moderate amounts), lubricates joints, feeds the brain, pacifies vata and pitta. 1-2 tsp daily is ideal."
+  },
+  {
+    "keywords": [
+      "vegetarian",
+      "ahimsa",
+      "diet"
+    ],
+    "question": "Why is a vegetarian diet preferred in Ayurveda?",
+    "answer": "Ayurveda favors sattvic (pure, peaceful) foods for mental clarity and spiritual growth. Most meats are tamasic (dulling) or rajasic (over-stimulating). However, Ayurveda isn't strictly vegetarian - meat can be therapeutic for certain conditions and constitutions."
+  },
+  {
+    "keywords": [
+      "sattvic",
+      "pure food"
+    ],
+    "question": "What is Sattvic food?",
+    "answer": "Sattvic food is fresh, pure, easy to digest - fruits, vegetables, whole grains, dairy, nuts, honey. Promotes clarity, peace, vitality. Eat mostly sattvic for balanced mind and body."
+  },
+  {
+    "keywords": [
+      "rajasic"
+    ],
+    "question": "What is Rajasic food?",
+    "answer": "Rajasic food is spicy, salty, pungent, over-stimulating - fried food, chilies, garlic (excess), coffee. Creates agitation, restlessness, ambition. Moderate intake."
+  },
+  {
+    "keywords": [
+      "tamasic"
+    ],
+    "question": "What is Tamasic food?",
+    "answer": "Tamasic food is heavy, stale, processed - leftovers, frozen meals, alcohol, meat, fermented food. Causes dullness, lethargy, inertia. Minimize."
+  },
+  {
+    "keywords": [
+      "six tastes",
+      "rasa",
+      "shad rasa"
+    ],
+    "question": "What are the six tastes in Ayurveda?",
+    "answer": "The six tastes (rasas): Sweet (madhura), Sour (amla), Salty (lavana), Pungent (katu), Bitter (tikta), Astringent (kashaya). A balanced meal should include all six. Each affects doshas differently."
+  },
+  {
+    "keywords": [
+      "diabetes",
+      "madhumeha",
+      "blood sugar"
+    ],
+    "question": "Ayurvedic approach to diabetes?",
+    "answer": "Diabetes (Madhumeha) is a kapha disorder. Key herbs: Gudmar (sugar destroyer), Methi (fenugreek), Jamun seeds, Bitter gourd, Turmeric. Diet: whole grains, bitter vegetables, avoid refined sugar + heavy kapha foods. Exercise daily."
+  },
+  {
+    "keywords": [
+      "hypertension",
+      "high blood pressure"
+    ],
+    "question": "Ayurvedic approach to hypertension?",
+    "answer": "Hypertension is often pitta + vata imbalance. Herbs: Sarpagandha, Arjuna, Jatamansi, Brahmi. Lifestyle: meditation, shavasana, sheetali pranayama. Diet: reduce salt, spicy, oily; increase cooling + calming foods."
+  },
+  {
+    "keywords": [
+      "insomnia",
+      "sleep",
+      "anidra"
+    ],
+    "question": "Ayurvedic remedies for insomnia?",
+    "answer": "Warm milk with nutmeg before bed, ashwagandha, brahmi, bhringraj oil on scalp, foot massage with sesame oil, yoga nidra, regular sleep time (by 10pm), no screens after 9pm."
+  },
+  {
+    "keywords": [
+      "stress",
+      "anxiety",
+      "tension"
+    ],
+    "question": "Ayurvedic management of stress?",
+    "answer": "Stress is vata imbalance. Herbs: Ashwagandha, Brahmi, Jatamansi. Practices: abhyanga, shirodhara, meditation, Bhramari and Nadi Shodhana pranayama, yoga. Diet: warm grounding foods, reduce caffeine, avoid stimulants."
+  },
+  {
+    "keywords": [
+      "weight loss",
+      "obesity",
+      "medoroga"
+    ],
+    "question": "Ayurvedic weight loss approach?",
+    "answer": "Obesity is kapha imbalance. Practices: Kapalbhati, Surya Namaskar, daily exercise, Udwarthana (dry powder massage). Diet: honey + lemon warm water, bitter + pungent foods, avoid sweets/dairy at night, largest meal at noon."
+  },
+  {
+    "keywords": [
+      "immunity",
+      "vyadhikshamatva"
+    ],
+    "question": "How to boost immunity in Ayurveda?",
+    "answer": "Build ojas: adequate sleep, joy, moderate exercise, nourishing foods (ghee, almonds, dates, milk), rasayanas (Chyawanprash, Ashwagandha, Amla). Daily practices: abhyanga, pranayama, meditation. Avoid: stress, overwork, junk food."
+  },
+  {
+    "keywords": [
+      "skin",
+      "skin disease",
+      "twak"
+    ],
+    "question": "Ayurvedic skincare tips?",
+    "answer": "Skin reflects inner health. Neem + turmeric for blemishes, Manjistha for complexion, rose water for cooling, sandalwood paste for pitta skin. Eat: bitter greens, amla, coconut. Avoid: spicy/oily, viruddha ahar. Oil massage nightly."
+  },
+  {
+    "keywords": [
+      "hair",
+      "kesha",
+      "baldness"
+    ],
+    "question": "Ayurvedic hair care?",
+    "answer": "Bhringraj oil massage, Amla, Methi powder, Shikakai for washing. Diet: sesame seeds, almonds, coconut, green vegetables. Avoid: excess heat, pitta-aggravating foods. Scalp oiling 2x/week."
+  },
+  {
+    "keywords": [
+      "hair loss",
+      "bald",
+      "khalitya"
+    ],
+    "question": "How to reduce hair loss in Ayurveda?",
+    "answer": "Often pitta-related. Bhringraj + amla oil massage, Brahmi, Bhringraj tea, cooling pitta diet, avoid stress, adequate iron + protein, head stand (shirshasana) with caution."
+  },
+  {
+    "keywords": [
+      "arthritis",
+      "joint pain",
+      "sandhivata"
+    ],
+    "question": "Ayurvedic approach to arthritis?",
+    "answer": "Sandhivata is vata in joints. Herbs: Shallaki (Boswellia), Ashwagandha, Rasna. Practices: Abhyanga with Mahanarayan oil, warm sesame oil, gentle yoga, Dashmoola. Diet: warm cooked, avoid cold/dry, ginger daily."
+  },
+  {
+    "keywords": [
+      "asthma",
+      "shwasa",
+      "breathing"
+    ],
+    "question": "Ayurvedic management of asthma?",
+    "answer": "Shwasa is kapha + vata imbalance. Herbs: Vasaka, Sitopaladi, Talisadi, Pushkarmool. Practices: steam inhalation, Bhastrika + Anulom-Vilom pranayama, avoid cold damp. Diet: warm, light, avoid dairy at night, include turmeric milk."
+  },
+  {
+    "keywords": [
+      "acidity",
+      "amlapitta",
+      "heartburn"
+    ],
+    "question": "Ayurvedic remedies for acidity?",
+    "answer": "Amlapitta is excess pitta. Avipattikar churna, Shatavari, Amla juice, cold milk (small sips), coconut water, sweet fruits. Avoid: spicy, sour, fried, coffee, late meals. Sheetali pranayama helps."
+  },
+  {
+    "keywords": [
+      "constipation",
+      "vibandha"
+    ],
+    "question": "Ayurvedic remedies for constipation?",
+    "answer": "Triphala (1-2 tsp at bedtime with warm water), castor oil (occasional), soaked raisins/prunes, ghee in warm milk, abhyanga, fiber + hydration, Pawanmuktasana pose."
+  },
+  {
+    "keywords": [
+      "headache",
+      "shirashula"
+    ],
+    "question": "Ayurvedic headache remedies?",
+    "answer": "Depends on dosha: Vata - warm sesame oil on head, rest, hydration. Pitta - cooling rose water compress, coconut oil. Kapha - eucalyptus steam, ginger tea. Shirodhara is therapeutic for chronic."
+  },
+  {
+    "keywords": [
+      "menstruation",
+      "period",
+      "artava"
+    ],
+    "question": "Ayurvedic care during menstruation?",
+    "answer": "Rest, warm light food (khichdi, soups), warm water, avoid heavy exercise/sex/travel, Ashoka and Shatavari for painful periods. Irregularities: Kumaryasan, Ashoka arista. Track cycle."
+  },
+  {
+    "keywords": [
+      "pregnancy",
+      "garbhini"
+    ],
+    "question": "Ayurvedic guidance in pregnancy?",
+    "answer": "Nourish with ghee, milk, dates, almonds (masha-specific foods). Gentle yoga, meditation, positive environment. Avoid: heavy exercise, hot/spicy, travel. Use specific rasayanas as guided by vaidya."
+  },
+  {
+    "keywords": [
+      "aging",
+      "anti-aging",
+      "rasayana"
+    ],
+    "question": "Ayurvedic anti-aging (Rasayana)?",
+    "answer": "Rasayana = rejuvenation. Chyawanprash, Ashwagandha, Amla, Brahmi, Shatavari, Guduchi. Plus: sleep by 10pm, daily abhyanga, meditation, sattvic food, ojas-building practices."
+  },
+  {
+    "keywords": [
+      "meditation",
+      "dhyana"
+    ],
+    "question": "How to start meditation in Ayurveda?",
+    "answer": "Start with 10-15 min daily, same time (sunrise ideal). Sit comfortably, focus on breath or mantra (Om, So-Ham). Brahmi tea helps. Gradually increase to 30 min. Consistency over duration."
+  },
+  {
+    "keywords": [
+      "yoga",
+      "asana"
+    ],
+    "question": "How does yoga complement Ayurveda?",
+    "answer": "Yoga balances doshas: slow grounding for vata, cooling for pitta, vigorous for kapha. Surya Namaskar warms kapha. Shitali cools pitta. Shavasana calms vata. Daily practice aligned to your prakriti transforms health."
+  },
+  {
+    "keywords": [
+      "pranayama",
+      "breathing"
+    ],
+    "question": "Best pranayama for stress?",
+    "answer": "Anulom Vilom (alternate nostril) balances nervous system. Bhramari (humming bee) instantly calms. Sheetali (cooling breath) for anger/heat. Deep belly breathing 10 min reduces cortisol."
+  },
+  {
+    "keywords": [
+      "surya namaskar",
+      "sun salutation"
+    ],
+    "question": "Benefits of Surya Namaskar?",
+    "answer": "12 rounds = full workout. Warms the body, burns kapha, strengthens muscles, improves flexibility, energizes mind, stimulates digestion, supports weight loss. Best in morning facing sun."
+  },
+  {
+    "keywords": [
+      "amla",
+      "amalaki",
+      "gooseberry"
+    ],
+    "question": "What are the benefits of Amla?",
+    "answer": "Amla is the highest-vitamin-C food, rasayana, all-dosha balancing. Boosts immunity, improves hair/skin, aids digestion, supports liver, anti-aging. Eat raw, as juice, in chyawanprash."
+  },
+  {
+    "keywords": [
+      "ginger",
+      "adraka",
+      "shunthi"
+    ],
+    "question": "Benefits of ginger in Ayurveda?",
+    "answer": "Ginger ignites agni, reduces nausea, anti-inflammatory, clears kapha. Drink ginger tea before meals. Fresh ginger = adraka, dried = shunthi. Caution in high pitta."
+  },
+  {
+    "keywords": [
+      "tulsi",
+      "holy basil"
+    ],
+    "question": "Benefits of Tulsi?",
+    "answer": "Tulsi (holy basil) is sacred + therapeutic. Boosts immunity, anti-stress (adaptogen), respiratory health, antimicrobial. Drink tulsi tea daily. Reduces cortisol."
+  },
+  {
+    "keywords": [
+      "neem",
+      "azadirachta"
+    ],
+    "question": "Uses of Neem?",
+    "answer": "Neem is the bitter-purifier. Blood cleanser, skin disorders, diabetes, dental care, antimicrobial, parasites. Not for long-term daily use without guidance. Neem toothpaste and oil pulling."
+  },
+  {
+    "keywords": [
+      "water",
+      "jala",
+      "hydration"
+    ],
+    "question": "Ayurvedic rules on drinking water?",
+    "answer": "Drink warm/room temp water, not cold. Boiled + cooled water is purest. Sip throughout day, don't gulp. Avoid ice water. Best first thing on waking (3-4 glasses). Minimal water during meals."
+  },
+  {
+    "keywords": [
+      "when to eat",
+      "meal timing"
+    ],
+    "question": "Ideal meal timings?",
+    "answer": "Breakfast by 8-9am (light), largest meal at noon (agni is peak), light dinner by 7-8pm. Eat only when hungry. Gap of 3-4 hours between meals. No late-night eating."
+  },
+  {
+    "keywords": [
+      "how much",
+      "portion",
+      "overeating"
+    ],
+    "question": "How much to eat?",
+    "answer": "Fill stomach: 1/2 with food, 1/4 with liquid, 1/4 empty for digestion. Eat to 75% full, not overfill. Mindfully, without distraction, in pleasant mood. Warm cooked > cold raw."
+  },
+  {
+    "keywords": [
+      "fasting",
+      "upavasa"
+    ],
+    "question": "Ayurvedic fasting?",
+    "answer": "Fast once a week or on ekadashi - on liquids/fruits/khichdi. Not dry fasting. Purpose: rest digestive system, burn ama. Break fast gently with warm kanji or khichdi."
+  },
+  {
+    "keywords": [
+      "body type",
+      "ectomorph",
+      "mesomorph"
+    ],
+    "question": "How do I know my body type?",
+    "answer": "Take a prakriti quiz. Vata types: thin, quick, cold hands. Pitta types: medium, sharp, warm, sweaty. Kapha types: sturdy, calm, oily skin. Most are combinations (Vata-Pitta etc.)."
+  },
+  {
+    "keywords": [
+      "shirodhara",
+      "head oil"
+    ],
+    "question": "What is Shirodhara?",
+    "answer": "Shirodhara is warm oil (usually sesame + herbs) streamed gently on forehead for 30-60 min. Deeply calms nervous system, reduces anxiety/insomnia/migraine, balances vata, profoundly relaxing."
+  },
+  {
+    "keywords": [
+      "nasya",
+      "nasal therapy"
+    ],
+    "question": "What is Nasya?",
+    "answer": "Nasya is medicated oil/powder administered through nostrils. Clears head, sinuses, improves mental clarity, treats headaches, allergies. Use Anu taila daily as prevention - 2 drops each nostril."
+  },
+  {
+    "keywords": [
+      "basti",
+      "enema"
+    ],
+    "question": "What is Basti?",
+    "answer": "Basti is medicated enema - the primary treatment for vata disorders. Cleanses colon, reduces arthritis, neurological issues, constipation. Must be done by experienced vaidya, part of panchakarma."
+  },
+  {
+    "keywords": [
+      "virechana",
+      "purgation"
+    ],
+    "question": "What is Virechana?",
+    "answer": "Virechana is therapeutic purgation - for excess pitta disorders (skin, liver, hyperacidity). Uses herbal laxatives. Performed under expert supervision after proper preparation (snehapana, swedana)."
+  },
+  {
+    "keywords": [
+      "tridosha",
+      "vpk"
+    ],
+    "question": "Can one have all three doshas balanced?",
+    "answer": "Yes - a 'tridoshic' or 'sama' prakriti means all three doshas are equally expressed. Rare (~5% of population). Such people are remarkably balanced and resilient. Most have 1-2 dominant doshas."
+  },
+  {
+    "keywords": [
+      "agni types",
+      "four agni"
+    ],
+    "question": "What are the four types of Agni?",
+    "answer": "Sama agni (balanced - ideal), Vishama (erratic - vata), Tikshna (sharp - pitta, acid reflux), Manda (dull - kapha, heaviness). Each needs different dietary approach to restore balance."
+  },
+  {
+    "keywords": [
+      "cowpath",
+      "go-pitta",
+      "urine"
+    ],
+    "question": "Is cow urine therapeutic in Ayurveda?",
+    "answer": "Gomutra (cow urine) is used in classical formulations for specific conditions under expert guidance - skin disorders, liver issues. Not for casual daily use. Modern processed forms available."
+  },
+  {
+    "keywords": [
+      "panchamrit"
+    ],
+    "question": "What is Panchamrita?",
+    "answer": "Panchamrita = 5 nectars: milk, curd, ghee, honey, sugar. Used in rituals + as rasayana (small amounts). Honey + ghee in equal parts is contraindicated (viruddha)."
+  },
+  {
+    "keywords": [
+      "chyawanprash"
+    ],
+    "question": "What is Chyawanprash?",
+    "answer": "Chyawanprash is a classical rasayana - amla-based herbal jam with 30+ herbs. Daily 1-2 tsp boosts immunity, strength, vitality, respiratory health. Especially in winter. Ideal for all ages."
+  },
+  {
+    "keywords": [
+      "ear ache",
+      "karnashula"
+    ],
+    "question": "Ayurvedic remedy for earache?",
+    "answer": "Warm sesame oil or garlic-infused oil - 2-3 drops in affected ear. Keep warm, no exposure to cold wind. Nasya with Anu taila. Persistent issues need professional care."
+  },
+  {
+    "keywords": [
+      "back pain",
+      "kati shool"
+    ],
+    "question": "Ayurvedic back pain relief?",
+    "answer": "Sesame oil abhyanga on back, warm Mahanarayan oil, gentle Bhujangasana and Shalabhasana, warm baths, avoid cold. Dashmoola kwath. Yogaraj guggulu for chronic. Posture correction."
+  },
+  {
+    "keywords": [
+      "eye care",
+      "netra",
+      "vision"
+    ],
+    "question": "Ayurvedic eye care?",
+    "answer": "Triphala eye wash, Trataka (candle gazing), ghee in eyes (netra tarpana by vaidya only), rose water drops, avoid excess screen time, Amla daily, palming exercises. Saptamrita Lauha for weak vision."
+  },
+  {
+    "keywords": [
+      "allergy",
+      "rhinitis"
+    ],
+    "question": "Ayurvedic allergy management?",
+    "answer": "Often kapha + weak agni + ama. Turmeric milk, Sitopaladi, Trikatu, Nasya with Anu taila, steam inhalation, avoid triggers + cold foods. Strengthen digestion. Neti pot for sinus."
+  },
+  {
+    "keywords": [
+      "cold",
+      "cough",
+      "common cold",
+      "kasa"
+    ],
+    "question": "Ayurvedic cold/cough remedy?",
+    "answer": "Ginger + tulsi + black pepper decoction with honey, Sitopaladi churna, turmeric milk, steam inhalation. Avoid cold foods/drinks/dairy. Rest + warm fluids."
+  },
+  {
+    "keywords": [
+      "fever",
+      "jwara"
+    ],
+    "question": "Ayurvedic fever care?",
+    "answer": "Light fasting or khichdi only, tulsi-ginger decoction, Sudarshan churna, Giloy juice, hydration, rest. Avoid heavy/cold/dairy during fever. Monitor temp. High fever needs medical care."
+  },
+  {
+    "keywords": [
+      "diarrhea",
+      "atisara"
+    ],
+    "question": "Ayurvedic care for diarrhea?",
+    "answer": "Rest digestive system. Pomegranate juice, rice kanji, buttermilk with roasted cumin, bilva (bael) fruit, Kutaja. Avoid heavy foods. Rehydration with ORS or coconut water."
+  },
+  {
+    "keywords": [
+      "nausea",
+      "vomiting",
+      "chardi"
+    ],
+    "question": "Ayurvedic nausea relief?",
+    "answer": "Ginger tea, lemon + honey water, clove chewing, pomegranate juice, mint leaves, avoid strong smells/heavy food. Small sips. Severe cases: Eladi vati, seek care if persistent."
+  },
+  {
+    "keywords": [
+      "weight gain",
+      "karshya",
+      "underweight"
+    ],
+    "question": "Ayurvedic weight gain approach?",
+    "answer": "Build ojas: ghee + milk + dates + almonds, ashwagandha, shatavari, Chyawanprash. Eat warm heavy nourishing foods 6x/day. Moderate exercise to stimulate appetite. Reduce stress. Sleep well."
+  },
+  {
+    "keywords": [
+      "pcod",
+      "polycystic"
+    ],
+    "question": "Ayurvedic approach to PCOD/PCOS?",
+    "answer": "Kapha-pitta imbalance. Shatavari, Ashoka, Kanchanar guggulu, Triphala. Low-GI diet, avoid dairy + sugar, daily exercise (45 min), weight management, Surya Namaskar, meditation."
+  },
+  {
+    "keywords": [
+      "thyroid",
+      "hypothyroid",
+      "hyperthyroid"
+    ],
+    "question": "Ayurvedic thyroid management?",
+    "answer": "Hypothyroid (kapha): Kanchanar guggulu, Ashwagandha, moderate exercise, avoid goitrogens raw. Hyperthyroid (pitta): Brahmi, Jatamansi, cooling diet, stress reduction, Sheetali pranayama."
+  },
+  {
+    "keywords": [
+      "acne",
+      "mukhdooshika"
+    ],
+    "question": "Ayurvedic acne treatment?",
+    "answer": "Pitta + kapha + ama. Internally: Manjistha, Neem, Kaishore guggulu, Triphala. Externally: turmeric + sandalwood paste, rose water. Diet: avoid spicy/oily/dairy, eat cooling bitter foods, hydrate."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata"
+    ],
+    "question": "What is Vata dosha?",
+    "answer": "Vata dosha controls movement, breathing, and blood flow in your body."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata"
+    ],
+    "question": "Vata kya hota hai?",
+    "answer": "Vata dosha controls movement, breathing, and blood flow in your body."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata",
+      "simple",
+      "words"
+    ],
+    "question": "Tell me about Vata dosha in simple words",
+    "answer": "Vata dosha controls movement, breathing, and blood flow in your body."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "pitta",
+      "explain"
+    ],
+    "question": "Explain Pitta dosha",
+    "answer": "Pitta dosha manages digestion, metabolism, and body temperature."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "pitta"
+    ],
+    "question": "Pitta dosha kya hai batao",
+    "answer": "Pitta dosha manages digestion, metabolism, and body temperature."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "pitta",
+      "does",
+      "our",
+      "body"
+    ],
+    "question": "What does Pitta do in our body?",
+    "answer": "Pitta dosha manages digestion, metabolism, and body temperature."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "kapha"
+    ],
+    "question": "What is Kapha dosha?",
+    "answer": "Kapha dosha provides structure, lubrication, and stability to your body."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "kapha",
+      "baare"
+    ],
+    "question": "Kapha ke baare mein batao",
+    "answer": "Kapha dosha provides structure, lubrication, and stability to your body."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "kapha",
+      "explain",
+      "ayurveda"
+    ],
+    "question": "Explain Kapha in Ayurveda",
+    "answer": "Kapha dosha provides structure, lubrication, and stability to your body."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "dry",
+      "skin",
+      "anxiety",
+      "does",
+      "mean",
+      "dosha"
+    ],
+    "question": "I have dry skin and anxiety, what does it mean?",
+    "answer": "These are signs of high Vata dosha. Eat warm, oily foods and stay calm."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "dry",
+      "skin",
+      "anxiety",
+      "problem",
+      "dosha"
+    ],
+    "question": "Dry skin and anxiety - kya problem hai?",
+    "answer": "These are signs of high Vata dosha. Eat warm, oily foods and stay calm."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "skin",
+      "feels",
+      "dry",
+      "get",
+      "anxious",
+      "easily",
+      "dosha"
+    ],
+    "question": "My skin feels dry and I get anxious easily",
+    "answer": "These are signs of high Vata dosha. Eat warm, oily foods and stay calm."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "feel",
+      "heartburn",
+      "get",
+      "angry",
+      "quickly",
+      "dosha"
+    ],
+    "question": "I feel heartburn and get angry quickly",
+    "answer": "High Pitta dosha is likely. Eat cooling foods like coconut and avoid spicy items."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "acid",
+      "reflux",
+      "gussa",
+      "aana",
+      "dosha"
+    ],
+    "question": "Acid reflux and gussa aana - kya karein?",
+    "answer": "High Pitta dosha is likely. Eat cooling foods like coconut and avoid spicy items."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "get",
+      "heartburn",
+      "lose",
+      "temper",
+      "often",
+      "dosha"
+    ],
+    "question": "I get heartburn and lose my temper often",
+    "answer": "High Pitta dosha is likely. Eat cooling foods like coconut and avoid spicy items."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "feel",
+      "heavy",
+      "sleepy",
+      "all",
+      "day",
+      "gain",
+      "weight",
+      "easily",
+      "dosha"
+    ],
+    "question": "I feel heavy, sleepy all day, and gain weight easily",
+    "answer": "This suggests high Kapha dosha. Eat light, warm foods and exercise daily."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "body",
+      "heavy",
+      "neend",
+      "zyada",
+      "aati",
+      "motapa",
+      "dosha"
+    ],
+    "question": "Body heavy, neend zyada aati hai, motapa - kya hai?",
+    "answer": "This suggests high Kapha dosha. Eat light, warm foods and exercise daily."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "always",
+      "tired",
+      "sluggish",
+      "putting",
+      "weight",
+      "dosha"
+    ],
+    "question": "Always tired, sluggish, and putting on weight",
+    "answer": "This suggests high Kapha dosha. Eat light, warm foods and exercise daily."
+  },
+  {
+    "keywords": [
+      "diet",
+      "vata",
+      "foods",
+      "balance",
+      "dosha",
+      "ghee"
+    ],
+    "question": "What foods balance Vata dosha?",
+    "answer": "Warm, cooked, oily foods like soups, root veggies, and ghee are good for Vata."
+  },
+  {
+    "keywords": [
+      "diet",
+      "vata",
+      "khana",
+      "chahiye",
+      "ghee"
+    ],
+    "question": "Vata ke liye kya khana chahiye?",
+    "answer": "Warm, cooked, oily foods like soups, root veggies, and ghee are good for Vata."
+  },
+  {
+    "keywords": [
+      "diet",
+      "vata",
+      "tips",
+      "people",
+      "ghee"
+    ],
+    "question": "Diet tips for Vata people",
+    "answer": "Warm, cooked, oily foods like soups, root veggies, and ghee are good for Vata."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "foods",
+      "reduce",
+      "dosha"
+    ],
+    "question": "What foods reduce Pitta dosha?",
+    "answer": "Cooling foods like coconut, cucumber, melons, and sweet fruits help balance Pitta."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "kam",
+      "karne",
+      "khayein"
+    ],
+    "question": "Pitta kam karne ke liye kya khayein?",
+    "answer": "Cooling foods like coconut, cucumber, melons, and sweet fruits help balance Pitta."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "imbalance"
+    ],
+    "question": "Best diet for Pitta imbalance",
+    "answer": "Cooling foods like coconut, cucumber, melons, and sweet fruits help balance Pitta."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "types",
+      "eat"
+    ],
+    "question": "What should Kapha types eat?",
+    "answer": "Light, dry, warm foods like barley, millet, leafy greens, and honey are best for Kapha."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "dosha",
+      "achi"
+    ],
+    "question": "Kapha dosha ke liye kya diet achi hai?",
+    "answer": "Light, dry, warm foods like barley, millet, leafy greens, and honey are best for Kapha."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "food",
+      "recommendations",
+      "body",
+      "type"
+    ],
+    "question": "Food recommendations for Kapha body type",
+    "answer": "Light, dry, warm foods like barley, millet, leafy greens, and honey are best for Kapha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "vata",
+      "which",
+      "herbs",
+      "dosha",
+      "ashwagandha"
+    ],
+    "question": "Which herbs are good for Vata?",
+    "answer": "Ashwagandha, dashamoola, and ginger are excellent for balancing Vata dosha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "vata",
+      "ache",
+      "dosha",
+      "ashwagandha"
+    ],
+    "question": "Vata ke liye kya herb ache hai?",
+    "answer": "Ashwagandha, dashamoola, and ginger are excellent for balancing Vata dosha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "vata",
+      "name",
+      "herbs",
+      "help",
+      "imbalance",
+      "dosha",
+      "ashwagandha"
+    ],
+    "question": "Name herbs that help Vata imbalance",
+    "answer": "Ashwagandha, dashamoola, and ginger are excellent for balancing Vata dosha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "pitta",
+      "herbs",
+      "reduce",
+      "neem",
+      "brahmi",
+      "amla"
+    ],
+    "question": "What herbs reduce Pitta?",
+    "answer": "Brahmi, neem, coriander, and amla are cooling herbs that pacify Pitta."
+  },
+  {
+    "keywords": [
+      "herb",
+      "pitta",
+      "shant",
+      "karne",
+      "wale",
+      "herbs",
+      "neem",
+      "brahmi",
+      "amla"
+    ],
+    "question": "Pitta shant karne wale herbs",
+    "answer": "Brahmi, neem, coriander, and amla are cooling herbs that pacify Pitta."
+  },
+  {
+    "keywords": [
+      "herb",
+      "pitta",
+      "herbs",
+      "imbalance",
+      "neem",
+      "brahmi",
+      "amla"
+    ],
+    "question": "Herbs for Pitta imbalance",
+    "answer": "Brahmi, neem, coriander, and amla are cooling herbs that pacify Pitta."
+  },
+  {
+    "keywords": [
+      "herb",
+      "kapha",
+      "herbs",
+      "dosha",
+      "tulsi",
+      "turmeric"
+    ],
+    "question": "Best herbs for Kapha dosha",
+    "answer": "Tulsi, pippali, ginger, and turmeric help reduce excess Kapha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "kapha",
+      "herbs",
+      "tulsi",
+      "turmeric"
+    ],
+    "question": "Kapha ke liye herbs batao",
+    "answer": "Tulsi, pippali, ginger, and turmeric help reduce excess Kapha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "kapha",
+      "which",
+      "herbs",
+      "person",
+      "tulsi",
+      "turmeric"
+    ],
+    "question": "Which herbs for Kapha person?",
+    "answer": "Tulsi, pippali, ginger, and turmeric help reduce excess Kapha."
+  },
+  {
+    "keywords": [
+      "routine",
+      "dinacharya"
+    ],
+    "question": "What is Dinacharya?",
+    "answer": "Dinacharya is the Ayurvedic daily routine to align your body with nature's cycles."
+  },
+  {
+    "keywords": [
+      "routine",
+      "dinacharya"
+    ],
+    "question": "Dinacharya kya hota hai?",
+    "answer": "Dinacharya is the Ayurvedic daily routine to align your body with nature's cycles."
+  },
+  {
+    "keywords": [
+      "routine",
+      "explain",
+      "ayurvedic",
+      "dinacharya"
+    ],
+    "question": "Explain Ayurvedic daily routine",
+    "answer": "Dinacharya is the Ayurvedic daily routine to align your body with nature's cycles."
+  },
+  {
+    "keywords": [
+      "routine",
+      "soon",
+      "wake"
+    ],
+    "question": "What should I do as soon as I wake up?",
+    "answer": "Wake up before sunrise, drink warm water, and eliminate bowels to start your day right."
+  },
+  {
+    "keywords": [
+      "routine",
+      "subah",
+      "uthte",
+      "karna",
+      "chahiye"
+    ],
+    "question": "Subah uthte hi kya karna chahiye?",
+    "answer": "Wake up before sunrise, drink warm water, and eliminate bowels to start your day right."
+  },
+  {
+    "keywords": [
+      "routine",
+      "morning",
+      "ayurveda"
+    ],
+    "question": "Morning routine as per Ayurveda",
+    "answer": "Wake up before sunrise, drink warm water, and eliminate bowels to start your day right."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "oil",
+      "massage",
+      "important",
+      "abhyanga"
+    ],
+    "question": "Why is oil massage important?",
+    "answer": "Abhyanga (oil massage) nourishes skin, calms Vata, and improves circulation."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "oil",
+      "massage",
+      "kyun",
+      "karna",
+      "chahiye",
+      "abhyanga"
+    ],
+    "question": "Oil massage kyun karna chahiye?",
+    "answer": "Abhyanga (oil massage) nourishes skin, calms Vata, and improves circulation."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "benefits",
+      "ayurvedic",
+      "massage",
+      "abhyanga"
+    ],
+    "question": "Benefits of Ayurvedic massage",
+    "answer": "Abhyanga (oil massage) nourishes skin, calms Vata, and improves circulation."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "prevent",
+      "disease",
+      "naturally",
+      "dosha"
+    ],
+    "question": "How can I prevent disease naturally?",
+    "answer": "Follow daily and seasonal routines, eat according to your dosha, and manage stress."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "bimari",
+      "bachne",
+      "dosha"
+    ],
+    "question": "Bimari se bachne ke liye kya karein?",
+    "answer": "Follow daily and seasonal routines, eat according to your dosha, and manage stress."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "natural",
+      "ways",
+      "stay",
+      "healthy",
+      "dosha"
+    ],
+    "question": "Natural ways to stay healthy",
+    "answer": "Follow daily and seasonal routines, eat according to your dosha, and manage stress."
+  },
+  {
+    "keywords": [
+      "routine",
+      "ritucharya"
+    ],
+    "question": "What is Ritucharya?",
+    "answer": "Ritucharya is seasonal routine — eating and living according to the current season."
+  },
+  {
+    "keywords": [
+      "routine",
+      "ritucharya",
+      "matlab"
+    ],
+    "question": "Ritucharya ka matlab kya hai?",
+    "answer": "Ritucharya is seasonal routine — eating and living according to the current season."
+  },
+  {
+    "keywords": [
+      "routine",
+      "explain",
+      "seasonal",
+      "ayurveda",
+      "ritucharya"
+    ],
+    "question": "Explain seasonal routine in Ayurveda",
+    "answer": "Ritucharya is seasonal routine — eating and living according to the current season."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "constipation",
+      "feel",
+      "bloated",
+      "dosha"
+    ],
+    "question": "I have constipation and feel bloated",
+    "answer": "High Vata dosha causing slow digestion. Drink warm water and eat cooked vegetables."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "constipation",
+      "bloating",
+      "dosha"
+    ],
+    "question": "Constipation and bloating - kya karein?",
+    "answer": "High Vata dosha causing slow digestion. Drink warm water and eat cooked vegetables."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "stomach",
+      "bloated",
+      "poop",
+      "properly",
+      "dosha"
+    ],
+    "question": "My stomach is bloated and I can't poop properly",
+    "answer": "High Vata dosha causing slow digestion. Drink warm water and eat cooked vegetables."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "face",
+      "red",
+      "feel",
+      "hot",
+      "all",
+      "time",
+      "dosha"
+    ],
+    "question": "My face is red and I feel hot all the time",
+    "answer": "Excess Pitta dosha. Avoid spicy foods and spend time in cool environments."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "chehra",
+      "lal",
+      "rehta",
+      "body",
+      "garam",
+      "dosha"
+    ],
+    "question": "Chehra lal rehta hai, body garam - kya hai?",
+    "answer": "Excess Pitta dosha. Avoid spicy foods and spend time in cool environments."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "always",
+      "feeling",
+      "hot",
+      "flushed",
+      "skin",
+      "dosha"
+    ],
+    "question": "Always feeling hot and flushed skin",
+    "answer": "Excess Pitta dosha. Avoid spicy foods and spend time in cool environments."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "sinus",
+      "feel",
+      "very",
+      "heavy",
+      "morning",
+      "dosha"
+    ],
+    "question": "I have sinus and feel very heavy in the morning",
+    "answer": "High Kapha dosha. Eat light breakfast and try steam inhalation with eucalyptus."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "subah",
+      "uthke",
+      "sinus",
+      "body",
+      "heavy",
+      "dosha"
+    ],
+    "question": "Subah uthke sinus aur body heavy - kya karein?",
+    "answer": "High Kapha dosha. Eat light breakfast and try steam inhalation with eucalyptus."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "morning",
+      "congestion",
+      "heaviness",
+      "dosha"
+    ],
+    "question": "Morning congestion and heaviness",
+    "answer": "High Kapha dosha. Eat light breakfast and try steam inhalation with eucalyptus."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "digital",
+      "twin",
+      "ayurveda",
+      "dosha"
+    ],
+    "question": "What is a digital twin in Ayurveda?",
+    "answer": "A digital twin is a virtual model of your body that tracks doshas using IoT sensors."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "ayurveda",
+      "digital",
+      "twin",
+      "dosha"
+    ],
+    "question": "Ayurveda mein digital twin kya hai?",
+    "answer": "A digital twin is a virtual model of your body that tracks doshas using IoT sensors."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "does",
+      "ayurtwin",
+      "work",
+      "dosha"
+    ],
+    "question": "How does AyurTwin work?",
+    "answer": "AyurTwin uses sensors to monitor your health and predicts dosha imbalances before symptoms appear."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "suggest",
+      "person"
+    ],
+    "question": "Can you suggest a daily routine for a Vata person?",
+    "answer": "Wake early, have warm oil massage, eat regular warm meals, and sleep by 10 PM."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "prakriti",
+      "dinacharya"
+    ],
+    "question": "Vata prakriti ke liye dinacharya batao",
+    "answer": "Wake early, have warm oil massage, eat regular warm meals, and sleep by 10 PM."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "body",
+      "type"
+    ],
+    "question": "Daily routine for Vata body type",
+    "answer": "Wake early, have warm oil massage, eat regular warm meals, and sleep by 10 PM."
+  },
+  {
+    "keywords": [
+      "routine",
+      "pitta",
+      "time",
+      "eat",
+      "lunch",
+      "ayurveda"
+    ],
+    "question": "What is the best time to eat lunch as per Ayurveda?",
+    "answer": "12 PM to 1 PM is best because Pitta is strongest for digestion then."
+  },
+  {
+    "keywords": [
+      "routine",
+      "pitta",
+      "lunch",
+      "time",
+      "ayurveda"
+    ],
+    "question": "Lunch ka best time kya hai Ayurveda mein?",
+    "answer": "12 PM to 1 PM is best because Pitta is strongest for digestion then."
+  },
+  {
+    "keywords": [
+      "routine",
+      "pitta",
+      "optimal",
+      "lunch",
+      "timing",
+      "according",
+      "ayurveda"
+    ],
+    "question": "Optimal lunch timing according to Ayurveda",
+    "answer": "12 PM to 1 PM is best because Pitta is strongest for digestion then."
+  },
+  {
+    "keywords": [
+      "diet",
+      "much",
+      "water",
+      "drink"
+    ],
+    "question": "How much water should I drink daily?",
+    "answer": "Drink according to thirst, but sipping warm water throughout the day is best."
+  },
+  {
+    "keywords": [
+      "diet",
+      "roz",
+      "kitna",
+      "paani",
+      "piyein"
+    ],
+    "question": "Roz kitna paani piyein?",
+    "answer": "Drink according to thirst, but sipping warm water throughout the day is best."
+  },
+  {
+    "keywords": [
+      "diet",
+      "water",
+      "intake",
+      "ayurveda"
+    ],
+    "question": "Water intake as per Ayurveda",
+    "answer": "Drink according to thirst, but sipping warm water throughout the day is best."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "fasting",
+      "health",
+      "vata",
+      "kapha",
+      "ama"
+    ],
+    "question": "Is fasting good for health?",
+    "answer": "Occasional fasting helps reduce Kapha and Ama, but not for Vata types."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "upvas",
+      "karna",
+      "sehat",
+      "acha",
+      "vata",
+      "kapha",
+      "ama"
+    ],
+    "question": "Kya upvas karna sehat ke liye acha hai?",
+    "answer": "Occasional fasting helps reduce Kapha and Ama, but not for Vata types."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "benefits",
+      "intermittent",
+      "fasting",
+      "ayurveda",
+      "vata",
+      "kapha",
+      "ama"
+    ],
+    "question": "Benefits of intermittent fasting in Ayurveda",
+    "answer": "Occasional fasting helps reduce Kapha and Ama, but not for Vata types."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "joints",
+      "crack",
+      "feel",
+      "stiff"
+    ],
+    "question": "My joints crack and I feel stiff",
+    "answer": "Vata imbalance drying the joints. Apply warm sesame oil daily and stay hydrated."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "jodon",
+      "akad",
+      "khat-khat",
+      "awaz"
+    ],
+    "question": "Jodon mein akad aur khat-khat awaz - kya karein?",
+    "answer": "Vata imbalance drying the joints. Apply warm sesame oil daily and stay hydrated."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "cracking",
+      "joints",
+      "stiffness"
+    ],
+    "question": "Cracking joints and stiffness",
+    "answer": "Vata imbalance drying the joints. Apply warm sesame oil daily and stay hydrated."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "signs",
+      "ama",
+      "toxins",
+      "body"
+    ],
+    "question": "What are the signs of Ama (toxins) in the body?",
+    "answer": "Feeling heavy, coated tongue, bad breath, and sluggish digestion indicate Ama."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "ama",
+      "lakshan"
+    ],
+    "question": "Ama ke lakshan kya hain?",
+    "answer": "Feeling heavy, coated tongue, bad breath, and sluggish digestion indicate Ama."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "know",
+      "toxins",
+      "body",
+      "ama"
+    ],
+    "question": "How to know if I have toxins in my body?",
+    "answer": "Feeling heavy, coated tongue, bad breath, and sluggish digestion indicate Ama."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "tips",
+      "sleep"
+    ],
+    "question": "Give me tips for good sleep",
+    "answer": "Avoid screens before bed, massage feet with oil, and sleep by 10 PM for good sleep."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "achi",
+      "neend"
+    ],
+    "question": "Achi neend ke liye kya karein?",
+    "answer": "Avoid screens before bed, massage feet with oil, and sleep by 10 PM for good sleep."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "ayurvedic",
+      "tips",
+      "insomnia"
+    ],
+    "question": "Ayurvedic tips for insomnia",
+    "answer": "Avoid screens before bed, massage feet with oil, and sleep by 10 PM for good sleep."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "eat",
+      "summer"
+    ],
+    "question": "What should I eat in summer?",
+    "answer": "Eat sweet, juicy fruits, coconut water, and avoid spicy or sour foods in summer."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "garmiyon",
+      "khana",
+      "chahiye"
+    ],
+    "question": "Garmiyon mein kya khana chahiye?",
+    "answer": "Eat sweet, juicy fruits, coconut water, and avoid spicy or sour foods in summer."
+  },
+  {
+    "keywords": [
+      "diet",
+      "pitta",
+      "summer",
+      "according",
+      "ayurveda"
+    ],
+    "question": "Summer diet according to Ayurveda",
+    "answer": "Eat sweet, juicy fruits, coconut water, and avoid spicy or sour foods in summer."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "does",
+      "stress",
+      "affect",
+      "doshas",
+      "pitta",
+      "kapha",
+      "dosha"
+    ],
+    "question": "How does stress affect doshas?",
+    "answer": "Stress increases Vata first, then can disturb Pitta and Kapha over time."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "stress",
+      "doshas",
+      "kaise",
+      "effect",
+      "karta",
+      "pitta",
+      "kapha",
+      "dosha"
+    ],
+    "question": "Stress doshas ko kaise effect karta hai?",
+    "answer": "Stress increases Vata first, then can disturb Pitta and Kapha over time."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "impact",
+      "stress",
+      "body",
+      "ayurveda",
+      "pitta",
+      "kapha"
+    ],
+    "question": "Impact of stress on body in Ayurveda",
+    "answer": "Stress increases Vata first, then can disturb Pitta and Kapha over time."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "panchakarma",
+      "dosha"
+    ],
+    "question": "What is Panchakarma?",
+    "answer": "Panchakarma is a deep detoxification therapy to remove excess doshas from the body."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "panchakarma",
+      "dosha"
+    ],
+    "question": "Panchakarma kya hai?",
+    "answer": "Panchakarma is a deep detoxification therapy to remove excess doshas from the body."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "explain",
+      "panchakarma",
+      "treatment",
+      "dosha"
+    ],
+    "question": "Explain Panchakarma treatment",
+    "answer": "Panchakarma is a deep detoxification therapy to remove excess doshas from the body."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "bad",
+      "breath",
+      "feel",
+      "lazy",
+      "always",
+      "ama"
+    ],
+    "question": "I have bad breath and feel lazy always",
+    "answer": "Excess Kapha and Ama buildup. Eat light, warm food and take ginger regularly."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "muh",
+      "badbu",
+      "aalsi",
+      "rehta",
+      "hun",
+      "problem",
+      "ama"
+    ],
+    "question": "Muh ki badbu aur aalsi rehta hun - kya problem?",
+    "answer": "Excess Kapha and Ama buildup. Eat light, warm food and take ginger regularly."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "bad",
+      "breath",
+      "lethargy",
+      "ama"
+    ],
+    "question": "Bad breath and lethargy",
+    "answer": "Excess Kapha and Ama buildup. Eat light, warm food and take ginger regularly."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "which",
+      "oil",
+      "massage"
+    ],
+    "question": "Which oil is best for Vata massage?",
+    "answer": "Sesame oil warmed slightly is best for pacifying Vata in massage."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "kaunsa",
+      "tel",
+      "achha",
+      "massage"
+    ],
+    "question": "Vata ke liye kaunsa tel achha hai massage mein?",
+    "answer": "Sesame oil warmed slightly is best for pacifying Vata in massage."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "massage",
+      "oil"
+    ],
+    "question": "Best massage oil for Vata",
+    "answer": "Sesame oil warmed slightly is best for pacifying Vata in massage."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "know",
+      "dominant"
+    ],
+    "question": "How do I know my dominant dosha?",
+    "answer": "Your body frame, digestion, personality, and preferences indicate your dominant dosha."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "apna",
+      "kaise",
+      "pehchanein"
+    ],
+    "question": "Apna dosha kaise pehchanein?",
+    "answer": "Your body frame, digestion, personality, and preferences indicate your dominant dosha."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "identify",
+      "type"
+    ],
+    "question": "Identify my dosha type",
+    "answer": "Your body frame, digestion, personality, and preferences indicate your dominant dosha."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "hair",
+      "falling",
+      "lot",
+      "dandruff"
+    ],
+    "question": "My hair is falling a lot and I have dandruff",
+    "answer": "High Pitta often causes hair fall. Apply coconut oil and avoid sour foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "baal",
+      "jhad",
+      "rahe",
+      "rusi"
+    ],
+    "question": "Baal jhad rahe hain aur rusi hai - kya karein?",
+    "answer": "High Pitta often causes hair fall. Apply coconut oil and avoid sour foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "hair",
+      "loss",
+      "dandruff",
+      "ayurveda",
+      "remedy"
+    ],
+    "question": "Hair loss and dandruff Ayurveda remedy",
+    "answer": "High Pitta often causes hair fall. Apply coconut oil and avoid sour foods."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "eat",
+      "dairy",
+      "dosha"
+    ],
+    "question": "Can I eat dairy if I have Kapha dosha?",
+    "answer": "Goat milk or buttermilk is okay, but avoid heavy cow milk and cheese."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "dosha",
+      "doodh",
+      "sakte"
+    ],
+    "question": "Kapha dosha mein kya doodh pi sakte hain?",
+    "answer": "Goat milk or buttermilk is okay, but avoid heavy cow milk and cheese."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "dairy",
+      "body",
+      "type"
+    ],
+    "question": "Dairy for Kapha body type",
+    "answer": "Goat milk or buttermilk is okay, but avoid heavy cow milk and cheese."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "pitta",
+      "exercise",
+      "type"
+    ],
+    "question": "What is the best exercise for Pitta type?",
+    "answer": "Cool, calming exercises like swimming, gentle yoga, and walking in nature."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "pitta",
+      "prakriti",
+      "kaisa",
+      "exercise",
+      "acha"
+    ],
+    "question": "Pitta prakriti ke liye kaisa exercise acha hai?",
+    "answer": "Cool, calming exercises like swimming, gentle yoga, and walking in nature."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "pitta",
+      "exercise",
+      "recommendations",
+      "dosha"
+    ],
+    "question": "Exercise recommendations for Pitta dosha",
+    "answer": "Cool, calming exercises like swimming, gentle yoga, and walking in nature."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "eyes",
+      "always",
+      "red",
+      "burning"
+    ],
+    "question": "My eyes are always red and burning",
+    "answer": "Pitta affecting the eyes. Wash with cold rose water and avoid screen time."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "aankhen",
+      "lal",
+      "jalan"
+    ],
+    "question": "Aankhen lal aur jalan - kya karein?",
+    "answer": "Pitta affecting the eyes. Wash with cold rose water and avoid screen time."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "red",
+      "burning",
+      "eyes",
+      "remedy"
+    ],
+    "question": "Red burning eyes remedy",
+    "answer": "Pitta affecting the eyes. Wash with cold rose water and avoid screen time."
+  },
+  {
+    "keywords": [
+      "diet",
+      "avoid",
+      "eating",
+      "night"
+    ],
+    "question": "What should I avoid eating at night?",
+    "answer": "Avoid heavy, fried, cold, or fermented foods at night for good digestion."
+  },
+  {
+    "keywords": [
+      "diet",
+      "raat",
+      "nahi",
+      "khana",
+      "chahiye"
+    ],
+    "question": "Raat ko kya nahi khana chahiye?",
+    "answer": "Avoid heavy, fried, cold, or fermented foods at night for good digestion."
+  },
+  {
+    "keywords": [
+      "diet",
+      "night",
+      "tips",
+      "ayurveda"
+    ],
+    "question": "Night diet tips Ayurveda",
+    "answer": "Avoid heavy, fried, cold, or fermented foods at night for good digestion."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "reduce",
+      "belly",
+      "fat",
+      "naturally"
+    ],
+    "question": "How to reduce belly fat naturally?",
+    "answer": "Eat warm honey water, avoid cold drinks, and do brisk walking daily for Kapha reduction."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "pet",
+      "charbi",
+      "kaise",
+      "kam",
+      "naturally"
+    ],
+    "question": "Pet ki charbi kaise kam karein naturally?",
+    "answer": "Eat warm honey water, avoid cold drinks, and do brisk walking daily for Kapha reduction."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "ayurveda",
+      "belly",
+      "fat"
+    ],
+    "question": "Ayurveda for belly fat",
+    "answer": "Eat warm honey water, avoid cold drinks, and do brisk walking daily for Kapha reduction."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "feel",
+      "cold",
+      "all",
+      "time",
+      "kapha"
+    ],
+    "question": "I feel cold all the time, what to do?",
+    "answer": "High Vata or low Kapha. Eat warm soups, ginger tea, and wear enough layers."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "hamesha",
+      "thand",
+      "lagti",
+      "kapha"
+    ],
+    "question": "Hamesha thand lagti hai - kya karein?",
+    "answer": "High Vata or low Kapha. Eat warm soups, ginger tea, and wear enough layers."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "feeling",
+      "cold",
+      "constantly",
+      "remedy",
+      "kapha"
+    ],
+    "question": "Feeling cold constantly remedy",
+    "answer": "High Vata or low Kapha. Eat warm soups, ginger tea, and wear enough layers."
+  },
+  {
+    "keywords": [
+      "fundamentals",
+      "role",
+      "agni",
+      "digestive",
+      "fire",
+      "health",
+      "ama"
+    ],
+    "question": "What is the role of Agni (digestive fire) in health?",
+    "answer": "Agni digests food and thoughts; weak Agni creates Ama and all diseases."
+  },
+  {
+    "keywords": [
+      "fundamentals",
+      "agni",
+      "kyun",
+      "zaroori",
+      "ama"
+    ],
+    "question": "Agni kya hai aur kyun zaroori hai?",
+    "answer": "Agni digests food and thoughts; weak Agni creates Ama and all diseases."
+  },
+  {
+    "keywords": [
+      "fundamentals",
+      "explain",
+      "digestive",
+      "fire",
+      "ayurveda",
+      "agni",
+      "ama"
+    ],
+    "question": "Explain digestive fire in Ayurveda",
+    "answer": "Agni digests food and thoughts; weak Agni creates Ama and all diseases."
+  },
+  {
+    "keywords": [
+      "diet",
+      "drink",
+      "cold",
+      "water",
+      "agni"
+    ],
+    "question": "Can I drink cold water?",
+    "answer": "Cold water weakens Agni, so always prefer warm or room temperature water."
+  },
+  {
+    "keywords": [
+      "diet",
+      "thanda",
+      "paani",
+      "peena",
+      "chahiye",
+      "agni"
+    ],
+    "question": "Kya thanda paani peena chahiye?",
+    "answer": "Cold water weakens Agni, so always prefer warm or room temperature water."
+  },
+  {
+    "keywords": [
+      "diet",
+      "cold",
+      "water",
+      "bad",
+      "digestion",
+      "agni"
+    ],
+    "question": "Is cold water bad for digestion?",
+    "answer": "Cold water weakens Agni, so always prefer warm or room temperature water."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "time",
+      "exercise",
+      "vata",
+      "pitta",
+      "kapha"
+    ],
+    "question": "What is the best time to exercise?",
+    "answer": "Morning 6-8 AM for Kapha and Vata, evening for Pitta types after cooling down."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "exercise",
+      "karne",
+      "time",
+      "vata",
+      "pitta",
+      "kapha"
+    ],
+    "question": "Exercise karne ka best time kya hai?",
+    "answer": "Morning 6-8 AM for Kapha and Vata, evening for Pitta types after cooling down."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "optimal",
+      "workout",
+      "timing",
+      "ayurveda",
+      "vata",
+      "pitta",
+      "kapha"
+    ],
+    "question": "Optimal workout timing Ayurveda",
+    "answer": "Morning 6-8 AM for Kapha and Vata, evening for Pitta types after cooling down."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "skin",
+      "breaks",
+      "out",
+      "with",
+      "pimples",
+      "often",
+      "neem"
+    ],
+    "question": "My skin breaks out with pimples often",
+    "answer": "Pitta imbalance causing heat in blood. Eat neem, coriander, and avoid oily foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "pimple",
+      "acne",
+      "samasya",
+      "ama",
+      "neem"
+    ],
+    "question": "Pimple aur acne ki samasya - kya karein?",
+    "answer": "Pitta imbalance causing heat in blood. Eat neem, coriander, and avoid oily foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "acne",
+      "remedy",
+      "according",
+      "ayurveda",
+      "neem"
+    ],
+    "question": "Acne remedy according to Ayurveda",
+    "answer": "Pitta imbalance causing heat in blood. Eat neem, coriander, and avoid oily foods."
+  },
+  {
+    "keywords": [
+      "diet",
+      "sattvic",
+      "food"
+    ],
+    "question": "What is Sattvic food?",
+    "answer": "Sattvic food is fresh, light, vegetarian, and eaten with gratitude for mental clarity."
+  },
+  {
+    "keywords": [
+      "diet",
+      "sattvic",
+      "khana"
+    ],
+    "question": "Sattvic khana kya hota hai?",
+    "answer": "Sattvic food is fresh, light, vegetarian, and eaten with gratitude for mental clarity."
+  },
+  {
+    "keywords": [
+      "diet",
+      "explain",
+      "sattvic"
+    ],
+    "question": "Explain Sattvic diet",
+    "answer": "Sattvic food is fresh, light, vegetarian, and eaten with gratitude for mental clarity."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "reduce",
+      "during",
+      "winter"
+    ],
+    "question": "How to reduce Vata during winter?",
+    "answer": "Eat warm, heavy soups, use sesame oil massage, and stay indoors in cold wind."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "winter",
+      "kaise",
+      "kam"
+    ],
+    "question": "Winter mein Vata kaise kam karein?",
+    "answer": "Eat warm, heavy soups, use sesame oil massage, and stay indoors in cold wind."
+  },
+  {
+    "keywords": [
+      "routine",
+      "vata",
+      "seasonal",
+      "tips"
+    ],
+    "question": "Seasonal tips for Vata",
+    "answer": "Eat warm, heavy soups, use sesame oil massage, and stay indoors in cold wind."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "sore",
+      "throat",
+      "cough",
+      "with",
+      "phlegm"
+    ],
+    "question": "I have a sore throat and cough with phlegm",
+    "answer": "Kapha-type cold. Take ginger-honey mix and avoid dairy and cold foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "gale",
+      "khasi",
+      "balgam"
+    ],
+    "question": "Gale mein khasi aur balgam - kya karein?",
+    "answer": "Kapha-type cold. Take ginger-honey mix and avoid dairy and cold foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "kapha",
+      "cough",
+      "with",
+      "mucus",
+      "remedy"
+    ],
+    "question": "Cough with mucus remedy",
+    "answer": "Kapha-type cold. Take ginger-honey mix and avoid dairy and cold foods."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "nasya",
+      "therapy",
+      "dosha"
+    ],
+    "question": "What is Nasya therapy?",
+    "answer": "Nasya is putting herbal oil drops in the nose to clear sinuses and balance doshas."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "nasya",
+      "dosha"
+    ],
+    "question": "Nasya kya hota hai?",
+    "answer": "Nasya is putting herbal oil drops in the nose to clear sinuses and balance doshas."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "explain",
+      "nasya",
+      "treatment",
+      "dosha"
+    ],
+    "question": "Explain Nasya treatment",
+    "answer": "Nasya is putting herbal oil drops in the nose to clear sinuses and balance doshas."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "memory",
+      "getting",
+      "weak",
+      "feel",
+      "foggy",
+      "brahmi"
+    ],
+    "question": "My memory is getting weak and I feel foggy",
+    "answer": "High Vata affecting the mind. Take Brahmi and practice meditation daily."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "yaadash",
+      "kamzor",
+      "mind",
+      "foggy",
+      "brahmi"
+    ],
+    "question": "Yaadash kamzor aur mind foggy - kya karein?",
+    "answer": "High Vata affecting the mind. Take Brahmi and practice meditation daily."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "brain",
+      "fog",
+      "poor",
+      "memory",
+      "ayurveda",
+      "brahmi"
+    ],
+    "question": "Brain fog and poor memory Ayurveda",
+    "answer": "High Vata affecting the mind. Take Brahmi and practice meditation daily."
+  },
+  {
+    "keywords": [
+      "diet",
+      "improve",
+      "digestion",
+      "naturally"
+    ],
+    "question": "How to improve digestion naturally?",
+    "answer": "Sip warm ginger water before meals, eat mindfully, and avoid overeating."
+  },
+  {
+    "keywords": [
+      "diet",
+      "digestion",
+      "kaise",
+      "sudharein",
+      "naturally"
+    ],
+    "question": "Digestion kaise sudharein naturally?",
+    "answer": "Sip warm ginger water before meals, eat mindfully, and avoid overeating."
+  },
+  {
+    "keywords": [
+      "diet",
+      "natural",
+      "tips",
+      "better",
+      "digestion"
+    ],
+    "question": "Natural tips for better digestion",
+    "answer": "Sip warm ginger water before meals, eat mindfully, and avoid overeating."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "get",
+      "mouth",
+      "ulcers",
+      "often"
+    ],
+    "question": "I get mouth ulcers often",
+    "answer": "Excess Pitta. Drink aloe vera juice and avoid spicy, sour, or fried foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "muh",
+      "chhale",
+      "jaate",
+      "baar"
+    ],
+    "question": "Muh mein chhale ho jaate hain baar baar",
+    "answer": "Excess Pitta. Drink aloe vera juice and avoid spicy, sour, or fried foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "recurring",
+      "mouth",
+      "ulcers",
+      "remedy"
+    ],
+    "question": "Recurring mouth ulcers remedy",
+    "answer": "Excess Pitta. Drink aloe vera juice and avoid spicy, sour, or fried foods."
+  },
+  {
+    "keywords": [
+      "routine",
+      "drink",
+      "morning"
+    ],
+    "question": "What is the best drink in the morning?",
+    "answer": "A glass of warm water with lemon and honey is excellent to start the day."
+  },
+  {
+    "keywords": [
+      "routine",
+      "subah",
+      "sabse",
+      "pehle",
+      "piyein"
+    ],
+    "question": "Subah sabse pehle kya piyein?",
+    "answer": "A glass of warm water with lemon and honey is excellent to start the day."
+  },
+  {
+    "keywords": [
+      "routine",
+      "morning",
+      "drink",
+      "health"
+    ],
+    "question": "Morning drink for health",
+    "answer": "A glass of warm water with lemon and honey is excellent to start the day."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "often",
+      "panchakarma"
+    ],
+    "question": "How often should I do Panchakarma?",
+    "answer": "Once a year for prevention, or twice if you have chronic imbalances."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "panchakarma",
+      "kitni",
+      "baar",
+      "karna",
+      "chahiye"
+    ],
+    "question": "Panchakarma kitni baar karna chahiye?",
+    "answer": "Once a year for prevention, or twice if you have chronic imbalances."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "frequency",
+      "panchakarma",
+      "detox"
+    ],
+    "question": "Frequency of Panchakarma detox",
+    "answer": "Once a year for prevention, or twice if you have chronic imbalances."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "irregular",
+      "periods",
+      "cramps",
+      "pitta",
+      "ashwagandha"
+    ],
+    "question": "I have irregular periods and cramps",
+    "answer": "Vata or Pitta imbalance. Take ashwagandha and avoid cold, dry foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "periods",
+      "irregular",
+      "cramps",
+      "pitta",
+      "ashwagandha"
+    ],
+    "question": "Periods irregular aur cramps - kya karein?",
+    "answer": "Vata or Pitta imbalance. Take ashwagandha and avoid cold, dry foods."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "menstrual",
+      "pain",
+      "ayurvedic",
+      "remedy",
+      "pitta",
+      "ashwagandha"
+    ],
+    "question": "Menstrual pain Ayurvedic remedy",
+    "answer": "Vata or Pitta imbalance. Take ashwagandha and avoid cold, dry foods."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "ayurveda",
+      "prevent",
+      "covid-like",
+      "diseases"
+    ],
+    "question": "Can Ayurveda prevent COVID-like diseases?",
+    "answer": "Yes, strong immunity via herbs, diet, and routine helps prevent many infections."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "ayurveda",
+      "corona",
+      "jaise",
+      "infections",
+      "bacha",
+      "sakta"
+    ],
+    "question": "Kya Ayurveda se corona jaise infections se bacha ja sakta hai?",
+    "answer": "Yes, strong immunity via herbs, diet, and routine helps prevent many infections."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "ayurveda",
+      "viral"
+    ],
+    "question": "Ayurveda for viral prevention",
+    "answer": "Yes, strong immunity via herbs, diet, and routine helps prevent many infections."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "urine",
+      "yellow",
+      "smells",
+      "strong"
+    ],
+    "question": "My urine is yellow and smells strong",
+    "answer": "Pitta excess or dehydration. Drink more water and add coriander seeds to it."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "peeshab",
+      "rang",
+      "peela",
+      "tez",
+      "badbu"
+    ],
+    "question": "Peeshab ka rang peela aur tez badbu - kya hai?",
+    "answer": "Pitta excess or dehydration. Drink more water and add coriander seeds to it."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "strong",
+      "smell",
+      "urine",
+      "remedy"
+    ],
+    "question": "Strong smell urine remedy",
+    "answer": "Pitta excess or dehydration. Drink more water and add coriander seeds to it."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "role",
+      "sleep",
+      "dosha",
+      "balance",
+      "kapha"
+    ],
+    "question": "What is the role of sleep in dosha balance?",
+    "answer": "Good sleep balances Vata and Kapha, while lack of sleep aggravates Vata."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "neend",
+      "dosha",
+      "balance",
+      "role",
+      "kapha"
+    ],
+    "question": "Neend ka dosha balance mein kya role hai?",
+    "answer": "Good sleep balances Vata and Kapha, while lack of sleep aggravates Vata."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "vata",
+      "importance",
+      "sleep",
+      "ayurveda",
+      "kapha"
+    ],
+    "question": "Importance of sleep in Ayurveda",
+    "answer": "Good sleep balances Vata and Kapha, while lack of sleep aggravates Vata."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "feel",
+      "restless",
+      "sit",
+      "still"
+    ],
+    "question": "I feel restless and can't sit still",
+    "answer": "High Vata. Ground yourself with warm oil massage and regular meal times."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "chain",
+      "nahi",
+      "baith",
+      "paata",
+      "restlessness"
+    ],
+    "question": "Chain se nahi baith paata, restlessness - kya hai?",
+    "answer": "High Vata. Ground yourself with warm oil massage and regular meal times."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "restlessness",
+      "ayurveda",
+      "remedy"
+    ],
+    "question": "Restlessness Ayurveda remedy",
+    "answer": "High Vata. Ground yourself with warm oil massage and regular meal times."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "foods",
+      "increase",
+      "dosha"
+    ],
+    "question": "What foods increase Kapha?",
+    "answer": "Sweet, sour, salty, heavy, cold, and oily foods increase Kapha dosha."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "badhane",
+      "wale",
+      "foods",
+      "kaunse",
+      "dosha"
+    ],
+    "question": "Kapha badhane wale foods kaunse hain?",
+    "answer": "Sweet, sour, salty, heavy, cold, and oily foods increase Kapha dosha."
+  },
+  {
+    "keywords": [
+      "diet",
+      "kapha",
+      "worsens",
+      "dosha"
+    ],
+    "question": "Diet that worsens Kapha",
+    "answer": "Sweet, sour, salty, heavy, cold, and oily foods increase Kapha dosha."
+  },
+  {
+    "keywords": [
+      "herb",
+      "use",
+      "turmeric"
+    ],
+    "question": "How to use turmeric daily?",
+    "answer": "Add turmeric to warm milk at night or use in cooking for anti-inflammatory benefits."
+  },
+  {
+    "keywords": [
+      "herb",
+      "turmeric",
+      "use",
+      "kaise"
+    ],
+    "question": "Turmeric ka daily use kaise karein?",
+    "answer": "Add turmeric to warm milk at night or use in cooking for anti-inflammatory benefits."
+  },
+  {
+    "keywords": [
+      "herb",
+      "turmeric",
+      "intake",
+      "method"
+    ],
+    "question": "Daily turmeric intake method",
+    "answer": "Add turmeric to warm milk at night or use in cooking for anti-inflammatory benefits."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "nails",
+      "brittle",
+      "hair",
+      "rough",
+      "ghee"
+    ],
+    "question": "My nails are brittle and hair is rough",
+    "answer": "Vata deficiency in tissues. Eat ghee, almonds, and do sesame oil massage."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "nakhun",
+      "toot",
+      "baal",
+      "kharab",
+      "ghee"
+    ],
+    "question": "Nakhun toot te hain, baal kharab - kya karein?",
+    "answer": "Vata deficiency in tissues. Eat ghee, almonds, and do sesame oil massage."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "brittle",
+      "nails",
+      "dry",
+      "hair",
+      "remedy",
+      "ghee"
+    ],
+    "question": "Brittle nails and dry hair remedy",
+    "answer": "Vata deficiency in tissues. Eat ghee, almonds, and do sesame oil massage."
+  },
+  {
+    "keywords": [
+      "diet",
+      "drink",
+      "milk",
+      "before",
+      "bed",
+      "kapha",
+      "turmeric"
+    ],
+    "question": "Should I drink milk before bed?",
+    "answer": "Warm milk with turmeric or nutmeg is good for sleep, but not for Kapha types."
+  },
+  {
+    "keywords": [
+      "diet",
+      "raat",
+      "sona",
+      "pehle",
+      "doodh",
+      "sakte",
+      "kapha",
+      "turmeric"
+    ],
+    "question": "Raat ko sona se pehle doodh pi sakte hain?",
+    "answer": "Warm milk with turmeric or nutmeg is good for sleep, but not for Kapha types."
+  },
+  {
+    "keywords": [
+      "diet",
+      "bedtime",
+      "milk",
+      "ayurveda",
+      "advice",
+      "kapha",
+      "turmeric"
+    ],
+    "question": "Bedtime milk Ayurveda advice",
+    "answer": "Warm milk with turmeric or nutmeg is good for sleep, but not for Kapha types."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "marma",
+      "therapy"
+    ],
+    "question": "What is Marma therapy?",
+    "answer": "Marma therapy involves stimulating vital energy points to heal physical and mental issues."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "marma",
+      "therapy"
+    ],
+    "question": "Marma therapy kya hai?",
+    "answer": "Marma therapy involves stimulating vital energy points to heal physical and mental issues."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "explain",
+      "marma",
+      "points",
+      "ayurveda"
+    ],
+    "question": "Explain Marma points in Ayurveda",
+    "answer": "Marma therapy involves stimulating vital energy points to heal physical and mental issues."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "joint",
+      "pain",
+      "moves",
+      "around",
+      "body"
+    ],
+    "question": "I have joint pain that moves around the body",
+    "answer": "Classic Vata pain. Use warm castor oil on joints and avoid cold drafts."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "jodon",
+      "dard",
+      "jagah",
+      "badalta"
+    ],
+    "question": "Jodon mein dard jo jagah badalta hai - kya karein?",
+    "answer": "Classic Vata pain. Use warm castor oil on joints and avoid cold drafts."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "vata",
+      "migrating",
+      "joint",
+      "pain",
+      "ayurveda"
+    ],
+    "question": "Migrating joint pain Ayurveda",
+    "answer": "Classic Vata pain. Use warm castor oil on joints and avoid cold drafts."
+  },
+  {
+    "keywords": [
+      "herb",
+      "make",
+      "ginger",
+      "tea",
+      "digestion"
+    ],
+    "question": "How to make ginger tea for digestion?",
+    "answer": "Boil fresh ginger in water for 5 mins, add honey, and sip before meals."
+  },
+  {
+    "keywords": [
+      "herb",
+      "adrak",
+      "chai",
+      "digestion",
+      "kaise",
+      "banayein"
+    ],
+    "question": "Adrak ki chai digestion ke liye kaise banayein?",
+    "answer": "Boil fresh ginger in water for 5 mins, add honey, and sip before meals."
+  },
+  {
+    "keywords": [
+      "herb",
+      "ginger",
+      "tea",
+      "recipe",
+      "gut",
+      "health"
+    ],
+    "question": "Ginger tea recipe for gut health",
+    "answer": "Boil fresh ginger in water for 5 mins, add honey, and sip before meals."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata",
+      "three",
+      "sub-doshas",
+      "ama"
+    ],
+    "question": "What are the three sub-doshas of Vata?",
+    "answer": "Prana (chest), Udana (throat), Vyana (heart), Samana (stomach), Apana (pelvis) — actually five."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata",
+      "kitne",
+      "sub-dosha",
+      "hote",
+      "ama"
+    ],
+    "question": "Vata ke kitne sub-dosha hote hain?",
+    "answer": "Prana, Udana, Vyana, Samana, and Apana are the five sub-doshas of Vata."
+  },
+  {
+    "keywords": [
+      "dosha",
+      "vata",
+      "name",
+      "five",
+      "sub-doshas",
+      "ama"
+    ],
+    "question": "Name the five sub-doshas of Vata",
+    "answer": "Prana, Udana, Vyana, Samana, and Apana are the five divisions of Vata."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "sweat",
+      "smells",
+      "sour",
+      "strong"
+    ],
+    "question": "My sweat smells sour and strong",
+    "answer": "Pitta imbalance in sweat glands. Take chlorophyll-rich foods and avoid spicy food."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "paseen",
+      "khatti",
+      "badbu"
+    ],
+    "question": "Paseen ki khatti badbu - kya karein?",
+    "answer": "Pitta imbalance in sweat glands. Take chlorophyll-rich foods and avoid spicy food."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "body",
+      "odor",
+      "sour",
+      "smell",
+      "remedy"
+    ],
+    "question": "Body odor sour smell remedy",
+    "answer": "Pitta imbalance in sweat glands. Take chlorophyll-rich foods and avoid spicy food."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "does",
+      "ayurtwin",
+      "predict",
+      "imbalances"
+    ],
+    "question": "How does AyurTwin predict imbalances?",
+    "answer": "It uses IoT sensors to track your pulse, temperature, sleep, and activity in real time."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "ayurtwin",
+      "imbalance",
+      "kaise",
+      "predict",
+      "karta"
+    ],
+    "question": "AyurTwin imbalance kaise predict karta hai?",
+    "answer": "It uses IoT sensors to track your pulse, temperature, sleep, and activity in real time."
+  },
+  {
+    "keywords": [
+      "prevention",
+      "technology",
+      "behind",
+      "ayurtwin"
+    ],
+    "question": "Technology behind AyurTwin",
+    "answer": "It uses IoT sensors to track your pulse, temperature, sleep, and activity in real time."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "children",
+      "follow",
+      "ayurvedic",
+      "routine"
+    ],
+    "question": "Can children follow Ayurvedic routine?",
+    "answer": "Yes, but with milder herbs and gentle oil massage according to their age."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "bachchon",
+      "ayurveda",
+      "safe"
+    ],
+    "question": "Kya bachchon ke liye Ayurveda safe hai?",
+    "answer": "Yes, but with milder herbs and gentle oil massage according to their age."
+  },
+  {
+    "keywords": [
+      "lifestyle",
+      "ayurveda",
+      "kids"
+    ],
+    "question": "Ayurveda for kids",
+    "answer": "Yes, but with milder herbs and gentle oil massage according to their age."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "feel",
+      "very",
+      "hungry",
+      "all",
+      "time"
+    ],
+    "question": "I feel very hungry all the time",
+    "answer": "High Pitta causing excessive hunger. Eat small, frequent cooling meals."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "baar",
+      "bhookh",
+      "lagti"
+    ],
+    "question": "Baar baar bhookh lagti hai - kya karein?",
+    "answer": "High Pitta causing excessive hunger. Eat small, frequent cooling meals."
+  },
+  {
+    "keywords": [
+      "symptom",
+      "pitta",
+      "constant",
+      "hunger",
+      "ayurveda"
+    ],
+    "question": "Constant hunger Ayurveda",
+    "answer": "High Pitta causing excessive hunger. Eat small, frequent cooling meals."
+  },
+  {
+    "keywords": [
+      "routine",
+      "ideal",
+      "waking",
+      "time",
+      "sattvic"
+    ],
+    "question": "What is the ideal waking time?",
+    "answer": "Brahma muhurta — 1.5 hours before sunrise — is the most sattvic time to wake."
+  },
+  {
+    "keywords": [
+      "routine",
+      "uthne",
+      "ideal",
+      "time",
+      "sattvic"
+    ],
+    "question": "Uthne ka ideal time kya hai?",
+    "answer": "Brahma muhurta — 1.5 hours before sunrise — is the most sattvic time to wake."
+  },
+  {
+    "keywords": [
+      "routine",
+      "time",
+      "wake",
+      "sattvic"
+    ],
+    "question": "Best time to wake up",
+    "answer": "Brahma muhurta — 1.5 hours before sunrise — is the most sattvic time to wake."
+  }
+]

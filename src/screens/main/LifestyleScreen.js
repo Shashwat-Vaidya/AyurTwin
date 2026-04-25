@@ -105,7 +105,6 @@ const LifestyleScreen = ({ navigation }) => {
             { label: 'Yoga', icon: '🧘', screen: 'Yoga', color: '#2D6A4F' },
             { label: 'Dosha Clock', icon: '🕐', screen: 'DoshaClock', color: '#7B68EE' },
             { label: 'Panchakarma', icon: '🌿', screen: 'Panchakarma', color: '#40916C' },
-            { label: 'Nadi Pariksha', icon: '💓', screen: 'NadiPariksha', color: '#E74C3C' },
             { label: 'Ritucharya', icon: '🍂', screen: 'Ritucharya', color: '#FFB347' },
             { label: 'Food Compat.', icon: '⚠️', screen: 'ViruddhaAhara', color: '#FFC107' },
             { label: 'Prevention', icon: '🛡️', screen: 'DiseasePrevention', color: '#17A2B8' },

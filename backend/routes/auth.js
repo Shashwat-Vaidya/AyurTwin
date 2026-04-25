@@ -1,120 +1,98 @@
 /**
- * Auth Routes - Registration, Login, JWT
+ * Auth routes: register (patient/family) + login.
  */
 const express = require('express');
 const bcrypt = require('bcryptjs');
-const router = express.Router();
-const { generateToken } = require('../middleware/auth');
 const db = require('../services/db');
-const { createLogger } = require('../utils/logger');
+const { sign } = require('../middleware/auth');
+const { requireFields } = require('../middleware/validate');
 
-const log = createLogger('auth');
+const router = express.Router();
 
-// POST /api/register
-router.post('/register', async (req, res) => {
-  try {
-    const userData = req.body;
+// ── Register (patient) ─────────────────────────────────────────────
+// Body: email, username, password, role='patient', full_name, age, gender,
+//       height_cm, weight_kg, diet_type='veg|nonveg', prakriti (optional)
+router.post('/register',
+    requireFields('email', 'username', 'password'),
+    async (req, res) => {
+        try {
+            const b = req.body;
+            const [e, u] = await Promise.all([
+                db.getUserByEmail(b.email),
+                db.getUserByUsername(b.username),
+            ]);
+            if (e.data) return res.status(409).json({ error: 'email already registered' });
+            if (u.data) return res.status(409).json({ error: 'username taken' });
 
-    // Hash password
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash(userData.password, salt);
+            const hash = await bcrypt.hash(b.password, 10);
+            const { data: user, error } = await db.createUser({
+                email: b.email.toLowerCase(),
+                username: b.username,
+                password_hash: hash,
+                role: b.role === 'family' ? 'family' : 'patient',
+                full_name: b.full_name,
+                age: b.age, gender: b.gender,
+                height_cm: b.height_cm, weight_kg: b.weight_kg,
+                diet_type: b.diet_type === 'nonveg' ? 'nonveg' : 'veg',
+                prakriti: b.prakriti || null,
+                last_health_update: new Date().toISOString(),
+            });
+            if (error) return res.status(400).json({ error: error.message });
 
-    const isFamily = userData.user_type === 'family_member';
+            // also write health_profile if any lifestyle payload present
+            if (b.health_profile) {
+                await db.upsertHealthProfile(user.id, b.health_profile);
+            }
+            // If a family user just signed up, link any pending invites pre-addressed to this email.
+            if (user.role === 'family') {
+                const { supabase } = require('../config/supabase');
+                await supabase.from('family_links')
+                    .update({ family_user_id: user.id })
+                    .ilike('family_email', user.email)
+                    .is('family_user_id', null);
+            }
+            // prakriti quiz snapshot
+            if (b.prakriti_quiz) {
+                await db.savePrakritiQuiz({
+                    user_id: user.id,
+                    vata_score: b.prakriti_quiz.vata,
+                    pitta_score: b.prakriti_quiz.pitta,
+                    kapha_score: b.prakriti_quiz.kapha,
+                    prakriti: b.prakriti_quiz.prakriti,
+                    answers: b.prakriti_quiz.answers || null,
+                });
+            }
 
-    const insertData = isFamily
-      ? {
-          username: userData.username,
-          email: userData.email,
-          password_hash: passwordHash,
-          user_type: 'family_member',
-          first_name: userData.first_name,
-          last_name: userData.last_name,
-          age: userData.age,
-          relationship: userData.relationship,
-        }
-      : {
-          username: userData.username,
-          email: userData.email,
-          password_hash: passwordHash,
-          user_type: 'patient',
-          first_name: userData.first_name,
-          middle_name: userData.middle_name,
-          last_name: userData.last_name,
-          phone: userData.phone,
-          date_of_birth: userData.date_of_birth,
-          age: userData.age,
-          gender: userData.gender,
-          blood_group: userData.blood_group,
-          height_cm: userData.height_cm,
-          weight_kg: userData.weight_kg,
-          bmi: userData.bmi,
-          bmi_category: userData.bmi_category,
-        };
+            res.status(201).json({ user: stripPwd(user), token: sign(user) });
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    });
 
-    const { data, error } = await db.createUser(insertData);
-    if (error) return res.status(400).json({ success: false, error: error.message });
+// ── Login ───────────────────────────────────────────────────────────
+// Body: identifier (email or username), password
+router.post('/login',
+    requireFields('identifier', 'password'),
+    async (req, res) => {
+        try {
+            const { identifier, password } = req.body;
+            const { data: user } = await db.getUserByEmailOrUsername(identifier);
+            if (!user) return res.status(401).json({ error: 'invalid credentials' });
+            const ok = await bcrypt.compare(password, user.password_hash);
+            if (!ok) return res.status(401).json({ error: 'invalid credentials' });
+            res.json({ user: stripPwd(user), token: sign(user) });
+        } catch (e) { res.status(500).json({ error: e.message }); }
+    });
 
-    // Initialize leaderboard entry for patients
-    if (!isFamily) {
-      await db.upsertLeaderboard({ user_id: data.id, total_score: 50 });
-    }
+// ── Verify existing token (for "view patient dashboard" handoff) ────
+router.post('/verify-patient-credentials',
+    requireFields('identifier', 'password'),
+    async (req, res) => {
+        const { data: user } = await db.getUserByEmailOrUsername(req.body.identifier);
+        if (!user || user.role !== 'patient') return res.status(404).json({ error: 'patient not found' });
+        const ok = await bcrypt.compare(req.body.password, user.password_hash);
+        if (!ok) return res.status(401).json({ error: 'invalid credentials' });
+        res.json({ user: stripPwd(user), token: sign(user) });
+    });
 
-    const token = generateToken(data);
-    log.info(`User registered: ${data.username} (${data.user_type})`);
-
-    res.status(201).json({ success: true, data, token });
-  } catch (err) {
-    log.error('Registration error:', err.message);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-// POST /api/login
-router.post('/login', async (req, res) => {
-  try {
-    const { email, password } = req.body;
-    if (!email || !password) {
-      return res.status(400).json({ success: false, error: 'Email/username and password required' });
-    }
-
-    // Try to find user by email or username
-    let user;
-    const { data: byEmail } = await db.getUserByEmail(email);
-    if (byEmail) {
-      user = byEmail;
-    } else {
-      const { data: byUsername } = await db.getUserByUsername(email);
-      if (byUsername) user = byUsername;
-    }
-
-    if (!user) {
-      return res.status(401).json({ success: false, error: 'Invalid credentials' });
-    }
-
-    // Verify password - support both hashed and plain text (legacy)
-    let isMatch = false;
-    if (user.password_hash.startsWith('$2')) {
-      isMatch = await bcrypt.compare(password, user.password_hash);
-    } else {
-      // Legacy plain text password support
-      isMatch = user.password_hash === password;
-    }
-
-    if (!isMatch) {
-      return res.status(401).json({ success: false, error: 'Invalid credentials' });
-    }
-
-    // Update last login
-    await db.updateUser(user.id, { last_login: new Date().toISOString() });
-
-    const token = generateToken(user);
-    log.info(`User logged in: ${user.username}`);
-
-    res.json({ success: true, data: user, token });
-  } catch (err) {
-    log.error('Login error:', err.message);
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
+function stripPwd(u) { if (!u) return u; const { password_hash, ...rest } = u; return rest; }
 
 module.exports = router;

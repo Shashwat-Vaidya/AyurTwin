@@ -42,10 +42,11 @@ import FoodRecommendationsScreen from '../screens/main/FoodRecommendationsScreen
 import YogaScreen from '../screens/main/YogaScreen';
 import DoshaClockScreen from '../screens/main/DoshaClockScreen';
 import PanchakarmaScreen from '../screens/main/PanchakarmaScreen';
-import NadiParikshaScreen from '../screens/main/NadiParikshaScreen';
 import RitucharyaScreen from '../screens/main/RitucharyaScreen';
 import ViruddhaAharaScreen from '../screens/main/ViruddhaAharaScreen';
 import DiseasePreventionScreen from '../screens/main/DiseasePreventionScreen';
+import HealthScoreBreakdownScreen from '../screens/main/HealthScoreBreakdownScreen';
+import DiseaseRiskBreakdownScreen from '../screens/main/DiseaseRiskBreakdownScreen';
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -70,6 +71,8 @@ const DashboardStackScreen = () => (
     <DashboardStack.Screen name="HealthJourney" component={HealthJourneyScreen} />
     <DashboardStack.Screen name="SmartInsights" component={SmartInsightsScreen} />
     <DashboardStack.Screen name="DoshaDetail" component={DoshaDetailScreen} />
+    <DashboardStack.Screen name="HealthScoreBreakdown" component={HealthScoreBreakdownScreen} />
+    <DashboardStack.Screen name="DiseaseRiskBreakdown" component={DiseaseRiskBreakdownScreen} />
   </DashboardStack.Navigator>
 );
 
@@ -87,7 +90,6 @@ const LifestyleStackScreen = () => (
     <LifestyleStack.Screen name="Yoga" component={YogaScreen} />
     <LifestyleStack.Screen name="DoshaClock" component={DoshaClockScreen} />
     <LifestyleStack.Screen name="Panchakarma" component={PanchakarmaScreen} />
-    <LifestyleStack.Screen name="NadiPariksha" component={NadiParikshaScreen} />
     <LifestyleStack.Screen name="Ritucharya" component={RitucharyaScreen} />
     <LifestyleStack.Screen name="ViruddhaAhara" component={ViruddhaAharaScreen} />
     <LifestyleStack.Screen name="DiseasePrevention" component={DiseasePreventionScreen} />
@@ -114,7 +116,6 @@ const MoreStackScreen = () => (
     <MoreStack.Screen name="Yoga" component={YogaScreen} />
     <MoreStack.Screen name="DoshaClock" component={DoshaClockScreen} />
     <MoreStack.Screen name="Panchakarma" component={PanchakarmaScreen} />
-    <MoreStack.Screen name="NadiPariksha" component={NadiParikshaScreen} />
     <MoreStack.Screen name="Ritucharya" component={RitucharyaScreen} />
     <MoreStack.Screen name="ViruddhaAhara" component={ViruddhaAharaScreen} />
     <MoreStack.Screen name="DiseasePrevention" component={DiseasePreventionScreen} />
@@ -178,12 +179,30 @@ const AppNavigator = () => {
     );
   }
 
+  const isFamily = state.user?.role === 'family' && !state.monitoringPatient;
+
   return (
     <NavigationContainer>
-      {state.isAuthenticated ? <MainTabs /> : <AuthStack />}
+      {!state.isAuthenticated ? (
+        <AuthStack />
+      ) : isFamily ? (
+        <FamilyStack />
+      ) : (
+        <MainTabs />
+      )}
     </NavigationContainer>
   );
 };
+
+const FamilyStackNav = createStackNavigator();
+const FamilyStack = () => (
+  <FamilyStackNav.Navigator screenOptions={{ headerShown: false }}>
+    <FamilyStackNav.Screen name="FamilyHome" component={FamilyDashboard} />
+    <FamilyStackNav.Screen name="DashboardHome" component={DashboardScreen} />
+    <FamilyStackNav.Screen name="Metrics" component={MetricsScreen} />
+    <FamilyStackNav.Screen name="DoshaDetail" component={DoshaDetailScreen} />
+  </FamilyStackNav.Navigator>
+);
 
 const styles = StyleSheet.create({
   loading: {

@@ -1,124 +1,105 @@
 import React from 'react';
-import {
-  View, Text, StyleSheet, TouchableOpacity, Alert,
-} from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import { useApp } from '../../context/AppContext';
 
-const MoreScreen = ({ navigation }) => {
+const MAIN_TILES = [
+  { icon: '👤', label: 'Profile',   screen: 'Profile' },
+  { icon: '📄', label: 'Reports',   screen: 'Reports' },
+  { icon: '📘', label: 'Education', screen: 'Education' },
+  { icon: 'ℹ️', label: 'About',     screen: 'About' },
+  { icon: '⚙️', label: 'Settings',  screen: 'Settings' },
+  { icon: '❓', label: 'Help',      screen: 'Help' },
+];
+
+const QUICK_ACCESS = [
+  { icon: '🔺', label: 'Dosha Details',   screen: 'DoshaDetail' },
+  { icon: '🍽️', label: 'Diet',            screen: 'FoodRecommendations' },
+  { icon: '🧘', label: 'Yoga',            screen: 'Yoga' },
+  { icon: '🍂', label: 'Ritucharya',      screen: 'Ritucharya' },
+  { icon: '⚠️', label: 'Viruddha Ahar',  screen: 'ViruddhaAhara' },
+  { icon: '🛡️', label: 'Prevention',     screen: 'DiseasePrevention' },
+  { icon: '👨‍👩‍👧', label: 'Family',     screen: 'Family' },
+  { icon: '🏆', label: 'Leaderboard',     screen: 'Leaderboard' },
+  { icon: '🌐', label: 'Community',       screen: 'Social' },
+];
+
+export default function MoreScreen({ navigation }) {
   const { logout } = useApp();
 
-  const handleLogout = () => {
+  const confirmLogout = () => {
     Alert.alert('Logout', 'Are you sure you want to logout?', [
       { text: 'Cancel', style: 'cancel' },
       { text: 'Logout', onPress: logout, style: 'destructive' },
     ]);
   };
 
-  const menuItems = [
-    { icon: '👤', label: 'Profile', screen: 'Profile' },
-    { icon: '📊', label: 'Reports', screen: 'Reports' },
-    { icon: '📱', label: 'Device', screen: 'Device' },
-    { icon: '📘', label: 'Education', screen: 'Education' },
-    { icon: 'ℹ️', label: 'About', screen: 'About' },
-    { icon: '⚙️', label: 'Settings', screen: 'Settings' },
-    { icon: '❓', label: 'Help', screen: 'Help' },
-    { icon: '🚪', label: 'Logout', screen: null },
-  ];
-
-  const handlePress = (item) => {
-    if (item.screen === null) {
-      handleLogout();
-    } else {
-      navigation.navigate(item.screen);
-    }
-  };
-
   return (
-    <View style={styles.container}>
-      <View style={styles.header}>
+    <ScrollView style={styles.container} contentContainerStyle={{ paddingBottom: 32 }}>
+      <LinearGradient colors={COLORS.gradient.saffron} style={styles.header}>
         <Text style={styles.title}>More</Text>
+        <Text style={styles.subtitle}>Profile, reports, education and quick access</Text>
+      </LinearGradient>
+
+      {/* 6 main tiles, 3 columns */}
+      <View style={styles.gridWrap}>
+        <View style={styles.grid}>
+          {MAIN_TILES.map(item => (
+            <TouchableOpacity key={item.label} style={styles.tile} activeOpacity={0.75}
+              onPress={() => navigation.navigate(item.screen)}>
+              <Text style={styles.tileIcon}>{item.icon}</Text>
+              <Text style={styles.tileLabel}>{item.label}</Text>
+            </TouchableOpacity>
+          ))}
+        </View>
       </View>
 
-      <View style={styles.menuGrid}>
-        {menuItems.map((item) => (
-          <TouchableOpacity
-            key={item.label}
-            style={styles.menuItem}
-            onPress={() => handlePress(item)}
-            activeOpacity={0.7}
-          >
-            <View style={[styles.menuIconBox, item.screen === null && styles.logoutBox]}>
-              <Text style={styles.menuIcon}>{item.icon}</Text>
-            </View>
-            <Text style={[styles.menuLabel, item.screen === null && styles.logoutLabel]}>{item.label}</Text>
+      {/* Quick access */}
+      <Text style={styles.sectionTitle}>Quick Access</Text>
+      <View style={styles.quickWrap}>
+        {QUICK_ACCESS.map(item => (
+          <TouchableOpacity key={item.label} style={styles.chip} activeOpacity={0.75}
+            onPress={() => navigation.navigate(item.screen)}>
+            <Text style={styles.chipIcon}>{item.icon}</Text>
+            <Text style={styles.chipLabel}>{item.label}</Text>
           </TouchableOpacity>
         ))}
       </View>
 
-      {/* Quick access to other features */}
-      <View style={styles.extraSection}>
-        <Text style={styles.extraTitle}>Quick Access</Text>
-        <View style={styles.extraGrid}>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('HealthJourney')}>
-            <Text style={styles.extraIcon}>📈</Text>
-            <Text style={styles.extraLabel}>Health Journey</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('SmartInsights')}>
-            <Text style={styles.extraIcon}>💡</Text>
-            <Text style={styles.extraLabel}>Smart Insights</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('DoshaDetail')}>
-            <Text style={styles.extraIcon}>🔺</Text>
-            <Text style={styles.extraLabel}>Dosha Detail</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('Family')}>
-            <Text style={styles.extraIcon}>👨‍👩‍👧</Text>
-            <Text style={styles.extraLabel}>Family</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('Leaderboard')}>
-            <Text style={styles.extraIcon}>🏆</Text>
-            <Text style={styles.extraLabel}>Leaderboard</Text>
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.extraItem} onPress={() => navigation.navigate('Social')}>
-            <Text style={styles.extraIcon}>🌐</Text>
-            <Text style={styles.extraLabel}>Social Feed</Text>
-          </TouchableOpacity>
-        </View>
-      </View>
-
-      <Text style={styles.disclaimer}>
-        This app provides preventive health insights and does not replace professional medical advice.
-      </Text>
-    </View>
+      <TouchableOpacity style={styles.logoutBtn} onPress={confirmLogout} activeOpacity={0.85}>
+        <Text style={styles.logoutText}>🚪  Logout</Text>
+      </TouchableOpacity>
+    </ScrollView>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background },
-  header: { paddingTop: 50, paddingHorizontal: SIZES.screenPadding, paddingBottom: 16 },
-  title: { fontSize: 26, fontWeight: '800', color: COLORS.text },
-  menuGrid: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: SIZES.screenPadding, gap: 12 },
-  menuItem: { width: '22%', alignItems: 'center', marginBottom: 16 },
-  menuIconBox: {
-    width: 56, height: 56, borderRadius: 16, backgroundColor: COLORS.surface,
-    alignItems: 'center', justifyContent: 'center', ...SHADOWS.small,
+  container: { flex: 1, backgroundColor: '#FAFAFA' },
+  header: { padding: 24, paddingTop: 56, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
+  title: { fontSize: 26, fontWeight: '800', color: '#FFF' },
+  subtitle: { fontSize: 13, color: '#FFFFFFCC', marginTop: 4 },
+  gridWrap: { padding: 16 },
+  grid: { flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'space-between' },
+  tile: {
+    width: '31%', aspectRatio: 1, backgroundColor: '#FFF', borderRadius: 16,
+    alignItems: 'center', justifyContent: 'center', marginBottom: 12,
+    ...SHADOWS.card,
   },
-  logoutBox: { backgroundColor: '#FFF0F0' },
-  menuIcon: { fontSize: 24 },
-  menuLabel: { fontSize: 11, fontWeight: '600', color: COLORS.textSecondary, marginTop: 6 },
-  logoutLabel: { color: COLORS.error },
-  // Extra section
-  extraSection: { paddingHorizontal: SIZES.screenPadding, marginTop: 8 },
-  extraTitle: { fontSize: 16, fontWeight: '700', color: COLORS.text, marginBottom: 12 },
-  extraGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10 },
-  extraItem: {
-    width: '30%', alignItems: 'center', paddingVertical: 14, backgroundColor: COLORS.surface,
-    borderRadius: SIZES.borderRadius, ...SHADOWS.small,
+  tileIcon: { fontSize: 36, marginBottom: 6 },
+  tileLabel: { fontSize: 12, fontWeight: '700', color: COLORS.text },
+  sectionTitle: { fontSize: 15, fontWeight: '700', color: COLORS.text, marginHorizontal: 16, marginBottom: 8, marginTop: 4 },
+  quickWrap: { flexDirection: 'row', flexWrap: 'wrap', paddingHorizontal: 16 },
+  chip: {
+    flexDirection: 'row', alignItems: 'center', backgroundColor: '#FFF',
+    paddingVertical: 10, paddingHorizontal: 14, borderRadius: 22, margin: 4,
+    borderWidth: 1, borderColor: '#EEE',
   },
-  extraIcon: { fontSize: 22, marginBottom: 4 },
-  extraLabel: { fontSize: 10, fontWeight: '600', color: COLORS.textSecondary, textAlign: 'center' },
-  disclaimer: { fontSize: 10, color: COLORS.textLight, textAlign: 'center', marginTop: 24, lineHeight: 14, paddingHorizontal: SIZES.screenPadding },
+  chipIcon: { fontSize: 16, marginRight: 6 },
+  chipLabel: { fontSize: 12, fontWeight: '600', color: COLORS.text },
+  logoutBtn: {
+    margin: 16, marginTop: 24, padding: 16, borderRadius: 14,
+    backgroundColor: '#FEE2E2', alignItems: 'center',
+  },
+  logoutText: { color: COLORS.error, fontWeight: '700', fontSize: 15 },
 });
-
-export default MoreScreen;

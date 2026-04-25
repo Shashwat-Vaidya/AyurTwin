@@ -5,7 +5,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../config/theme';
-import { getAyurBotResponse } from '../utils/chatbotLogic';
+import { sendChat } from '../services/api';
 import { useApp } from '../context/AppContext';
 
 const ChatBot = () => {
@@ -18,28 +18,21 @@ const ChatBot = () => {
   const scrollRef = useRef(null);
   const scaleAnim = useRef(new Animated.Value(1)).current;
 
-  const handleSend = () => {
-    if (!input.trim()) return;
-    const userMsg = { id: messages.length, text: input.trim(), sender: 'user' };
-    const newMessages = [...messages, userMsg];
-    setMessages(newMessages);
+  const handleSend = async () => {
+    const msg = input.trim();
+    if (!msg) return;
+    const userMsg = { id: messages.length, text: msg, sender: 'user' };
+    const typing = { id: messages.length + 1, text: '…', sender: 'bot', typing: true };
+    setMessages([...messages, userMsg, typing]);
     setInput('');
 
-    // Get bot response
-    setTimeout(() => {
-      const userProfile = {
-        ...state.user,
-        ...state.registrationData,
-        prakriti: state.prakritiResult?.prakriti,
-        vata_percent: state.prakritiResult?.vata_percent,
-        pitta_percent: state.prakritiResult?.pitta_percent,
-        kapha_percent: state.prakritiResult?.kapha_percent,
-        healthScore: state.healthScore,
-      };
-      const response = getAyurBotResponse(input.trim(), userProfile);
-      const botMsg = { id: newMessages.length, text: response, sender: 'bot' };
-      setMessages([...newMessages, botMsg]);
-    }, 500);
+    const res = await sendChat(msg);
+    const text = res.success
+      ? (res.data.response || "I'm sorry, I can only help with Ayurveda-related questions.")
+      : 'Network issue — try again in a moment.';
+    setMessages(prev => prev.filter(m => !m.typing).concat({
+      id: prev.length, text, sender: 'bot',
+    }));
   };
 
   const handlePress = () => {
@@ -95,15 +88,6 @@ const ChatBot = () => {
                     </Text>
                   </View>
                 </View>
-              ))}
-            </ScrollView>
-
-            {/* Quick Actions */}
-            <ScrollView horizontal showsHorizontalScrollIndicator={false} style={styles.quickActions}>
-              {['My dosha', 'Stress tips', 'Diet advice', 'Sleep help', 'What is Ayurveda?'].map((q) => (
-                <TouchableOpacity key={q} style={styles.quickBtn} onPress={() => { setInput(q); }}>
-                  <Text style={styles.quickBtnText}>{q}</Text>
-                </TouchableOpacity>
               ))}
             </ScrollView>
 

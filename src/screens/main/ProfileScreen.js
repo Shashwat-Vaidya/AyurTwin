@@ -8,6 +8,7 @@ import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
 import { calculateBMI, calculateHealthScore } from '../../utils/healthCalculations';
+import { updateMe } from '../../services/api';
 
 const ProfileScreen = ({ navigation }) => {
   const { state, dispatch } = useApp();
@@ -33,16 +34,15 @@ const ProfileScreen = ({ navigation }) => {
     return c[bmi.category] || COLORS.textLight;
   };
 
-  const handleSave = () => {
-    const newBmi = calculateBMI(parseFloat(editData.weight_kg), parseFloat(editData.height_cm));
-    const updated = {
-      ...editData,
-      height_cm: parseFloat(editData.height_cm),
-      weight_kg: parseFloat(editData.weight_kg),
-      bmi: newBmi.value,
-      bmi_category: newBmi.category,
+  const handleSave = async () => {
+    const payload = {
+      full_name: `${editData.first_name || profile.first_name || ''} ${editData.last_name || profile.last_name || ''}`.trim(),
+      height_cm: editData.height_cm ? parseFloat(editData.height_cm) : undefined,
+      weight_kg: editData.weight_kg ? parseFloat(editData.weight_kg) : undefined,
     };
-    dispatch({ type: 'SET_REGISTRATION_DATA', payload: updated });
+    const res = await updateMe(payload);
+    if (!res.success) return Alert.alert('Update failed', res.error);
+    dispatch({ type: 'SET_USER', payload: { ...user, ...res.data.user } });
     setIsEditing(false);
     Alert.alert('Saved', 'Profile updated successfully.');
   };

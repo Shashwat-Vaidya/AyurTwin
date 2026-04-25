@@ -1,146 +1,233 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, Alert,
+  KeyboardAvoidingView, Platform, Modal,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { COLORS, SIZES, SHADOWS } from '../../config/theme';
+import { COLORS, SIZES } from '../../config/theme';
 import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
+import {
+  inviteFamily, listMyFamily, listFamilyInvites, respondFamilyInvite,
+  listMonitorPatients, verifyPatientCredentials, setAuthToken,
+} from '../../services/api';
 
 const FamilyDashboard = ({ navigation }) => {
-  const { state } = useApp();
-  const [inviteEmail, setInviteEmail] = useState('');
+  const { state, dispatch, logout } = useApp();
+  const isFamily = state.user?.role === 'family';
+
+  const [loading, setLoading] = useState(true);
+  const [family, setFamily] = useState([]);         // patient side
+  const [invites, setInvites] = useState([]);       // family side - pending
+  const [patients, setPatients] = useState([]);     // family side - approved
+
   const [showInvite, setShowInvite] = useState(false);
+  const [inviteForm, setInviteForm] = useState({ family_email: '', family_name: '', family_age: '', family_role: '' });
 
-  // Simulated family members
-  const familyMembers = [
-    { id: 1, name: 'Parent A', relation: 'Father', healthScore: 72, prakriti: 'Pitta-Kapha', status: 'healthy', alerts: 1 },
-    { id: 2, name: 'Parent B', relation: 'Mother', healthScore: 65, prakriti: 'Vata-Pitta', status: 'attention', alerts: 3 },
-  ];
+  const [credsModal, setCredsModal] = useState(null); // { patient }
+  const [credsId, setCredsId] = useState('');
+  const [credsPwd, setCredsPwd] = useState('');
 
-  const handleInvite = () => {
-    if (!inviteEmail.trim()) {
-      Alert.alert('Error', 'Please enter an email address.');
-      return;
+  useEffect(() => { load(); }, []);
+
+  const load = async () => {
+    setLoading(true);
+    if (isFamily) {
+      const [inv, pat] = await Promise.all([listFamilyInvites(), listMonitorPatients()]);
+      if (inv.success) setInvites(inv.data.invites || []);
+      if (pat.success) setPatients(pat.data.patients || []);
+    } else {
+      const f = await listMyFamily();
+      if (f.success) setFamily(f.data.family || []);
     }
-    Alert.alert('Invite Sent', `Family invitation sent to ${inviteEmail}`);
-    setInviteEmail('');
-    setShowInvite(false);
+    setLoading(false);
   };
 
-  const getStatusColor = (status) => {
-    if (status === 'healthy') return COLORS.success;
-    if (status === 'attention') return COLORS.warning;
-    return COLORS.error;
+  const submitInvite = async () => {
+    if (!inviteForm.family_email) return Alert.alert('Error', 'Email is required');
+    const res = await inviteFamily({
+      family_email: inviteForm.family_email,
+      family_name: inviteForm.family_name,
+      family_age: inviteForm.family_age ? parseInt(inviteForm.family_age, 10) : null,
+      family_role: inviteForm.family_role,
+    });
+    if (!res.success) return Alert.alert('Error', res.error);
+    setShowInvite(false);
+    setInviteForm({ family_email: '', family_name: '', family_age: '', family_role: '' });
+    load();
+  };
+
+  const respond = async (id, action) => {
+    const res = await respondFamilyInvite(id, action);
+    if (!res.success) Alert.alert('Error', res.error);
+    load();
+  };
+
+  const openPatientDashboard = (patient) => {
+    setCredsModal({ patient });
+    setCredsId(patient.username || patient.email);
+    setCredsPwd('');
+  };
+
+  const confirmMonitor = async () => {
+    if (!credsPwd) return;
+    const res = await verifyPatientCredentials(credsId, credsPwd);
+    if (!res.success) return Alert.alert('Verification failed', res.error || 'Invalid credentials');
+    // swap auth token to the patient's, so all /dashboard calls show their data
+    await setAuthToken(res.data.token);
+    dispatch({ type: 'SET_MONITORING_PATIENT', payload: res.data.user });
+    dispatch({ type: 'SET_USER', payload: res.data.user });
+    setCredsModal(null);
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
-      <LinearGradient colors={COLORS.gradient.green} style={styles.header}>
-        <Text style={styles.headerTitle}>Family Health</Text>
-        <Text style={styles.headerSubtitle}>Monitor your loved ones</Text>
-      </LinearGradient>
-
-      <View style={styles.content}>
-        {/* Add Family Member */}
-        <TouchableOpacity style={styles.addBtn} onPress={() => setShowInvite(!showInvite)}>
-          <Text style={styles.addBtnText}>+ Add Family Member</Text>
-        </TouchableOpacity>
-
-        {showInvite && (
-          <Card variant="elevated" style={styles.inviteCard}>
-            <Text style={styles.inviteTitle}>Send Invitation</Text>
-            <TextInput
-              style={styles.inviteInput}
-              value={inviteEmail}
-              onChangeText={setInviteEmail}
-              placeholder="Enter family member's email"
-              keyboardType="email-address"
-            />
-            <GradientButton title="Send Invite" onPress={handleInvite} gradient={COLORS.gradient.green} />
-          </Card>
-        )}
-
-        {/* Family Members */}
-        <Text style={styles.sectionTitle}>Family Members</Text>
-        {familyMembers.map((member) => (
-          <Card key={member.id} variant="elevated" style={styles.memberCard}>
-            <View style={styles.memberHeader}>
-              <LinearGradient colors={COLORS.gradient.green} style={styles.memberAvatar}>
-                <Text style={styles.memberAvatarText}>{member.name[0]}</Text>
-              </LinearGradient>
-              <View style={styles.memberInfo}>
-                <Text style={styles.memberName}>{member.name}</Text>
-                <Text style={styles.memberRelation}>{member.relation}</Text>
-              </View>
-              <View style={[styles.statusDot, { backgroundColor: getStatusColor(member.status) }]} />
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <LinearGradient colors={COLORS.gradient.green} style={styles.header}>
+          <View style={styles.headerRow}>
+            <View>
+              <Text style={styles.headerTitle}>{isFamily ? 'Family Monitoring' : 'Your Family'}</Text>
+              <Text style={styles.headerSubtitle}>{isFamily ? 'Watch over your loved ones' : 'People who monitor your health'}</Text>
             </View>
-
-            <View style={styles.memberMetrics}>
-              <View style={styles.memberMetric}>
-                <Text style={styles.metricValue}>{member.healthScore}</Text>
-                <Text style={styles.metricLabel}>Health Score</Text>
-              </View>
-              <View style={styles.memberMetric}>
-                <Text style={styles.metricValue}>{member.prakriti}</Text>
-                <Text style={styles.metricLabel}>Prakriti</Text>
-              </View>
-              <View style={styles.memberMetric}>
-                <Text style={[styles.metricValue, { color: member.alerts > 2 ? COLORS.error : COLORS.warning }]}>
-                  {member.alerts}
-                </Text>
-                <Text style={styles.metricLabel}>Alerts</Text>
-              </View>
-            </View>
-
-            <TouchableOpacity style={styles.viewDashBtn}>
-              <Text style={styles.viewDashText}>View Dashboard →</Text>
+            <TouchableOpacity onPress={logout} style={styles.logoutBtn}>
+              <Text style={styles.logoutText}>🚪</Text>
             </TouchableOpacity>
-          </Card>
-        ))}
+          </View>
+        </LinearGradient>
 
-        {/* Pending Invites */}
-        <Text style={styles.sectionTitle}>Pending Invites</Text>
-        <Card variant="outlined" style={styles.pendingCard}>
-          <Text style={styles.pendingIcon}>📩</Text>
-          <Text style={styles.pendingText}>No pending invitations</Text>
-        </Card>
-      </View>
-    </ScrollView>
+        <View style={styles.content}>
+          {!isFamily && (
+            <>
+              <TouchableOpacity style={styles.addBtn} onPress={() => setShowInvite(v => !v)}>
+                <Text style={styles.addBtnText}>+ Invite Family Member</Text>
+              </TouchableOpacity>
+
+              {showInvite && (
+                <Card style={{ marginBottom: 16 }}>
+                  <TextInput style={styles.input} placeholder="Family member email *"
+                    autoCapitalize="none" keyboardType="email-address"
+                    value={inviteForm.family_email} onChangeText={v => setInviteForm(f => ({ ...f, family_email: v }))} />
+                  <TextInput style={styles.input} placeholder="Name"
+                    value={inviteForm.family_name} onChangeText={v => setInviteForm(f => ({ ...f, family_name: v }))} />
+                  <TextInput style={styles.input} placeholder="Age" keyboardType="number-pad"
+                    value={inviteForm.family_age} onChangeText={v => setInviteForm(f => ({ ...f, family_age: v }))} />
+                  <TextInput style={styles.input} placeholder="Role (Mother / Father / Son / etc.)"
+                    value={inviteForm.family_role} onChangeText={v => setInviteForm(f => ({ ...f, family_role: v }))} />
+                  <GradientButton title="Send Invite" onPress={submitInvite} />
+                </Card>
+              )}
+
+              <Text style={styles.sectionTitle}>People who monitor you</Text>
+              {family.length === 0 && <Text style={styles.empty}>No family members linked yet.</Text>}
+              {family.map(f => (
+                <Card key={f.id} style={styles.personCard}>
+                  <View>
+                    <Text style={styles.personName}>{f.family_name || f.family?.full_name || f.family_email}</Text>
+                    <Text style={styles.personMeta}>{f.family_role || '—'}{f.family_age ? ` · ${f.family_age} yrs` : ''}</Text>
+                    <Text style={[styles.badge, statusStyle(f.status)]}>{f.status.toUpperCase()}</Text>
+                  </View>
+                </Card>
+              ))}
+            </>
+          )}
+
+          {isFamily && (
+            <>
+              <Text style={styles.sectionTitle}>Pending Invites</Text>
+              {invites.length === 0 && <Text style={styles.empty}>No pending invites.</Text>}
+              {invites.map(inv => (
+                <Card key={inv.id} style={styles.personCard}>
+                  <Text style={styles.personName}>{inv.patient?.full_name || inv.patient?.email}</Text>
+                  <Text style={styles.personMeta}>{inv.patient?.prakriti ? `Prakriti: ${inv.patient.prakriti}` : ' '}</Text>
+                  <View style={styles.row}>
+                    <TouchableOpacity style={styles.approveBtn} onPress={() => respond(inv.id, 'approve')}>
+                      <Text style={styles.approveText}>Approve</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.rejectBtn} onPress={() => respond(inv.id, 'reject')}>
+                      <Text style={styles.rejectText}>Reject</Text>
+                    </TouchableOpacity>
+                  </View>
+                </Card>
+              ))}
+
+              <Text style={styles.sectionTitle}>Patients You Monitor</Text>
+              {patients.length === 0 && <Text style={styles.empty}>Approve an invite to start monitoring.</Text>}
+              {patients.map(p => (
+                <Card key={p.id} style={styles.personCard}>
+                  <Text style={styles.personName}>{p.patient?.full_name || p.patient?.username}</Text>
+                  <Text style={styles.personMeta}>
+                    {p.patient?.prakriti ? `Prakriti: ${p.patient.prakriti}` : ''}
+                    {p.patient?.age ? ` · ${p.patient.age} yrs` : ''}
+                  </Text>
+                  <TouchableOpacity style={styles.viewBtn} onPress={() => openPatientDashboard(p.patient)}>
+                    <Text style={styles.viewText}>See Dashboard</Text>
+                  </TouchableOpacity>
+                </Card>
+              ))}
+            </>
+          )}
+        </View>
+      </ScrollView>
+
+      <Modal visible={!!credsModal} transparent animationType="fade" onRequestClose={() => setCredsModal(null)}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.modalCard}>
+            <Text style={styles.modalTitle}>Verify Patient Credentials</Text>
+            <Text style={styles.modalSubtitle}>To view {credsModal?.patient?.full_name}'s dashboard, enter their login.</Text>
+            <TextInput style={styles.input} placeholder="Email or username"
+              autoCapitalize="none" value={credsId} onChangeText={setCredsId} />
+            <TextInput style={styles.input} placeholder="Password"
+              secureTextEntry value={credsPwd} onChangeText={setCredsPwd} />
+            <View style={styles.row}>
+              <TouchableOpacity style={styles.rejectBtn} onPress={() => setCredsModal(null)}>
+                <Text style={styles.rejectText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.approveBtn} onPress={confirmMonitor}>
+                <Text style={styles.approveText}>View Dashboard</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
+    </KeyboardAvoidingView>
   );
 };
 
+const statusStyle = (s) => ({
+  color: s === 'approved' ? COLORS.success : s === 'rejected' ? COLORS.error : COLORS.warning,
+  borderColor: s === 'approved' ? COLORS.success : s === 'rejected' ? COLORS.error : COLORS.warning,
+});
+
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: COLORS.background },
-  header: { paddingTop: 50, paddingBottom: 24, paddingHorizontal: SIZES.screenPadding, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
-  headerTitle: { fontSize: 26, fontWeight: '800', color: '#FFF' },
-  headerSubtitle: { fontSize: 13, color: '#FFFFFFCC' },
-  content: { paddingHorizontal: SIZES.screenPadding, paddingBottom: 30 },
-  addBtn: { alignSelf: 'center', marginTop: 16, paddingHorizontal: 20, paddingVertical: 10, borderRadius: 20, borderWidth: 1.5, borderColor: COLORS.secondary, borderStyle: 'dashed' },
-  addBtnText: { fontSize: 14, fontWeight: '700', color: COLORS.secondary },
-  inviteCard: { marginTop: 12 },
-  inviteTitle: { fontSize: 16, fontWeight: '700', color: COLORS.text, marginBottom: 10 },
-  inviteInput: { borderWidth: 1, borderColor: COLORS.border, borderRadius: 10, padding: 12, marginBottom: 12, fontSize: 14 },
-  sectionTitle: { fontSize: 18, fontWeight: '700', color: COLORS.text, marginTop: 24, marginBottom: 12 },
-  // Member Card
-  memberCard: { marginBottom: 12 },
-  memberHeader: { flexDirection: 'row', alignItems: 'center', marginBottom: 14 },
-  memberAvatar: { width: 46, height: 46, borderRadius: 23, alignItems: 'center', justifyContent: 'center', marginRight: 12 },
-  memberAvatarText: { fontSize: 20, fontWeight: '700', color: '#FFF' },
-  memberInfo: { flex: 1 },
-  memberName: { fontSize: 16, fontWeight: '700', color: COLORS.text },
-  memberRelation: { fontSize: 12, color: COLORS.textSecondary },
-  statusDot: { width: 12, height: 12, borderRadius: 6 },
-  memberMetrics: { flexDirection: 'row', justifyContent: 'space-around', paddingVertical: 12, borderTopWidth: 0.5, borderTopColor: COLORS.border },
-  memberMetric: { alignItems: 'center' },
-  metricValue: { fontSize: 16, fontWeight: '700', color: COLORS.text },
-  metricLabel: { fontSize: 10, color: COLORS.textSecondary, marginTop: 2 },
-  viewDashBtn: { alignItems: 'center', paddingVertical: 10, borderTopWidth: 0.5, borderTopColor: COLORS.border, marginTop: 8 },
-  viewDashText: { fontSize: 13, fontWeight: '700', color: COLORS.secondary },
-  pendingCard: { alignItems: 'center', padding: 24 },
-  pendingIcon: { fontSize: 32, marginBottom: 8 },
-  pendingText: { fontSize: 14, color: COLORS.textSecondary },
+  container: { flex: 1, backgroundColor: '#FAFAFA' },
+  header: { padding: 24, paddingTop: 52, borderBottomLeftRadius: 24, borderBottomRightRadius: 24 },
+  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+  headerTitle: { fontSize: 24, fontWeight: '800', color: '#FFF' },
+  headerSubtitle: { fontSize: 13, color: '#FFFFFFCC', marginTop: 4 },
+  logoutBtn: { width: 40, height: 40, borderRadius: 20, backgroundColor: '#FFFFFF33', alignItems: 'center', justifyContent: 'center' },
+  logoutText: { fontSize: 18 },
+  content: { padding: 16 },
+  addBtn: { backgroundColor: COLORS.primary, padding: 14, borderRadius: 12, alignItems: 'center', marginBottom: 12 },
+  addBtnText: { color: '#FFF', fontWeight: '700' },
+  sectionTitle: { fontSize: 16, fontWeight: '700', color: COLORS.text, marginTop: 12, marginBottom: 8 },
+  empty: { color: COLORS.textSecondary, fontStyle: 'italic', padding: 8 },
+  personCard: { marginBottom: 10, padding: 14 },
+  personName: { fontSize: 16, fontWeight: '700', color: COLORS.text },
+  personMeta: { fontSize: 12, color: COLORS.textSecondary, marginTop: 2, marginBottom: 8 },
+  badge: { alignSelf: 'flex-start', fontSize: 10, fontWeight: '800', paddingVertical: 2, paddingHorizontal: 8, borderRadius: 6, borderWidth: 1 },
+  input: { borderWidth: 1, borderColor: COLORS.border, borderRadius: 10, padding: 12, marginBottom: 10, fontSize: 14, backgroundColor: '#FFF' },
+  row: { flexDirection: 'row', gap: 10, marginTop: 8 },
+  approveBtn: { flex: 1, backgroundColor: COLORS.success, padding: 12, borderRadius: 10, alignItems: 'center' },
+  approveText: { color: '#FFF', fontWeight: '700' },
+  rejectBtn: { flex: 1, backgroundColor: COLORS.error, padding: 12, borderRadius: 10, alignItems: 'center' },
+  rejectText: { color: '#FFF', fontWeight: '700' },
+  viewBtn: { backgroundColor: COLORS.primary, padding: 12, borderRadius: 10, alignItems: 'center', marginTop: 8 },
+  viewText: { color: '#FFF', fontWeight: '700' },
+  modalOverlay: { flex: 1, backgroundColor: '#00000088', alignItems: 'center', justifyContent: 'center', padding: 24 },
+  modalCard: { backgroundColor: '#FFF', borderRadius: 16, padding: 20, width: '100%', maxWidth: 400 },
+  modalTitle: { fontSize: 18, fontWeight: '800', color: COLORS.text, marginBottom: 4 },
+  modalSubtitle: { fontSize: 12, color: COLORS.textSecondary, marginBottom: 14 },
 });
 
 export default FamilyDashboard;

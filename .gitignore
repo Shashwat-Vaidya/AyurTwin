@@ -1,7 +1,6 @@
-# Learn more https://docs.github.com/en/get-started/getting-started-with-git/ignoring-files
-
 # dependencies
 node_modules/
+**/node_modules/
 
 # Expo
 .expo/
@@ -26,12 +25,31 @@ npm-debug.*
 yarn-debug.*
 yarn-error.*
 
-# macOS
+# macOS / Windows
 .DS_Store
+Thumbs.db
 *.pem
 
-# local env files
-.env*.local
+# Secrets — NEVER commit these
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.env.*
+
+# Generated ML artefacts (regenerate with `npm run train`)
+backend/ml/model.json
+backend/ml/dataset.csv
+
+# Generated docs / reports (regenerate with `npm run manual`)
+docs/AyurTwin_User_Manual.pdf
+
+# Generated PDF reports / temp downloads
+*.pdf
+!docs/keep/*.pdf
+
+# Legacy Python venv folder
+ayurtwin 3.0/
 
 # typescript
 *.tsbuildinfo
@@ -39,3 +57,7 @@ yarn-error.*
 # generated native folders
 /ios
 /android
+
+# editor
+.vscode/
+.idea/

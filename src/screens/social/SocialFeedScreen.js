@@ -7,7 +7,7 @@ import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
-import { getSocialFeed, createPost, likePost } from '../../services/api';
+import { getCommunityFeed, createCommunityPost, likeCommunityPost } from '../../services/api';
 
 const SocialFeedScreen = () => {
   const { state } = useApp();
@@ -24,17 +24,18 @@ const SocialFeedScreen = () => {
 
   const fetchPosts = async () => {
     setLoading(true);
-    const result = await getSocialFeed();
-    if (result.success && result.data) {
-      const formatted = result.data.map(post => ({
+    const result = await getCommunityFeed();
+    if (result.success && result.data?.posts) {
+      const formatted = result.data.posts.map(post => ({
         id: post.id,
-        userId: post.user?.id,
-        user: `${post.user?.first_name || ''} ${post.user?.last_name?.charAt(0) || ''}.`,
-        avatar: (post.user?.first_name || 'U')[0],
-        type: post.post_type || 'general',
-        content: post.content,
-        likes: post.likes_count || 0,
-        comments: post.comments_count || 0,
+        userId: post.user_id,
+        user: post.author_name || post.user?.full_name || post.user?.username || 'User',
+        avatar: (post.author_name || post.user?.full_name || 'U')[0],
+        type: 'general',
+        title: post.title,
+        content: post.body,
+        likes: post.likes || 0,
+        comments: 0,
         time: getTimeAgo(post.created_at),
         liked: false,
       }));
@@ -57,48 +58,27 @@ const SocialFeedScreen = () => {
   };
 
   const handleLike = async (postId) => {
-    const alreadyLiked = likedPosts[postId];
-    if (alreadyLiked) return; // prevent double-like
-
+    if (likedPosts[postId]) return;
     setPosts(posts.map(p => p.id === postId ? { ...p, liked: true, likes: p.likes + 1 } : p));
     setLikedPosts({ ...likedPosts, [postId]: true });
-
-    if (user.id) {
-      await likePost(postId, user.id);
-    }
+    await likeCommunityPost(postId);
   };
 
   const handlePost = async () => {
     if (!newPost.trim()) return;
-
-    if (user.id) {
-      const result = await createPost(user.id, newPost.trim(), 'general');
-      if (result.success) {
-        // Add to top of feed immediately
-        const post = {
-          id: result.data.id,
-          userId: user.id,
-          user: `${user.first_name || user.username || 'You'} ${user.last_name?.charAt(0) || ''}.`,
-          avatar: (user.first_name || 'U')[0],
-          type: 'general',
-          content: newPost.trim(),
-          likes: 0, comments: 0, time: 'Just now', liked: false,
-        };
-        setPosts([post, ...posts]);
-      }
-    } else {
-      // Fallback for local user
-      const post = {
-        id: Date.now().toString(),
-        user: user.first_name || user.username || 'You',
-        avatar: (user.first_name || 'U')[0],
+    const result = await createCommunityPost({ body: newPost.trim() });
+    if (result.success && result.data?.post) {
+      const p = result.data.post;
+      setPosts([{
+        id: p.id,
+        userId: p.user_id,
+        user: p.author_name || user.full_name || user.username || 'You',
+        avatar: (p.author_name || user.full_name || 'U')[0],
         type: 'general',
-        content: newPost.trim(),
+        content: p.body,
         likes: 0, comments: 0, time: 'Just now', liked: false,
-      };
-      setPosts([post, ...posts]);
+      }, ...posts]);
     }
-
     setNewPost('');
     setShowCompose(false);
   };

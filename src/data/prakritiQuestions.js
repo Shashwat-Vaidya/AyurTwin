@@ -10,6 +10,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 1,
     category: 'Physical Structure',
+    explanation: "Ayurveda links body frame to dosha — thin = Vata (air), medium = Pitta (fire), heavy = Kapha (earth).",
     question: 'What best describes your natural body build or frame?',
     options: [
       { key: 'a', text: 'Lean and thin', dosha: 'vata' },
@@ -20,6 +21,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 2,
     category: 'Physical Structure',
+    explanation: "Symmetry reflects underlying tissue (dhatu) balance. Vata bodies tend to be uneven; Kapha bodies are symmetrical.",
     question: 'How would you describe the symmetry and proportion of your body parts?',
     options: [
       { key: 'a', text: 'Uneven or asymmetrical', dosha: 'vata' },
@@ -30,6 +32,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 3,
     category: 'Physical Structure',
+    explanation: "Skin & hair texture reveal your dominant element. Dry = Vata, soft & warm = Pitta, oily = Kapha.",
     question: 'What is the predominant texture of your skin and hair?',
     options: [
       { key: 'a', text: 'Rough and dry', dosha: 'vata' },
@@ -40,6 +43,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 4,
     category: 'Physical Structure',
+    explanation: "Face shape mirrors prana (life-force) flow. Narrow faces are typical Vata, sharp ones Pitta, broad ones Kapha.",
     question: 'Which shape best describes your face?',
     options: [
       { key: 'a', text: 'Small and narrow', dosha: 'vata' },
@@ -50,6 +54,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 5,
     category: 'Physical Structure',
+    explanation: "Skin nature shows tissue quality. Choose what matches you most days, not just today.",
     question: 'What is the general nature of your skin?',
     options: [
       { key: 'a', text: 'Dry and rough', dosha: 'vata' },
@@ -60,6 +65,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 6,
     category: 'Physical Structure',
+    explanation: "Touch temperature reflects circulation: cold hands = Vata, warm = Pitta, cool & moist = Kapha.",
     question: 'How does your skin feel to the touch of others?',
     options: [
       { key: 'a', text: 'Generally cold', dosha: 'vata' },
@@ -70,6 +76,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 7,
     category: 'Physical Structure',
+    explanation: "Complexion reveals tejas (inner glow). Pick the tone you naturally have without sun/skincare.",
     question: 'What is your natural skin complexion?',
     options: [
       { key: 'a', text: 'Dark or dull', dosha: 'vata' },
@@ -80,6 +87,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 8,
     category: 'Physical Structure',
+    explanation: "Hair quality shows reproductive tissue (shukra). Dry-frizzy = Vata, fine, prematurely greying = Pitta, thick and shiny = Kapha.",
     question: 'What is the nature of your hair?',
     options: [
       { key: 'a', text: 'Thin, dry, brittle, or frizzy', dosha: 'vata' },
@@ -91,6 +99,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 9,
     category: 'Digestive Function',
+    explanation: "Joint behaviour reflects synovial fluid (a Kapha quality). Cracking joints suggest Vata excess.",
     question: 'What is the condition of your joints?',
     options: [
       { key: 'a', text: 'They produce cracking sounds and feel loose or unstable', dosha: 'vata' },
@@ -101,6 +110,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 10,
     category: 'Digestive Function',
+    explanation: "Digestive fire (Agni) is core to Ayurveda. Variable = Vata-Vishama, sharp = Pitta-Tikshna, slow = Kapha-Manda.",
     question: 'How is your digestive fire or appetite strength?',
     options: [
       { key: 'a', text: 'Variable - sometimes strong, sometimes weak', dosha: 'vata' },
@@ -111,6 +121,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 11,
     category: 'Digestive Function',
+    explanation: "Digestion speed shapes weight and metabolism. Pitta digests fastest; Kapha slowest.",
     question: 'How would you describe your digestive capacity?',
     options: [
       { key: 'a', text: 'Irregular - digests some foods well, others poorly', dosha: 'vata' },
@@ -121,6 +132,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 12,
     category: 'Digestive Function',
+    explanation: "Hunger pattern mirrors metabolism. Pitta types feel hunger sharply; Kapha types can skip meals easily.",
     question: 'How intense is your feeling of hunger?',
     options: [
       { key: 'a', text: 'Low or inconsistent', dosha: 'vata' },
@@ -131,6 +143,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 13,
     category: 'Digestive Function',
+    explanation: "Cravings hint at dosha. Choose what you genuinely prefer, not what you think is healthiest.",
     question: 'Which tastes do you naturally prefer or crave?',
     options: [
       { key: 'a', text: 'Sweet, sour, and salty', dosha: 'vata' },
@@ -142,6 +155,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 14,
     category: 'Mental Traits',
+    explanation: "Voice quality reflects throat (Kapha) and breath (Vata). Pick how it usually sounds, not when sick.",
     question: 'Which best describes your voice?',
     options: [
       { key: 'a', text: 'Weak, thin, or cracked', dosha: 'vata' },
@@ -152,6 +166,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 15,
     category: 'Mental Traits',
+    explanation: "Mental courage in new situations reveals dosha. Anxious = Vata, bold = Pitta, steady = Kapha.",
     question: 'How would you rate your level of courage or bravery in new situations?',
     options: [
       { key: 'a', text: 'Low - tendency towards anxiety or fear', dosha: 'vata' },
@@ -162,6 +177,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 16,
     category: 'Mental Traits',
+    explanation: "Reaction speed reveals nervous-system pace. Quick = Pitta, deliberate = Kapha.",
     question: 'What is your typical reaction speed to events or information?',
     options: [
       { key: 'a', text: 'Unpredictable - sometimes fast, sometimes slow', dosha: 'vata' },
@@ -172,6 +188,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 17,
     category: 'Mental Traits',
+    explanation: "Pace of movement is dosha-driven. Pick how you naturally walk and work, not when in a hurry.",
     question: 'How would you describe your general pace of activity and movement?',
     options: [
       { key: 'a', text: 'Fast, light, and quick', dosha: 'vata' },
@@ -182,6 +199,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 18,
     category: 'Mental Traits',
+    explanation: "Physical endurance reflects ojas (vitality). Kapha types have the most stamina; Vata the least.",
     question: 'What is your level of physical endurance and strength?',
     options: [
       { key: 'a', text: 'Low - tires easily', dosha: 'vata' },
@@ -193,6 +211,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 19,
     category: 'Physical Structure',
+    explanation: "Teeth indicate bone tissue (asthi). Vata = uneven, Pitta = sharp/yellowish, Kapha = strong/white.",
     question: 'What best describes your teeth?',
     options: [
       { key: 'a', text: 'Small, uneven, irregular, or with gaps', dosha: 'vata' },
@@ -203,6 +222,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 20,
     category: 'Physical Structure',
+    explanation: "Eye size and shine reveal alochaka pitta. Small/dry = Vata, sharp = Pitta, large & moist = Kapha.",
     question: 'What is the shape of your nose?',
     options: [
       { key: 'a', text: 'Thin, small, or irregularly shaped', dosha: 'vata' },
@@ -213,6 +233,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 21,
     category: 'Physical Structure',
+    explanation: "Sweat pattern reveals heat. Light sweat = Vata, profuse with strong odour = Pitta, mild & sticky = Kapha.",
     question: 'Which description best fits your eyes?',
     options: [
       { key: 'a', text: 'Small, dry, unsteady, or dull', dosha: 'vata' },
@@ -223,6 +244,7 @@ export const PRAKRITI_QUESTIONS = [
   {
     id: 22,
     category: 'Physical Structure',
+    explanation: "Sleep depth reveals tamas/sattva. Light = Vata, moderate = Pitta, deep & long = Kapha.",
     question: 'What is the condition of your nails?',
     options: [
       { key: 'a', text: 'Dry, rough, brittle, or cracked', dosha: 'vata' },

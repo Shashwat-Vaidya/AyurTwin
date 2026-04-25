@@ -28,12 +28,12 @@ const SignInScreen = ({ navigation }) => {
     try {
       const result = await loginUser(email.trim(), password);
       if (result.success) {
-        await login(result.data);
+        await login(result.data.user, result.data.token);
       } else {
         Alert.alert('Login Failed', result.error || 'Invalid credentials. Please try again.');
       }
     } catch (err) {
-      Alert.alert('Error', 'Something went wrong. Please try again.');
+      Alert.alert('Error', err.message || 'Something went wrong. Please try again.');
     }
     setLoading(false);
   };

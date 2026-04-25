@@ -6,11 +6,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
-import {
-  generateDiseaseRisks, calculateHealthScore,
-  detectDoshaImbalance, generateAlerts,
-} from '../../utils/healthCalculations';
-import { getLatestSensorReading } from '../../services/api';
+import { getDashboard, getLatestSensor } from '../../services/api';
 
 const { width } = Dimensions.get('window');
 
@@ -22,44 +18,37 @@ const DashboardScreen = ({ navigation }) => {
   const [sensorData, setSensorData] = useState(null);
   const [risks, setRisks] = useState({});
   const [healthScore, setHealthScore] = useState(0);
-  const [doshaBalance, setDoshaBalance] = useState({});
+  const [doshaBalance, setDoshaBalance] = useState({ vata: 33, pitta: 33, kapha: 34 });
   const [alerts, setAlerts] = useState([]);
+  const [dashUser, setDashUser] = useState(null);
 
-  // Fetch sensor data from Supabase every 5 seconds
   useEffect(() => {
     Animated.timing(fadeAnim, { toValue: 1, duration: 800, useNativeDriver: true }).start();
-    loadDashboardData();
-    fetchSensorData();
-    const sensorInterval = setInterval(fetchSensorData, 5000); // Sensor refresh every 5s
-    const dashInterval = setInterval(loadDashboardData, 30000); // Dashboard refresh every 30s
-    return () => {
-      clearInterval(sensorInterval);
-      clearInterval(dashInterval);
-    };
+    loadDashboard();
+    const fast = setInterval(fetchSensor, 5000);     // live sensor every 5s
+    const slow = setInterval(loadDashboard, 60000);  // full aggregate every 60s
+    return () => { clearInterval(fast); clearInterval(slow); };
   }, []);
 
-  const fetchSensorData = async () => {
+  const fetchSensor = async () => {
     if (!user?.id) return;
-    const result = await getLatestSensorReading(user.id);
-    if (result.success && result.data) {
-      setSensorData(result.data);
+    const r = await getLatestSensor(user.id);
+    if (r.success && r.data?.sensor) {
+      const s = r.data.sensor;
+      setSensorData({ ...s, temperature: s.body_temperature });
     }
   };
 
-  const loadDashboardData = () => {
-    const profile = { ...user, ...(state.registrationData || {}) };
-    const vitals = sensorData
-      ? { heartRate: sensorData.heart_rate, temperature: sensorData.temperature, spo2: sensorData.spo2, stressIndex: 45 }
-      : { heartRate: 72, temperature: 36.6, spo2: 98, stressIndex: 45 };
-    const r = generateDiseaseRisks(profile);
-    const hs = calculateHealthScore(profile);
-    const db = detectDoshaImbalance(state.prakritiResult, profile);
-    const a = generateAlerts(vitals, r, db);
-
-    setRisks(r);
-    setHealthScore(hs);
-    setDoshaBalance(db);
-    setAlerts(a);
+  const loadDashboard = async () => {
+    const r = await getDashboard();
+    if (!r.success) return;
+    const d = r.data;
+    setDashUser(d.user);
+    setRisks(d.disease_risks || {});
+    setHealthScore(d.health_score || 0);
+    setDoshaBalance(d.dosha || { vata: 33, pitta: 33, kapha: 34 });
+    setAlerts((d.alerts || []).map(a => ({ type: a.severity, title: a.title, message: a.message })));
+    if (d.sensor) setSensorData({ ...d.sensor, temperature: d.sensor.body_temperature });
   };
 
   const handleLogout = () => {
@@ -93,8 +82,8 @@ const DashboardScreen = ({ navigation }) => {
   };
 
   const getDoshaBadge = () => {
-    const prakriti = state.prakritiResult?.prakriti || user.prakriti || 'Unknown';
-    return prakriti;
+    const prakriti = dashUser?.prakriti || user.prakriti || state.prakritiResult?.prakriti || 'Unknown';
+    return String(prakriti).charAt(0).toUpperCase() + String(prakriti).slice(1);
   };
 
   const topRisks = Object.entries(risks)
@@ -112,7 +101,7 @@ const DashboardScreen = ({ navigation }) => {
         <View style={styles.headerContent}>
           <View>
             <Text style={styles.greeting}>{getGreeting()},</Text>
-            <Text style={styles.userName}>{user.first_name || user.username || 'User'}</Text>
+            <Text style={styles.userName}>{dashUser?.full_name || dashUser?.username || user.full_name || user.username || 'User'}</Text>
           </View>
           <View style={styles.headerActions}>
             <TouchableOpacity onPress={() => navigation.navigate('MoreTab', { screen: 'Profile' })} style={styles.profileBtn}>
@@ -129,24 +118,26 @@ const DashboardScreen = ({ navigation }) => {
       </LinearGradient>
 
       <View style={styles.content}>
-        {/* Health Score */}
-        <Card style={styles.healthScoreCard} variant="elevated">
-          <View style={styles.healthScoreRow}>
-            <View style={styles.healthScoreCircle}>
-              <Text style={styles.healthScoreValue}>{healthScore}</Text>
-              <Text style={styles.healthScoreLabel}>Health Score</Text>
+        {/* Health Score (tap to see breakdown) */}
+        <TouchableOpacity activeOpacity={0.85} onPress={() => navigation.navigate('HealthScoreBreakdown')}>
+          <Card style={styles.healthScoreCard} variant="elevated">
+            <View style={styles.healthScoreRow}>
+              <View style={styles.healthScoreCircle}>
+                <Text style={styles.healthScoreValue}>{healthScore}</Text>
+                <Text style={styles.healthScoreLabel}>/ 500</Text>
+              </View>
+              <View style={styles.healthScoreInfo}>
+                <Text style={styles.healthScoreTitle}>Health Score</Text>
+                <Text style={[styles.healthScoreStatus, {
+                  color: healthScore >= 400 ? COLORS.success : healthScore >= 300 ? COLORS.warning : COLORS.error
+                }]}>
+                  {healthScore >= 400 ? 'Excellent' : healthScore >= 300 ? 'Good' : healthScore >= 200 ? 'Moderate' : 'Needs Attention'}
+                </Text>
+                <Text style={styles.healthScoreDesc}>Tap to see how this is calculated →</Text>
+              </View>
             </View>
-            <View style={styles.healthScoreInfo}>
-              <Text style={styles.healthScoreTitle}>Overall Health</Text>
-              <Text style={[styles.healthScoreStatus, {
-                color: healthScore >= 70 ? COLORS.success : healthScore >= 50 ? COLORS.warning : COLORS.error
-              }]}>
-                {healthScore >= 70 ? 'Good' : healthScore >= 50 ? 'Moderate' : 'Needs Attention'}
-              </Text>
-              <Text style={styles.healthScoreDesc}>Based on BMI, stress, sleep, activity & lifestyle</Text>
-            </View>
-          </View>
-        </Card>
+          </Card>
+        </TouchableOpacity>
 
         {/* Live Health Cards - fetched from Supabase every 5s */}
         <Text style={styles.sectionTitle}>Live Sensor Data</Text>
@@ -187,8 +178,9 @@ const DashboardScreen = ({ navigation }) => {
         {/* Top 3 Disease Risks */}
         <Text style={styles.sectionTitle}>Top Disease Risks</Text>
         <Card style={styles.riskCard} variant="elevated">
-          {topRisks.map(([key, value], idx) => (
-            <View key={key} style={styles.riskRow}>
+          {topRisks.map(([key, value]) => (
+            <TouchableOpacity key={key} style={styles.riskRow} activeOpacity={0.7}
+              onPress={() => navigation.navigate('DiseaseRiskBreakdown', { disease: key })}>
               <Text style={styles.riskLabel}>{riskLabel(key)}</Text>
               <View style={styles.riskBarTrack}>
                 <View style={[styles.riskBarFill, {
@@ -199,7 +191,7 @@ const DashboardScreen = ({ navigation }) => {
               <Text style={[styles.riskPercent, {
                 color: value > 70 ? COLORS.error : value > 50 ? COLORS.warning : COLORS.success,
               }]}>{value}%</Text>
-            </View>
+            </TouchableOpacity>
           ))}
         </Card>
 
@@ -239,6 +231,9 @@ const DashboardScreen = ({ navigation }) => {
 
         <Text style={styles.disclaimer}>
           This app provides preventive health insights and does not replace professional medical advice.
+        </Text>
+        <Text style={[styles.disclaimer, { marginTop: 4, fontWeight: '600' }]}>
+          Developed by Shashwat Developers Group (SDG 2.0)
         </Text>
       </View>
     </Animated.ScrollView>

@@ -1,43 +1,24 @@
-/**
- * Dinacharya & Meal Tracking Routes
- */
 const express = require('express');
-const router = express.Router();
 const db = require('../services/db');
+const { authenticate } = require('../middleware/auth');
 
-// POST /api/dinacharya
-router.post('/', async (req, res) => {
-  try {
-    const { user_id, date, ...data } = req.body;
-    const { error } = await db.saveDinacharya(user_id, date, data);
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    res.json({ success: true });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+const router = express.Router();
+
+router.get('/today', authenticate, async (req, res) => {
+    const { data } = await db.getTodayDinacharya(req.user.id);
+    res.json({ entry: data });
 });
 
-// GET /api/dinacharya/:userId
-router.get('/:userId', async (req, res) => {
-  try {
-    const { data, error } = await db.getDinacharyaHistory(req.params.userId);
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    res.json({ success: true, data: data || [] });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
-});
-
-// POST /api/meals
-router.post('/meals', async (req, res) => {
-  try {
-    const { user_id, ...data } = req.body;
-    const { data: meal, error } = await db.saveMeal({ user_id, ...data });
-    if (error) return res.status(400).json({ success: false, error: error.message });
-    res.json({ success: true, data: meal });
-  } catch (err) {
-    res.status(500).json({ success: false, error: err.message });
-  }
+router.post('/', authenticate, async (req, res) => {
+    const { tasks } = req.body;
+    if (!tasks || typeof tasks !== 'object') return res.status(400).json({ error: 'tasks object required' });
+    const keys = Object.keys(tasks);
+    const done = keys.filter(k => tasks[k] === true).length;
+    const pct = keys.length ? Math.round(done / keys.length * 100) : 0;
+    const date = new Date().toISOString().slice(0, 10);
+    const { error } = await db.upsertDinacharya(req.user.id, date, tasks, pct);
+    if (error) return res.status(400).json({ error: error.message });
+    res.json({ completion_pct: pct });
 });
 
 module.exports = router;
