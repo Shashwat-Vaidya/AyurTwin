@@ -30,14 +30,14 @@ const MoodTrackerScreen = () => {
   const [moodHistory, setMoodHistory] = useState([]);
 
   const moods = [
-    { id: 1, emoji: '😊', label: 'Great', color: colors.successGreen, value: 5 },
-    { id: 2, emoji: '🙂', label: 'Good', color: colors.primaryGreen, value: 4 },
-    { id: 3, emoji: '😐', label: 'Okay', color: colors.warningYellow, value: 3 },
-    { id: 4, emoji: '😔', label: 'Sad', color: colors.tempOrange, value: 2 },
-    { id: 5, emoji: '😫', label: 'Stressed', color: colors.stressPurple, value: 2 },
-    { id: 6, emoji: '😤', label: 'Angry', color: colors.alertRed, value: 1 },
-    { id: 7, emoji: '😴', label: 'Tired', color: colors.sleepIndigo, value: 2 },
-    { id: 8, emoji: '😰', label: 'Anxious', color: colors.heartRate, value: 1 },
+    { id: 1, ion: 'happy-outline', label: 'Great', color: colors.successGreen, value: 5 },
+    { id: 2, ion: 'happy-outline', label: 'Good', color: colors.primaryGreen, value: 4 },
+    { id: 3, ion: 'remove-circle-outline', label: 'Okay', color: colors.warningYellow, value: 3 },
+    { id: 4, ion: 'sad-outline', label: 'Sad', color: colors.tempOrange, value: 2 },
+    { id: 5, ion: 'flash-outline', label: 'Stressed', color: colors.stressPurple, value: 2 },
+    { id: 6, ion: 'flame-outline', label: 'Angry', color: colors.alertRed, value: 1 },
+    { id: 7, ion: 'moon-outline', label: 'Tired', color: colors.sleepIndigo, value: 2 },
+    { id: 8, ion: 'pulse-outline', label: 'Anxious', color: colors.heartRate, value: 1 },
   ];
 
   const weeklyData = {
@@ -97,11 +97,11 @@ const MoodTrackerScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Mood Tracker</Text>
           <TouchableOpacity style={styles.historyButton}>
-            <Ionicons name="calendar" size={24} color={colors.primarySaffron} />
+            <Ionicons name="calendar"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -127,7 +127,7 @@ const MoodTrackerScreen = () => {
               ]}
               onPress={() => handleMoodSelect(mood)}
             >
-              <Text style={styles.moodEmoji}>{mood.emoji}</Text>
+              <Ionicons name={mood.ion} size={28} color={mood.color} style={styles.moodEmoji} />
               <Text style={styles.moodLabel}>{mood.label}</Text>
             </TouchableOpacity>
           ))}
@@ -139,8 +139,7 @@ const MoodTrackerScreen = () => {
             <Text style={styles.noteTitle}>Add a note (optional)</Text>
             <TextInput
               style={styles.noteInput}
-              placeholder="What's on your mind?"
-              placeholderTextColor={colors.textTertiary}
+              placeholder="What's on your mind?"placeholderTextColor={colors.textTertiary}
               value={moodNote}
               onChangeText={setMoodNote}
               multiline
@@ -148,8 +147,7 @@ const MoodTrackerScreen = () => {
             />
             <View style={styles.noteButtons}>
               <Button
-                title="Cancel"
-                onPress={() => {
+                title="Cancel"onPress={() => {
                   setShowNoteInput(false);
                   setSelectedMood(null);
                   setMoodNote('');
@@ -159,8 +157,7 @@ const MoodTrackerScreen = () => {
                 size="small"
               />
               <Button
-                title="Save"
-                onPress={handleSaveMood}
+                title="Save"onPress={handleSaveMood}
                 style={styles.noteSaveButton}
                 gradient
                 size="small"
@@ -233,7 +230,7 @@ const MoodTrackerScreen = () => {
         
         {moodHistory.length === 0 ? (
           <Card style={styles.emptyCard}>
-            <Ionicons name="heart-outline" size={50} color={colors.textTertiary} />
+            <Ionicons name="heart-outline"size={50} color={colors.textTertiary} />
             <Text style={styles.emptyText}>No mood entries yet</Text>
             <Text style={styles.emptySubtext}>Track your mood to see patterns</Text>
           </Card>
@@ -241,7 +238,7 @@ const MoodTrackerScreen = () => {
           moodHistory.slice(0, 5).map((entry) => (
             <Card key={entry.id} style={styles.entryCard}>
               <View style={styles.entryHeader}>
-                <Text style={styles.entryEmoji}>{entry.mood.emoji}</Text>
+                <Ionicons name={entry.mood.ion} size={24} color={entry.mood.color} style={styles.entryEmoji} />
                 <View style={styles.entryInfo}>
                   <Text style={styles.entryMood}>{entry.mood.label}</Text>
                   <Text style={styles.entryTime}>
@@ -262,29 +259,29 @@ const MoodTrackerScreen = () => {
           <Text style={styles.tipsTitle}>Tips for Mental Wellness</Text>
           
           <View style={styles.tipItem}>
-            <Ionicons name="leaf" size={18} color={colors.primaryGreen} />
+            <Ionicons name="leaf"size={18} color={colors.primaryGreen} />
             <Text style={styles.tipText}>Practice mindfulness for 5 minutes daily</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="fitness" size={18} color={colors.heartRate} />
+            <Ionicons name="fitness"size={18} color={colors.heartRate} />
             <Text style={styles.tipText}>Exercise regularly to boost mood</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="moon" size={18} color={colors.sleepIndigo} />
+            <Ionicons name="moon"size={18} color={colors.sleepIndigo} />
             <Text style={styles.tipText}>Maintain consistent sleep schedule</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="people" size={18} color={colors.spO2Blue} />
+            <Ionicons name="people"size={18} color={colors.spO2Blue} />
             <Text style={styles.tipText}>Connect with friends and family</Text>
           </View>
         </Card>
 
         {/* Journal Button */}
         <TouchableOpacity style={styles.journalButton}>
-          <Ionicons name="book" size={20} color={colors.primarySaffron} />
+          <Ionicons name="book"size={20} color={colors.primarySaffron} />
           <Text style={styles.journalText}>Open Journal</Text>
         </TouchableOpacity>
       </ScrollView>

@@ -73,7 +73,7 @@ const GoalCard = ({
 
   const handleComplete = () => {
     Alert.alert(
-      'Goal Complete! 🎉',
+      'Goal Complete! ',
       'Congratulations on achieving your goal!',
       [
         { text: 'Close' },
@@ -115,7 +115,7 @@ const GoalCard = ({
               <Text style={styles.goalTitle}>{goal}</Text>
               {deadline && showDeadline && (
                 <View style={styles.deadlineContainer}>
-                  <Ionicons name="calendar" size={12} color={colors.textTertiary} />
+                  <Ionicons name="calendar"size={12} color={colors.textTertiary} />
                   <Text style={[
                     styles.deadlineText,
                     daysRemaining < 0 && styles.expiredText
@@ -129,7 +129,7 @@ const GoalCard = ({
             </View>
             {editable && (
               <TouchableOpacity onPress={handleEdit} style={styles.editButton}>
-                <Ionicons name="pencil" size={18} color={colors.textSecondary} />
+                <Ionicons name="pencil"size={18} color={colors.textSecondary} />
               </TouchableOpacity>
             )}
           </View>
@@ -203,7 +203,7 @@ const GoalCard = ({
                 style={[styles.completeButton, { backgroundColor: colors.successGreen }]}
                 onPress={handleComplete}
               >
-                <Ionicons name="checkmark-circle" size={18} color="white" />
+                <Ionicons name="checkmark-circle"size={18} color="white" />
                 <Text style={styles.completeButtonText}>Goal Achieved!</Text>
               </TouchableOpacity>
             )}
@@ -220,8 +220,7 @@ const GoalCard = ({
               style={styles.editInput}
               value={editValue}
               onChangeText={setEditValue}
-              keyboardType="numeric"
-              placeholder="Enter target"
+              keyboardType="numeric"placeholder="Enter target"
             />
           </View>
 
@@ -237,15 +236,13 @@ const GoalCard = ({
 
           <View style={styles.editButtons}>
             <Button
-              title="Cancel"
-              onPress={() => setShowEdit(false)}
+              title="Cancel"onPress={() => setShowEdit(false)}
               style={styles.editCancel}
               outline
               size="small"
             />
             <Button
-              title="Save"
-              onPress={handleSaveEdit}
+              title="Save"onPress={handleSaveEdit}
               style={styles.editSave}
               gradient
               size="small"
@@ -262,12 +259,9 @@ export const StepGoalCard = ({ steps, goal = 10000, onUpdate }) => {
 
   return (
     <GoalCard
-      goal="Daily Steps"
-      progress={steps}
+      goal="Daily Steps"progress={steps}
       target={goal}
-      unit="steps"
-      icon="walk"
-      color={colors.primaryGreen}
+      unit="steps"icon="walk"color={colors.primaryGreen}
       onUpdate={onUpdate}
       showProgress="circle"
     />
@@ -277,12 +271,9 @@ export const StepGoalCard = ({ steps, goal = 10000, onUpdate }) => {
 export const WaterGoalCard = ({ consumed, goal = 2500, onUpdate }) => {
   return (
     <GoalCard
-      goal="Daily Water Intake"
-      progress={consumed}
+      goal="Daily Water Intake"progress={consumed}
       target={goal}
-      unit="ml"
-      icon="water"
-      color={colors.spO2Blue}
+      unit="ml"icon="water"color={colors.spO2Blue}
       onUpdate={onUpdate}
     />
   );
@@ -291,12 +282,9 @@ export const WaterGoalCard = ({ consumed, goal = 2500, onUpdate }) => {
 export const SleepGoalCard = ({ hours, goal = 8, onUpdate }) => {
   return (
     <GoalCard
-      goal="Sleep Goal"
-      progress={hours}
+      goal="Sleep Goal"progress={hours}
       target={goal}
-      unit="hours"
-      icon="moon"
-      color={colors.sleepIndigo}
+      unit="hours"icon="moon"color={colors.sleepIndigo}
       onUpdate={onUpdate}
       showProgress="circle"
     />
@@ -310,12 +298,9 @@ export const WeightGoalCard = ({ current, target, startWeight, onUpdate }) => {
 
   return (
     <GoalCard
-      goal="Weight Goal"
-      progress={current}
+      goal="Weight Goal"progress={current}
       target={target}
-      unit="kg"
-      icon="body"
-      color={colors.heartRate}
+      unit="kg"icon="body"color={colors.heartRate}
       onUpdate={onUpdate}
       showProgress={false}
     />
@@ -325,12 +310,9 @@ export const WeightGoalCard = ({ current, target, startWeight, onUpdate }) => {
 export const CaloriesGoalCard = ({ consumed, goal = 2000, onUpdate }) => {
   return (
     <GoalCard
-      goal="Calorie Intake"
-      progress={consumed}
+      goal="Calorie Intake"progress={consumed}
       target={goal}
-      unit="kcal"
-      icon="flame"
-      color={colors.tempOrange}
+      unit="kcal"icon="flame"color={colors.tempOrange}
       onUpdate={onUpdate}
     />
   );
@@ -339,12 +321,9 @@ export const CaloriesGoalCard = ({ consumed, goal = 2000, onUpdate }) => {
 export const WorkoutGoalCard = ({ sessions, goal = 5, onUpdate }) => {
   return (
     <GoalCard
-      goal="Weekly Workouts"
-      progress={sessions}
+      goal="Weekly Workouts"progress={sessions}
       target={goal}
-      unit="sessions"
-      icon="fitness"
-      color={colors.stressPurple}
+      unit="sessions"icon="fitness"color={colors.stressPurple}
       onUpdate={onUpdate}
     />
   );
@@ -353,12 +332,9 @@ export const WorkoutGoalCard = ({ sessions, goal = 5, onUpdate }) => {
 export const MeditationGoalCard = ({ minutes, goal = 30, onUpdate }) => {
   return (
     <GoalCard
-      goal="Daily Meditation"
-      progress={minutes}
+      goal="Daily Meditation"progress={minutes}
       target={goal}
-      unit="minutes"
-      icon="leaf"
-      color={colors.primarySaffron}
+      unit="minutes"icon="leaf"color={colors.primarySaffron}
       onUpdate={onUpdate}
     />
   );

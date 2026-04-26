@@ -66,18 +66,38 @@ function recommend({ user, profile, sensor, risks = {} }, yogaList) {
     const filtered = list.filter(y => !(y.avoid_for || []).includes(prakriti));
     const ranked = filtered.map(y => ({ y, s: score(y, ctx) })).sort((a, b) => b.s - a.s);
 
-    const picks = (fn) => ranked.filter(fn).slice(0, 3).map(r => ({
-        name: r.y.name,
-        type: r.y.type,
-        benefits: r.y.benefits,
-        duration_min: r.y.duration_min,
-        intensity: r.y.intensity,
-        score: +r.s.toFixed(2),
-    }));
+    const used = new Set();
+    const pickUnique = (fn, n) => {
+        const out = [];
+        for (const r of ranked) {
+            if (used.has(r.y.name)) continue;
+            if (!fn(r)) continue;
+            out.push({
+                name: r.y.name,
+                type: r.y.type,
+                benefits: r.y.benefits,
+                duration_min: r.y.duration_min,
+                intensity: r.y.intensity,
+                score: +r.s.toFixed(2),
+            });
+            used.add(r.y.name);
+            if (out.length >= n) break;
+        }
+        return out;
+    };
 
-    const morning = picks(r => r.y.time_of_day === 'morning' || r.y.time_of_day === 'both');
-    const evening = picks(r => r.y.time_of_day === 'evening' || r.y.time_of_day === 'both');
-    const therapeutic = picks(r => r.y.type === 'meditation' || r.y.type === 'pranayama');
+    // Morning gets first pick (prefers `morning` strictly, then `both`)
+    const morning = pickUnique(r => r.y.time_of_day === 'morning', 3);
+    if (morning.length < 3) {
+        morning.push(...pickUnique(r => r.y.time_of_day === 'both', 3 - morning.length));
+    }
+    // Evening: prefers `evening` strictly, then unused `both`
+    const evening = pickUnique(r => r.y.time_of_day === 'evening', 2);
+    if (evening.length < 2) {
+        evening.push(...pickUnique(r => r.y.time_of_day === 'both', 2 - evening.length));
+    }
+    // Therapeutic picks any unused meditation/pranayama
+    const therapeutic = pickUnique(r => r.y.type === 'meditation' || r.y.type === 'pranayama', 3);
 
     return { dominant_dosha: dom, prakriti, morning, evening, therapeutic };
 }

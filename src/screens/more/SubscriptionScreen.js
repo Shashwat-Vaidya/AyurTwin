@@ -135,7 +135,7 @@ const SubscriptionScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Subscription</Text>
           <TouchableOpacity onPress={handleRestore} style={styles.restoreButton}>
@@ -150,7 +150,7 @@ const SubscriptionScreen = () => {
           end={{ x: 1, y: 1 }}
           style={styles.heroCard}
         >
-          <Ionicons name="leaf" size={60} color="white" />
+          <Ionicons name="leaf"size={60} color="white" />
           <Text style={styles.heroTitle}>AyurTwin Premium</Text>
           <Text style={styles.heroSubtitle}>
             Unlock the full potential of your health journey
@@ -244,7 +244,7 @@ const SubscriptionScreen = () => {
               </View>
             </View>
             {feature.included ? (
-              <Ionicons name="checkmark-circle" size={24} color={colors.successGreen} />
+              <Ionicons name="checkmark-circle"size={24} color={colors.successGreen} />
             ) : (
               <Text style={styles.comingSoon}>Coming soon</Text>
             )}
@@ -295,8 +295,8 @@ const SubscriptionScreen = () => {
             <Text style={styles.comparisonFeature}>Priority Support</Text>
             <View style={styles.comparisonValues}>
               <Text style={styles.comparisonValue}>-</Text>
-              <Text style={styles.comparisonValue}>✓</Text>
-              <Text style={styles.comparisonValue}>✓</Text>
+              <Text style={styles.comparisonValue}></Text>
+              <Text style={styles.comparisonValue}></Text>
             </View>
           </View>
 
@@ -305,7 +305,7 @@ const SubscriptionScreen = () => {
             <View style={styles.comparisonValues}>
               <Text style={styles.comparisonValue}>-</Text>
               <Text style={styles.comparisonValue}>-</Text>
-              <Text style={styles.comparisonValue}>✓</Text>
+              <Text style={styles.comparisonValue}></Text>
             </View>
           </View>
 
@@ -326,7 +326,7 @@ const SubscriptionScreen = () => {
 
         {/* Guarantee */}
         <View style={styles.guaranteeContainer}>
-          <Ionicons name="shield-checkmark" size={20} color={colors.successGreen} />
+          <Ionicons name="shield-checkmark"size={20} color={colors.successGreen} />
           <Text style={styles.guaranteeText}>
             30-day money-back guarantee. Cancel anytime.
           </Text>

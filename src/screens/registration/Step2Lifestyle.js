@@ -205,7 +205,7 @@ const Step2Lifestyle = () => {
                 <Text style={styles.optionDescription}>{level.description}</Text>
               </View>
               {physicalActivity === level.value && (
-                <Ionicons name="checkmark-circle" size={24} color={colors.primarySaffron} />
+                <Ionicons name="checkmark-circle"size={24} color={colors.primarySaffron} />
               )}
             </TouchableOpacity>
           ))}
@@ -304,7 +304,7 @@ const Step2Lifestyle = () => {
         {/* Smoking Toggle */}
         <View style={styles.toggleWrapper}>
           <View style={styles.toggleHeader}>
-            <Ionicons name=" cigarette-outline" size={24} color={colors.textSecondary} />
+            <Ionicons name="cigarette-outline"size={24} color={colors.textSecondary} />
             <Text style={styles.toggleLabel}>Smoking</Text>
           </View>
           <ToggleSwitch
@@ -317,7 +317,7 @@ const Step2Lifestyle = () => {
         {/* Alcohol Toggle */}
         <View style={styles.toggleWrapper}>
           <View style={styles.toggleHeader}>
-            <Ionicons name="wine-outline" size={24} color={colors.textSecondary} />
+            <Ionicons name="wine-outline"size={24} color={colors.textSecondary} />
             <Text style={styles.toggleLabel}>Alcohol Consumption</Text>
           </View>
           <ToggleSwitch
@@ -331,7 +331,7 @@ const Step2Lifestyle = () => {
         <View style={styles.sliderWrapper}>
           <View style={styles.sliderHeader}>
             <View style={styles.sliderTitleContainer}>
-              <Ionicons name="water-outline" size={24} color={getWaterIntakeColor()} />
+              <Ionicons name="water-outline"size={24} color={getWaterIntakeColor()} />
               <Text style={styles.sliderLabel}>Daily Water Intake</Text>
             </View>
             <View style={[styles.valueBadge, { backgroundColor: getWaterIntakeColor() }]}>
@@ -346,8 +346,7 @@ const Step2Lifestyle = () => {
             value={waterIntake}
             onValueChange={setWaterIntake}
             minimumTrackTintColor={getWaterIntakeColor()}
-            maximumTrackTintColor="rgba(0,0,0,0.1)"
-            thumbTintColor={getWaterIntakeColor()}
+            maximumTrackTintColor="rgba(0,0,0,0.1)"thumbTintColor={getWaterIntakeColor()}
           />
           <View style={styles.sliderLabels}>
             <Text style={styles.sliderMinLabel}>0.5L</Text>
@@ -355,10 +354,10 @@ const Step2Lifestyle = () => {
           </View>
           <Text style={styles.recommendationText}>
             {waterIntake < 2 
-              ? '⚠️ Try to drink at least 2L per day' 
+              ? 'Try to drink at least 2L per day' 
               : waterIntake >= 3 
-              ? '🌟 Excellent! Staying well hydrated' 
-              : '✅ Good amount for basic hydration'}
+              ? 'Excellent! Staying well hydrated' 
+              : 'Good amount for basic hydration'}
           </Text>
         </View>
 
@@ -366,7 +365,7 @@ const Step2Lifestyle = () => {
         <View style={styles.sliderWrapper}>
           <View style={styles.sliderHeader}>
             <View style={styles.sliderTitleContainer}>
-              <Ionicons name="fast-food-outline" size={24} color={getJunkFoodColor()} />
+              <Ionicons name="fast-food-outline"size={24} color={getJunkFoodColor()} />
               <Text style={styles.sliderLabel}>Junk Food (times/week)</Text>
             </View>
             <View style={[styles.valueBadge, { backgroundColor: getJunkFoodColor() }]}>
@@ -381,8 +380,7 @@ const Step2Lifestyle = () => {
             value={junkFoodFrequency}
             onValueChange={setJunkFoodFrequency}
             minimumTrackTintColor={getJunkFoodColor()}
-            maximumTrackTintColor="rgba(0,0,0,0.1)"
-            thumbTintColor={getJunkFoodColor()}
+            maximumTrackTintColor="rgba(0,0,0,0.1)"thumbTintColor={getJunkFoodColor()}
           />
           <View style={styles.sliderLabels}>
             <Text style={styles.sliderMinLabel}>0</Text>
@@ -390,12 +388,12 @@ const Step2Lifestyle = () => {
           </View>
           <Text style={styles.recommendationText}>
             {junkFoodFrequency === 0 
-              ? '🌟 No junk food - Excellent!' 
+              ? 'No junk food - Excellent!' 
               : junkFoodFrequency <= 2 
-              ? '✅ Moderate consumption' 
+              ? 'Moderate consumption' 
               : junkFoodFrequency <= 4 
-              ? '⚠️ Try to reduce to 2 times or less' 
-              : '🔴 High consumption - health risk'}
+              ? 'Try to reduce to 2 times or less' 
+              : 'High consumption - health risk'}
           </Text>
         </View>
 
@@ -403,7 +401,7 @@ const Step2Lifestyle = () => {
         <View style={styles.sliderWrapper}>
           <View style={styles.sliderHeader}>
             <View style={styles.sliderTitleContainer}>
-              <Ionicons name="fitness-outline" size={24} color={getExerciseColor()} />
+              <Ionicons name="fitness-outline"size={24} color={getExerciseColor()} />
               <Text style={styles.sliderLabel}>Exercise (hours/day)</Text>
             </View>
             <View style={[styles.valueBadge, { backgroundColor: getExerciseColor() }]}>
@@ -418,8 +416,7 @@ const Step2Lifestyle = () => {
             value={exerciseDuration}
             onValueChange={setExerciseDuration}
             minimumTrackTintColor={getExerciseColor()}
-            maximumTrackTintColor="rgba(0,0,0,0.1)"
-            thumbTintColor={getExerciseColor()}
+            maximumTrackTintColor="rgba(0,0,0,0.1)"thumbTintColor={getExerciseColor()}
           />
           <View style={styles.sliderLabels}>
             <Text style={styles.sliderMinLabel}>0h</Text>
@@ -427,26 +424,24 @@ const Step2Lifestyle = () => {
           </View>
           <Text style={styles.recommendationText}>
             {exerciseDuration === 0 
-              ? '⚠️ Try to add at least 30 mins of exercise' 
+              ? 'Try to add at least 30 mins of exercise' 
               : exerciseDuration < 0.5 
-              ? '⚠️ Aim for 30 mins minimum' 
+              ? 'Aim for 30 mins minimum' 
               : exerciseDuration >= 1 
-              ? '🌟 Great job! Active lifestyle' 
-              : '✅ Good start!'}
+              ? 'Great job! Active lifestyle' 
+              : 'Good start!'}
           </Text>
         </View>
 
         {/* Navigation Buttons */}
         <View style={styles.buttonContainer}>
           <Button
-            title="Back"
-            onPress={handleBack}
+            title="Back"onPress={handleBack}
             style={styles.backButton}
             outline
           />
           <Button
-            title="Next"
-            onPress={handleNext}
+            title="Next"onPress={handleNext}
             style={styles.nextButton}
             gradient
           />

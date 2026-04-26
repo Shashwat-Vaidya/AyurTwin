@@ -38,9 +38,7 @@ const Dropdown = ({
   renderSelectedItem,
   maxHeight = 300,
   minWidth = 200,
-  dropdownPosition = 'bottom', // 'bottom', 'top', 'auto'
-  animationType = 'fade', // 'fade', 'slide', 'none'
-  backgroundColor = 'white',
+  dropdownPosition = 'bottom', // 'bottom', 'top', 'auto'animationType = 'fade', // 'fade', 'slide', 'none'backgroundColor = 'white',
   textColor = colors.textPrimary,
   placeholderColor = colors.textTertiary,
   borderColor = 'rgba(0,0,0,0.05)',
@@ -207,8 +205,7 @@ const Dropdown = ({
         </Text>
         {isSelected && (
           <Ionicons
-            name="checkmark"
-            size={18}
+            name="checkmark"size={18}
             color={activeColor}
             style={styles.checkIcon}
           />
@@ -290,7 +287,7 @@ const Dropdown = ({
         <View style={styles.buttonActions}>
           {clearable && value && (multiple ? value.length > 0 : true) && (
             <TouchableOpacity onPress={handleClear} style={styles.clearButton}>
-              <Ionicons name="close-circle" size={18} color={colors.textTertiary} />
+              <Ionicons name="close-circle"size={18} color={colors.textTertiary} />
             </TouchableOpacity>
           )}
           <Ionicons
@@ -306,8 +303,7 @@ const Dropdown = ({
       <Modal
         visible={visible}
         transparent
-        animationType="none"
-        onRequestClose={closeDropdown}
+        animationType="none"onRequestClose={closeDropdown}
       >
         <TouchableOpacity
           style={styles.modalOverlay}
@@ -317,7 +313,7 @@ const Dropdown = ({
           <Animated.View style={dropdownStyles}>
             {searchable && (
               <View style={[styles.searchContainer, { borderColor }]}>
-                <Ionicons name="search" size={18} color={colors.textTertiary} />
+                <Ionicons name="search"size={18} color={colors.textTertiary} />
                 <TextInput
                   style={styles.searchInput}
                   placeholder={searchPlaceholder}
@@ -328,7 +324,7 @@ const Dropdown = ({
                 />
                 {searchText.length > 0 && (
                   <TouchableOpacity onPress={() => setSearchText('')}>
-                    <Ionicons name="close-circle" size={16} color={colors.textTertiary} />
+                    <Ionicons name="close-circle"size={16} color={colors.textTertiary} />
                   </TouchableOpacity>
                 )}
               </View>
@@ -362,16 +358,16 @@ export const MultiSelectDropdown = (props) => (
 
 export const CountryCodeDropdown = ({ value, onSelect, ...props }) => {
   const countryCodes = [
-    { value: '+1', label: '🇺🇸 +1 (USA)' },
-    { value: '+44', label: '🇬🇧 +44 (UK)' },
-    { value: '+91', label: '🇮🇳 +91 (India)' },
-    { value: '+61', label: '🇦🇺 +61 (Australia)' },
-    { value: '+81', label: '🇯🇵 +81 (Japan)' },
-    { value: '+86', label: '🇨🇳 +86 (China)' },
-    { value: '+49', label: '🇩🇪 +49 (Germany)' },
-    { value: '+33', label: '🇫🇷 +33 (France)' },
-    { value: '+39', label: '🇮🇹 +39 (Italy)' },
-    { value: '+34', label: '🇪🇸 +34 (Spain)' },
+    { value: '+1', label: ' +1 (USA)' },
+    { value: '+44', label: ' +44 (UK)' },
+    { value: '+91', label: ' +91 (India)' },
+    { value: '+61', label: ' +61 (Australia)' },
+    { value: '+81', label: ' +81 (Japan)' },
+    { value: '+86', label: ' +86 (China)' },
+    { value: '+49', label: ' +49 (Germany)' },
+    { value: '+33', label: ' +33 (France)' },
+    { value: '+39', label: ' +39 (Italy)' },
+    { value: '+34', label: ' +34 (Spain)' },
   ];
 
   return (
@@ -379,8 +375,7 @@ export const CountryCodeDropdown = ({ value, onSelect, ...props }) => {
       data={countryCodes}
       value={value}
       onSelect={onSelect}
-      placeholder="Select country code"
-      minWidth={150}
+      placeholder="Select country code"minWidth={150}
       {...props}
     />
   );

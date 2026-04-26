@@ -23,11 +23,11 @@ const DeviceScreen = ({ navigation }) => {
     lastSync: 'Just now',
     macAddress: 'AA:BB:CC:DD:EE:FF',
     sensors: [
-      { name: 'Heart Rate', status: 'Active', icon: '❤️' },
-      { name: 'SpO2', status: 'Active', icon: '🫁' },
-      { name: 'Temperature', status: 'Active', icon: '🌡️' },
-      { name: 'Accelerometer', status: 'Active', icon: '📐' },
-      { name: 'Stress Monitor', status: 'Active', icon: '😰' },
+      { name: 'Heart Rate', status: 'Active', icon: '' },
+      { name: 'SpO2', status: 'Active', icon: '' },
+      { name: 'Temperature', status: 'Active', icon: '' },
+      { name: 'Accelerometer', status: 'Active', icon: '' },
+      { name: 'Stress Monitor', status: 'Active', icon: '' },
     ],
   };
 
@@ -49,7 +49,7 @@ const DeviceScreen = ({ navigation }) => {
 
       <View style={styles.content}>
         {/* Device Status Card */}
-        <Card variant="elevated" style={styles.statusCard}>
+        <Card variant="elevated"style={styles.statusCard}>
           <View style={styles.deviceHeader}>
             <View style={styles.deviceIconBox}>
               <Text style={styles.deviceIcon}>⌚</Text>
@@ -69,7 +69,7 @@ const DeviceScreen = ({ navigation }) => {
         <Text style={styles.sectionTitle}>Battery Status</Text>
         <Card variant="elevated">
           <View style={styles.batteryRow}>
-            <Text style={styles.batteryIcon}>🔋</Text>
+            <Text style={styles.batteryIcon}></Text>
             <View style={styles.batteryBarTrack}>
               <View style={[styles.batteryBarFill, {
                 width: `${device.battery}%`,
@@ -84,11 +84,11 @@ const DeviceScreen = ({ navigation }) => {
         {/* Sync Info */}
         <Text style={styles.sectionTitle}>Sync Status</Text>
         <Card variant="elevated">
-          <InfoRow icon="🔄" label="Last Sync" value={device.lastSync} />
-          <InfoRow icon="📡" label="Firmware" value={device.firmware} />
-          <InfoRow icon="📱" label="Connection" value="Bluetooth 5.0" />
-          <InfoRow icon="🔗" label="MAC Address" value={device.macAddress} />
-          <GradientButton title="Sync Now" onPress={() => {}} gradient={COLORS.gradient.blue} style={styles.syncBtn} />
+          <InfoRow icon=""label="Last Sync"value={device.lastSync} />
+          <InfoRow icon=""label="Firmware"value={device.firmware} />
+          <InfoRow icon=""label="Connection"value="Bluetooth 5.0" />
+          <InfoRow icon=""label="MAC Address"value={device.macAddress} />
+          <GradientButton title="Sync Now"onPress={() => {}} gradient={COLORS.gradient.blue} style={styles.syncBtn} />
         </Card>
 
         {/* Sensors */}
@@ -108,15 +108,15 @@ const DeviceScreen = ({ navigation }) => {
         {/* Device Settings */}
         <Text style={styles.sectionTitle}>Device Settings</Text>
         <Card variant="elevated">
-          <SettingRow label="Auto Sync" value={autoSync} onChange={setAutoSync} />
-          <SettingRow label="Continuous Monitoring" value={continuousMonitoring} onChange={setContinuousMonitoring} />
-          <SettingRow label="Heart Rate Alerts" value={heartRateAlert} onChange={setHeartRateAlert} />
-          <SettingRow label="SpO2 Alerts" value={spo2Alert} onChange={setSpo2Alert} />
+          <SettingRow label="Auto Sync"value={autoSync} onChange={setAutoSync} />
+          <SettingRow label="Continuous Monitoring"value={continuousMonitoring} onChange={setContinuousMonitoring} />
+          <SettingRow label="Heart Rate Alerts"value={heartRateAlert} onChange={setHeartRateAlert} />
+          <SettingRow label="SpO2 Alerts"value={spo2Alert} onChange={setSpo2Alert} />
         </Card>
 
         {/* Note */}
-        <Card variant="outlined" style={styles.noteCard}>
-          <Text style={styles.noteIcon}>ℹ️</Text>
+        <Card variant="outlined"style={styles.noteCard}>
+          <Text style={styles.noteIcon}>ℹ</Text>
           <Text style={styles.noteText}>
             Device integration is currently simulated. In the next phase, real IoT health monitoring devices will be supported for continuous data collection.
           </Text>

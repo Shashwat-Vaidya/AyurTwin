@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
@@ -7,22 +8,23 @@ import {
   generateSimulatedVitals, generateDiseaseRisks, generateTimelineData,
   detectDoshaImbalance,
 } from '../../utils/healthCalculations';
+import { getLatestSensor } from '../../services/api';
 
 const { width } = Dimensions.get('window');
 
 const FILTERS = ['Day', 'Week', 'Month', 'Year'];
 
 const DISEASES = [
-  { key: 'diabetes', label: 'Diabetes', icon: '🩸' },
-  { key: 'hypertension', label: 'Hypertension', icon: '💓' },
-  { key: 'heart_disease', label: 'Heart Disease', icon: '❤️' },
-  { key: 'stress', label: 'Stress', icon: '😰' },
-  { key: 'sleep_disorder', label: 'Sleep Disorder', icon: '😴' },
-  { key: 'asthma', label: 'Asthma', icon: '🫁' },
-  { key: 'arthritis', label: 'Arthritis', icon: '🦴' },
-  { key: 'obesity', label: 'Obesity', icon: '⚖️' },
-  { key: 'digestive_disorder', label: 'Digestive Disorder', icon: '🤢' },
-  { key: 'fever', label: 'Fever', icon: '🌡️' },
+  { key: 'diabetes', label: 'Diabetes', ion: 'water-outline' },
+  { key: 'hypertension', label: 'Hypertension', ion: 'pulse-outline' },
+  { key: 'heart_disease', label: 'Heart Disease', ion: 'heart-outline' },
+  { key: 'stress', label: 'Stress', ion: 'flash-outline' },
+  { key: 'sleep_disorder', label: 'Sleep Disorder', ion: 'moon-outline' },
+  { key: 'asthma', label: 'Asthma', ion: 'cloud-outline' },
+  { key: 'arthritis', label: 'Arthritis', ion: 'body-outline' },
+  { key: 'obesity', label: 'Obesity', ion: 'scale-outline' },
+  { key: 'digestive_disorder', label: 'Digestive Disorder', ion: 'restaurant-outline' },
+  { key: 'fever', label: 'Fever', ion: 'thermometer-outline' },
 ];
 
 const MetricsScreen = () => {
@@ -33,9 +35,32 @@ const MetricsScreen = () => {
   const [doshaBalance, setDoshaBalance] = useState({});
   const [timelineData, setTimelineData] = useState([]);
 
+  const refreshSensor = async () => {
+    if (!state.user?.id) return;
+    try {
+      const r = await getLatestSensor(state.user.id);
+      if (r.success && r.data?.sensor) {
+        const s = r.data.sensor;
+        setVitals(prev => ({
+          ...prev,
+          heartRate: s.heart_rate ?? prev.heartRate,
+          spo2: s.spo2 ?? prev.spo2,
+          temperature: s.body_temperature ?? prev.temperature,
+        }));
+      } else if (!r.success) {
+        console.warn('[MetricsScreen] Failed to fetch sensor:', r.error);
+      }
+    } catch (error) {
+      console.error('[MetricsScreen] Sensor fetch error:', error);
+    }
+  };
+
   useEffect(() => {
     loadData();
-  }, [activeFilter]);
+    // Live sensor refresh every 5s
+    const tick = setInterval(refreshSensor, 5000);
+    return () => clearInterval(tick);
+  }, [activeFilter, state.user?.id]);
 
   const loadData = () => {
     const profile = { ...state.user, ...(state.registrationData || {}) };
@@ -45,6 +70,7 @@ const MetricsScreen = () => {
 
     const hours = activeFilter === 'Day' ? 24 : activeFilter === 'Week' ? 168 : 720;
     setTimelineData(generateTimelineData(Math.min(hours, 24)));
+    refreshSensor();
   };
 
   const getRiskColor = (v) => v > 70 ? COLORS.error : v > 50 ? COLORS.warning : v > 30 ? COLORS.accent : COLORS.success;
@@ -71,12 +97,12 @@ const MetricsScreen = () => {
       <View style={styles.content}>
         {/* Metrics Grid */}
         <View style={styles.metricsGrid}>
-          <MetricBox icon="❤️" label="Heart Rate" value={vitals.heartRate || 72} unit="bpm" color={COLORS.heart} />
-          <MetricBox icon="🫁" label="SpO2" value={vitals.spo2 || 98} unit="%" color={COLORS.spo2} />
-          <MetricBox icon="🌡️" label="Temp" value={vitals.temperature || 36.6} unit="°C" color={COLORS.temp} />
-          <MetricBox icon="😰" label="Stress" value={vitals.stressIndex || 45} unit="idx" color={COLORS.stress} />
-          <MetricBox icon="😴" label="Sleep" value={state.registrationData?.sleep_duration_hours || 7} unit="hrs" color={COLORS.info} />
-          <MetricBox icon="🏃" label="Activity" value={state.registrationData?.exercise_minutes || 30} unit="min" color={COLORS.success} />
+          <MetricBox ion="heart-outline" label="Heart Rate" value={vitals.heartRate || 72} unit="bpm" color={COLORS.heart} />
+          <MetricBox ion="cloud-outline" label="SpO2" value={vitals.spo2 || 98} unit="%" color={COLORS.spo2} />
+          <MetricBox ion="thermometer-outline" label="Temp" value={vitals.temperature || 36.6} unit="°C" color={COLORS.temp} />
+          <MetricBox ion="flash-outline" label="Stress" value={vitals.stressIndex || 45} unit="idx" color={COLORS.stress} />
+          <MetricBox ion="moon-outline" label="Sleep" value={state.registrationData?.sleep_duration_hours || 7} unit="hrs" color={COLORS.info} />
+          <MetricBox ion="walk-outline" label="Activity" value={state.registrationData?.exercise_minutes || 30} unit="min" color={COLORS.success} />
         </View>
 
         {/* Heart Rate Chart (Simplified) */}
@@ -154,7 +180,7 @@ const MetricsScreen = () => {
           const value = risks[disease.key] || 0;
           return (
             <View key={disease.key} style={styles.diseaseRow}>
-              <Text style={styles.diseaseIcon}>{disease.icon}</Text>
+              <Ionicons name={disease.ion} size={18} color={getRiskColor(value)} style={styles.diseaseIcon} />
               <Text style={styles.diseaseLabel}>{disease.label}</Text>
               <View style={styles.diseaseBarTrack}>
                 <View style={[styles.diseaseBarFill, { width: `${value}%`, backgroundColor: getRiskColor(value) }]} />
@@ -172,9 +198,9 @@ const MetricsScreen = () => {
   );
 };
 
-const MetricBox = ({ icon, label, value, unit, color }) => (
+const MetricBox = ({ ion, label, value, unit, color }) => (
   <View style={[styles.metricBox, { borderTopColor: color }]}>
-    <Text style={styles.metricIcon}>{icon}</Text>
+    <Ionicons name={ion} size={22} color={color} style={styles.metricIcon} />
     <Text style={[styles.metricValue, { color }]}>{value}</Text>
     <Text style={styles.metricUnit}>{unit}</Text>
     <Text style={styles.metricLabel}>{label}</Text>
@@ -209,7 +235,7 @@ const styles = StyleSheet.create({
     width: (width - 60) / 3, padding: 12, backgroundColor: COLORS.surface,
     borderRadius: SIZES.borderRadius, alignItems: 'center', borderTopWidth: 3, ...SHADOWS.small,
   },
-  metricIcon: { fontSize: 20, marginBottom: 4 },
+  metricIcon: { marginBottom: 4 },
   metricValue: { fontSize: 20, fontWeight: '800' },
   metricUnit: { fontSize: 10, color: COLORS.textLight },
   metricLabel: { fontSize: 10, color: COLORS.textSecondary, marginTop: 2 },

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES } from '../../config/theme';
 import InputField from '../../components/common/InputField';
 import GradientButton from '../../components/common/GradientButton';
@@ -43,7 +44,7 @@ const SignInScreen = ({ navigation }) => {
       <ScrollView contentContainerStyle={styles.scroll} showsVerticalScrollIndicator={false}>
         <View style={styles.header}>
           <LinearGradient colors={COLORS.gradient.saffron} style={styles.logoCircle}>
-            <Text style={styles.logoIcon}>🌿</Text>
+            <Ionicons name="leaf" size={32} color="#FFFFFF" />
           </LinearGradient>
           <Text style={styles.title}>Welcome Back</Text>
           <Text style={styles.subtitle}>Sign in to your AyurTwin account</Text>
@@ -56,7 +57,7 @@ const SignInScreen = ({ navigation }) => {
             onChangeText={setEmail}
             placeholder="Enter email or username"
             keyboardType="email-address"
-            icon="📧"
+            icon="mail-outline"
             error={errors.email}
           />
           <InputField
@@ -65,7 +66,7 @@ const SignInScreen = ({ navigation }) => {
             onChangeText={setPassword}
             placeholder="Enter your password"
             secureTextEntry
-            icon="🔒"
+            icon="lock-closed-outline"
             error={errors.password}
           />
 
@@ -74,11 +75,6 @@ const SignInScreen = ({ navigation }) => {
           </TouchableOpacity>
 
           <GradientButton title="Sign In" onPress={handleSignIn} loading={loading} style={styles.signInBtn} />
-
-          <TouchableOpacity style={styles.biometricBtn}>
-            <Text style={styles.biometricIcon}>🔑</Text>
-            <Text style={styles.biometricText}>Sign in with Biometrics</Text>
-          </TouchableOpacity>
         </View>
 
         <TouchableOpacity onPress={() => navigation.navigate('Landing')} style={styles.registerBtn}>
@@ -142,24 +138,6 @@ const styles = StyleSheet.create({
   signInBtn: {
     width: '100%',
     marginBottom: 16,
-  },
-  biometricBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 14,
-    borderRadius: SIZES.borderRadius,
-    borderWidth: 1.5,
-    borderColor: COLORS.border,
-    gap: 8,
-  },
-  biometricIcon: {
-    fontSize: 20,
-  },
-  biometricText: {
-    fontSize: 14,
-    fontWeight: '600',
-    color: COLORS.textSecondary,
   },
   registerBtn: {
     alignItems: 'center',

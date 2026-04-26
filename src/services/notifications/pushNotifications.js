@@ -265,7 +265,7 @@ class PushNotificationService {
   // Achievement unlocked
   async sendAchievementUnlocked(userId, achievement) {
     return this.sendNotification(userId, {
-      title: 'Achievement Unlocked! 🏆',
+      title: 'Achievement Unlocked! ',
       body: `You've earned: ${achievement.name}`,
       data: {
         type: 'achievement',
@@ -312,7 +312,7 @@ class PushNotificationService {
   async sendTestNotification() {
     await Notifications.scheduleNotificationAsync({
       content: {
-        title: 'Test Notification 📱',
+        title: 'Test Notification ',
         body: 'This is a test notification from AyurTwin',
         data: { type: 'test' },
       },

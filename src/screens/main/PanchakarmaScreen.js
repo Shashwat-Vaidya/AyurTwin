@@ -2,144 +2,124 @@ import React, { useEffect, useState } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, ActivityIndicator, TouchableOpacity,
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, FONTS, SIZES, SHADOWS } from '../../config/theme';
-import { useApp } from '../../context/AppContext';
-import { getPanchakarmaAssessment } from '../../services/api';
+import { getPanchakarma } from '../../services/api';
+
+const THERAPY_ICONS = {
+  Vamana: 'arrow-up-outline',
+  Virechana: 'arrow-down-outline',
+  Basti: 'water-outline',
+  Nasya: 'cloud-outline',
+  Raktamokshana: 'medkit-outline',
+};
 
 const PanchakarmaScreen = ({ navigation }) => {
-  const { state } = useApp();
-  const userId = state.user?.id;
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     (async () => {
-      if (!userId) return;
-      const res = await getPanchakarmaAssessment(userId);
+      const res = await getPanchakarma();
       if (res.success) setData(res.data);
       setLoading(false);
     })();
-  }, [userId]);
+  }, []);
 
   if (loading) {
     return <View style={styles.center}><ActivityIndicator size="large" color={COLORS.primary} /></View>;
   }
 
-  const a = data?.assessment;
-  const scoreColor = a?.readiness_score >= 70 ? COLORS.success : a?.readiness_score >= 40 ? COLORS.warning : COLORS.error;
+  if (!data) {
+    return (
+      <View style={styles.center}>
+        <Ionicons name="alert-circle-outline" size={48} color={COLORS.textLight} />
+        <Text style={styles.errorText}>Could not load Panchakarma information.</Text>
+      </View>
+    );
+  }
 
   return (
     <ScrollView style={styles.container}>
       <View style={styles.header}>
-        <TouchableOpacity onPress={() => navigation?.goBack?.()}><Text style={styles.back}>←</Text></TouchableOpacity>
-        <Text style={styles.title}>🌿 Panchakarma</Text>
+        <TouchableOpacity onPress={() => navigation?.goBack?.()}>
+          <Ionicons name="arrow-back" size={24} color={COLORS.text} />
+        </TouchableOpacity>
+        <Text style={styles.title}>Panchakarma</Text>
         <View style={{ width: 24 }} />
       </View>
 
-      {a && (
-        <>
-          <View style={[styles.scoreCard, { borderColor: scoreColor }]}>
-            <Text style={styles.scoreLabel}>Readiness Score</Text>
-            <Text style={[styles.scoreValue, { color: scoreColor }]}>{a.readiness_score}/100</Text>
-            <Text style={styles.scoreStatus}>{a.status}</Text>
+      <View style={styles.heroCard}>
+        <Ionicons name="leaf" size={36} color={COLORS.primary} />
+        <Text style={styles.heroTitle}>{data.title}</Text>
+        <Text style={styles.heroOverview}>{data.overview}</Text>
+      </View>
+
+      <Text style={styles.sectionTitle}>The Five Therapies</Text>
+      {(data.procedures || []).map((proc, i) => (
+        <View key={`proc-${i}`} style={styles.therapyCard}>
+          <View style={styles.therapyHeader}>
+            <Ionicons name={THERAPY_ICONS[proc.name] || 'medkit-outline'} size={24} color={COLORS.primary} />
+            <View style={{ flex: 1, marginLeft: 12 }}>
+              <Text style={styles.therapyName}>{proc.name}</Text>
+              <Text style={styles.therapyMeaning}>{proc.meaning}</Text>
+            </View>
           </View>
+          <Text style={styles.therapyIndication}>Indication: {proc.indication}</Text>
+        </View>
+      ))}
 
-          <View style={styles.card}>
-            <Text style={styles.sectionTitle}>📊 Current State</Text>
-            <Row label="Ama (Toxins)" value={a.ama_level} />
-            <Row label="Ojas (Vitality)" value={a.ojas_level} />
-            <Row label="Agni (Digestion)" value={a.agni_type} />
-            <Row label="Dominant Dosha" value={a.dominant_dosha} />
+      <Text style={styles.sectionTitle}>Treatment Phases</Text>
+      {(data.phases || []).map((ph, i) => (
+        <View key={`ph-${i}`} style={styles.phaseRow}>
+          <Text style={styles.phaseNum}>{i + 1}</Text>
+          <View style={{ flex: 1 }}>
+            <Text style={styles.phaseName}>{ph.phase}</Text>
+            <Text style={styles.phaseDesc}>{ph.desc}</Text>
           </View>
+        </View>
+      ))}
 
-          {a.recommended_therapies?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>💊 Recommended Therapies</Text>
-              {a.recommended_therapies.map((t, i) => (
-                <View key={i} style={styles.therapyCard}>
-                  <Text style={styles.therapyName}>{t.name}</Text>
-                  {t.sanskrit && <Text style={styles.therapySanskrit}>{t.sanskrit}</Text>}
-                  <Text style={styles.therapyDesc}>{t.description}</Text>
-                  {t.duration && <Text style={styles.therapyMeta}>Duration: {t.duration}</Text>}
-                  {t.target && <Text style={styles.therapyMeta}>Target: {t.target}</Text>}
-                </View>
-              ))}
-            </View>
-          )}
+      {data.duration && (
+        <View style={styles.metaCard}>
+          <Ionicons name="time-outline" size={20} color={COLORS.primary} />
+          <Text style={styles.metaText}>Typical Duration: {data.duration}</Text>
+        </View>
+      )}
 
-          {a.preparatory_steps?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>🪴 Preparatory Steps (Purvakarma)</Text>
-              {a.preparatory_steps.map((s, i) => (
-                <View key={i} style={styles.stepRow}>
-                  <Text style={styles.stepNum}>{i + 1}</Text>
-                  <View style={{ flex: 1 }}>
-                    <Text style={styles.stepName}>{s.name}</Text>
-                    <Text style={styles.stepDesc}>{s.description}</Text>
-                    {s.duration && <Text style={styles.stepMeta}>⏱️ {s.duration}</Text>}
-                  </View>
-                </View>
-              ))}
-            </View>
-          )}
-
-          {a.post_protocol?.length > 0 && (
-            <View style={styles.card}>
-              <Text style={styles.sectionTitle}>🍵 Post-Panchakarma (Samsarjana Krama)</Text>
-              {a.post_protocol.map((p, i) => (
-                <Text key={i} style={styles.bullet}>• {p}</Text>
-              ))}
-            </View>
-          )}
-
-          {a.cautions?.length > 0 && (
-            <View style={[styles.card, { borderLeftWidth: 4, borderLeftColor: COLORS.error }]}>
-              <Text style={styles.sectionTitle}>⚠️ Cautions</Text>
-              {a.cautions.map((c, i) => (
-                <Text key={i} style={styles.caution}>• {c}</Text>
-              ))}
-            </View>
-          )}
-        </>
+      {data.caveat && (
+        <View style={styles.cautionCard}>
+          <Ionicons name="warning-outline" size={20} color={COLORS.error} />
+          <Text style={styles.cautionText}>{data.caveat}</Text>
+        </View>
       )}
     </ScrollView>
   );
 };
 
-const Row = ({ label, value }) => (
-  <View style={styles.row}>
-    <Text style={styles.rowLabel}>{label}</Text>
-    <Text style={styles.rowValue}>{value}</Text>
-  </View>
-);
-
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: COLORS.background },
-  center: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  center: { flex: 1, alignItems: 'center', justifyContent: 'center', padding: 32 },
+  errorText: { ...FONTS.caption, marginTop: 12, textAlign: 'center' },
   header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: SIZES.screenPadding, paddingTop: 50 },
-  back: { fontSize: 28 },
   title: { ...FONTS.title, fontSize: 20 },
-  scoreCard: { backgroundColor: COLORS.surface, margin: SIZES.md, padding: SIZES.lg, borderRadius: SIZES.borderRadiusLg, alignItems: 'center', borderWidth: 2, ...SHADOWS.small },
-  scoreLabel: { ...FONTS.caption },
-  scoreValue: { fontSize: 36, fontWeight: '800', marginTop: 4 },
-  scoreStatus: { ...FONTS.bold, marginTop: 4 },
-  card: { backgroundColor: COLORS.surface, margin: SIZES.md, padding: SIZES.md, borderRadius: SIZES.borderRadius, ...SHADOWS.small },
-  sectionTitle: { ...FONTS.bold, fontSize: 15, marginBottom: SIZES.sm },
-  row: { flexDirection: 'row', justifyContent: 'space-between', paddingVertical: 6, borderBottomWidth: 1, borderBottomColor: COLORS.border },
-  rowLabel: { ...FONTS.caption },
-  rowValue: { ...FONTS.bold, fontSize: 13 },
-  therapyCard: { backgroundColor: COLORS.background, padding: SIZES.sm, borderRadius: 8, marginBottom: 8 },
-  therapyName: { ...FONTS.bold, color: COLORS.primary },
-  therapySanskrit: { fontSize: 11, fontStyle: 'italic', color: COLORS.textSecondary },
-  therapyDesc: { ...FONTS.caption, marginTop: 4 },
-  therapyMeta: { fontSize: 11, color: COLORS.textLight, marginTop: 2 },
-  stepRow: { flexDirection: 'row', marginBottom: SIZES.sm },
-  stepNum: { width: 24, height: 24, borderRadius: 12, backgroundColor: COLORS.secondary, color: '#fff', textAlign: 'center', lineHeight: 24, fontWeight: '700', marginRight: SIZES.sm },
-  stepName: { ...FONTS.bold, fontSize: 13 },
-  stepDesc: { ...FONTS.caption, marginTop: 2 },
-  stepMeta: { fontSize: 11, color: COLORS.textLight, marginTop: 2 },
-  bullet: { ...FONTS.caption, marginTop: 4 },
-  caution: { ...FONTS.caption, color: COLORS.error, marginTop: 4 },
+  heroCard: { backgroundColor: COLORS.surface, margin: SIZES.md, padding: SIZES.lg, borderRadius: SIZES.borderRadiusLg, alignItems: 'center', ...SHADOWS.small },
+  heroTitle: { ...FONTS.bold, fontSize: 16, marginTop: 12, textAlign: 'center' },
+  heroOverview: { ...FONTS.caption, marginTop: 8, lineHeight: 20, textAlign: 'center' },
+  sectionTitle: { ...FONTS.bold, fontSize: 16, marginHorizontal: SIZES.md, marginTop: SIZES.md, marginBottom: SIZES.sm },
+  therapyCard: { backgroundColor: COLORS.surface, marginHorizontal: SIZES.md, marginBottom: 8, padding: SIZES.md, borderRadius: SIZES.borderRadius, ...SHADOWS.small },
+  therapyHeader: { flexDirection: 'row', alignItems: 'center' },
+  therapyName: { ...FONTS.bold, fontSize: 15 },
+  therapyMeaning: { fontSize: 12, color: COLORS.textSecondary, marginTop: 2, fontStyle: 'italic' },
+  therapyIndication: { ...FONTS.caption, marginTop: 8, lineHeight: 18 },
+  phaseRow: { flexDirection: 'row', backgroundColor: COLORS.surface, marginHorizontal: SIZES.md, marginBottom: 8, padding: SIZES.md, borderRadius: SIZES.borderRadius, ...SHADOWS.small },
+  phaseNum: { width: 28, height: 28, borderRadius: 14, backgroundColor: COLORS.primary, color: '#fff', textAlign: 'center', lineHeight: 28, fontWeight: '800', marginRight: 12 },
+  phaseName: { ...FONTS.bold, fontSize: 14 },
+  phaseDesc: { ...FONTS.caption, marginTop: 4, lineHeight: 18 },
+  metaCard: { flexDirection: 'row', alignItems: 'center', backgroundColor: COLORS.surface, margin: SIZES.md, padding: SIZES.md, borderRadius: SIZES.borderRadius, gap: 10 },
+  metaText: { ...FONTS.bold, fontSize: 13 },
+  cautionCard: { flexDirection: 'row', alignItems: 'flex-start', backgroundColor: '#FFF5F5', marginHorizontal: SIZES.md, marginBottom: SIZES.lg, padding: SIZES.md, borderRadius: SIZES.borderRadius, borderLeftWidth: 4, borderLeftColor: COLORS.error, gap: 10 },
+  cautionText: { ...FONTS.caption, flex: 1, color: COLORS.error, lineHeight: 18 },
 });
 
 export default PanchakarmaScreen;

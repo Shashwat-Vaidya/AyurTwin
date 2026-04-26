@@ -245,7 +245,7 @@ const DailyChecklist = () => {
         await AsyncStorage.setItem('checklist_streak', newStreak.toString());
         
         Alert.alert(
-          '🎉 Amazing!',
+          'Amazing!',
           `You've completed your entire daily routine! Streak: ${newStreak} days`,
           [{ text: 'Great!' }]
         );
@@ -290,7 +290,7 @@ const DailyChecklist = () => {
     
     try {
       await Share.share({
-        message: `I've completed ${completed}/${total} (${percentage}%) of my Ayurvedic daily routine today! 🌿\n\nTrack your own wellness with AyurTwin app.`,
+        message: `I've completed ${completed}/${total} (${percentage}%) of my Ayurvedic daily routine today! \n\nTrack your own wellness with AyurTwin app.`,
         title: 'My Daily Routine Progress',
       });
     } catch (error) {
@@ -336,11 +336,11 @@ const DailyChecklist = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Daily Routine</Text>
           <TouchableOpacity onPress={shareProgress} style={styles.shareButton}>
-            <Ionicons name="share-social" size={22} color={colors.primarySaffron} />
+            <Ionicons name="share-social"size={22} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -352,7 +352,7 @@ const DailyChecklist = () => {
           style={styles.streakCard}
         >
           <View style={styles.streakLeft}>
-            <Ionicons name="flame" size={30} color="white" />
+            <Ionicons name="flame"size={30} color="white" />
             <View>
               <Text style={styles.streakLabel}>Current Streak</Text>
               <Text style={styles.streakValue}>{streak} days</Text>
@@ -366,11 +366,11 @@ const DailyChecklist = () => {
         {/* Date Navigator */}
         <View style={styles.dateNavigator}>
           <TouchableOpacity onPress={() => changeDate(-1)} style={styles.dateArrow}>
-            <Ionicons name="chevron-back" size={22} color={colors.textSecondary} />
+            <Ionicons name="chevron-back"size={22} color={colors.textSecondary} />
           </TouchableOpacity>
           
           <View style={styles.dateContainer}>
-            <Ionicons name="calendar" size={18} color={colors.primarySaffron} />
+            <Ionicons name="calendar"size={18} color={colors.primarySaffron} />
             <Text style={styles.dateText}>{formatDate(selectedDate)}</Text>
           </View>
           
@@ -380,8 +380,7 @@ const DailyChecklist = () => {
             disabled={selectedDate > new Date()}
           >
             <Ionicons 
-              name="chevron-forward" 
-              size={22} 
+              name="chevron-forward"size={22} 
               color={selectedDate > new Date() ? colors.disabled : colors.textSecondary} 
             />
           </TouchableOpacity>
@@ -408,7 +407,7 @@ const DailyChecklist = () => {
           </Text>
 
           <TouchableOpacity onPress={resetChecklist} style={styles.resetButton}>
-            <Ionicons name="refresh" size={16} color={colors.textTertiary} />
+            <Ionicons name="refresh"size={16} color={colors.textTertiary} />
             <Text style={styles.resetText}>Reset</Text>
           </TouchableOpacity>
         </Card>
@@ -440,7 +439,7 @@ const DailyChecklist = () => {
                   onPress={() => toggleItem(item.id)}
                 >
                   <View style={[styles.checkbox, checklists[item.id] && styles.checkboxChecked]}>
-                    {checklists[item.id] && <Ionicons name="checkmark" size={16} color="white" />}
+                    {checklists[item.id] && <Ionicons name="checkmark"size={16} color="white" />}
                   </View>
                   
                   <View style={styles.itemContent}>
@@ -456,7 +455,7 @@ const DailyChecklist = () => {
                     
                     <View style={styles.itemDetails}>
                       <View style={styles.itemBenefit}>
-                        <Ionicons name="leaf" size={12} color={colors.primaryGreen} />
+                        <Ionicons name="leaf"size={12} color={colors.primaryGreen} />
                         <Text style={styles.itemBenefitText}>{item.benefit}</Text>
                       </View>
                       <Text style={styles.itemAyurvedic}>{item.ayurvedic}</Text>
@@ -470,7 +469,7 @@ const DailyChecklist = () => {
 
         {/* Wisdom Card */}
         <Card style={styles.wisdomCard}>
-          <Ionicons name="leaf" size={30} color={colors.primaryGreen} />
+          <Ionicons name="leaf"size={30} color={colors.primaryGreen} />
           <Text style={styles.wisdomTitle}>Ayurvedic Wisdom</Text>
           <Text style={styles.wisdomText}>
             "Dinacharya (daily routine) is the foundation of health. 
@@ -481,15 +480,13 @@ const DailyChecklist = () => {
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
           <Button
-            title="Set Reminders"
-            onPress={() => {}}
+            title="Set Reminders"onPress={() => {}}
             style={styles.reminderButton}
             outline
             icon="notifications"
           />
           <Button
-            title="View History"
-            onPress={() => {}}
+            title="View History"onPress={() => {}}
             style={styles.historyButton}
             outline
             icon="time"

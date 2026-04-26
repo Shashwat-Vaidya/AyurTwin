@@ -329,7 +329,7 @@ const WaterTrackerScreen = () => {
 
         {/* Hydration Tips */}
         <Card style={styles.tipsCard}>
-          <Text style={styles.tipsTitle}>💧 Hydration Tips</Text>
+          <Text style={styles.tipsTitle}>Hydration Tips</Text>
           
           <View style={styles.tipItem}>
             <Ionicons name="checkmark-circle" size={18} color={colors.successGreen} />

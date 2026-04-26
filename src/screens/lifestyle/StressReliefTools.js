@@ -188,7 +188,7 @@ const StressReliefTools = () => {
           colors={[colors.stressPurple, colors.sleepIndigo]}
           style={styles.meditationCircle}
         >
-          <Ionicons name="body" size={50} color="white" />
+          <Ionicons name="body"size={50} color="white" />
         </LinearGradient>
 
         <View style={styles.meditationTimer}>
@@ -204,28 +204,26 @@ const StressReliefTools = () => {
           value={meditationTime}
           onValueChange={setMeditationTime}
           minimumTrackTintColor={colors.stressPurple}
-          maximumTrackTintColor="rgba(0,0,0,0.1)"
-          thumbTintColor={colors.stressPurple}
+          maximumTrackTintColor="rgba(0,0,0,0.1)"thumbTintColor={colors.stressPurple}
         />
 
         <View style={styles.meditationOptions}>
           <TouchableOpacity style={styles.meditationOption}>
-            <Ionicons name="volume-high" size={20} color={colors.stressPurple} />
+            <Ionicons name="volume-high"size={20} color={colors.stressPurple} />
             <Text style={styles.meditationOptionText}>Guided</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.meditationOption}>
-            <Ionicons name="musical-notes" size={20} color={colors.stressPurple} />
+            <Ionicons name="musical-notes"size={20} color={colors.stressPurple} />
             <Text style={styles.meditationOptionText}>Music</Text>
           </TouchableOpacity>
           <TouchableOpacity style={styles.meditationOption}>
-            <Ionicons name="timer" size={20} color={colors.stressPurple} />
+            <Ionicons name="timer"size={20} color={colors.stressPurple} />
             <Text style={styles.meditationOptionText}>Timer</Text>
           </TouchableOpacity>
         </View>
 
         <Button
-          title="Start Meditation"
-          onPress={() => {}}
+          title="Start Meditation"onPress={() => {}}
           style={styles.meditationStartButton}
           gradient
           icon="play"
@@ -254,7 +252,7 @@ const StressReliefTools = () => {
             <Text style={styles.soundName}>{sound.name}</Text>
             {selectedSound === sound.id && (
               <View style={[styles.soundPlaying, { backgroundColor: sound.color }]}>
-                <Ionicons name="volume-high" size={16} color="white" />
+                <Ionicons name="volume-high"size={16} color="white" />
               </View>
             )}
           </TouchableOpacity>
@@ -279,7 +277,7 @@ const StressReliefTools = () => {
         </TouchableOpacity>
 
         <View style={styles.volumeControl}>
-          <Ionicons name="volume-low" size={20} color={colors.textSecondary} />
+          <Ionicons name="volume-low"size={20} color={colors.textSecondary} />
           <Slider
             style={styles.volumeSlider}
             minimumValue={0}
@@ -288,12 +286,12 @@ const StressReliefTools = () => {
             minimumTrackTintColor={colors.primarySaffron}
             maximumTrackTintColor="rgba(0,0,0,0.1)"
           />
-          <Ionicons name="volume-high" size={20} color={colors.textSecondary} />
+          <Ionicons name="volume-high"size={20} color={colors.textSecondary} />
         </View>
       </View>
 
       <Card style={styles.timerCard}>
-        <Ionicons name="timer" size={20} color={colors.primarySaffron} />
+        <Ionicons name="timer"size={20} color={colors.primarySaffron} />
         <Text style={styles.timerText}>Sleep timer: Off</Text>
         <TouchableOpacity>
           <Text style={styles.timerSetText}>Set</Text>
@@ -309,7 +307,7 @@ const StressReliefTools = () => {
       {yogaPoses.map((pose) => (
         <Card key={pose.id} style={styles.yogaCard}>
           <View style={styles.yogaHeader}>
-            <Ionicons name="body" size={24} color={colors.primarySaffron} />
+            <Ionicons name="body"size={24} color={colors.primarySaffron} />
             <View style={styles.yogaInfo}>
               <Text style={styles.yogaName}>{pose.name}</Text>
               <Text style={styles.yogaTime}>{pose.time}</Text>
@@ -323,8 +321,7 @@ const StressReliefTools = () => {
       ))}
 
       <Button
-        title="View All Yoga Poses"
-        onPress={() => {}}
+        title="View All Yoga Poses"onPress={() => {}}
         style={styles.viewAllButton}
         outline
       />
@@ -342,7 +339,7 @@ const StressReliefTools = () => {
 
       <TouchableOpacity style={styles.journalEntry}>
         <View style={styles.entryLeft}>
-          <Ionicons name="sunny" size={20} color={colors.warningYellow} />
+          <Ionicons name="sunny"size={20} color={colors.warningYellow} />
           <Text style={styles.entryText}>Morning reflection...</Text>
         </View>
         <Text style={styles.entryTime}>8:30 AM</Text>
@@ -350,21 +347,21 @@ const StressReliefTools = () => {
 
       <TouchableOpacity style={styles.journalEntry}>
         <View style={styles.entryLeft}>
-          <Ionicons name="cafe" size={20} color={colors.tempOrange} />
+          <Ionicons name="cafe"size={20} color={colors.tempOrange} />
           <Text style={styles.entryText}>Afternoon thoughts...</Text>
         </View>
         <Text style={styles.entryTime}>2:15 PM</Text>
       </TouchableOpacity>
 
       <TouchableOpacity style={styles.addEntryButton}>
-        <Ionicons name="add-circle" size={24} color={colors.primarySaffron} />
+        <Ionicons name="add-circle"size={24} color={colors.primarySaffron} />
         <Text style={styles.addEntryText}>Write in journal</Text>
       </TouchableOpacity>
 
       <View style={styles.moodTracker}>
         <Text style={styles.moodTitle}>How are you feeling?</Text>
         <View style={styles.moodOptions}>
-          {['😊', '😐', '😔', '😤', '😴'].map((mood, index) => (
+          {['', '', '', '', ''].map((mood, index) => (
             <TouchableOpacity key={index} style={styles.moodButton}>
               <Text style={styles.moodEmoji}>{mood}</Text>
             </TouchableOpacity>
@@ -384,11 +381,11 @@ const StressReliefTools = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Stress Relief Tools</Text>
           <TouchableOpacity style={styles.historyButton}>
-            <Ionicons name="time" size={24} color={colors.primarySaffron} />
+            <Ionicons name="time"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -434,7 +431,7 @@ const StressReliefTools = () => {
 
         {/* Daily Affirmation */}
         <Card style={styles.affirmationCard}>
-          <Ionicons name="heart" size={24} color={colors.heartRate} />
+          <Ionicons name="heart"size={24} color={colors.heartRate} />
           <Text style={styles.affirmationText}>
             "You are stronger than you think. Take a deep breath and keep going."
           </Text>

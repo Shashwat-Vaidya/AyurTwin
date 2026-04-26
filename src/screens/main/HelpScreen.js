@@ -46,10 +46,10 @@ const HelpScreen = ({ navigation }) => {
         {/* Quick Help */}
         <Text style={styles.sectionTitle}>Quick Help</Text>
         <View style={styles.helpGrid}>
-          <HelpCard icon="💬" title="Chat with AyurBot" desc="Ask health questions" />
-          <HelpCard icon="📧" title="Email Support" desc="support@ayurtwin.com" />
-          <HelpCard icon="📖" title="User Guide" desc="How to use the app" />
-          <HelpCard icon="🐛" title="Report Bug" desc="Help us improve" />
+          <HelpCard icon=""title="Chat with AyurBot"desc="Ask health questions" />
+          <HelpCard icon=""title="Email Support"desc="support@ayurtwin.com" />
+          <HelpCard icon=""title="User Guide"desc="How to use the app" />
+          <HelpCard icon=""title="Report Bug"desc="Help us improve" />
         </View>
 
         {/* FAQs */}
@@ -76,7 +76,7 @@ const HelpScreen = ({ navigation }) => {
             {['bug', 'feature', 'general'].map((t) => (
               <TouchableOpacity key={t} style={[styles.feedbackTypeBtn, feedbackType === t && styles.feedbackTypeBtnActive]} onPress={() => setFeedbackType(t)}>
                 <Text style={[styles.feedbackTypeText, feedbackType === t && styles.feedbackTypeTextActive]}>
-                  {t === 'bug' ? '🐛 Bug' : t === 'feature' ? '💡 Feature' : '💬 General'}
+                  {t === 'bug' ? 'Bug' : t === 'feature' ? 'Feature' : 'General'}
                 </Text>
               </TouchableOpacity>
             ))}
@@ -87,20 +87,19 @@ const HelpScreen = ({ navigation }) => {
             style={styles.feedbackInput}
             value={feedbackText}
             onChangeText={setFeedbackText}
-            placeholder="Describe your feedback..."
-            multiline
+            placeholder="Describe your feedback..."multiline
             numberOfLines={4}
             textAlignVertical="top"
           />
-          <GradientButton title="Submit Feedback" onPress={handleSubmitFeedback} />
+          <GradientButton title="Submit Feedback"onPress={handleSubmitFeedback} />
         </Card>
 
         {/* Contact Info */}
         <Text style={styles.sectionTitle}>Contact Us</Text>
         <Card variant="elevated">
-          <ContactRow icon="📧" label="Email" value="support@ayurtwin.com" />
-          <ContactRow icon="🌐" label="Website" value="www.ayurtwin.com" />
-          <ContactRow icon="📍" label="Location" value="India" />
+          <ContactRow icon=""label="Email"value="support@ayurtwin.com" />
+          <ContactRow icon=""label="Website"value="www.ayurtwin.com" />
+          <ContactRow icon=""label="Location"value="India" />
         </Card>
 
         <Text style={styles.disclaimer}>

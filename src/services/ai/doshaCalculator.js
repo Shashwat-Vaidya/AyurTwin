@@ -6,21 +6,21 @@ class DoshaCalculatorService {
         elements: ['Air', 'Space'],
         qualities: ['Dry', 'Light', 'Cold', 'Rough', 'Subtle', 'Mobile'],
         color: '#7B6E8F',
-        emoji: '🌬️',
+        emoji: '',
       },
       pitta: {
         name: 'Pitta',
         elements: ['Fire', 'Water'],
         qualities: ['Hot', 'Sharp', 'Light', 'Oily', 'Liquid', 'Mobile'],
         color: '#FF6B6B',
-        emoji: '🔥',
+        emoji: '',
       },
       kapha: {
         name: 'Kapha',
         elements: ['Water', 'Earth'],
         qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth', 'Stable'],
         color: '#6BA6A6',
-        emoji: '🌊',
+        emoji: '',
       },
     };
   }

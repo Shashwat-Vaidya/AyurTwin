@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, ActivityIndicator } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import Card from '../../components/common/Card';
 import { useApp } from '../../context/AppContext';
@@ -24,7 +25,8 @@ const LeaderboardScreen = () => {
         rank: entry.rank,
         name: entry.display_name,
         score: entry.score,
-        badge: entry.rank === 1 ? '🥇' : entry.rank === 2 ? '🥈' : entry.rank === 3 ? '🥉' : '',
+        badgeIcon: entry.rank === 1 ? 'trophy' : entry.rank === 2 ? 'medal' : entry.rank === 3 ? 'medal-outline' : 'ribbon-outline',
+        badgeColor: entry.rank === 1 ? '#FFD700' : entry.rank === 2 ? '#C0C0C0' : entry.rank === 3 ? '#CD7F32' : '#999',
         isUser: entry.is_me,
         improvement: 0, consistency: 0, streak: 0,
       }));
@@ -38,7 +40,7 @@ const LeaderboardScreen = () => {
   if (loading) {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
+        <ActivityIndicator size="large"color={COLORS.primary} />
         <Text style={{ marginTop: 12, color: COLORS.textSecondary }}>Loading leaderboard...</Text>
       </View>
     );
@@ -57,7 +59,7 @@ const LeaderboardScreen = () => {
           <View style={styles.podium}>
             {leaderboard.slice(0, 3).map((item, idx) => (
               <View key={item.rank} style={[styles.podiumItem, idx === 0 && styles.podiumFirst]}>
-                <Text style={styles.podiumBadge}>{item.badge}</Text>
+                <Ionicons name={item.badgeIcon} size={28} color={item.badgeColor} style={styles.podiumBadge} />
                 <LinearGradient
                   colors={idx === 0 ? COLORS.gradient.saffron : idx === 1 ? ['#C0C0C0', '#D0D0D0'] : ['#CD7F32', '#DDA15E']}
                   style={[styles.podiumAvatar, idx === 0 && styles.podiumAvatarFirst]}
@@ -99,10 +101,10 @@ const LeaderboardScreen = () => {
           <>
             <Text style={styles.sectionTitle}>Your Score Breakdown</Text>
             <Card variant="elevated">
-              <ScoreRow label="Health Score" value={myEntry.healthScore} max={100} color={COLORS.success} />
-              <ScoreRow label="Improvement" value={myEntry.improvement} max={20} color={COLORS.primary} />
-              <ScoreRow label="Consistency" value={myEntry.consistency} max={100} color={COLORS.info} />
-              <ScoreRow label="Streak" value={myEntry.streak} max={100} color={COLORS.warning} />
+              <ScoreRow label="Health Score"value={myEntry.healthScore} max={100} color={COLORS.success} />
+              <ScoreRow label="Improvement"value={myEntry.improvement} max={20} color={COLORS.primary} />
+              <ScoreRow label="Consistency"value={myEntry.consistency} max={100} color={COLORS.info} />
+              <ScoreRow label="Streak"value={myEntry.streak} max={100} color={COLORS.warning} />
             </Card>
           </>
         )}

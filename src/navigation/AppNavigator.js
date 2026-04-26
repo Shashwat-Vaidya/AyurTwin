@@ -175,7 +175,7 @@ const AppNavigator = () => {
   if (state.isLoading) {
     return (
       <View style={styles.loading}>
-        <Text style={styles.loadingText}>🌿</Text>
+        <Ionicons name="leaf" size={48} color={COLORS.primary} />
       </View>
     );
   }

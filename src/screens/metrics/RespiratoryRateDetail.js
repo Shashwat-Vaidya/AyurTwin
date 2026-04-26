@@ -111,11 +111,11 @@ const RespiratoryRateDetail = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Respiratory Rate</Text>
           <TouchableOpacity style={styles.infoButton}>
-            <Ionicons name="information-circle-outline" size={24} color={colors.primarySaffron} />
+            <Ionicons name="information-circle-outline"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -226,7 +226,7 @@ const RespiratoryRateDetail = () => {
         {/* Normal Range Info */}
         <Card style={styles.rangeInfoCard}>
           <View style={styles.rangeInfoHeader}>
-            <Ionicons name="information-circle" size={22} color={colors.spO2Blue} />
+            <Ionicons name="information-circle"size={22} color={colors.spO2Blue} />
             <Text style={styles.rangeInfoTitle}>Normal Respiratory Rate</Text>
           </View>
           <Text style={styles.rangeInfoText}>
@@ -263,25 +263,25 @@ const RespiratoryRateDetail = () => {
         
         <View style={styles.factorsGrid}>
           <Card style={styles.factorCard}>
-            <Ionicons name="fitness" size={24} color={colors.heartRate} />
+            <Ionicons name="fitness"size={24} color={colors.heartRate} />
             <Text style={styles.factorTitle}>Exercise</Text>
             <Text style={styles.factorText}>Increases during physical activity</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="moon" size={24} color={colors.sleepIndigo} />
+            <Ionicons name="moon"size={24} color={colors.sleepIndigo} />
             <Text style={styles.factorTitle}>Sleep</Text>
             <Text style={styles.factorText}>Decreases during deep sleep</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="flash" size={24} color={colors.stressPurple} />
+            <Ionicons name="flash"size={24} color={colors.stressPurple} />
             <Text style={styles.factorTitle}>Stress/Anxiety</Text>
             <Text style={styles.factorText}>Increases with stress</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="thermometer" size={24} color={colors.tempOrange} />
+            <Ionicons name="thermometer"size={24} color={colors.tempOrange} />
             <Text style={styles.factorTitle}>Fever</Text>
             <Text style={styles.factorText}>Increases with body temperature</Text>
           </Card>
@@ -292,7 +292,7 @@ const RespiratoryRateDetail = () => {
         
         <Card style={styles.exerciseCard}>
           <View style={styles.exerciseHeader}>
-            <Ionicons name="leaf" size={24} color={colors.primaryGreen} />
+            <Ionicons name="leaf"size={24} color={colors.primaryGreen} />
             <Text style={styles.exerciseTitle}>Diaphragmatic Breathing</Text>
           </View>
           <Text style={styles.exerciseDescription}>
@@ -306,7 +306,7 @@ const RespiratoryRateDetail = () => {
 
         <Card style={styles.exerciseCard}>
           <View style={styles.exerciseHeader}>
-            <Ionicons name="timer" size={24} color={colors.stressPurple} />
+            <Ionicons name="timer"size={24} color={colors.stressPurple} />
             <Text style={styles.exerciseTitle}>Box Breathing</Text>
           </View>
           <Text style={styles.exerciseDescription}>
@@ -321,26 +321,26 @@ const RespiratoryRateDetail = () => {
         {/* Insights */}
         <Card style={styles.insightsCard}>
           <View style={styles.insightsHeader}>
-            <Ionicons name="bulb" size={24} color={colors.warningYellow} />
+            <Ionicons name="bulb"size={24} color={colors.warningYellow} />
             <Text style={styles.insightsTitle}>Insights</Text>
           </View>
           
           <View style={styles.insightItem}>
-            <Ionicons name="checkmark-circle" size={18} color={colors.successGreen} />
+            <Ionicons name="checkmark-circle"size={18} color={colors.successGreen} />
             <Text style={styles.insightText}>
               Your respiratory rate is within normal range
             </Text>
           </View>
           
           <View style={styles.insightItem}>
-            <Ionicons name="trending-down" size={18} color={colors.spO2Blue} />
+            <Ionicons name="trending-down"size={18} color={colors.spO2Blue} />
             <Text style={styles.insightText}>
               Rate decreases during sleep as expected
             </Text>
           </View>
           
           <View style={styles.insightItem}>
-            <Ionicons name="trending-up" size={18} color={colors.warningYellow} />
+            <Ionicons name="trending-up"size={18} color={colors.warningYellow} />
             <Text style={styles.insightText}>
               Slight increase during afternoon hours
             </Text>
@@ -349,24 +349,24 @@ const RespiratoryRateDetail = () => {
 
         {/* When to Seek Help */}
         <Card style={styles.warningCard}>
-          <Text style={styles.warningTitle}>⚠️ When to Seek Help</Text>
+          <Text style={styles.warningTitle}> When to Seek Help</Text>
           <Text style={styles.warningText}>
             Contact a healthcare provider if you experience:
           </Text>
           <View style={styles.warningItem}>
-            <Ionicons name="alert-circle" size={16} color={colors.alertRed} />
+            <Ionicons name="alert-circle"size={16} color={colors.alertRed} />
             <Text style={styles.warningItemText}>Respiratory rate &lt; 8 or &gt; 24 at rest</Text>
           </View>
           <View style={styles.warningItem}>
-            <Ionicons name="alert-circle" size={16} color={colors.alertRed} />
+            <Ionicons name="alert-circle"size={16} color={colors.alertRed} />
             <Text style={styles.warningItemText}>Shortness of breath</Text>
           </View>
           <View style={styles.warningItem}>
-            <Ionicons name="alert-circle" size={16} color={colors.alertRed} />
+            <Ionicons name="alert-circle"size={16} color={colors.alertRed} />
             <Text style={styles.warningItemText}>Chest pain or tightness</Text>
           </View>
           <View style={styles.warningItem}>
-            <Ionicons name="alert-circle" size={16} color={colors.alertRed} />
+            <Ionicons name="alert-circle"size={16} color={colors.alertRed} />
             <Text style={styles.warningItemText}>Blue lips or fingernails</Text>
           </View>
         </Card>
@@ -374,15 +374,13 @@ const RespiratoryRateDetail = () => {
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
           <Button
-            title="Export Data"
-            onPress={() => {}}
+            title="Export Data"onPress={() => {}}
             style={styles.exportButton}
             outline
             icon="download-outline"
           />
           <Button
-            title="Set Alert"
-            onPress={() => {}}
+            title="Set Alert"onPress={() => {}}
             style={styles.alertButton}
             gradient
             icon="notifications-outline"

@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS } from '../../config/theme';
 
 const SplashScreen = ({ navigation }) => {
@@ -28,7 +29,7 @@ const SplashScreen = ({ navigation }) => {
             colors={COLORS.gradient.saffron}
             style={styles.logoCircle}
           >
-            <Text style={styles.logoIcon}>🌿</Text>
+            <Ionicons name="leaf" size={48} color="#FFFFFF" />
           </LinearGradient>
         </View>
         <Text style={styles.appName}>AyurTwin</Text>

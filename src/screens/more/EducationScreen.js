@@ -40,7 +40,7 @@ const EducationScreen = () => {
       excerpt: 'Learn about your unique mind-body constitution and how it affects your health.',
       category: 'ayurveda',
       readTime: '5 min',
-      image: '📚',
+      image: '',
       color: colors.primaryGreen,
       featured: true,
     },
@@ -50,7 +50,7 @@ const EducationScreen = () => {
       excerpt: 'Discover how sweet, sour, salty, pungent, bitter, and astringent tastes affect your doshas.',
       category: 'nutrition',
       readTime: '4 min',
-      image: '🍎',
+      image: '',
       color: colors.tempOrange,
       featured: true,
     },
@@ -63,7 +63,7 @@ const EducationScreen = () => {
       excerpt: 'Vata governs all movement in the body and mind. Learn to balance this airy dosha.',
       category: 'dosha',
       readTime: '6 min',
-      image: '🌬️',
+      image: '',
       color: colors.vata,
       author: 'Dr. Arya Sharma',
       date: 'Mar 15, 2024',
@@ -74,7 +74,7 @@ const EducationScreen = () => {
       excerpt: 'Understand the transformative energy of Pitta and how to keep it in balance.',
       category: 'dosha',
       readTime: '5 min',
-      image: '🔥',
+      image: '',
       color: colors.pitta,
       author: 'Dr. Rajesh Kumar',
       date: 'Mar 12, 2024',
@@ -85,7 +85,7 @@ const EducationScreen = () => {
       excerpt: 'Explore the grounding energy of Kapha and tips for maintaining balance.',
       category: 'dosha',
       readTime: '7 min',
-      image: '🌊',
+      image: '',
       color: colors.kapha,
       author: 'Dr. Arya Sharma',
       date: 'Mar 10, 2024',
@@ -96,7 +96,7 @@ const EducationScreen = () => {
       excerpt: 'Start your day right with these Ayurvedic practices for energy and clarity.',
       category: 'lifestyle',
       readTime: '4 min',
-      image: '🌅',
+      image: '',
       color: colors.warningYellow,
       author: 'Priya Singh',
       date: 'Mar 8, 2024',
@@ -107,7 +107,7 @@ const EducationScreen = () => {
       excerpt: 'Learn how to adjust your diet according to the seasons for better health.',
       category: 'nutrition',
       readTime: '5 min',
-      image: '🍂',
+      image: '',
       color: colors.tempOrange,
       author: 'Vikram Mehta',
       date: 'Mar 5, 2024',
@@ -118,7 +118,7 @@ const EducationScreen = () => {
       excerpt: 'Specific yoga practices to balance your unique constitution.',
       category: 'yoga',
       readTime: '8 min',
-      image: '🧘',
+      image: '',
       color: colors.primarySaffron,
       author: 'Priya Singh',
       date: 'Mar 3, 2024',
@@ -129,7 +129,7 @@ const EducationScreen = () => {
       excerpt: 'Understanding Agni (digestive fire) and how to maintain healthy digestion.',
       category: 'ayurveda',
       readTime: '6 min',
-      image: '🍲',
+      image: '',
       color: colors.primaryGreen,
       author: 'Dr. Rajesh Kumar',
       date: 'Feb 28, 2024',
@@ -140,7 +140,7 @@ const EducationScreen = () => {
       excerpt: 'Natural techniques to reduce stress and anxiety based on your dosha.',
       category: 'lifestyle',
       readTime: '5 min',
-      image: '🧘',
+      image: '',
       color: colors.stressPurple,
       author: 'Dr. Arya Sharma',
       date: 'Feb 25, 2024',
@@ -151,7 +151,7 @@ const EducationScreen = () => {
       excerpt: 'Ayurvedic herbs and their benefits for everyday health issues.',
       category: 'ayurveda',
       readTime: '7 min',
-      image: '🌿',
+      image: '',
       color: colors.primaryGreen,
       author: 'Vikram Mehta',
       date: 'Feb 22, 2024',
@@ -167,21 +167,21 @@ const EducationScreen = () => {
       id: 'v1',
       title: 'Introduction to Ayurveda',
       duration: '15:30',
-      thumbnail: '🎥',
+      thumbnail: '',
       views: '12K',
     },
     {
       id: 'v2',
       title: 'Dosha Quiz & Explanation',
       duration: '22:15',
-      thumbnail: '🎥',
+      thumbnail: '',
       views: '8.5K',
     },
     {
       id: 'v3',
       title: 'Morning Yoga Routine',
       duration: '18:45',
-      thumbnail: '🎥',
+      thumbnail: '',
       views: '15K',
     },
   ];
@@ -196,11 +196,11 @@ const EducationScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Education</Text>
           <TouchableOpacity style={styles.searchButton}>
-            <Ionicons name="search" size={24} color={colors.primarySaffron} />
+            <Ionicons name="search"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -217,7 +217,7 @@ const EducationScreen = () => {
           </Text>
           <TouchableOpacity style={styles.heroButton}>
             <Text style={styles.heroButtonText}>Start Learning</Text>
-            <Ionicons name="arrow-forward" size={16} color="white" />
+            <Ionicons name="arrow-forward"size={16} color="white" />
           </TouchableOpacity>
         </LinearGradient>
 
@@ -274,7 +274,7 @@ const EducationScreen = () => {
                     </Text>
                     <View style={styles.featuredFooter}>
                       <Text style={styles.featuredReadTime}>{article.readTime} read</Text>
-                      <Ionicons name="arrow-forward" size={16} color="white" />
+                      <Ionicons name="arrow-forward"size={16} color="white" />
                     </View>
                   </LinearGradient>
                 </TouchableOpacity>
@@ -314,15 +314,15 @@ const EducationScreen = () => {
               
               <View style={styles.articleFooter}>
                 <View style={styles.articleMeta}>
-                  <Ionicons name="person-outline" size={12} color={colors.textTertiary} />
+                  <Ionicons name="person-outline"size={12} color={colors.textTertiary} />
                   <Text style={styles.articleMetaText}>{article.author}</Text>
                 </View>
                 <View style={styles.articleMeta}>
-                  <Ionicons name="time-outline" size={12} color={colors.textTertiary} />
+                  <Ionicons name="time-outline"size={12} color={colors.textTertiary} />
                   <Text style={styles.articleMetaText}>{article.readTime}</Text>
                 </View>
                 <View style={styles.articleMeta}>
-                  <Ionicons name="calendar-outline" size={12} color={colors.textTertiary} />
+                  <Ionicons name="calendar-outline"size={12} color={colors.textTertiary} />
                   <Text style={styles.articleMetaText}>{article.date}</Text>
                 </View>
               </View>
@@ -355,7 +355,7 @@ const EducationScreen = () => {
         {/* Quiz Section */}
         <Card style={styles.quizCard}>
           <View style={styles.quizHeader}>
-            <Ionicons name="help-circle" size={30} color={colors.primarySaffron} />
+            <Ionicons name="help-circle"size={30} color={colors.primarySaffron} />
             <View style={styles.quizInfo}>
               <Text style={styles.quizTitle}>Test Your Knowledge</Text>
               <Text style={styles.quizSubtitle}>Take the Ayurveda quiz</Text>
@@ -365,8 +365,7 @@ const EducationScreen = () => {
             10 questions to assess your understanding of Ayurvedic principles
           </Text>
           <Button
-            title="Start Quiz"
-            onPress={() => {}}
+            title="Start Quiz"onPress={() => {}}
             style={styles.quizButton}
             gradient
             icon="help"
@@ -380,8 +379,7 @@ const EducationScreen = () => {
             Get weekly Ayurvedic tips and new articles directly in your inbox
           </Text>
           <Button
-            title="Subscribe"
-            onPress={() => {}}
+            title="Subscribe"onPress={() => {}}
             style={styles.newsletterButton}
             outline
             icon="mail"

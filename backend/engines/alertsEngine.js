@@ -7,12 +7,14 @@ const { safeNum } = require('./common');
 
 function build({ user = {}, profile = {}, sensor = {}, risks = {}, dinacharyaPct = 0, healthScore = 250 } = {}) {
     const alerts = [];
+    const s = sensor || {};
+    const p = profile || {};
 
-    const hr = safeNum(sensor.heart_rate);
-    const spo2 = safeNum(sensor.spo2);
-    const temp = safeNum(sensor.body_temperature);
-    const stress = safeNum(profile.stress_level, 5);
-    const sleep = safeNum(profile.sleep_hours, 7);
+    const hr = safeNum(s.heart_rate);
+    const spo2 = safeNum(s.spo2);
+    const temp = safeNum(s.body_temperature);
+    const stress = safeNum(p.stress_level, 5);
+    const sleep = safeNum(p.sleep_hours, 7);
 
     if (temp >= 38) alerts.push({ category: 'vital', severity: 'critical', title: 'High body temperature', message: `${temp}°C detected - rest, hydrate, monitor.` });
     else if (temp >= 37.5) alerts.push({ category: 'vital', severity: 'warning', title: 'Mild fever', message: `${temp}°C` });

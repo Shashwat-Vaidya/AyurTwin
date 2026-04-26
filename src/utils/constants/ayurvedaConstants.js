@@ -13,7 +13,7 @@ export const DOSHAS = {
     qualities: ['Dry', 'Light', 'Cold', 'Rough', 'Subtle', 'Mobile'],
     color: '#7B6E8F',
     secondaryColor: '#9B8BA9',
-    emoji: '🌬️',
+    emoji: '',
     icon: 'wind',
     season: ['Autumn', 'Early Winter'],
     timeOfDay: ['2 AM - 6 AM', '2 PM - 6 PM'],
@@ -55,7 +55,7 @@ export const DOSHAS = {
     qualities: ['Hot', 'Sharp', 'Light', 'Oily', 'Liquid', 'Mobile'],
     color: '#FF6B6B',
     secondaryColor: '#FF8A8A',
-    emoji: '🔥',
+    emoji: '',
     icon: 'flame',
     season: ['Summer'],
     timeOfDay: ['10 AM - 2 PM', '10 PM - 2 AM'],
@@ -97,7 +97,7 @@ export const DOSHAS = {
     qualities: ['Heavy', 'Slow', 'Cool', 'Oily', 'Smooth', 'Stable'],
     color: '#6BA6A6',
     secondaryColor: '#8BB8B8',
-    emoji: '🌊',
+    emoji: '',
     icon: 'water',
     season: ['Spring'],
     timeOfDay: ['6 AM - 10 AM', '6 PM - 10 PM'],
@@ -155,7 +155,7 @@ export const PRAKRITI_TYPES = {
     name: 'Vata-Pitta',
     primaryDoshas: ['vata', 'pitta'],
     color: '#B19CD9',
-    emoji: '🌬️🔥',
+    emoji: '',
     description: 'Mix of Vata and Pitta - Creative and intense, with both mobility and transformation.',
     balancingTips: [
       'Balance activity with rest',
@@ -169,7 +169,7 @@ export const PRAKRITI_TYPES = {
     name: 'Pitta-Kapha',
     primaryDoshas: ['pitta', 'kapha'],
     color: '#D4A5A5',
-    emoji: '🔥🌊',
+    emoji: '',
     description: 'Mix of Pitta and Kapha - Strong and steady with intense focus when needed.',
     balancingTips: [
       'Stay active but not overheated',
@@ -183,7 +183,7 @@ export const PRAKRITI_TYPES = {
     name: 'Vata-Kapha',
     primaryDoshas: ['vata', 'kapha'],
     color: '#9CAFB7',
-    emoji: '🌬️🌊',
+    emoji: '',
     description: 'Mix of Vata and Kapha - Creative yet stable, with periods of high energy and calm.',
     balancingTips: [
       'Maintain routine with variety',
@@ -197,7 +197,7 @@ export const PRAKRITI_TYPES = {
     name: 'Tri-Dosha',
     primaryDoshas: ['vata', 'pitta', 'kapha'],
     color: '#B5B35C',
-    emoji: '🌿',
+    emoji: '',
     description: 'All three doshas in balance - Most balanced constitution, adaptable to all situations.',
     balancingTips: [
       'Maintain balance through seasons',
@@ -224,7 +224,7 @@ export const SIX_TASTES = {
     },
     sources: ['Grains', 'Dairy', 'Sweet fruits', 'Honey', 'Sugar'],
     benefits: ['Builds tissues', 'Calming', 'Strengthening'],
-    icon: '🍯',
+    icon: '',
   },
   sour: {
     id: 'sour',
@@ -238,7 +238,7 @@ export const SIX_TASTES = {
     },
     sources: ['Citrus', 'Yogurt', 'Fermented foods', 'Vinegar'],
     benefits: ['Stimulates digestion', 'Refreshing'],
-    icon: '🍋',
+    icon: '',
   },
   salty: {
     id: 'salty',
@@ -252,7 +252,7 @@ export const SIX_TASTES = {
     },
     sources: ['Salt', 'Seaweed', 'Salty foods'],
     benefits: ['Improves taste', 'Aids digestion', 'Electrolyte balance'],
-    icon: '🧂',
+    icon: '',
   },
   pungent: {
     id: 'pungent',
@@ -266,7 +266,7 @@ export const SIX_TASTES = {
     },
     sources: ['Chili', 'Ginger', 'Pepper', 'Garlic', 'Spices'],
     benefits: ['Stimulates digestion', 'Clears sinuses'],
-    icon: '🌶️',
+    icon: '',
   },
   bitter: {
     id: 'bitter',
@@ -280,7 +280,7 @@ export const SIX_TASTES = {
     },
     sources: ['Bitter greens', 'Turmeric', 'Coffee', 'Neem'],
     benefits: ['Detoxifying', 'Anti-inflammatory'],
-    icon: '🥬',
+    icon: '',
   },
   astringent: {
     id: 'astringent',
@@ -294,7 +294,7 @@ export const SIX_TASTES = {
     },
     sources: ['Legumes', 'Raw banana', 'Pomegranate', 'Tea'],
     benefits: ['Healing', 'Absorbs water'],
-    icon: '🫘',
+    icon: '',
   },
 };
 

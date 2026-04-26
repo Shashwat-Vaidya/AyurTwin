@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import { useApp } from '../../context/AppContext';
 import {
@@ -63,9 +64,9 @@ const AlertsScreen = () => {
 
   const getAlertStyle = (type) => {
     const colors = {
-      critical: { border: COLORS.error, bg: '#FFF5F5', icon: '🚨' },
-      warning: { border: COLORS.warning, bg: '#FFFBF0', icon: '⚠️' },
-      info: { border: COLORS.info, bg: '#F0F9FF', icon: 'ℹ️' },
+      critical: { border: COLORS.error, bg: '#FFF5F5', icon: 'alert-circle-outline' },
+      warning: { border: COLORS.warning, bg: '#FFFBF0', icon: 'warning-outline' },
+      info: { border: COLORS.info, bg: '#F0F9FF', icon: 'information-circle-outline' },
     };
     return colors[type] || colors.info;
   };
@@ -97,16 +98,16 @@ const AlertsScreen = () => {
       <View style={styles.content}>
         {filteredAlerts.length === 0 ? (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>✅</Text>
+            <Ionicons name="checkmark-circle-outline" size={48} color={COLORS.success} style={styles.emptyIcon} />
             <Text style={styles.emptyText}>No alerts in this category</Text>
           </View>
         ) : (
           filteredAlerts.map((alert) => {
             const style = getAlertStyle(alert.type);
             return (
-              <View key={alert.id} style={[styles.alertCard, { borderLeftColor: style.border, backgroundColor: style.bg }]}>
+              <View key={`alert-${alert.id}`} style={[styles.alertCard, { borderLeftColor: style.border, backgroundColor: style.bg }]}>
                 <View style={styles.alertHeader}>
-                  <Text style={styles.alertIcon}>{style.icon}</Text>
+                  <Ionicons name={style.icon} size={18} color={style.border} style={styles.alertIcon} />
                   <Text style={styles.alertTitle}>{alert.title}</Text>
                   <Text style={styles.alertTime}>{alert.time}</Text>
                 </View>
@@ -129,8 +130,8 @@ const AlertsScreen = () => {
         {alertHistory.map((alert, idx) => {
           const style = getAlertStyle(alert.type);
           return (
-            <View key={idx} style={[styles.historyCard]}>
-              <Text style={styles.historyIcon}>{style.icon}</Text>
+            <View key={`hist-${idx}`} style={[styles.historyCard]}>
+              <Ionicons name={style.icon} size={20} color={style.border} style={styles.historyIcon} />
               <View style={styles.historyInfo}>
                 <Text style={styles.historyTitle}>{alert.title}</Text>
                 <Text style={styles.historyMessage}>{alert.message}</Text>

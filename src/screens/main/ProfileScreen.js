@@ -64,7 +64,7 @@ const ProfileScreen = ({ navigation }) => {
           <Text style={styles.userEmail}>{profile.email || profile.username || ''}</Text>
           {prakriti.prakriti && (
             <View style={styles.doshaBadge}>
-              <Text style={styles.doshaBadgeText}>🔺 {prakriti.prakriti}</Text>
+              <Text style={styles.doshaBadgeText}> {prakriti.prakriti}</Text>
             </View>
           )}
         </View>
@@ -88,7 +88,7 @@ const ProfileScreen = ({ navigation }) => {
         </View>
 
         {/* BMI Ring */}
-        <Card variant="elevated" style={styles.bmiCard}>
+        <Card variant="elevated"style={styles.bmiCard}>
           <View style={styles.bmiRow}>
             <View style={[styles.bmiRing, { borderColor: getBMIColor() }]}>
               <Text style={[styles.bmiValue, { color: getBMIColor() }]}>{bmi.value}</Text>
@@ -121,9 +121,9 @@ const ProfileScreen = ({ navigation }) => {
             <Text style={styles.sectionTitle}>Dosha Profile</Text>
             <Card variant="elevated">
               <View style={styles.doshaGrid}>
-                <DoshaItem label="Vata" percent={prakriti.vata_percent} color={COLORS.vata} />
-                <DoshaItem label="Pitta" percent={prakriti.pitta_percent} color={COLORS.pitta} />
-                <DoshaItem label="Kapha" percent={prakriti.kapha_percent} color={COLORS.kapha} />
+                <DoshaItem label="Vata"percent={prakriti.vata_percent} color={COLORS.vata} />
+                <DoshaItem label="Pitta"percent={prakriti.pitta_percent} color={COLORS.pitta} />
+                <DoshaItem label="Kapha"percent={prakriti.kapha_percent} color={COLORS.kapha} />
               </View>
             </Card>
           </>
@@ -140,25 +140,25 @@ const ProfileScreen = ({ navigation }) => {
         <Card variant="elevated">
           {isEditing ? (
             <View>
-              <EditRow label="First Name" value={editData.first_name} onChange={(v) => setEditData({...editData, first_name: v})} />
-              <EditRow label="Last Name" value={editData.last_name} onChange={(v) => setEditData({...editData, last_name: v})} />
-              <EditRow label="Phone" value={editData.phone} onChange={(v) => setEditData({...editData, phone: v})} keyboardType="phone-pad" />
-              <EditRow label="Height (cm)" value={editData.height_cm} onChange={(v) => setEditData({...editData, height_cm: v})} keyboardType="numeric" />
-              <EditRow label="Weight (kg)" value={editData.weight_kg} onChange={(v) => setEditData({...editData, weight_kg: v})} keyboardType="numeric" />
-              <GradientButton title="Save Changes" onPress={handleSave} style={styles.saveBtn} />
+              <EditRow label="First Name"value={editData.first_name} onChange={(v) => setEditData({...editData, first_name: v})} />
+              <EditRow label="Last Name"value={editData.last_name} onChange={(v) => setEditData({...editData, last_name: v})} />
+              <EditRow label="Phone"value={editData.phone} onChange={(v) => setEditData({...editData, phone: v})} keyboardType="phone-pad" />
+              <EditRow label="Height (cm)"value={editData.height_cm} onChange={(v) => setEditData({...editData, height_cm: v})} keyboardType="numeric" />
+              <EditRow label="Weight (kg)"value={editData.weight_kg} onChange={(v) => setEditData({...editData, weight_kg: v})} keyboardType="numeric" />
+              <GradientButton title="Save Changes"onPress={handleSave} style={styles.saveBtn} />
             </View>
           ) : (
             <View>
-              <InfoRow label="Full Name" value={`${profile.first_name || ''} ${profile.middle_name || ''} ${profile.last_name || ''}`.trim()} />
-              <InfoRow label="Email" value={profile.email || 'N/A'} />
-              <InfoRow label="Phone" value={profile.phone || 'N/A'} />
-              <InfoRow label="Date of Birth" value={profile.date_of_birth || 'N/A'} />
-              <InfoRow label="Age" value={profile.age ? `${profile.age} years` : 'N/A'} />
-              <InfoRow label="Gender" value={profile.gender || 'N/A'} />
-              <InfoRow label="Blood Group" value={profile.blood_group || 'N/A'} />
-              <InfoRow label="Height" value={profile.height_cm ? `${profile.height_cm} cm` : 'N/A'} />
-              <InfoRow label="Weight" value={profile.weight_kg ? `${profile.weight_kg} kg` : 'N/A'} />
-              <InfoRow label="User Type" value={profile.user_type === 'patient' ? 'Patient' : 'Family Member'} />
+              <InfoRow label="Full Name"value={`${profile.first_name || ''} ${profile.middle_name || ''} ${profile.last_name || ''}`.trim()} />
+              <InfoRow label="Email"value={profile.email || 'N/A'} />
+              <InfoRow label="Phone"value={profile.phone || 'N/A'} />
+              <InfoRow label="Date of Birth"value={profile.date_of_birth || 'N/A'} />
+              <InfoRow label="Age"value={profile.age ? `${profile.age} years` : 'N/A'} />
+              <InfoRow label="Gender"value={profile.gender || 'N/A'} />
+              <InfoRow label="Blood Group"value={profile.blood_group || 'N/A'} />
+              <InfoRow label="Height"value={profile.height_cm ? `${profile.height_cm} cm` : 'N/A'} />
+              <InfoRow label="Weight"value={profile.weight_kg ? `${profile.weight_kg} kg` : 'N/A'} />
+              <InfoRow label="User Type"value={profile.user_type === 'patient' ? 'Patient' : 'Family Member'} />
             </View>
           )}
         </Card>
@@ -166,13 +166,13 @@ const ProfileScreen = ({ navigation }) => {
         {/* Lifestyle Summary */}
         <Text style={styles.sectionTitle}>Lifestyle Summary</Text>
         <Card variant="elevated">
-          <InfoRow label="Physical Activity" value={profile.physical_activity || 'N/A'} />
-          <InfoRow label="Work Type" value={profile.work_type || 'N/A'} />
-          <InfoRow label="Diet Type" value={profile.diet_type || 'N/A'} />
-          <InfoRow label="Smoking" value={profile.smoking ? 'Yes' : 'No'} />
-          <InfoRow label="Alcohol" value={profile.alcohol ? 'Yes' : 'No'} />
-          <InfoRow label="Stress Level" value={profile.stress_level ? `${profile.stress_level}/10` : 'N/A'} />
-          <InfoRow label="Sleep Duration" value={profile.sleep_duration_hours ? `${profile.sleep_duration_hours} hrs` : 'N/A'} />
+          <InfoRow label="Physical Activity"value={profile.physical_activity || 'N/A'} />
+          <InfoRow label="Work Type"value={profile.work_type || 'N/A'} />
+          <InfoRow label="Diet Type"value={profile.diet_type || 'N/A'} />
+          <InfoRow label="Smoking"value={profile.smoking ? 'Yes' : 'No'} />
+          <InfoRow label="Alcohol"value={profile.alcohol ? 'Yes' : 'No'} />
+          <InfoRow label="Stress Level"value={profile.stress_level ? `${profile.stress_level}/10` : 'N/A'} />
+          <InfoRow label="Sleep Duration"value={profile.sleep_duration_hours ? `${profile.sleep_duration_hours} hrs` : 'N/A'} />
         </Card>
 
         {/* Family History Summary */}

@@ -19,7 +19,7 @@ const AboutScreen = ({ navigation }) => {
         {/* Logo & Info */}
         <View style={styles.logoSection}>
           <LinearGradient colors={COLORS.gradient.saffron} style={styles.logo}>
-            <Text style={styles.logoIcon}>🌿</Text>
+            <Text style={styles.logoIcon}></Text>
           </LinearGradient>
           <Text style={styles.appName}>AyurTwin</Text>
           <Text style={styles.tagline}>Digital Health Twin</Text>
@@ -27,7 +27,7 @@ const AboutScreen = ({ navigation }) => {
         </View>
 
         {/* Description */}
-        <Card variant="elevated" style={styles.descCard}>
+        <Card variant="elevated"style={styles.descCard}>
           <Text style={styles.descTitle}>About AyurTwin</Text>
           <Text style={styles.descText}>
             AyurTwin is an AI-powered Digital Health Twin system that combines modern technology with ancient Ayurvedic wisdom to provide preventive healthcare insights.
@@ -40,28 +40,28 @@ const AboutScreen = ({ navigation }) => {
         {/* What We Do */}
         <Text style={styles.sectionTitle}>What We Do</Text>
         <View style={styles.featureList}>
-          <FeatureItem icon="🧠" title="AI Disease Prediction" desc="ML-powered risk analysis for 10+ diseases" />
-          <FeatureItem icon="🔺" title="Dosha Analysis" desc="Personalized Ayurvedic constitution assessment" />
-          <FeatureItem icon="📊" title="Health Monitoring" desc="Real-time health metrics and vital tracking" />
-          <FeatureItem icon="🌿" title="Lifestyle Guidance" desc="Personalized diet, exercise, and routine recommendations" />
-          <FeatureItem icon="👨‍👩‍👧" title="Family Monitoring" desc="Track health of your loved ones" />
-          <FeatureItem icon="🏆" title="Social Features" desc="Leaderboard and community motivation" />
+          <FeatureItem icon=""title="AI Disease Prediction"desc="ML-powered risk analysis for 10+ diseases" />
+          <FeatureItem icon=""title="Dosha Analysis"desc="Personalized Ayurvedic constitution assessment" />
+          <FeatureItem icon=""title="Health Monitoring"desc="Real-time health metrics and vital tracking" />
+          <FeatureItem icon=""title="Lifestyle Guidance"desc="Personalized diet, exercise, and routine recommendations" />
+          <FeatureItem icon=""title="Family Monitoring"desc="Track health of your loved ones" />
+          <FeatureItem icon=""title="Social Features"desc="Leaderboard and community motivation" />
         </View>
 
         {/* Technology */}
         <Text style={styles.sectionTitle}>Technology Stack</Text>
         <Card variant="elevated">
-          <TechRow label="Frontend" value="React Native + Expo" />
-          <TechRow label="Backend" value="Node.js + Express" />
-          <TechRow label="Database" value="Supabase (PostgreSQL)" />
-          <TechRow label="AI/ML" value="Random Forest, Gradient Boosting (planned)" />
-          <TechRow label="Ayurveda Engine" value="Rule-based Dosha Analysis" />
+          <TechRow label="Frontend"value="React Native + Expo" />
+          <TechRow label="Backend"value="Node.js + Express" />
+          <TechRow label="Database"value="Supabase (PostgreSQL)" />
+          <TechRow label="AI/ML"value="Random Forest, Gradient Boosting (planned)" />
+          <TechRow label="Ayurveda Engine"value="Rule-based Dosha Analysis" />
         </Card>
 
         {/* Disclaimer */}
         <Text style={styles.sectionTitle}>Important Disclaimer</Text>
-        <Card variant="outlined" style={styles.disclaimerCard}>
-          <Text style={styles.disclaimerIcon}>⚠️</Text>
+        <Card variant="outlined"style={styles.disclaimerCard}>
+          <Text style={styles.disclaimerIcon}></Text>
           <Text style={styles.disclaimerText}>
             This application provides preventive health insights and risk predictions based on user-provided data. It does NOT provide medical diagnosis or replace professional medical advice. Always consult a qualified healthcare professional for medical concerns.
           </Text>
@@ -73,7 +73,7 @@ const AboutScreen = ({ navigation }) => {
           <Text style={styles.creditText}>Built with care for preventive healthcare.</Text>
           <Text style={styles.creditText}>Combining the wisdom of Ayurveda with modern AI.</Text>
           <Text style={[styles.creditText, { marginTop: 10, fontWeight: '700', color: COLORS.primary }]}>
-            Made with ❤️ for a healthier world.
+            Made with  for a healthier world.
           </Text>
         </Card>
       </View>

@@ -47,11 +47,11 @@ const HealthJourneyScreen = ({ navigation }) => {
   };
 
   const milestones = [
-    { week: 1, label: 'Profile Created', icon: '🌱', done: true },
-    { week: 2, label: 'First Full Week', icon: '📅', done: true },
-    { week: 4, label: '1 Month Streak', icon: '🔥', done: journeyData.length >= 4 },
+    { week: 1, label: 'Profile Created', icon: '', done: true },
+    { week: 2, label: 'First Full Week', icon: '', done: true },
+    { week: 4, label: '1 Month Streak', icon: '', done: journeyData.length >= 4 },
     { week: 8, label: '2 Month Journey', icon: '⭐', done: journeyData.length >= 8 },
-    { week: 12, label: '3 Month Champion', icon: '🏆', done: journeyData.length >= 12 },
+    { week: 12, label: '3 Month Champion', icon: '', done: journeyData.length >= 12 },
   ];
 
   const latestWeek = journeyData[journeyData.length - 1] || {};
@@ -73,7 +73,7 @@ const HealthJourneyScreen = ({ navigation }) => {
 
       <View style={styles.content}>
         {/* Current Score Card */}
-        <Card variant="elevated" style={styles.scoreCard}>
+        <Card variant="elevated"style={styles.scoreCard}>
           <View style={styles.scoreRow}>
             <View style={[styles.scoreCircle, { borderColor: getScoreColor(currentScore) }]}>
               <Text style={[styles.scoreValue, { color: getScoreColor(currentScore) }]}>{currentScore}</Text>
@@ -181,7 +181,7 @@ const HealthJourneyScreen = ({ navigation }) => {
           {milestones.map((m, i) => (
             <View key={i} style={styles.milestoneRow}>
               <View style={[styles.milestoneIconBox, m.done && styles.milestoneIconDone]}>
-                <Text style={styles.milestoneIcon}>{m.done ? m.icon : '🔒'}</Text>
+                <Text style={styles.milestoneIcon}>{m.done ? m.icon : ''}</Text>
               </View>
               <View style={styles.milestoneConnector}>
                 <View style={[styles.milestoneLine, m.done && styles.milestoneLineDone]} />
@@ -190,7 +190,7 @@ const HealthJourneyScreen = ({ navigation }) => {
                 <Text style={[styles.milestoneLabel, m.done && styles.milestoneLabelDone]}>{m.label}</Text>
                 <Text style={styles.milestoneWeek}>Week {m.week}</Text>
               </View>
-              {m.done && <Text style={styles.milestoneCheck}>✅</Text>}
+              {m.done && <Text style={styles.milestoneCheck}></Text>}
             </View>
           ))}
         </Card>

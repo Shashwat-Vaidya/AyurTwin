@@ -26,9 +26,9 @@ const ExerciseSuggestions = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
 
   const doshas = [
-    { id: 'vata', name: 'Vata', color: colors.vata, emoji: '🌬️' },
-    { id: 'pitta', name: 'Pitta', color: colors.pitta, emoji: '🔥' },
-    { id: 'kapha', name: 'Kapha', color: colors.kapha, emoji: '🌊' },
+    { id: 'vata', name: 'Vata', color: colors.vata, emoji: '' },
+    { id: 'pitta', name: 'Pitta', color: colors.pitta, emoji: '' },
+    { id: 'kapha', name: 'Kapha', color: colors.kapha, emoji: '' },
   ];
 
   const levels = [
@@ -55,7 +55,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Moderate',
       dosha: ['vata', 'kapha'],
       level: 'beginner',
-      image: '🚶',
+      image: '',
       description: 'Simple walking at a pace that elevates heart rate',
       benefits: ['Improves circulation', 'Reduces stress', 'Easy on joints'],
     },
@@ -68,7 +68,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Moderate',
       dosha: ['vata', 'pitta', 'kapha'],
       level: 'beginner',
-      image: '🧘',
+      image: '',
       description: '12 yoga poses in sequence',
       benefits: ['Full body stretch', 'Energizing', 'Improves flexibility'],
     },
@@ -81,7 +81,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Moderate',
       dosha: ['pitta', 'kapha'],
       level: 'intermediate',
-      image: '🏊',
+      image: '',
       description: 'Low-impact full body workout',
       benefits: ['Cooling for Pitta', 'Builds endurance', 'Joint-friendly'],
     },
@@ -94,7 +94,7 @@ const ExerciseSuggestions = () => {
       intensity: 'High',
       dosha: ['kapha'],
       level: 'intermediate',
-      image: '🏋️',
+      image: '',
       description: 'Resistance training with weights',
       benefits: ['Builds muscle', 'Increases metabolism', 'Strengthens bones'],
     },
@@ -107,7 +107,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Low',
       dosha: ['vata', 'pitta'],
       level: 'beginner',
-      image: '🧘',
+      image: '',
       description: 'Gentle yoga focusing on poses and breathing',
       benefits: ['Calms Vata', 'Reduces anxiety', 'Improves balance'],
     },
@@ -120,7 +120,7 @@ const ExerciseSuggestions = () => {
       intensity: 'High',
       dosha: ['kapha'],
       level: 'advanced',
-      image: '🏃',
+      image: '',
       description: 'High-intensity running',
       benefits: ['Excellent for Kapha', 'Builds stamina', 'Releases endorphins'],
     },
@@ -133,7 +133,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Moderate',
       dosha: ['vata', 'pitta'],
       level: 'intermediate',
-      image: '🤸',
+      image: '',
       description: 'Core-strengthening and flexibility exercises',
       benefits: ['Core strength', 'Posture improvement', 'Body awareness'],
     },
@@ -146,7 +146,7 @@ const ExerciseSuggestions = () => {
       intensity: 'Low',
       dosha: ['pitta'],
       level: 'beginner',
-      image: '🧘',
+      image: '',
       description: 'Gentle, cooling yoga poses',
       benefits: ['Cools Pitta', 'Reduces inflammation', 'Calming'],
     },
@@ -191,11 +191,11 @@ const ExerciseSuggestions = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Exercise Suggestions</Text>
           <TouchableOpacity style={styles.favoriteButton}>
-            <Ionicons name="heart-outline" size={24} color={colors.primarySaffron} />
+            <Ionicons name="heart-outline"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -295,11 +295,11 @@ const ExerciseSuggestions = () => {
                 <Text style={styles.exerciseName}>{exercise.name}</Text>
                 <View style={styles.exerciseMeta}>
                   <View style={styles.exerciseMetaItem}>
-                    <Ionicons name="time" size={12} color={colors.textTertiary} />
+                    <Ionicons name="time"size={12} color={colors.textTertiary} />
                     <Text style={styles.exerciseMetaText}>{exercise.duration}</Text>
                   </View>
                   <View style={styles.exerciseMetaItem}>
-                    <Ionicons name="flame" size={12} color={colors.tempOrange} />
+                    <Ionicons name="flame"size={12} color={colors.tempOrange} />
                     <Text style={styles.exerciseMetaText}>{exercise.calories} cal</Text>
                   </View>
                 </View>
@@ -316,7 +316,7 @@ const ExerciseSuggestions = () => {
             <View style={styles.benefitsContainer}>
               {exercise.benefits.map((benefit, index) => (
                 <View key={index} style={styles.benefitItem}>
-                  <Ionicons name="checkmark-circle" size={14} color={colors.successGreen} />
+                  <Ionicons name="checkmark-circle"size={14} color={colors.successGreen} />
                   <Text style={styles.benefitText}>{benefit}</Text>
                 </View>
               ))}
@@ -336,7 +336,7 @@ const ExerciseSuggestions = () => {
                       styles.doshaTagText,
                       { color: d === 'vata' ? colors.vata : d === 'pitta' ? colors.pitta : colors.kapha }
                     ]}>
-                      {d === 'vata' ? '🌬️' : d === 'pitta' ? '🔥' : '🌊'} {d.charAt(0).toUpperCase() + d.slice(1)}
+                      {d === 'vata' ? '' : d === 'pitta' ? '' : ''} {d.charAt(0).toUpperCase() + d.slice(1)}
                     </Text>
                   </View>
                 ))}
@@ -344,7 +344,7 @@ const ExerciseSuggestions = () => {
 
               <TouchableOpacity style={styles.startButton}>
                 <Text style={styles.startButtonText}>Start</Text>
-                <Ionicons name="play" size={16} color="white" />
+                <Ionicons name="play"size={16} color="white" />
               </TouchableOpacity>
             </View>
           </Card>
@@ -390,8 +390,7 @@ const ExerciseSuggestions = () => {
           </View>
 
           <Button
-            title="Create My Plan"
-            onPress={() => {}}
+            title="Create My Plan"onPress={() => {}}
             style={styles.createPlanButton}
             gradient
           />
@@ -400,22 +399,22 @@ const ExerciseSuggestions = () => {
         {/* Tips */}
         <Card style={styles.tipsCard}>
           <View style={styles.tipsHeader}>
-            <Ionicons name="bulb" size={24} color={colors.warningYellow} />
+            <Ionicons name="bulb"size={24} color={colors.warningYellow} />
             <Text style={styles.tipsTitle}>Exercise Tips</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="water" size={16} color={colors.spO2Blue} />
+            <Ionicons name="water"size={16} color={colors.spO2Blue} />
             <Text style={styles.tipText}>Stay hydrated before, during, and after exercise</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="fitness" size={16} color={colors.primaryGreen} />
+            <Ionicons name="fitness"size={16} color={colors.primaryGreen} />
             <Text style={styles.tipText}>Warm up for 5-10 minutes before exercising</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="body" size={16} color={colors.stressPurple} />
+            <Ionicons name="body"size={16} color={colors.stressPurple} />
             <Text style={styles.tipText}>Listen to your body and rest when needed</Text>
           </View>
         </Card>

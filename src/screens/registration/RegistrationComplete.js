@@ -64,12 +64,12 @@ const RegistrationComplete = () => {
     }
   };
 
-  const getDoshaEmoji = () => {
+  const getDoshaIcon = () => {
     switch(prakriti?.type) {
-      case 'vata': return '🌬️';
-      case 'pitta': return '🔥';
-      case 'kapha': return '🌊';
-      default: return '🌿';
+      case 'vata': return 'cloud-outline';
+      case 'pitta': return 'flame-outline';
+      case 'kapha': return 'water-outline';
+      default: return 'leaf-outline';
     }
   };
 
@@ -120,8 +120,9 @@ const RegistrationComplete = () => {
               <View style={styles.prakritiHeader}>
                 <Text style={styles.prakritiTitle}>Your Prakriti</Text>
                 <View style={[styles.prakritiBadge, { backgroundColor: getDoshaColor() }]}>
+                  <Ionicons name={getDoshaIcon()} size={14} color="white" style={{ marginRight: 6 }} />
                   <Text style={styles.prakritiBadgeText}>
-                    {getDoshaEmoji()} {prakriti.type.charAt(0).toUpperCase() + prakriti.type.slice(1)}
+                    {prakriti.type.charAt(0).toUpperCase() + prakriti.type.slice(1)}
                   </Text>
                 </View>
               </View>
@@ -227,6 +228,8 @@ const styles = StyleSheet.create({
     color: colors.textPrimary,
   },
   prakritiBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 20,

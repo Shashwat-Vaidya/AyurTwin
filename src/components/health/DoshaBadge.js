@@ -25,7 +25,7 @@ const DoshaBadge = ({
       color: colors.vata,
       lightColor: `${colors.vata}20`,
       icon: 'leaf',
-      emoji: '🌬️',
+      emoji: '',
       description: 'Air & Space - Creative, energetic',
     },
     pitta: {
@@ -33,7 +33,7 @@ const DoshaBadge = ({
       color: colors.pitta,
       lightColor: `${colors.pitta}20`,
       icon: 'flame',
-      emoji: '🔥',
+      emoji: '',
       description: 'Fire & Water - Intense, focused',
     },
     kapha: {
@@ -41,7 +41,7 @@ const DoshaBadge = ({
       color: colors.kapha,
       lightColor: `${colors.kapha}20`,
       icon: 'water',
-      emoji: '🌊',
+      emoji: '',
       description: 'Water & Earth - Calm, stable',
     },
   };
@@ -83,13 +83,7 @@ const DoshaBadge = ({
       style,
     ]}>
       {showIcon && (
-        <>
-          {size === 'small' ? (
-            <Text style={[styles.emoji, { fontSize: sizeStyles.emojiSize }]}>{config.emoji}</Text>
-          ) : (
-            <Ionicons name={config.icon} size={sizeStyles.icon} color={config.color} />
-          )}
-        </>
+        <Ionicons name={config.icon} size={sizeStyles.icon} color={config.color} style={{ marginRight: 4 }} />
       )}
       {showLabel && (
         <Text style={[styles.label, { fontSize: sizeStyles.fontSize, color: config.color }]}>

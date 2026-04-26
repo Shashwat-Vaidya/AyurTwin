@@ -32,7 +32,7 @@ const OnboardingScreen = () => {
       description: 'Your personal digital health twin that combines ancient Ayurvedic wisdom with modern technology.',
       icon: 'leaf',
       color: colors.primaryGreen,
-      image: '🌿',
+      image: '',
     },
     {
       id: '2',
@@ -40,7 +40,7 @@ const OnboardingScreen = () => {
       description: 'Monitor heart rate, SpO₂, temperature, stress, and activity in real-time with your wearable device.',
       icon: 'heart',
       color: colors.heartRate,
-      image: '❤️',
+      image: '',
     },
     {
       id: '3',
@@ -48,7 +48,7 @@ const OnboardingScreen = () => {
       description: 'Take our quiz to discover your unique dosha constitution and get personalized recommendations.',
       icon: 'body',
       color: colors.stressPurple,
-      image: '🧘',
+      image: '',
     },
     {
       id: '4',
@@ -56,7 +56,7 @@ const OnboardingScreen = () => {
       description: 'Receive early warnings about potential health risks and personalized lifestyle guidance.',
       icon: 'analytics',
       color: colors.primarySaffron,
-      image: '🤖',
+      image: '',
     },
   ];
 

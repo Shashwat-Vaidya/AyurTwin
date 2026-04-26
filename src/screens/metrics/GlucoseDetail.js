@@ -124,11 +124,11 @@ const GlucoseDetail = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Blood Glucose</Text>
           <TouchableOpacity style={styles.infoButton}>
-            <Ionicons name="information-circle-outline" size={24} color={colors.primarySaffron} />
+            <Ionicons name="information-circle-outline"size={24} color={colors.primarySaffron} />
           </TouchableOpacity>
         </View>
 
@@ -338,25 +338,25 @@ const GlucoseDetail = () => {
         
         <View style={styles.factorsGrid}>
           <Card style={styles.factorCard}>
-            <Ionicons name="restaurant" size={24} color={colors.tempOrange} />
+            <Ionicons name="restaurant"size={24} color={colors.tempOrange} />
             <Text style={styles.factorTitle}>Diet</Text>
             <Text style={styles.factorText}>Carbohydrates increase glucose</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="fitness" size={24} color={colors.primaryGreen} />
+            <Ionicons name="fitness"size={24} color={colors.primaryGreen} />
             <Text style={styles.factorTitle}>Exercise</Text>
             <Text style={styles.factorText}>Lowers glucose levels</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="flash" size={24} color={colors.stressPurple} />
+            <Ionicons name="flash"size={24} color={colors.stressPurple} />
             <Text style={styles.factorTitle}>Stress</Text>
             <Text style={styles.factorText}>Can increase glucose</Text>
           </Card>
           
           <Card style={styles.factorCard}>
-            <Ionicons name="medkit" size={24} color={colors.alertRed} />
+            <Ionicons name="medkit"size={24} color={colors.alertRed} />
             <Text style={styles.factorTitle}>Medications</Text>
             <Text style={styles.factorText}>Can affect glucose levels</Text>
           </Card>
@@ -364,25 +364,25 @@ const GlucoseDetail = () => {
 
         {/* Meal Timing Tips */}
         <Card style={styles.tipsCard}>
-          <Text style={styles.tipsTitle}>🍽️ Meal Timing Tips</Text>
+          <Text style={styles.tipsTitle}> Meal Timing Tips</Text>
           
           <View style={styles.tipItem}>
-            <Ionicons name="time" size={18} color={colors.primarySaffron} />
+            <Ionicons name="time"size={18} color={colors.primarySaffron} />
             <Text style={styles.tipText}>Test fasting glucose first thing in morning</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="time" size={18} color={colors.primarySaffron} />
+            <Ionicons name="time"size={18} color={colors.primarySaffron} />
             <Text style={styles.tipText}>Post-meal test 2 hours after eating</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="restaurant" size={18} color={colors.primarySaffron} />
+            <Ionicons name="restaurant"size={18} color={colors.primarySaffron} />
             <Text style={styles.tipText}>Eat meals at consistent times daily</Text>
           </View>
           
           <View style={styles.tipItem}>
-            <Ionicons name="water" size={18} color={colors.primarySaffron} />
+            <Ionicons name="water"size={18} color={colors.primarySaffron} />
             <Text style={styles.tipText}>Stay hydrated throughout the day</Text>
           </View>
         </Card>
@@ -393,7 +393,7 @@ const GlucoseDetail = () => {
           
           {glucoseCategory.recommendations.map((rec, index) => (
             <View key={index} style={styles.recommendationItem}>
-              <Ionicons name="checkmark-circle" size={18} color={colors.successGreen} />
+              <Ionicons name="checkmark-circle"size={18} color={colors.successGreen} />
               <Text style={styles.recommendationText}>{rec}</Text>
             </View>
           ))}
@@ -402,15 +402,13 @@ const GlucoseDetail = () => {
         {/* Action Buttons */}
         <View style={styles.buttonContainer}>
           <Button
-            title="Export Data"
-            onPress={() => {}}
+            title="Export Data"onPress={() => {}}
             style={styles.exportButton}
             outline
             icon="download-outline"
           />
           <Button
-            title="Set Alert"
-            onPress={() => {}}
+            title="Set Alert"onPress={() => {}}
             style={styles.alertButton}
             gradient
             icon="notifications-outline"

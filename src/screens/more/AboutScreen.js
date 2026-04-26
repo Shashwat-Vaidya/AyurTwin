@@ -28,22 +28,22 @@ const AboutScreen = () => {
     {
       name: 'Dr. Arya Sharma',
       role: 'Ayurvedic Consultant',
-      avatar: '👩‍⚕️',
+      avatar: '',
     },
     {
       name: 'Prof. Rajesh Kumar',
       role: 'Lead Researcher',
-      avatar: '👨‍🔬',
+      avatar: '',
     },
     {
       name: 'Priya Singh',
       role: 'UI/UX Designer',
-      avatar: '👩‍🎨',
+      avatar: '',
     },
     {
       name: 'Vikram Mehta',
       role: 'Lead Developer',
-      avatar: '👨‍💻',
+      avatar: '',
     },
   ];
 
@@ -79,7 +79,7 @@ const AboutScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>About</Text>
           <View style={{ width: 40 }} />
@@ -93,9 +93,9 @@ const AboutScreen = () => {
           style={styles.logoCard}
         >
           <View style={styles.logoContainer}>
-            <Ionicons name="leaf" size={50} color="white" />
+            <Ionicons name="leaf"size={50} color="white" />
             <View style={styles.logoHeart}>
-              <Ionicons name="heart" size={30} color="white" />
+              <Ionicons name="heart"size={30} color="white" />
             </View>
           </View>
           <Text style={styles.appName}>AyurTwin</Text>
@@ -124,7 +124,7 @@ const AboutScreen = () => {
           <Text style={styles.featuresTitle}>Key Features</Text>
           {features.map((feature, index) => (
             <View key={index} style={styles.featureItem}>
-              <Ionicons name="checkmark-circle" size={20} color={colors.successGreen} />
+              <Ionicons name="checkmark-circle"size={20} color={colors.successGreen} />
               <Text style={styles.featureText}>{feature}</Text>
             </View>
           ))}
@@ -162,7 +162,7 @@ const AboutScreen = () => {
           <Text style={styles.awardsTitle}>Awards & Recognition</Text>
           
           <View style={styles.awardItem}>
-            <Ionicons name="trophy" size={24} color={colors.warningYellow} />
+            <Ionicons name="trophy"size={24} color={colors.warningYellow} />
             <View style={styles.awardContent}>
               <Text style={styles.awardName}>Best Health Tech Innovation 2024</Text>
               <Text style={styles.awardOrg}>Digital Health Summit</Text>
@@ -170,7 +170,7 @@ const AboutScreen = () => {
           </View>
 
           <View style={styles.awardItem}>
-            <Ionicons name="medal" size={24} color={colors.primaryGreen} />
+            <Ionicons name="medal"size={24} color={colors.primaryGreen} />
             <View style={styles.awardContent}>
               <Text style={styles.awardName}>AI for Good Award</Text>
               <Text style={styles.awardOrg}>Tech for Humanity</Text>
@@ -178,7 +178,7 @@ const AboutScreen = () => {
           </View>
 
           <View style={styles.awardItem}>
-            <Ionicons name="star" size={24} color={colors.primarySaffron} />
+            <Ionicons name="star"size={24} color={colors.primarySaffron} />
             <View style={styles.awardContent}>
               <Text style={styles.awardName}>Top 10 Startups 2024</Text>
               <Text style={styles.awardOrg}>HealthTech Magazine</Text>
@@ -192,35 +192,35 @@ const AboutScreen = () => {
           
           <View style={styles.socialButtons}>
             <TouchableOpacity style={styles.socialButton} onPress={() => openLink('https://twitter.com/ayurtwin')}>
-              <Ionicons name="logo-twitter" size={24} color="#1DA1F2" />
+              <Ionicons name="logo-twitter"size={24} color="#1DA1F2" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton} onPress={() => openLink('https://linkedin.com/company/ayurtwin')}>
-              <Ionicons name="logo-linkedin" size={24} color="#0077B5" />
+              <Ionicons name="logo-linkedin"size={24} color="#0077B5" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton} onPress={() => openLink('https://facebook.com/ayurtwin')}>
-              <Ionicons name="logo-facebook" size={24} color="#4267B2" />
+              <Ionicons name="logo-facebook"size={24} color="#4267B2" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton} onPress={() => openLink('https://instagram.com/ayurtwin')}>
-              <Ionicons name="logo-instagram" size={24} color="#E4405F" />
+              <Ionicons name="logo-instagram"size={24} color="#E4405F" />
             </TouchableOpacity>
             <TouchableOpacity style={styles.socialButton} onPress={() => openLink('https://github.com/ayurtwin')}>
-              <Ionicons name="logo-github" size={24} color="#333" />
+              <Ionicons name="logo-github"size={24} color="#333" />
             </TouchableOpacity>
           </View>
 
           <View style={styles.contactInfo}>
             <TouchableOpacity style={styles.contactRow} onPress={() => openLink('mailto:support@ayurtwin.com')}>
-              <Ionicons name="mail-outline" size={20} color={colors.primarySaffron} />
+              <Ionicons name="mail-outline"size={20} color={colors.primarySaffron} />
               <Text style={styles.contactText}>support@ayurtwin.com</Text>
             </TouchableOpacity>
             
             <TouchableOpacity style={styles.contactRow} onPress={() => openLink('https://ayurtwin.com')}>
-              <Ionicons name="globe-outline" size={20} color={colors.primarySaffron} />
+              <Ionicons name="globe-outline"size={20} color={colors.primarySaffron} />
               <Text style={styles.contactText}>www.ayurtwin.com</Text>
             </TouchableOpacity>
             
             <View style={styles.contactRow}>
-              <Ionicons name="location-outline" size={20} color={colors.primarySaffron} />
+              <Ionicons name="location-outline"size={20} color={colors.primarySaffron} />
               <Text style={styles.contactText}>Bangalore, India</Text>
             </View>
           </View>
@@ -248,13 +248,12 @@ const AboutScreen = () => {
         {/* Copyright */}
         <Text style={styles.copyright}>
           © 2024 AyurTwin. All rights reserved.{'\n'}
-          Made with ❤️ in India
+          Made with  in India
         </Text>
 
         {/* Rate Us Button */}
         <Button
-          title="Rate AyurTwin on Play Store"
-          onPress={() => {}}
+          title="Rate AyurTwin on Play Store"onPress={() => {}}
           style={styles.rateButton}
           outline
           icon="star"

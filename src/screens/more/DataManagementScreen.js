@@ -162,7 +162,7 @@ const DataManagementScreen = () => {
 
   const handleDeleteAllData = () => {
     Alert.alert(
-      '⚠️ Delete All Data',
+      'Delete All Data',
       'Are you absolutely sure? This action cannot be undone. All your health data, personal information, and settings will be permanently deleted.',
       [
         { text: 'Cancel', style: 'cancel' },
@@ -172,7 +172,7 @@ const DataManagementScreen = () => {
           onPress: () => {
             Alert.alert(
               'Final Confirmation',
-              'Type "DELETE" to confirm',
+              'Type "DELETE"to confirm',
               [
                 { text: 'Cancel', style: 'cancel' },
                 {
@@ -209,7 +209,7 @@ const DataManagementScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Data Management</Text>
           <View style={{ width: 40 }} />
@@ -273,7 +273,7 @@ const DataManagementScreen = () => {
               style={[styles.actionButton, { backgroundColor: `${colors.primarySaffron}20` }]}
               onPress={() => handleExportData('json')}
             >
-              <Ionicons name="download" size={24} color={colors.primarySaffron} />
+              <Ionicons name="download"size={24} color={colors.primarySaffron} />
               <Text style={styles.actionButtonText}>Export JSON</Text>
             </TouchableOpacity>
             
@@ -281,7 +281,7 @@ const DataManagementScreen = () => {
               style={[styles.actionButton, { backgroundColor: `${colors.primaryGreen}20` }]}
               onPress={() => handleExportData('csv')}
             >
-              <Ionicons name="grid" size={24} color={colors.primaryGreen} />
+              <Ionicons name="grid"size={24} color={colors.primaryGreen} />
               <Text style={styles.actionButtonText}>Export CSV</Text>
             </TouchableOpacity>
           </View>
@@ -291,7 +291,7 @@ const DataManagementScreen = () => {
               style={[styles.actionButton, { backgroundColor: `${colors.spO2Blue}20` }]}
               onPress={handleImportData}
             >
-              <Ionicons name="cloud-upload" size={24} color={colors.spO2Blue} />
+              <Ionicons name="cloud-upload"size={24} color={colors.spO2Blue} />
               <Text style={styles.actionButtonText}>Import Data</Text>
             </TouchableOpacity>
             
@@ -299,7 +299,7 @@ const DataManagementScreen = () => {
               style={[styles.actionButton, { backgroundColor: `${colors.stressPurple}20` }]}
               onPress={handleBackup}
             >
-              <Ionicons name="cloud-done" size={24} color={colors.stressPurple} />
+              <Ionicons name="cloud-done"size={24} color={colors.stressPurple} />
               <Text style={styles.actionButtonText}>Backup</Text>
             </TouchableOpacity>
           </View>
@@ -311,7 +311,7 @@ const DataManagementScreen = () => {
           
           <View style={styles.settingRow}>
             <View style={styles.settingLeft}>
-              <Ionicons name="sync" size={20} color={colors.textSecondary} />
+              <Ionicons name="sync"size={20} color={colors.textSecondary} />
               <Text style={styles.settingLabel}>Enable Auto Backup</Text>
             </View>
             <Switch
@@ -387,39 +387,39 @@ const DataManagementScreen = () => {
           
           <View style={styles.backupItem}>
             <View style={styles.backupLeft}>
-              <Ionicons name="calendar" size={16} color={colors.textSecondary} />
+              <Ionicons name="calendar"size={16} color={colors.textSecondary} />
               <Text style={styles.backupDate}>Today, 2:30 PM</Text>
             </View>
             <View style={styles.backupRight}>
               <Text style={styles.backupSize}>127 MB</Text>
               <TouchableOpacity>
-                <Ionicons name="download" size={18} color={colors.primarySaffron} />
+                <Ionicons name="download"size={18} color={colors.primarySaffron} />
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.backupItem}>
             <View style={styles.backupLeft}>
-              <Ionicons name="calendar" size={16} color={colors.textSecondary} />
+              <Ionicons name="calendar"size={16} color={colors.textSecondary} />
               <Text style={styles.backupDate}>Yesterday, 10:15 AM</Text>
             </View>
             <View style={styles.backupRight}>
               <Text style={styles.backupSize}>125 MB</Text>
               <TouchableOpacity>
-                <Ionicons name="download" size={18} color={colors.primarySaffron} />
+                <Ionicons name="download"size={18} color={colors.primarySaffron} />
               </TouchableOpacity>
             </View>
           </View>
 
           <View style={styles.backupItem}>
             <View style={styles.backupLeft}>
-              <Ionicons name="calendar" size={16} color={colors.textSecondary} />
+              <Ionicons name="calendar"size={16} color={colors.textSecondary} />
               <Text style={styles.backupDate}>Jan 15, 2024</Text>
             </View>
             <View style={styles.backupRight}>
               <Text style={styles.backupSize}>124 MB</Text>
               <TouchableOpacity>
-                <Ionicons name="download" size={18} color={colors.primarySaffron} />
+                <Ionicons name="download"size={18} color={colors.primarySaffron} />
               </TouchableOpacity>
             </View>
           </View>
@@ -439,8 +439,7 @@ const DataManagementScreen = () => {
           </View>
 
           <Button
-            title="Clear Cache"
-            onPress={handleClearCache}
+            title="Clear Cache"onPress={handleClearCache}
             style={styles.clearCacheButton}
             outline
             icon="trash"
@@ -455,7 +454,7 @@ const DataManagementScreen = () => {
             style={styles.dangerButton}
             onPress={handleDeleteAllData}
           >
-            <Ionicons name="trash" size={20} color={colors.alertRed} />
+            <Ionicons name="trash"size={20} color={colors.alertRed} />
             <Text style={styles.dangerButtonText}>Delete All Data</Text>
           </TouchableOpacity>
           

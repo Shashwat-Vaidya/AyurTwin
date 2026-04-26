@@ -33,7 +33,7 @@ const ViruddhaAharaScreen = ({ navigation }) => {
     <ScrollView style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation?.goBack?.()}><Text style={styles.back}>←</Text></TouchableOpacity>
-        <Text style={styles.title}>⚠️ Viruddha Ahara</Text>
+        <Text style={styles.title}> Viruddha Ahara</Text>
         <View style={{ width: 24 }} />
       </View>
 
@@ -49,8 +49,7 @@ const ViruddhaAharaScreen = ({ navigation }) => {
             style={styles.input}
             value={input}
             onChangeText={setInput}
-            placeholder="e.g., milk, yogurt, fish..."
-            onSubmitEditing={addFood}
+            placeholder="e.g., milk, yogurt, fish..."onSubmitEditing={addFood}
           />
           <TouchableOpacity style={styles.addBtn} onPress={addFood}>
             <Text style={styles.addBtnText}>+</Text>
@@ -60,7 +59,7 @@ const ViruddhaAharaScreen = ({ navigation }) => {
         <View style={styles.foodList}>
           {foods.map((f, i) => (
             <TouchableOpacity key={i} style={styles.foodChip} onPress={() => removeFood(i)}>
-              <Text style={styles.foodChipText}>{f} ✕</Text>
+              <Text style={styles.foodChipText}>{f} </Text>
             </TouchableOpacity>
           ))}
         </View>
@@ -70,14 +69,14 @@ const ViruddhaAharaScreen = ({ navigation }) => {
           onPress={check}
           disabled={foods.length < 2 || loading}
         >
-          {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.checkBtnText}>🔍 Check Compatibility</Text>}
+          {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.checkBtnText}> Check Compatibility</Text>}
         </TouchableOpacity>
       </View>
 
       {result && (
         <View style={[styles.card, { borderLeftWidth: 4, borderLeftColor: result.isCompatible ? COLORS.success : COLORS.error }]}>
           <Text style={[styles.resultTitle, { color: result.isCompatible ? COLORS.success : COLORS.error }]}>
-            {result.isCompatible ? '✅ Compatible' : '⚠️ Incompatible'}
+            {result.isCompatible ? 'Compatible' : 'Incompatible'}
           </Text>
           <Text style={styles.resultRec}>{result.recommendation}</Text>
 
@@ -89,7 +88,7 @@ const ViruddhaAharaScreen = ({ navigation }) => {
                   <Text style={styles.pairFoods}>{p.food1} + {p.food2}</Text>
                   <Text style={styles.pairType}>{p.type} · severity: {p.severity}</Text>
                   <Text style={styles.pairExpl}>{p.explanation}</Text>
-                  {p.reference && <Text style={styles.pairRef}>📖 {p.reference}</Text>}
+                  {p.reference && <Text style={styles.pairRef}> {p.reference}</Text>}
                 </View>
               ))}
             </View>

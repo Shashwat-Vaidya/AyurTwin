@@ -100,7 +100,7 @@ const MessageBubble = ({
             onPress={() => handleAction(action)}
           >
             {action.icon && (
-              <Ionicons name={action.icon} size={16} color="white" style={styles.actionIcon} />
+              <Ionicons name={action.icon} size={16} color="white"style={styles.actionIcon} />
             )}
             <Text style={styles.actionText}>{action.label}</Text>
           </TouchableOpacity>
@@ -120,13 +120,13 @@ const MessageBubble = ({
             style={[styles.feedbackButton, feedback === 'yes' && styles.feedbackButtonActive]}
             onPress={() => handleFeedback('yes')}
           >
-            <Ionicons name="thumbs-up" size={16} color={feedback === 'yes' ? colors.successGreen : colors.textSecondary} />
+            <Ionicons name="thumbs-up"size={16} color={feedback === 'yes' ? colors.successGreen : colors.textSecondary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.feedbackButton, feedback === 'no' && styles.feedbackButtonActive]}
             onPress={() => handleFeedback('no')}
           >
-            <Ionicons name="thumbs-down" size={16} color={feedback === 'no' ? colors.alertRed : colors.textSecondary} />
+            <Ionicons name="thumbs-down"size={16} color={feedback === 'no' ? colors.alertRed : colors.textSecondary} />
           </TouchableOpacity>
         </View>
       </View>
@@ -181,7 +181,7 @@ const MessageBubble = ({
       {/* Avatar */}
       {showAvatar && isBot && (
         <View style={styles.avatarContainer}>
-          <Text style={styles.avatar}>{message.avatar || '🤖'}</Text>
+          <Ionicons name={message.avatar || 'logo-electron'} size={20} color={colors.primaryGreen} />
         </View>
       )}
 
@@ -227,7 +227,7 @@ const MessageBubble = ({
       {/* User Avatar */}
       {showAvatar && isUser && (
         <View style={styles.avatarContainer}>
-          <Text style={styles.avatar}>{message.avatar || '👤'}</Text>
+          <Ionicons name={message.avatar || 'person-circle-outline'} size={20} color={colors.primarySaffron} />
         </View>
       )}
     </Animated.View>

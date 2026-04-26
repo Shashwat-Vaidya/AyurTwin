@@ -94,8 +94,12 @@ export const suggestViruddha = (q) =>
 // ── Yoga / Prevention / Education / Reports ────────────────────────
 export const getYogaRecommendations = () => request('/yoga/recommendations');
 export const getPrevention = () => request('/prevention');
+export const getPreventionPlans = () => request('/prevention');
 export const getEducation = () => request('/education');
 export const getPanchakarma = () => request('/education/panchakarma');
+export const getPanchakarmaAssessment = () => request('/education/panchakarma');
+export const getFoodRecommendations = () => request('/diet/recommendations');
+export const getDoshaClock = () => request('/diet/dosha-clock');
 export const getReport = () => request('/reports/me');
 export const getReportPdfUrl = async () => {
     const t = await getAuthToken();

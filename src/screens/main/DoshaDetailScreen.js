@@ -11,7 +11,7 @@ import { detectDoshaImbalance } from '../../utils/healthCalculations';
 
 const doshaData = {
   Vata: {
-    color: COLORS.vata, gradient: ['#7B68EE', '#9B89FF'], icon: '💨',
+    color: COLORS.vata, gradient: ['#7B68EE', '#9B89FF'], icon: '',
     elements: 'Space + Air', qualities: 'Dry, Light, Cold, Rough, Subtle, Mobile',
     governs: 'Movement, Breathing, Nervous System, Circulation',
     body: 'Thin, light frame. Dry skin and hair. Small eyes. Irregular features.',
@@ -24,7 +24,7 @@ const doshaData = {
     herbs: ['Ashwagandha', 'Shatavari', 'Brahmi', 'Ginger', 'Sesame oil'],
   },
   Pitta: {
-    color: COLORS.pitta, gradient: ['#FF6347', '#FF7F6A'], icon: '🔥',
+    color: COLORS.pitta, gradient: ['#FF6347', '#FF7F6A'], icon: '',
     elements: 'Fire + Water', qualities: 'Hot, Sharp, Light, Liquid, Oily, Spreading',
     governs: 'Digestion, Metabolism, Body Temperature, Transformation',
     body: 'Medium build. Warm skin. Sharp features. Reddish complexion.',
@@ -37,7 +37,7 @@ const doshaData = {
     herbs: ['Amalaki (Amla)', 'Shatavari', 'Neem', 'Sandalwood', 'Coconut oil'],
   },
   Kapha: {
-    color: COLORS.kapha, gradient: ['#32CD32', '#50E050'], icon: '🌊',
+    color: COLORS.kapha, gradient: ['#32CD32', '#50E050'], icon: '',
     elements: 'Earth + Water', qualities: 'Heavy, Slow, Cool, Oily, Smooth, Dense, Stable',
     governs: 'Structure, Lubrication, Stability, Immunity, Growth',
     body: 'Strong, well-built frame. Smooth, oily skin. Large eyes. Thick hair.',
@@ -98,15 +98,15 @@ const DoshaDetailScreen = ({ navigation }) => {
 
       <View style={styles.content}>
         {/* Score overview */}
-        <Card variant="elevated" style={styles.scoreCard}>
+        <Card variant="elevated"style={styles.scoreCard}>
           <View style={styles.doshaScores}>
-            <ScoreCircle label="Vata" percent={prakriti.vata_percent || 33} color={COLORS.vata} />
-            <ScoreCircle label="Pitta" percent={prakriti.pitta_percent || 33} color={COLORS.pitta} />
-            <ScoreCircle label="Kapha" percent={prakriti.kapha_percent || 33} color={COLORS.kapha} />
+            <ScoreCircle label="Vata"percent={prakriti.vata_percent || 33} color={COLORS.vata} />
+            <ScoreCircle label="Pitta"percent={prakriti.pitta_percent || 33} color={COLORS.pitta} />
+            <ScoreCircle label="Kapha"percent={prakriti.kapha_percent || 33} color={COLORS.kapha} />
           </View>
           {dosha.imbalanceDetected && (
             <View style={styles.imbalanceBox}>
-              <Text style={styles.imbalanceText}>⚠️ {dosha.dominantImbalance?.charAt(0).toUpperCase() + dosha.dominantImbalance?.slice(1)} imbalance detected</Text>
+              <Text style={styles.imbalanceText}> {dosha.dominantImbalance?.charAt(0).toUpperCase() + dosha.dominantImbalance?.slice(1)} imbalance detected</Text>
             </View>
           )}
         </Card>
@@ -114,9 +114,9 @@ const DoshaDetailScreen = ({ navigation }) => {
         {/* About this Dosha */}
         <Text style={styles.sectionTitle}>About {primaryDosha}</Text>
         <Card variant="elevated">
-          <DetailRow label="Elements" value={data.elements} />
-          <DetailRow label="Qualities" value={data.qualities} />
-          <DetailRow label="Governs" value={data.governs} />
+          <DetailRow label="Elements"value={data.elements} />
+          <DetailRow label="Qualities"value={data.qualities} />
+          <DetailRow label="Governs"value={data.governs} />
         </Card>
 
         <Text style={styles.sectionTitle}>Physical Traits</Text>
@@ -136,32 +136,32 @@ const DoshaDetailScreen = ({ navigation }) => {
 
         {/* Balanced vs Imbalanced */}
         <Text style={styles.sectionTitle}>When Balanced</Text>
-        <Card variant="elevated" style={{ borderLeftWidth: 3, borderLeftColor: COLORS.success }}>
+        <Card variant="elevated"style={{ borderLeftWidth: 3, borderLeftColor: COLORS.success }}>
           {data.balanced.map((item, i) => (
-            <Text key={i} style={styles.listItem}>✅ {item}</Text>
+            <Text key={i} style={styles.listItem}> {item}</Text>
           ))}
         </Card>
 
         <Text style={styles.sectionTitle}>When Imbalanced</Text>
-        <Card variant="elevated" style={{ borderLeftWidth: 3, borderLeftColor: COLORS.error }}>
+        <Card variant="elevated"style={{ borderLeftWidth: 3, borderLeftColor: COLORS.error }}>
           {data.imbalanced.map((item, i) => (
-            <Text key={i} style={styles.listItem}>⚠️ {item}</Text>
+            <Text key={i} style={styles.listItem}> {item}</Text>
           ))}
         </Card>
 
         {/* Diet */}
         <Text style={styles.sectionTitle}>Diet Recommendations</Text>
-        <Card variant="elevated" style={{ borderLeftWidth: 3, borderLeftColor: data.color }}>
+        <Card variant="elevated"style={{ borderLeftWidth: 3, borderLeftColor: data.color }}>
           {data.diet.map((item, i) => (
-            <Text key={i} style={styles.listItem}>🍽 {item}</Text>
+            <Text key={i} style={styles.listItem}> {item}</Text>
           ))}
         </Card>
 
         {/* Lifestyle */}
         <Text style={styles.sectionTitle}>Lifestyle Tips</Text>
-        <Card variant="elevated" style={{ borderLeftWidth: 3, borderLeftColor: data.color }}>
+        <Card variant="elevated"style={{ borderLeftWidth: 3, borderLeftColor: data.color }}>
           {data.lifestyle.map((item, i) => (
-            <Text key={i} style={styles.listItem}>🌿 {item}</Text>
+            <Text key={i} style={styles.listItem}> {item}</Text>
           ))}
         </Card>
 
@@ -180,7 +180,7 @@ const DoshaDetailScreen = ({ navigation }) => {
         {['Vata', 'Pitta', 'Kapha'].map((d) => {
           const dd = doshaData[d];
           return (
-            <Card key={d} variant="elevated" style={[styles.allDoshaCard, { borderLeftWidth: 3, borderLeftColor: dd.color }]}>
+            <Card key={d} variant="elevated"style={[styles.allDoshaCard, { borderLeftWidth: 3, borderLeftColor: dd.color }]}>
               <View style={styles.allDoshaHeader}>
                 <Text style={styles.allDoshaIcon}>{dd.icon}</Text>
                 <Text style={[styles.allDoshaName, { color: dd.color }]}>{d}</Text>

@@ -159,7 +159,7 @@ const PrakritiQuizScreen = ({ navigation }) => {
           )}
         </View>
 
-        <GradientButton title="Continue Registration" onPress={handleFinish} style={styles.finishBtn} />
+        <GradientButton title="Continue Registration"onPress={handleFinish} style={styles.finishBtn} />
       </ScrollView>
     );
   }
@@ -177,7 +177,7 @@ const PrakritiQuizScreen = ({ navigation }) => {
         <Text style={styles.questionText}>{question.question}</Text>
         {question.explanation && (
           <View style={styles.explainBox}>
-            <Text style={styles.explainIcon}>💡</Text>
+            <Text style={styles.explainIcon}></Text>
             <Text style={styles.explainText}>{question.explanation}</Text>
           </View>
         )}

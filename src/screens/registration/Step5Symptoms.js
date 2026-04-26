@@ -228,7 +228,7 @@ const Step5Symptoms = () => {
         {/* Symptom Score Card */}
         <View style={styles.scoreCard}>
           <View style={styles.scoreHeader}>
-            <Ionicons name="pulse" size={24} color={colors.heartRate} />
+            <Ionicons name="pulse"size={24} color={colors.heartRate} />
             <Text style={styles.scoreTitle}>Symptom Assessment Score</Text>
           </View>
           
@@ -252,7 +252,7 @@ const Step5Symptoms = () => {
 
         {/* Info Card */}
         <View style={styles.infoCard}>
-          <Ionicons name="information-circle" size={24} color={colors.spO2Blue} />
+          <Ionicons name="information-circle"size={24} color={colors.spO2Blue} />
           <Text style={styles.infoText}>
             Select any symptoms you've noticed recently. This helps us identify 
             potential health concerns early.
@@ -376,12 +376,12 @@ const Step5Symptoms = () => {
 
                   {showDetails[symptom.id] && (
                     <View style={styles.recommendationsBox}>
-                      <Text style={styles.recommendationsTitle}>🌿 Ayurvedic Perspective:</Text>
+                      <Text style={styles.recommendationsTitle}> Ayurvedic Perspective:</Text>
                       <Text style={styles.recommendationText}>
                         {getAyurvedicAdvice(symptom.id)}
                       </Text>
                       <View style={styles.tipContainer}>
-                        <Ionicons name="leaf" size={16} color={colors.primaryGreen} />
+                        <Ionicons name="leaf"size={16} color={colors.primaryGreen} />
                         <Text style={styles.tipText}>
                           Track this symptom in the app for better insights
                         </Text>
@@ -400,7 +400,7 @@ const Step5Symptoms = () => {
           
           <View style={styles.fatigueHeader}>
             <View style={styles.fatigueIconContainer}>
-              <Ionicons name="battery-charging" size={24} color={getFatigueColor()} />
+              <Ionicons name="battery-charging"size={24} color={getFatigueColor()} />
               <Text style={styles.fatigueLabel}>Energy Level</Text>
             </View>
             <View style={[styles.fatigueBadge, { backgroundColor: getFatigueColor() }]}>
@@ -416,8 +416,7 @@ const Step5Symptoms = () => {
             value={fatigueLevel}
             onValueChange={setFatigueLevel}
             minimumTrackTintColor={getFatigueColor()}
-            maximumTrackTintColor="rgba(0,0,0,0.1)"
-            thumbTintColor={getFatigueColor()}
+            maximumTrackTintColor="rgba(0,0,0,0.1)"thumbTintColor={getFatigueColor()}
           />
 
           <View style={styles.fatigueScale}>
@@ -432,7 +431,7 @@ const Step5Symptoms = () => {
           {/* Fatigue Tips based on level */}
           {fatigueLevel > 6 && (
             <View style={styles.fatigueTip}>
-              <Ionicons name="bulb" size={20} color={colors.warningYellow} />
+              <Ionicons name="bulb"size={20} color={colors.warningYellow} />
               <Text style={styles.fatigueTipText}>
                 Consider checking iron levels and sleep quality
               </Text>
@@ -442,7 +441,7 @@ const Step5Symptoms = () => {
 
         {/* Weekly Tracking Reminder */}
         <View style={styles.reminderCard}>
-          <Ionicons name="calendar" size={24} color={colors.primarySaffron} />
+          <Ionicons name="calendar"size={24} color={colors.primarySaffron} />
           <View style={styles.reminderContent}>
             <Text style={styles.reminderTitle}>Track Symptoms Weekly</Text>
             <Text style={styles.reminderText}>
@@ -454,14 +453,12 @@ const Step5Symptoms = () => {
         {/* Navigation Buttons */}
         <View style={styles.buttonContainer}>
           <Button
-            title="Back"
-            onPress={handleBack}
+            title="Back"onPress={handleBack}
             style={styles.backButton}
             outline
           />
           <Button
-            title="Next"
-            onPress={handleNext}
+            title="Next"onPress={handleNext}
             style={styles.nextButton}
             gradient
           />

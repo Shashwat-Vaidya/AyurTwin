@@ -3,6 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
   Alert, KeyboardAvoidingView, Platform, Switch
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import InputField from '../../components/common/InputField';
 import GradientButton from '../../components/common/GradientButton';
@@ -323,7 +324,7 @@ const RegisterScreen = ({ navigation, route }) => {
         style={[styles.roleCard, state.userType === 'patient' && styles.roleCardActive]}
         onPress={() => dispatch({ type: 'SET_USER_TYPE', payload: 'patient' })}
       >
-        <Text style={styles.roleIcon}>👤</Text>
+        <Ionicons name="person-circle-outline" size={36} color={COLORS.primary} style={styles.roleIcon} />
         <View style={styles.roleInfo}>
           <Text style={styles.roleTitle}>Patient</Text>
           <Text style={styles.roleDesc}>Full health tracking, predictions, and personalized guidance</Text>
@@ -333,7 +334,7 @@ const RegisterScreen = ({ navigation, route }) => {
         style={[styles.roleCard, state.userType === 'family_member' && styles.roleCardActive]}
         onPress={() => dispatch({ type: 'SET_USER_TYPE', payload: 'family_member' })}
       >
-        <Text style={styles.roleIcon}>👨‍👩‍👧</Text>
+        <Ionicons name="people-outline" size={36} color={COLORS.primary} style={styles.roleIcon} />
         <View style={styles.roleInfo}>
           <Text style={styles.roleTitle}>Family Member</Text>
           <Text style={styles.roleDesc}>Monitor and track health of your family members</Text>
@@ -345,12 +346,12 @@ const RegisterScreen = ({ navigation, route }) => {
   const renderStep1 = () => (
     <View>
       <Text style={styles.stepTitle}>Personal Information</Text>
-      <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="👤" error={errors.firstName} />
+      <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="person-outline" error={errors.firstName} />
       <InputField label="Middle Name" value={middleName} onChangeText={setMiddleName} placeholder="Middle name" />
       <InputField label="Last Name *" value={lastName} onChangeText={setLastName} placeholder="Last name" error={errors.lastName} />
-      <InputField label="Email *" value={email} onChangeText={setEmail} placeholder="Email address" keyboardType="email-address" icon="📧" error={errors.email} />
-      <InputField label="Phone" value={phone} onChangeText={setPhone} placeholder="Phone number" keyboardType="phone-pad" icon="📱" />
-      <InputField label="Date of Birth (YYYY-MM-DD)" value={dob} onChangeText={setDob} placeholder="1990-01-15" icon="📅" />
+      <InputField label="Email *" value={email} onChangeText={setEmail} placeholder="Email address" keyboardType="email-address" icon="mail-outline" error={errors.email} />
+      <InputField label="Phone" value={phone} onChangeText={setPhone} placeholder="Phone number" keyboardType="phone-pad" icon="call-outline" />
+      <InputField label="Date of Birth (YYYY-MM-DD)" value={dob} onChangeText={setDob} placeholder="1990-01-15" icon="calendar-outline" />
 
       <Text style={styles.fieldLabel}>Gender</Text>
       {renderChipSelector(GENDERS, gender, setGender)}
@@ -380,22 +381,22 @@ const RegisterScreen = ({ navigation, route }) => {
       <Text style={styles.stepTitle}>Lifestyle</Text>
       <Text style={styles.fieldLabel}>Physical Activity</Text>
       {renderChipSelector([
-        { label: '🚶 Low', value: 'low' },
-        { label: '🏃 Moderate', value: 'moderate' },
-        { label: '💪 High', value: 'high' },
+        { label: 'Low', value: 'low' },
+        { label: 'Moderate', value: 'moderate' },
+        { label: 'High', value: 'high' },
       ], physicalActivity, setPhysicalActivity)}
 
       <Text style={styles.fieldLabel}>Work Type</Text>
       {renderChipSelector([
-        { label: '💺 Sitting', value: 'sitting' },
-        { label: '🏗 Active', value: 'active' },
-        { label: '🔄 Mixed', value: 'mixed' },
+        { label: 'Sitting', value: 'sitting' },
+        { label: 'Active', value: 'active' },
+        { label: 'Mixed', value: 'mixed' },
       ], workType, setWorkType)}
 
       <Text style={styles.fieldLabel}>Diet Type *</Text>
       {renderChipSelector([
-        { label: '🌱 Vegetarian', value: 'veg' },
-        { label: '🍗 Non-Vegetarian', value: 'nonveg' },
+        { label: 'Vegetarian', value: 'veg' },
+        { label: 'Non-Vegetarian', value: 'nonveg' },
       ], dietType, setDietType)}
 
       {renderToggle('Smoking', smoking, setSmoking)}
@@ -411,8 +412,8 @@ const RegisterScreen = ({ navigation, route }) => {
     <View>
       <Text style={styles.stepTitle}>Sleep & Mental Health</Text>
       {renderSlider('Sleep Duration (hours)', sleepDuration + 3, (v) => setSleepDuration(v - 3), 3, 12)}
-      <InputField label="Sleep Time" value={sleepTime} onChangeText={setSleepTime} placeholder="22:00" icon="🌙" />
-      <InputField label="Wake Time" value={wakeTime} onChangeText={setWakeTime} placeholder="06:00" icon="🌅" />
+      <InputField label="Sleep Time" value={sleepTime} onChangeText={setSleepTime} placeholder="22:00" icon="moon-outline" />
+      <InputField label="Wake Time" value={wakeTime} onChangeText={setWakeTime} placeholder="06:00" icon="sunny-outline" />
       {renderSlider('Daytime Sleepiness (0-10)', sleepiness, setSleepiness)}
       {renderSlider('Stress Level (0-10)', stressLevel, setStressLevel)}
       {renderSlider('Anxiety Level (0-10)', anxietyLevel, setAnxietyLevel)}
@@ -453,16 +454,16 @@ const RegisterScreen = ({ navigation, route }) => {
 
       <Text style={styles.fieldLabel}>Body Temperature Tendency</Text>
       {renderChipSelector([
-        { label: '❄️ Cold', value: 'cold' },
-        { label: '🌡 Normal', value: 'normal' },
-        { label: '🔥 Hot', value: 'hot' },
+        { label: 'Cold', value: 'cold' },
+        { label: 'Normal', value: 'normal' },
+        { label: 'Hot', value: 'hot' },
       ], bodyTemp, setBodyTemp)}
 
       <Text style={styles.fieldLabel}>Stress Response</Text>
       {renderChipSelector([
-        { label: '😌 Calm', value: 'calm' },
-        { label: '😤 Irritable', value: 'irritable' },
-        { label: '😰 Anxious', value: 'anxious' },
+        { label: 'Calm', value: 'calm' },
+        { label: 'Irritable', value: 'irritable' },
+        { label: 'Anxious', value: 'anxious' },
       ], stressResponse, setStressResponse)}
     </View>
   );
@@ -471,7 +472,7 @@ const RegisterScreen = ({ navigation, route }) => {
     <View>
       <Text style={styles.stepTitle}>Prakriti Assessment</Text>
       <View style={styles.quizPromptCard}>
-        <Text style={styles.quizIcon}>🔺</Text>
+        <Ionicons name="triangle-outline" size={48} color={COLORS.primary} style={styles.quizIcon} />
         <Text style={styles.quizTitle}>Prakriti Quiz</Text>
         <Text style={styles.quizDesc}>
           Complete a 22-question assessment to determine your Ayurvedic constitution (Vata, Pitta, Kapha).
@@ -495,9 +496,9 @@ const RegisterScreen = ({ navigation, route }) => {
   const renderStep8 = () => (
     <View>
       <Text style={styles.stepTitle}>Create Your Account</Text>
-      <InputField label="Username *" value={username} onChangeText={setUsername} placeholder="Choose a username" icon="👤" error={errors.username} />
-      <InputField label="Password *" value={password} onChangeText={setPassword} placeholder="Min 6 characters" secureTextEntry icon="🔒" error={errors.password} />
-      <InputField label="Confirm Password *" value={confirmPassword} onChangeText={setConfirmPassword} placeholder="Re-enter password" secureTextEntry icon="🔒" error={errors.confirmPassword} />
+      <InputField label="Username *" value={username} onChangeText={setUsername} placeholder="Choose a username" icon="person-outline" error={errors.username} />
+      <InputField label="Password *" value={password} onChangeText={setPassword} placeholder="Min 6 characters" secureTextEntry icon="lock-closed-outline" error={errors.password} />
+      <InputField label="Confirm Password *" value={confirmPassword} onChangeText={setConfirmPassword} placeholder="Re-enter password" secureTextEntry icon="lock-closed-outline" error={errors.confirmPassword} />
     </View>
   );
 
@@ -505,10 +506,10 @@ const RegisterScreen = ({ navigation, route }) => {
     <View>
       <Text style={styles.stepTitle}>Family Member Info</Text>
       <Text style={styles.stepDesc}>Enter your basic details to create a family account</Text>
-      <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="👤" error={errors.firstName} />
+      <InputField label="First Name *" value={firstName} onChangeText={setFirstName} placeholder="First name" icon="person-outline" error={errors.firstName} />
       <InputField label="Last Name *" value={lastName} onChangeText={setLastName} placeholder="Last name" error={errors.lastName} />
-      <InputField label="Email *" value={familyEmail} onChangeText={setFamilyEmail} placeholder="Email (patient invites you here)" keyboardType="email-address" icon="📧" autoCapitalize="none" error={errors.familyEmail} />
-      <InputField label="Age *" value={familyAge} onChangeText={setFamilyAge} placeholder="Your age" keyboardType="numeric" icon="🎂" error={errors.familyAge} />
+      <InputField label="Email *" value={familyEmail} onChangeText={setFamilyEmail} placeholder="Email (patient invites you here)" keyboardType="email-address" icon="mail-outline" autoCapitalize="none" error={errors.familyEmail} />
+      <InputField label="Age *" value={familyAge} onChangeText={setFamilyAge} placeholder="Your age" keyboardType="numeric" icon="calendar-number-outline" error={errors.familyAge} />
 
       <Text style={styles.fieldLabel}>Relationship *</Text>
       {renderChipSelector(RELATIONSHIPS, relationship, setRelationship)}

@@ -26,7 +26,7 @@ const ChatbotFloating = ({
   onClose,
   initialMessage = "Hi! I'm AyurBot. How can I help you today?",
   botName = 'AyurBot',
-  botAvatar = '🤖',
+  botAvatar = '',
 }) => {
   
   const [isOpen, setIsOpen] = useState(false);
@@ -157,7 +157,7 @@ const ChatbotFloating = ({
         ]}
         pointerEvents={isOpen ? 'auto' : 'none'}
       >
-        <BlurView intensity={80} tint="light" style={styles.blurContainer}>
+        <BlurView intensity={80} tint="light"style={styles.blurContainer}>
           <ChatInterface
             onClose={closeChat}
             initialMessage={initialMessage}
@@ -186,10 +186,10 @@ const ChatbotFloating = ({
             style={[styles.button, { width: size, height: size, borderRadius: size / 2 }]}
           >
             {isOpen ? (
-              <Ionicons name="close" size={size * 0.5} color="white" />
+              <Ionicons name="close"size={size * 0.5} color="white" />
             ) : (
               <>
-                <Ionicons name="chatbubble" size={size * 0.5} color="white" />
+                <Ionicons name="chatbubble"size={size * 0.5} color="white" />
                 {unreadCount > 0 && (
                   <Animated.View
                     style={[
@@ -219,7 +219,7 @@ export const ChatbotIcon = ({ onPress, size = 50, color = colors.primarySaffron 
       colors={[color, `${color}CC`]}
       style={[styles.icon, { width: size, height: size, borderRadius: size / 2 }]}
     >
-      <Ionicons name="chatbubble" size={size * 0.5} color="white" />
+      <Ionicons name="chatbubble"size={size * 0.5} color="white" />
     </LinearGradient>
   </TouchableOpacity>
 );
@@ -230,7 +230,7 @@ export const ChatbotMinimized = ({ onPress, lastMessage }) => (
       colors={[colors.primarySaffron, colors.primaryGreen]}
       style={styles.minimizedIcon}
     >
-      <Ionicons name="chatbubble" size={24} color="white" />
+      <Ionicons name="chatbubble"size={24} color="white" />
     </LinearGradient>
     <View style={styles.minimizedContent}>
       <Text style={styles.minimizedTitle}>AyurBot</Text>
@@ -238,7 +238,7 @@ export const ChatbotMinimized = ({ onPress, lastMessage }) => (
         {lastMessage || "How can I help you?"}
       </Text>
     </View>
-    <Ionicons name="chevron-up" size={20} color={colors.textSecondary} />
+    <Ionicons name="chevron-up"size={20} color={colors.textSecondary} />
   </TouchableOpacity>
 );
 

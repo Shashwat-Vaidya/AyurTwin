@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 
-const InputField = ({ label, value, onChangeText, placeholder, keyboardType, secureTextEntry, error, icon, rightIcon, onRightIconPress, multiline, style }) => {
+const InputField = ({ label, value, onChangeText, placeholder, keyboardType, secureTextEntry, error, icon, rightIcon, onRightIconPress, multiline, style, autoCapitalize }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -14,7 +15,7 @@ const InputField = ({ label, value, onChangeText, placeholder, keyboardType, sec
         isFocused && styles.inputFocused,
         error && styles.inputError,
       ]}>
-        {icon && <Text style={styles.icon}>{icon}</Text>}
+        {icon && <Ionicons name={icon} size={18} color={COLORS.textSecondary} style={styles.icon} />}
         <TextInput
           style={[styles.input, multiline && styles.multiline]}
           value={value}
@@ -26,15 +27,16 @@ const InputField = ({ label, value, onChangeText, placeholder, keyboardType, sec
           onFocus={() => setIsFocused(true)}
           onBlur={() => setIsFocused(false)}
           multiline={multiline}
+          autoCapitalize={autoCapitalize}
         />
         {secureTextEntry && (
           <TouchableOpacity onPress={() => setShowPassword(!showPassword)} style={styles.eyeBtn}>
-            <Text style={styles.eyeIcon}>{showPassword ? '👁' : '👁‍🗨'}</Text>
+            <Ionicons name={showPassword ? 'eye-outline' : 'eye-off-outline'} size={20} color={COLORS.textSecondary} />
           </TouchableOpacity>
         )}
         {rightIcon && (
           <TouchableOpacity onPress={onRightIconPress} style={styles.eyeBtn}>
-            <Text style={styles.eyeIcon}>{rightIcon}</Text>
+            <Ionicons name={rightIcon} size={20} color={COLORS.textSecondary} />
           </TouchableOpacity>
         )}
       </View>
@@ -71,7 +73,6 @@ const styles = StyleSheet.create({
     borderColor: COLORS.error,
   },
   icon: {
-    fontSize: 18,
     marginRight: 10,
   },
   input: {
@@ -86,9 +87,6 @@ const styles = StyleSheet.create({
   },
   eyeBtn: {
     padding: 4,
-  },
-  eyeIcon: {
-    fontSize: 18,
   },
   errorText: {
     color: COLORS.error,

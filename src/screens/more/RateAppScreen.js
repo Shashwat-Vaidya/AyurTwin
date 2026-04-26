@@ -43,7 +43,7 @@ const RateAppScreen = () => {
       setTimeout(() => {
         setIsSubmitting(false);
         Alert.alert(
-          'Thank You! 🌟',
+          'Thank You! ',
           'We\'re so glad you\'re enjoying AyurTwin! Would you like to leave a review on the app store?',
           [
             { text: 'Not Now', style: 'cancel' },
@@ -135,7 +135,7 @@ const RateAppScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Rate AyurTwin</Text>
           <View style={{ width: 40 }} />
@@ -148,7 +148,7 @@ const RateAppScreen = () => {
           end={{ x: 1, y: 1 }}
           style={styles.heroCard}
         >
-          <Ionicons name="heart" size={60} color="white" />
+          <Ionicons name="heart"size={60} color="white" />
           <Text style={styles.heroTitle}>Love AyurTwin?</Text>
           <Text style={styles.heroSubtitle}>
             Your feedback helps us improve and reach more people on their wellness journey.
@@ -168,8 +168,7 @@ const RateAppScreen = () => {
 
             {/* Rate Button */}
             <Button
-              title="Submit Rating"
-              onPress={handleRate}
+              title="Submit Rating"onPress={handleRate}
               style={styles.rateButton}
               gradient
               loading={isSubmitting}
@@ -188,8 +187,7 @@ const RateAppScreen = () => {
 
             <TextInput
               style={styles.feedbackInput}
-              placeholder="Your feedback..."
-              placeholderTextColor={colors.textTertiary}
+              placeholder="Your feedback..."placeholderTextColor={colors.textTertiary}
               value={feedback}
               onChangeText={setFeedback}
               multiline
@@ -199,17 +197,14 @@ const RateAppScreen = () => {
 
             <TextInput
               style={styles.emailInput}
-              placeholder="Email (optional, for follow-up)"
-              placeholderTextColor={colors.textTertiary}
+              placeholder="Email (optional, for follow-up)"placeholderTextColor={colors.textTertiary}
               value={email}
               onChangeText={setEmail}
-              keyboardType="email-address"
-              autoCapitalize="none"
+              keyboardType="email-address"autoCapitalize="none"
             />
 
             <Button
-              title="Submit Feedback"
-              onPress={handleSubmitFeedback}
+              title="Submit Feedback"onPress={handleSubmitFeedback}
               style={styles.submitButton}
               gradient
             />
@@ -219,7 +214,7 @@ const RateAppScreen = () => {
         {/* Thank You Message (for high ratings) */}
         {hasRated && (
           <Card style={styles.thankYouCard}>
-            <Ionicons name="checkmark-circle" size={80} color={colors.successGreen} />
+            <Ionicons name="checkmark-circle"size={80} color={colors.successGreen} />
             <Text style={styles.thankYouTitle}>Thank You!</Text>
             <Text style={styles.thankYouText}>
               Your rating means the world to us. We're committed to helping you on your health journey!
@@ -240,7 +235,7 @@ const RateAppScreen = () => {
                 colors={['#25D366', '#128C7E']}
                 style={styles.shareButtonGradient}
               >
-                <Ionicons name="logo-whatsapp" size={24} color="white" />
+                <Ionicons name="logo-whatsapp"size={24} color="white" />
               </LinearGradient>
             </TouchableOpacity>
 
@@ -249,7 +244,7 @@ const RateAppScreen = () => {
                 colors={['#1DA1F2', '#0D8ECF']}
                 style={styles.shareButtonGradient}
               >
-                <Ionicons name="logo-twitter" size={24} color="white" />
+                <Ionicons name="logo-twitter"size={24} color="white" />
               </LinearGradient>
             </TouchableOpacity>
 
@@ -258,7 +253,7 @@ const RateAppScreen = () => {
                 colors={['#4267B2', '#2E4B8C']}
                 style={styles.shareButtonGradient}
               >
-                <Ionicons name="logo-facebook" size={24} color="white" />
+                <Ionicons name="logo-facebook"size={24} color="white" />
               </LinearGradient>
             </TouchableOpacity>
 
@@ -267,7 +262,7 @@ const RateAppScreen = () => {
                 colors={['#E1306C', '#C13584']}
                 style={styles.shareButtonGradient}
               >
-                <Ionicons name="logo-instagram" size={24} color="white" />
+                <Ionicons name="logo-instagram"size={24} color="white" />
               </LinearGradient>
             </TouchableOpacity>
           </View>
@@ -279,7 +274,7 @@ const RateAppScreen = () => {
             <Text style={styles.statNumber}>4.8</Text>
             <View style={styles.statStars}>
               {[1, 2, 3, 4, 5].map((star) => (
-                <Ionicons key={star} name="star" size={12} color={colors.warningYellow} />
+                <Ionicons key={star} name="star"size={12} color={colors.warningYellow} />
               ))}
             </View>
             <Text style={styles.statLabel}>App Store</Text>
@@ -289,7 +284,7 @@ const RateAppScreen = () => {
             <Text style={styles.statNumber}>4.7</Text>
             <View style={styles.statStars}>
               {[1, 2, 3, 4, 5].map((star) => (
-                <Ionicons key={star} name="star" size={12} color={colors.warningYellow} />
+                <Ionicons key={star} name="star"size={12} color={colors.warningYellow} />
               ))}
             </View>
             <Text style={styles.statLabel}>Play Store</Text>
@@ -313,7 +308,7 @@ const RateAppScreen = () => {
               <Text style={styles.testimonialName}>Rajesh Kumar</Text>
               <View style={styles.testimonialStars}>
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Ionicons key={star} name="star" size={12} color={colors.warningYellow} />
+                  <Ionicons key={star} name="star"size={12} color={colors.warningYellow} />
                 ))}
               </View>
             </View>
@@ -332,7 +327,7 @@ const RateAppScreen = () => {
               <Text style={styles.testimonialName}>Priya Sharma</Text>
               <View style={styles.testimonialStars}>
                 {[1, 2, 3, 4, 5].map((star) => (
-                  <Ionicons key={star} name="star" size={12} color={colors.warningYellow} />
+                  <Ionicons key={star} name="star"size={12} color={colors.warningYellow} />
                 ))}
               </View>
             </View>

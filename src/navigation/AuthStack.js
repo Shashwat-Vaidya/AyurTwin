@@ -6,7 +6,6 @@ import LandingScreen from "../screens/auth/LandingScreen";
 import SignInScreen from "../screens/auth/SignInScreen";
 import ForgotPasswordScreen from "../screens/auth/ForgotPasswordScreen";
 import ResetPasswordScreen from "../screens/auth/ResetPasswordScreen";
-import BiometricScreen from "../screens/auth/BiometricScreen";
 
 import RegistrationStack from "./RegistrationStack";
 
@@ -29,9 +28,7 @@ export default function AuthStack() {
       <Stack.Screen name={ROUTES.SIGN_IN} component={SignInScreen} />
       <Stack.Screen name={ROUTES.FORGOT_PASSWORD} component={ForgotPasswordScreen} />
       <Stack.Screen name={ROUTES.RESET_PASSWORD} component={ResetPasswordScreen} />
-      <Stack.Screen name={ROUTES.BIOMETRIC} component={BiometricScreen} />
 
-      {/* 🔥 FIX ADDED HERE */}
       <Stack.Screen
         name={ROUTES.REGISTRATION_NAVIGATOR}
         component={RegistrationStack}

@@ -91,7 +91,7 @@ const SocialFeedScreen = () => {
   if (loading) {
     return (
       <View style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]}>
-        <ActivityIndicator size="large" color={COLORS.primary} />
+        <ActivityIndicator size="large"color={COLORS.primary} />
         <Text style={{ marginTop: 12, color: COLORS.textSecondary }}>Loading community posts...</Text>
       </View>
     );
@@ -108,33 +108,32 @@ const SocialFeedScreen = () => {
         {/* Compose */}
         <TouchableOpacity style={styles.composeBtn} onPress={() => setShowCompose(!showCompose)}>
           <Text style={styles.composeText}>Share your health journey...</Text>
-          <Text style={styles.composeIcon}>✍️</Text>
+          <Text style={styles.composeIcon}></Text>
         </TouchableOpacity>
 
         {showCompose && (
-          <Card variant="elevated" style={styles.composeCard}>
+          <Card variant="elevated"style={styles.composeCard}>
             <TextInput
               style={styles.composeInput}
               value={newPost}
               onChangeText={setNewPost}
-              placeholder="What's your health achievement today?"
-              multiline
+              placeholder="What's your health achievement today?"multiline
               numberOfLines={3}
             />
-            <GradientButton title="Post" onPress={handlePost} />
+            <GradientButton title="Post"onPress={handlePost} />
           </Card>
         )}
 
         {/* Feed */}
         {posts.length === 0 && (
           <View style={styles.emptyState}>
-            <Text style={styles.emptyIcon}>📝</Text>
+            <Text style={styles.emptyIcon}></Text>
             <Text style={styles.emptyText}>No posts yet. Be the first to share!</Text>
           </View>
         )}
 
         {posts.map((post) => (
-          <Card key={post.id} variant="elevated" style={styles.postCard}>
+          <Card key={post.id} variant="elevated"style={styles.postCard}>
             <View style={styles.postHeader}>
               <View style={styles.postAvatar}>
                 <Text style={styles.postAvatarText}>{post.avatar}</Text>
@@ -153,16 +152,16 @@ const SocialFeedScreen = () => {
             <View style={styles.postActions}>
               <TouchableOpacity style={styles.actionBtn} onPress={() => handleLike(post.id)}>
                 <Text style={styles.actionIcon}>
-                  {post.liked ? '❤️' : '🤍'}
+                  {post.liked ? '' : ''}
                 </Text>
                 <Text style={[styles.actionText, post.liked && styles.actionTextActive]}>{post.likes}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionBtn}>
-                <Text style={styles.actionIcon}>💬</Text>
+                <Text style={styles.actionIcon}></Text>
                 <Text style={styles.actionText}>{post.comments}</Text>
               </TouchableOpacity>
               <TouchableOpacity style={styles.actionBtn}>
-                <Text style={styles.actionIcon}>🔗</Text>
+                <Text style={styles.actionIcon}></Text>
                 <Text style={styles.actionText}>Share</Text>
               </TouchableOpacity>
             </View>

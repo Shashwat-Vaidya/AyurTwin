@@ -141,14 +141,14 @@ export const playSound = async (soundFile = 'notification.wav') => {
  */
 export const createHealthAlertNotification = (alert) => {
   const severityColors = {
-    critical: '🔴',
-    high: '🟠',
-    medium: '🟡',
-    low: '🟢',
-    info: '🔵',
+    critical: '',
+    high: '',
+    medium: '',
+    low: '',
+    info: '',
   };
 
-  const emoji = severityColors[alert.severity] || '⚪';
+  const emoji = severityColors[alert.severity] || '';
 
   return {
     title: `${emoji} ${alert.title}`,
@@ -172,11 +172,11 @@ export const createHealthAlertNotification = (alert) => {
  */
 export const createReminderNotification = (reminder) => {
   const icons = {
-    medication: '💊',
-    water: '💧',
-    exercise: '🏃',
-    sleep: '😴',
-    meal: '🍽️',
+    medication: '',
+    water: '',
+    exercise: '',
+    sleep: '',
+    meal: '',
   };
 
   const icon = icons[reminder.type] || '⏰';
@@ -202,12 +202,12 @@ export const createReminderNotification = (reminder) => {
  */
 export const createDoshaUpdateNotification = (doshaData) => {
   const doshaEmojis = {
-    vata: '🌬️',
-    pitta: '🔥',
-    kapha: '🌊',
+    vata: '',
+    pitta: '',
+    kapha: '',
   };
 
-  const emoji = doshaEmojis[doshaData.dominant] || '🌿';
+  const emoji = doshaEmojis[doshaData.dominant] || '';
 
   return {
     title: `${emoji} Dosha Balance Update`,
@@ -229,7 +229,7 @@ export const createDoshaUpdateNotification = (doshaData) => {
  */
 export const createWeeklyReportNotification = (report) => {
   return {
-    title: '📊 Weekly Health Report Ready',
+    title: 'Weekly Health Report Ready',
     body: `Your health score: ${report.score}/100. Tap to view details.`,
     data: {
       type: NOTIFICATION_TYPES.WEEKLY_REPORT,
@@ -249,7 +249,7 @@ export const createWeeklyReportNotification = (report) => {
  */
 export const createAchievementNotification = (achievement) => {
   return {
-    title: `🏆 Achievement Unlocked: ${achievement.name}`,
+    title: ` Achievement Unlocked: ${achievement.name}`,
     body: achievement.description,
     data: {
       type: NOTIFICATION_TYPES.ACHIEVEMENT,
@@ -268,14 +268,14 @@ export const createAchievementNotification = (achievement) => {
  */
 export const createDeviceNotification = (deviceData) => {
   const icons = {
-    connected: '🔗',
-    disconnected: '⚠️',
-    lowBattery: '🔋',
-    synced: '🔄',
-    error: '❌',
+    connected: '',
+    disconnected: '',
+    lowBattery: '',
+    synced: '',
+    error: '',
   };
 
-  const icon = icons[deviceData.status] || '📱';
+  const icon = icons[deviceData.status] || '';
 
   return {
     title: `${icon} Device ${deviceData.status}`,

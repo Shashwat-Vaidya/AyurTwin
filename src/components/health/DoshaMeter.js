@@ -58,19 +58,19 @@ const DoshaMeter = ({
     }
   };
 
-  const getDoshaEmoji = (dosha) => {
+  const getDoshaIcon = (dosha) => {
     switch(dosha) {
       case 'vata':
       case 'Vata':
-        return '🌬️';
+        return 'cloud-outline';
       case 'pitta':
       case 'Pitta':
-        return '🔥';
+        return 'flame-outline';
       case 'kapha':
       case 'Kapha':
-        return '🌊';
+        return 'water-outline';
       default:
-        return '🌿';
+        return 'leaf-outline';
     }
   };
 
@@ -98,13 +98,12 @@ const DoshaMeter = ({
       <View style={[styles.meterContainer, { width: size, height: size }]}>
         <Svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
           {/* Background Circle */}
-          <G rotation="-90" origin={`${size / 2}, ${size / 2}`}>
+          <G rotation="-90"origin={`${size / 2}, ${size / 2}`}>
             <Circle
               cx={size / 2}
               cy={size / 2}
               r={radius}
-              stroke="rgba(0,0,0,0.05)"
-              strokeWidth={15}
+              stroke="rgba(0,0,0,0.05)"strokeWidth={15}
               fill="none"
             />
             
@@ -117,8 +116,7 @@ const DoshaMeter = ({
               strokeWidth={15}
               strokeDasharray={`${circumference * vataNorm / 100} ${circumference}`}
               strokeDashoffset={0}
-              strokeLinecap="round"
-              fill="none"
+              strokeLinecap="round"fill="none"
             />
             
             {/* Pitta Segment */}
@@ -130,8 +128,7 @@ const DoshaMeter = ({
               strokeWidth={15}
               strokeDasharray={`${circumference * pittaNorm / 100} ${circumference}`}
               strokeDashoffset={-circumference * vataNorm / 100}
-              strokeLinecap="round"
-              fill="none"
+              strokeLinecap="round"fill="none"
             />
             
             {/* Kapha Segment */}
@@ -143,17 +140,14 @@ const DoshaMeter = ({
               strokeWidth={15}
               strokeDasharray={`${circumference * kaphaNorm / 100} ${circumference}`}
               strokeDashoffset={-circumference * (vataNorm + pittaNorm) / 100}
-              strokeLinecap="round"
-              fill="none"
+              strokeLinecap="round"fill="none"
             />
           </G>
         </Svg>
 
         {/* Center Content */}
         <View style={styles.centerContent}>
-          <Text style={[styles.dominantEmoji, { fontSize: size * 0.15 }]}>
-            {getDoshaEmoji(dominantDosha)}
-          </Text>
+          <Ionicons name={getDoshaIcon(dominantDosha)} size={size * 0.18} color={dominantColor} />
           <Text style={[styles.dominantText, { fontSize: size * 0.08, color: dominantColor }]}>
             {dominantDosha}
           </Text>

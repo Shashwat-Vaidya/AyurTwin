@@ -23,30 +23,30 @@ const LanguageScreen = () => {
   const [searchQuery, setSearchQuery] = useState('');
 
   const languages = [
-    { code: 'en', name: 'English', native: 'English', flag: '🇺🇸', rtl: false },
-    { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '🇮🇳', rtl: false },
-    { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '🇮🇳', rtl: false },
-    { code: 'te', name: 'Telugu', native: 'తెలుగు', flag: '🇮🇳', rtl: false },
-    { code: 'ta', name: 'Tamil', native: 'தமிழ்', flag: '🇮🇳', rtl: false },
-    { code: 'mr', name: 'Marathi', native: 'मराठी', flag: '🇮🇳', rtl: false },
-    { code: 'gu', name: 'Gujarati', native: 'ગુજરાતી', flag: '🇮🇳', rtl: false },
-    { code: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ', flag: '🇮🇳', rtl: false },
-    { code: 'ml', name: 'Malayalam', native: 'മലയാളം', flag: '🇮🇳', rtl: false },
-    { code: 'or', name: 'Odia', native: 'ଓଡ଼ିଆ', flag: '🇮🇳', rtl: false },
-    { code: 'pa', name: 'Punjabi', native: 'ਪੰਜਾਬੀ', flag: '🇮🇳', rtl: false },
-    { code: 'as', name: 'Assamese', native: 'অসমীয়া', flag: '🇮🇳', rtl: false },
-    { code: 'ur', name: 'Urdu', native: 'اردو', flag: '🇮🇳', rtl: true },
-    { code: 'sa', name: 'Sanskrit', native: 'संस्कृतम्', flag: '🇮🇳', rtl: false },
-    { code: 'es', name: 'Spanish', native: 'Español', flag: '🇪🇸', rtl: false },
-    { code: 'fr', name: 'French', native: 'Français', flag: '🇫🇷', rtl: false },
-    { code: 'de', name: 'German', native: 'Deutsch', flag: '🇩🇪', rtl: false },
-    { code: 'it', name: 'Italian', native: 'Italiano', flag: '🇮🇹', rtl: false },
-    { code: 'pt', name: 'Portuguese', native: 'Português', flag: '🇵🇹', rtl: false },
-    { code: 'ru', name: 'Russian', native: 'Русский', flag: '🇷🇺', rtl: false },
-    { code: 'ja', name: 'Japanese', native: '日本語', flag: '🇯🇵', rtl: false },
-    { code: 'ko', name: 'Korean', native: '한국어', flag: '🇰🇷', rtl: false },
-    { code: 'zh', name: 'Chinese', native: '中文', flag: '🇨🇳', rtl: false },
-    { code: 'ar', name: 'Arabic', native: 'العربية', flag: '🇸🇦', rtl: true },
+    { code: 'en', name: 'English', native: 'English', flag: '', rtl: false },
+    { code: 'hi', name: 'Hindi', native: 'हिन्दी', flag: '', rtl: false },
+    { code: 'bn', name: 'Bengali', native: 'বাংলা', flag: '', rtl: false },
+    { code: 'te', name: 'Telugu', native: 'తెలుగు', flag: '', rtl: false },
+    { code: 'ta', name: 'Tamil', native: 'தமிழ்', flag: '', rtl: false },
+    { code: 'mr', name: 'Marathi', native: 'मराठी', flag: '', rtl: false },
+    { code: 'gu', name: 'Gujarati', native: 'ગુજરાતી', flag: '', rtl: false },
+    { code: 'kn', name: 'Kannada', native: 'ಕನ್ನಡ', flag: '', rtl: false },
+    { code: 'ml', name: 'Malayalam', native: 'മലയാളം', flag: '', rtl: false },
+    { code: 'or', name: 'Odia', native: 'ଓଡ଼ିଆ', flag: '', rtl: false },
+    { code: 'pa', name: 'Punjabi', native: 'ਪੰਜਾਬੀ', flag: '', rtl: false },
+    { code: 'as', name: 'Assamese', native: 'অসমীয়া', flag: '', rtl: false },
+    { code: 'ur', name: 'Urdu', native: 'اردو', flag: '', rtl: true },
+    { code: 'sa', name: 'Sanskrit', native: 'संस्कृतम्', flag: '', rtl: false },
+    { code: 'es', name: 'Spanish', native: 'Español', flag: '', rtl: false },
+    { code: 'fr', name: 'French', native: 'Français', flag: '', rtl: false },
+    { code: 'de', name: 'German', native: 'Deutsch', flag: '', rtl: false },
+    { code: 'it', name: 'Italian', native: 'Italiano', flag: '', rtl: false },
+    { code: 'pt', name: 'Portuguese', native: 'Português', flag: '', rtl: false },
+    { code: 'ru', name: 'Russian', native: 'Русский', flag: '', rtl: false },
+    { code: 'ja', name: 'Japanese', native: '日本語', flag: '', rtl: false },
+    { code: 'ko', name: 'Korean', native: '한국어', flag: '', rtl: false },
+    { code: 'zh', name: 'Chinese', native: '中文', flag: '', rtl: false },
+    { code: 'ar', name: 'Arabic', native: 'العربية', flag: '', rtl: true },
   ];
 
   const popularLanguages = languages.slice(0, 8);
@@ -106,7 +106,7 @@ const LanguageScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Language</Text>
           <View style={{ width: 40 }} />
@@ -168,7 +168,7 @@ const LanguageScreen = () => {
                 {getLanguageProgress(language.code)}%
               </Text>
               {selectedLanguage === language.code && (
-                <Ionicons name="checkmark-circle" size={24} color={colors.successGreen} />
+                <Ionicons name="checkmark-circle"size={24} color={colors.successGreen} />
               )}
             </View>
           </TouchableOpacity>
@@ -207,7 +207,7 @@ const LanguageScreen = () => {
                 {getLanguageProgress(language.code)}%
               </Text>
               {selectedLanguage === language.code && (
-                <Ionicons name="checkmark-circle" size={24} color={colors.successGreen} />
+                <Ionicons name="checkmark-circle"size={24} color={colors.successGreen} />
               )}
             </View>
           </TouchableOpacity>
@@ -215,7 +215,7 @@ const LanguageScreen = () => {
 
         {/* RTL Notice */}
         <Card style={styles.rtlCard}>
-          <Ionicons name="information-circle" size={20} color={colors.spO2Blue} />
+          <Ionicons name="information-circle"size={20} color={colors.spO2Blue} />
           <Text style={styles.rtlText}>
             Right-to-left languages like Arabic and Urdu will adjust the app layout accordingly.
           </Text>
@@ -228,8 +228,7 @@ const LanguageScreen = () => {
             Help us translate AyurTwin into your language and earn rewards!
           </Text>
           <Button
-            title="Contribute Translations"
-            onPress={() => {}}
+            title="Contribute Translations"onPress={() => {}}
             style={styles.contributeButton}
             outline
             icon="language"
@@ -238,8 +237,7 @@ const LanguageScreen = () => {
 
         {/* Save Button */}
         <Button
-          title="Save Language"
-          onPress={handleSave}
+          title="Save Language"onPress={handleSave}
           style={styles.saveButton}
           gradient
         />

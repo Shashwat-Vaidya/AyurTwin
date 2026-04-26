@@ -50,7 +50,7 @@ const RecipesScreen = () => {
       dosha: ['vata'],
       time: 15,
       difficulty: 'Easy',
-      image: '🥣',
+      image: '',
       color: colors.vata,
       ingredients: ['Rolled oats', 'Ghee', 'Cinnamon', 'Almond milk', 'Maple syrup'],
       instructions: [
@@ -72,7 +72,7 @@ const RecipesScreen = () => {
       dosha: ['pitta'],
       time: 10,
       difficulty: 'Easy',
-      image: '🥗',
+      image: '',
       color: colors.pitta,
       ingredients: ['Cucumber', 'Mint', 'Cilantro', 'Lime juice', 'Coconut yogurt'],
       instructions: [
@@ -94,7 +94,7 @@ const RecipesScreen = () => {
       dosha: ['kapha'],
       time: 25,
       difficulty: 'Medium',
-      image: '🥙',
+      image: '',
       color: colors.kapha,
       ingredients: ['Quinoa', 'Roasted vegetables', 'Lemon', 'Fresh herbs', 'Olive oil'],
       instructions: [
@@ -116,7 +116,7 @@ const RecipesScreen = () => {
       dosha: ['vata', 'pitta', 'kapha'],
       time: 40,
       difficulty: 'Medium',
-      image: '🍚',
+      image: '',
       color: colors.primaryGreen,
       ingredients: ['Basmati rice', 'Mung dal', 'Ghee', 'Cumin', 'Coriander', 'Ginger'],
       instructions: [
@@ -138,7 +138,7 @@ const RecipesScreen = () => {
       dosha: ['vata', 'kapha'],
       time: 5,
       difficulty: 'Easy',
-      image: '🥛',
+      image: '',
       color: colors.warningYellow,
       ingredients: ['Almond milk', 'Turmeric', 'Ginger', 'Cinnamon', 'Honey'],
       instructions: [
@@ -160,7 +160,7 @@ const RecipesScreen = () => {
       dosha: ['vata'],
       time: 20,
       difficulty: 'Easy',
-      image: '🍎',
+      image: '',
       color: colors.heartRate,
       ingredients: ['Apples', 'Cinnamon', 'Cardamom', 'Ghee', 'Dates'],
       instructions: [
@@ -182,7 +182,7 @@ const RecipesScreen = () => {
       dosha: ['pitta', 'kapha'],
       time: 30,
       difficulty: 'Easy',
-      image: '🥣',
+      image: '',
       color: colors.spO2Blue,
       ingredients: ['Mung beans', 'Cumin', 'Coriander', 'Turmeric', 'Ghee'],
       instructions: [
@@ -204,7 +204,7 @@ const RecipesScreen = () => {
       dosha: ['vata'],
       time: 35,
       difficulty: 'Easy',
-      image: '🥕',
+      image: '',
       color: colors.tempOrange,
       ingredients: ['Carrots', 'Sweet potatoes', 'Parsnips', 'Olive oil', 'Rosemary'],
       instructions: [
@@ -253,27 +253,26 @@ const RecipesScreen = () => {
         {/* Header */}
         <View style={styles.header}>
           <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
-            <Ionicons name="arrow-back" size={24} color={colors.textPrimary} />
+            <Ionicons name="arrow-back"size={24} color={colors.textPrimary} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Ayurvedic Recipes</Text>
           <TouchableOpacity style={styles.favoritesButton}>
-            <Ionicons name="heart" size={24} color={colors.heartRate} />
+            <Ionicons name="heart"size={24} color={colors.heartRate} />
           </TouchableOpacity>
         </View>
 
         {/* Search Bar */}
         <View style={styles.searchContainer}>
-          <Ionicons name="search" size={20} color={colors.textTertiary} />
+          <Ionicons name="search"size={20} color={colors.textTertiary} />
           <TextInput
             style={styles.searchInput}
-            placeholder="Search recipes..."
-            placeholderTextColor={colors.textTertiary}
+            placeholder="Search recipes..."placeholderTextColor={colors.textTertiary}
             value={searchQuery}
             onChangeText={setSearchQuery}
           />
           {searchQuery.length > 0 && (
             <TouchableOpacity onPress={() => setSearchQuery('')}>
-              <Ionicons name="close-circle" size={20} color={colors.textTertiary} />
+              <Ionicons name="close-circle"size={20} color={colors.textTertiary} />
             </TouchableOpacity>
           )}
         </View>
@@ -368,15 +367,15 @@ const RecipesScreen = () => {
 
                 <View style={styles.recipeMeta}>
                   <View style={styles.metaItem}>
-                    <Ionicons name="time" size={14} color={colors.textTertiary} />
+                    <Ionicons name="time"size={14} color={colors.textTertiary} />
                     <Text style={styles.metaText}>{recipe.time} min</Text>
                   </View>
                   <View style={styles.metaItem}>
-                    <Ionicons name="flame" size={14} color={colors.textTertiary} />
+                    <Ionicons name="flame"size={14} color={colors.textTertiary} />
                     <Text style={styles.metaText}>{recipe.calories} cal</Text>
                   </View>
                   <View style={styles.metaItem}>
-                    <Ionicons name="fitness" size={14} color={colors.textTertiary} />
+                    <Ionicons name="fitness"size={14} color={colors.textTertiary} />
                     <Text style={styles.metaText}>{recipe.difficulty}</Text>
                   </View>
                 </View>
@@ -438,8 +437,7 @@ const RecipesScreen = () => {
             Create a personalized meal plan based on your dosha and dietary preferences.
           </Text>
           <Button
-            title="Create Meal Plan"
-            onPress={() => {}}
+            title="Create Meal Plan"onPress={() => {}}
             style={styles.planButton}
             gradient
           />

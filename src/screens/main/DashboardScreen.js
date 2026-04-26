@@ -29,27 +29,40 @@ const DashboardScreen = ({ navigation }) => {
     const fast = setInterval(fetchSensor, 5000);     // live sensor every 5s
     const slow = setInterval(loadDashboard, 60000);  // full aggregate every 60s
     return () => { clearInterval(fast); clearInterval(slow); };
-  }, []);
+  }, [user?.id]);
 
   const fetchSensor = async () => {
     if (!user?.id) return;
-    const r = await getLatestSensor(user.id);
-    if (r.success && r.data?.sensor) {
-      const s = r.data.sensor;
-      setSensorData({ ...s, temperature: s.body_temperature });
+    try {
+      const r = await getLatestSensor(user.id);
+      if (r.success && r.data?.sensor) {
+        const s = r.data.sensor;
+        setSensorData({ ...s, temperature: s.body_temperature });
+      } else if (!r.success) {
+        console.warn('[DashboardScreen] Failed to fetch sensor:', r.error);
+      }
+    } catch (error) {
+      console.error('[DashboardScreen] Sensor fetch error:', error);
     }
   };
 
   const loadDashboard = async () => {
-    const r = await getDashboard();
-    if (!r.success) return;
-    const d = r.data;
-    setDashUser(d.user);
-    setRisks(d.disease_risks || {});
-    setHealthScore(d.health_score || 0);
-    setDoshaBalance(d.dosha || { vata: 33, pitta: 33, kapha: 34 });
-    setAlerts((d.alerts || []).map(a => ({ type: a.severity, title: a.title, message: a.message })));
-    if (d.sensor) setSensorData({ ...d.sensor, temperature: d.sensor.body_temperature });
+    try {
+      const r = await getDashboard();
+      if (!r.success) {
+        console.warn('[DashboardScreen] Failed to load dashboard:', r.error);
+        return;
+      }
+      const d = r.data;
+      setDashUser(d.user);
+      setRisks(d.disease_risks || {});
+      setHealthScore(d.health_score || 0);
+      setDoshaBalance(d.dosha || { vata: 33, pitta: 33, kapha: 34 });
+      setAlerts((d.alerts || []).map(a => ({ type: a.severity, title: a.title, message: a.message })));
+      if (d.sensor) setSensorData({ ...d.sensor, temperature: d.sensor.body_temperature });
+    } catch (error) {
+      console.error('[DashboardScreen] Dashboard load error:', error);
+    }
   };
 
   const handleLogout = () => {
@@ -225,9 +238,12 @@ const DashboardScreen = ({ navigation }) => {
             <DoshaBar label="Kapha" percent={doshaBalance.kapha || 33} color={COLORS.kapha} />
           </View>
           {doshaBalance.imbalanceDetected && (
-            <Text style={styles.doshaWarning}>
-              ⚠️ {doshaBalance.dominantImbalance?.charAt(0).toUpperCase() + doshaBalance.dominantImbalance?.slice(1)} imbalance detected
-            </Text>
+            <View style={styles.doshaWarningRow}>
+              <Ionicons name="warning-outline" size={14} color={COLORS.warning} style={{ marginRight: 6 }} />
+              <Text style={styles.doshaWarning}>
+                {doshaBalance.dominantImbalance?.charAt(0).toUpperCase() + doshaBalance.dominantImbalance?.slice(1)} imbalance detected
+              </Text>
+            </View>
           )}
         </Card>
 
@@ -341,7 +357,8 @@ const styles = StyleSheet.create({
   doshaBarTrack: { flex: 1, width: 24, backgroundColor: COLORS.border, borderRadius: 12, overflow: 'hidden', justifyContent: 'flex-end' },
   doshaBarFill: { width: '100%', borderRadius: 12 },
   doshaBarPercent: { fontSize: 12, fontWeight: '700', marginTop: 4 },
-  doshaWarning: { fontSize: 12, color: COLORS.warning, textAlign: 'center', marginTop: 12, fontWeight: '600' },
+  doshaWarningRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 12 },
+  doshaWarning: { fontSize: 12, color: COLORS.warning, textAlign: 'center', fontWeight: '600' },
   disclaimer: { fontSize: 10, color: COLORS.textLight, textAlign: 'center', marginTop: 24, marginBottom: 30, lineHeight: 14 },
 });
 

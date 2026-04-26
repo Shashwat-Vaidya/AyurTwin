@@ -74,19 +74,19 @@ const LifestyleScreen = ({ navigation }) => {
 
   const exerciseRecommendations = () => {
     if (prakriti.includes('vata')) return [
-      { name: 'Gentle Yoga', duration: '30 min', icon: '🧘' },
-      { name: 'Walking', duration: '30 min', icon: '🚶' },
-      { name: 'Tai Chi', duration: '20 min', icon: '🌊' },
+      { name: 'Gentle Yoga', duration: '30 min', ion: 'body-outline' },
+      { name: 'Walking', duration: '30 min', ion: 'walk-outline' },
+      { name: 'Tai Chi', duration: '20 min', ion: 'water-outline' },
     ];
     if (prakriti.includes('pitta')) return [
-      { name: 'Swimming', duration: '30 min', icon: '🏊' },
-      { name: 'Moon Salutation', duration: '20 min', icon: '🌙' },
-      { name: 'Cycling', duration: '30 min', icon: '🚴' },
+      { name: 'Swimming', duration: '30 min', ion: 'water-outline' },
+      { name: 'Moon Salutation', duration: '20 min', ion: 'moon-outline' },
+      { name: 'Cycling', duration: '30 min', ion: 'bicycle-outline' },
     ];
     return [
-      { name: 'Brisk Walking', duration: '45 min', icon: '🏃' },
-      { name: 'HIIT', duration: '20 min', icon: '💪' },
-      { name: 'Power Yoga', duration: '30 min', icon: '🔥' },
+      { name: 'Brisk Walking', duration: '45 min', ion: 'walk-outline' },
+      { name: 'HIIT', duration: '20 min', ion: 'barbell-outline' },
+      { name: 'Power Yoga', duration: '30 min', ion: 'flame-outline' },
     ];
   };
 
@@ -122,7 +122,7 @@ const LifestyleScreen = ({ navigation }) => {
         </View>
 
         {/* Dinacharya */}
-        <Text style={styles.sectionTitle}>🌅 Dinacharya (Daily Routine)</Text>
+        <Text style={styles.sectionTitle}>Dinacharya (Daily Routine)</Text>
         <Card variant="elevated">
           <View style={styles.progressHeader}>
             <Text style={styles.progressText}>{completedCount}/8 completed</Text>
@@ -134,25 +134,30 @@ const LifestyleScreen = ({ navigation }) => {
             <View style={[styles.progressFill, { width: `${dinacharyaProgress}%` }]} />
           </View>
           {[
-            { key: 'wake_early', label: 'Wake up early (before 6 AM)', icon: '🌅' },
-            { key: 'drink_water', label: 'Drink warm water', icon: '💧' },
-            { key: 'exercise', label: 'Exercise / Yoga', icon: '🏃' },
-            { key: 'meditation', label: 'Meditation (10 min)', icon: '🧘' },
-            { key: 'healthy_breakfast', label: 'Healthy breakfast', icon: '🍳' },
-            { key: 'healthy_lunch', label: 'Balanced lunch', icon: '🍱' },
-            { key: 'healthy_dinner', label: 'Light dinner (before 8 PM)', icon: '🍲' },
-            { key: 'early_sleep', label: 'Sleep by 10 PM', icon: '😴' },
+            { key: 'wake_early', label: 'Wake up early (before 6 AM)', ion: 'sunny-outline' },
+            { key: 'drink_water', label: 'Drink warm water', ion: 'water-outline' },
+            { key: 'exercise', label: 'Exercise / Yoga', ion: 'walk-outline' },
+            { key: 'meditation', label: 'Meditation (10 min)', ion: 'body-outline' },
+            { key: 'healthy_breakfast', label: 'Healthy breakfast', ion: 'cafe-outline' },
+            { key: 'healthy_lunch', label: 'Balanced lunch', ion: 'restaurant-outline' },
+            { key: 'healthy_dinner', label: 'Light dinner (before 8 PM)', ion: 'fast-food-outline' },
+            { key: 'early_sleep', label: 'Sleep by 10 PM', ion: 'moon-outline' },
           ].map((item) => (
             <TouchableOpacity key={item.key} style={styles.checkItem} onPress={() => toggleDinacharya(item.key)}>
-              <Text style={styles.checkIcon}>{dinacharya[item.key] ? '✅' : '⬜'}</Text>
-              <Text style={styles.checkEmoji}>{item.icon}</Text>
+              <Ionicons
+                name={dinacharya[item.key] ? 'checkbox' : 'square-outline'}
+                size={20}
+                color={dinacharya[item.key] ? COLORS.success : COLORS.textLight}
+                style={styles.checkIcon}
+              />
+              <Ionicons name={item.ion} size={20} color={COLORS.primary} style={styles.checkEmoji} />
               <Text style={[styles.checkLabel, dinacharya[item.key] && styles.checkLabelDone]}>{item.label}</Text>
             </TouchableOpacity>
           ))}
         </Card>
 
         {/* Diet Recommendations */}
-        <Text style={styles.sectionTitle}>🍽 Diet Recommendations</Text>
+        <Text style={styles.sectionTitle}>Diet Recommendations</Text>
         <Text style={styles.sectionNote}>Based on your {state.prakritiResult?.prakriti || 'Dosha'} constitution</Text>
         {getDietRecommendations().map((meal, idx) => (
           <Card key={idx} style={styles.mealCard}>
@@ -162,7 +167,7 @@ const LifestyleScreen = ({ navigation }) => {
         ))}
 
         {/* Calorie Calculator */}
-        <Text style={styles.sectionTitle}>🔥 Calorie Calculator</Text>
+        <Text style={styles.sectionTitle}>Calorie Calculator</Text>
         <Card variant="elevated">
           <View style={styles.calcRow}>
             <View style={styles.calcField}>
@@ -212,12 +217,16 @@ const LifestyleScreen = ({ navigation }) => {
         </Card>
 
         {/* Meal Tracker */}
-        <Text style={styles.sectionTitle}>🍛 Meal Tracker</Text>
+        <Text style={styles.sectionTitle}>Meal Tracker</Text>
         <Card variant="elevated">
           {['breakfast', 'lunch', 'dinner'].map((meal) => (
             <View key={meal} style={styles.mealTrackRow}>
               <TouchableOpacity onPress={() => setMeals({ ...meals, [meal]: { ...meals[meal], done: !meals[meal].done } })}>
-                <Text style={styles.mealTrackCheck}>{meals[meal].done ? '✅' : '⬜'}</Text>
+                <Ionicons
+                  name={meals[meal].done ? 'checkbox' : 'square-outline'}
+                  size={22}
+                  color={meals[meal].done ? COLORS.success : COLORS.textLight}
+                />
               </TouchableOpacity>
               <Text style={styles.mealTrackName}>{meal.charAt(0).toUpperCase() + meal.slice(1)}</Text>
               <TextInput
@@ -238,7 +247,7 @@ const LifestyleScreen = ({ navigation }) => {
         </Card>
 
         {/* Ritucharya */}
-        <Text style={styles.sectionTitle}>🌦 Ritucharya (Seasonal Routine)</Text>
+        <Text style={styles.sectionTitle}>Ritucharya (Seasonal Routine)</Text>
         <Card variant="elevated" style={[styles.seasonCard, { borderLeftColor: COLORS[season.dosha] }]}>
           <Text style={styles.seasonTitle}>{season.season}</Text>
           <Text style={styles.seasonAdvice}>{season.advice}</Text>
@@ -248,11 +257,11 @@ const LifestyleScreen = ({ navigation }) => {
         </Card>
 
         {/* Exercise */}
-        <Text style={styles.sectionTitle}>🧘 Exercise Suggestions</Text>
+        <Text style={styles.sectionTitle}>Exercise Suggestions</Text>
         <View style={styles.exerciseGrid}>
           {exerciseRecommendations().map((ex, idx) => (
-            <Card key={idx} style={styles.exerciseCard}>
-              <Text style={styles.exerciseIcon}>{ex.icon}</Text>
+            <Card key={`ex-${idx}`} style={styles.exerciseCard}>
+              <Ionicons name={ex.ion} size={28} color={COLORS.primary} style={styles.exerciseIcon} />
               <Text style={styles.exerciseName}>{ex.name}</Text>
               <Text style={styles.exerciseDuration}>{ex.duration}</Text>
             </Card>
@@ -260,21 +269,21 @@ const LifestyleScreen = ({ navigation }) => {
         </View>
 
         {/* Stress Relief */}
-        <Text style={styles.sectionTitle}>😌 Stress Relief Tools</Text>
+        <Text style={styles.sectionTitle}>Stress Relief Tools</Text>
         <Card variant="elevated">
           {[
-            { icon: '🧘', name: 'Guided Meditation', desc: '10-minute calming meditation' },
-            { icon: '🌬', name: 'Breathing Exercise', desc: 'Anulom Vilom pranayama - 5 min' },
-            { icon: '🎵', name: 'Calming Music', desc: 'Nature sounds for relaxation' },
-            { icon: '📝', name: 'Gratitude Journal', desc: 'Write 3 things you are grateful for' },
+            { ion: 'body-outline', name: 'Guided Meditation', desc: '10-minute calming meditation' },
+            { ion: 'cloud-outline', name: 'Breathing Exercise', desc: 'Anulom Vilom pranayama - 5 min' },
+            { ion: 'musical-notes-outline', name: 'Calming Music', desc: 'Nature sounds for relaxation' },
+            { ion: 'create-outline', name: 'Gratitude Journal', desc: 'Write 3 things you are grateful for' },
           ].map((tool, idx) => (
-            <TouchableOpacity key={idx} style={styles.toolRow}>
-              <Text style={styles.toolIcon}>{tool.icon}</Text>
+            <TouchableOpacity key={`tool-${idx}`} style={styles.toolRow}>
+              <Ionicons name={tool.ion} size={24} color={COLORS.primary} style={styles.toolIcon} />
               <View style={styles.toolInfo}>
                 <Text style={styles.toolName}>{tool.name}</Text>
                 <Text style={styles.toolDesc}>{tool.desc}</Text>
               </View>
-              <Text style={styles.toolArrow}>›</Text>
+              <Ionicons name="chevron-forward" size={20} color={COLORS.textLight} />
             </TouchableOpacity>
           ))}
         </Card>
@@ -343,16 +352,15 @@ const styles = StyleSheet.create({
   // Exercise
   exerciseGrid: { flexDirection: 'row', gap: 10 },
   exerciseCard: { flex: 1, alignItems: 'center', padding: 14 },
-  exerciseIcon: { fontSize: 28, marginBottom: 6 },
+  exerciseIcon: { marginBottom: 6 },
   exerciseName: { fontSize: 12, fontWeight: '700', color: COLORS.text, textAlign: 'center' },
   exerciseDuration: { fontSize: 11, color: COLORS.textSecondary, marginTop: 2 },
   // Tools
   toolRow: { flexDirection: 'row', alignItems: 'center', paddingVertical: 12, borderBottomWidth: 0.5, borderBottomColor: COLORS.border, gap: 12 },
-  toolIcon: { fontSize: 24 },
+  toolIcon: { },
   toolInfo: { flex: 1 },
   toolName: { fontSize: 14, fontWeight: '600', color: COLORS.text },
   toolDesc: { fontSize: 12, color: COLORS.textSecondary },
-  toolArrow: { fontSize: 24, color: COLORS.textLight },
   disclaimer: { fontSize: 10, color: COLORS.textLight, textAlign: 'center', marginTop: 24, lineHeight: 14 },
   tileGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 10, marginBottom: 16 },
   tile: { width: '30%', backgroundColor: COLORS.surface, padding: 12, borderRadius: 12, alignItems: 'center', borderTopWidth: 3, elevation: 2, shadowColor: '#000', shadowOpacity: 0.08, shadowRadius: 4, shadowOffset: { width: 0, height: 2 } },

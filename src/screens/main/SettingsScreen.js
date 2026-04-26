@@ -48,48 +48,48 @@ const SettingsScreen = ({ navigation }) => {
         {/* Notifications */}
         <Text style={styles.sectionTitle}>Notifications</Text>
         <Card variant="elevated">
-          <SettingToggle icon="🔔" label="Push Notifications" value={notifications} onChange={setNotifications} />
-          <SettingToggle icon="🚨" label="Health Alert Notifications" value={alertNotif} onChange={setAlertNotif} />
-          <SettingToggle icon="🔺" label="Dosha Imbalance Alerts" value={doshaNotif} onChange={setDoshaNotif} />
-          <SettingToggle icon="📊" label="Weekly Report Notifications" value={weeklyReport} onChange={setWeeklyReport} />
+          <SettingToggle icon=""label="Push Notifications"value={notifications} onChange={setNotifications} />
+          <SettingToggle icon=""label="Health Alert Notifications"value={alertNotif} onChange={setAlertNotif} />
+          <SettingToggle icon=""label="Dosha Imbalance Alerts"value={doshaNotif} onChange={setDoshaNotif} />
+          <SettingToggle icon=""label="Weekly Report Notifications"value={weeklyReport} onChange={setWeeklyReport} />
         </Card>
 
         {/* Display */}
         <Text style={styles.sectionTitle}>Display</Text>
         <Card variant="elevated">
-          <SettingToggle icon="🌙" label="Dark Mode" value={darkMode} onChange={setDarkMode} />
-          <SettingRow icon="📏" label="Units" value={units} onPress={() => setUnits(units === 'metric' ? 'imperial' : 'metric')} />
-          <SettingRow icon="🌐" label="Language" value={language} onPress={() => {}} />
+          <SettingToggle icon=""label="Dark Mode"value={darkMode} onChange={setDarkMode} />
+          <SettingRow icon=""label="Units"value={units} onPress={() => setUnits(units === 'metric' ? 'imperial' : 'metric')} />
+          <SettingRow icon=""label="Language"value={language} onPress={() => {}} />
         </Card>
 
         {/* Data & Privacy */}
         <Text style={styles.sectionTitle}>Data & Privacy</Text>
         <Card variant="elevated">
-          <SettingToggle icon="🔄" label="Auto Sync Data" value={autoSync} onChange={setAutoSync} />
-          <SettingToggle icon="📤" label="Anonymous Data Sharing" value={dataSharing} onChange={setDataSharing} />
-          <SettingToggle icon="🔑" label="Biometric Login" value={biometric} onChange={setBiometric} />
-          <SettingRow icon="📥" label="Export Health Data" value="" onPress={() => Alert.alert('Export', 'Your health data export would be generated here.')} />
+          <SettingToggle icon=""label="Auto Sync Data"value={autoSync} onChange={setAutoSync} />
+          <SettingToggle icon=""label="Anonymous Data Sharing"value={dataSharing} onChange={setDataSharing} />
+          <SettingToggle icon=""label="Biometric Login"value={biometric} onChange={setBiometric} />
+          <SettingRow icon=""label="Export Health Data"value=""onPress={() => Alert.alert('Export', 'Your health data export would be generated here.')} />
         </Card>
 
         {/* App Info */}
         <Text style={styles.sectionTitle}>App Info</Text>
         <Card variant="elevated">
-          <InfoRow icon="📱" label="App Version" value="1.0.0" />
-          <InfoRow icon="🔧" label="Build" value="2026.04.13" />
-          <InfoRow icon="📋" label="Terms of Service" value="" onPress={() => {}} />
-          <InfoRow icon="🔒" label="Privacy Policy" value="" onPress={() => {}} />
-          <InfoRow icon="📜" label="Open Source Licenses" value="" onPress={() => {}} />
+          <InfoRow icon=""label="App Version"value="1.0.0" />
+          <InfoRow icon=""label="Build"value="2026.04.13" />
+          <InfoRow icon=""label="Terms of Service"value=""onPress={() => {}} />
+          <InfoRow icon=""label="Privacy Policy"value=""onPress={() => {}} />
+          <InfoRow icon=""label="Open Source Licenses"value=""onPress={() => {}} />
         </Card>
 
         {/* Account Actions */}
         <Text style={styles.sectionTitle}>Account</Text>
         <TouchableOpacity style={styles.logoutBtn} onPress={handleLogout}>
-          <Text style={styles.logoutBtnIcon}>🚪</Text>
+          <Text style={styles.logoutBtnIcon}></Text>
           <Text style={styles.logoutBtnText}>Logout</Text>
         </TouchableOpacity>
 
         <TouchableOpacity style={styles.deleteBtn} onPress={handleDeleteAccount}>
-          <Text style={styles.deleteBtnIcon}>⚠️</Text>
+          <Text style={styles.deleteBtnIcon}></Text>
           <Text style={styles.deleteBtnText}>Delete Account</Text>
         </TouchableOpacity>
 

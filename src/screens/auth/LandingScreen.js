@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
+import { Ionicons } from '@expo/vector-icons';
 import { COLORS, SIZES, SHADOWS } from '../../config/theme';
 import GradientButton from '../../components/common/GradientButton';
 import { useApp } from '../../context/AppContext';
@@ -25,7 +26,7 @@ const LandingScreen = ({ navigation }) => {
           colors={COLORS.gradient.saffron}
           style={styles.logoCircle}
         >
-          <Text style={styles.logoIcon}>🌿</Text>
+          <Ionicons name="leaf" size={40} color="#FFFFFF" />
         </LinearGradient>
         <Text style={styles.appName}>AyurTwin</Text>
         <Text style={styles.tagline}>Your personal AI-powered Ayurvedic health companion</Text>
@@ -38,7 +39,7 @@ const LandingScreen = ({ navigation }) => {
             style={[styles.toggleBtn, selectedType === 'patient' && styles.toggleActive]}
             onPress={() => setSelectedType('patient')}
           >
-            <Text style={styles.toggleIcon}>👤</Text>
+            <Ionicons name="person-circle-outline" size={32} color={selectedType === 'patient' ? COLORS.primary : COLORS.textSecondary} style={styles.toggleIcon} />
             <Text style={[styles.toggleText, selectedType === 'patient' && styles.toggleTextActive]}>Patient</Text>
             <Text style={styles.toggleDesc}>Full Health Tracking</Text>
           </TouchableOpacity>
@@ -46,7 +47,7 @@ const LandingScreen = ({ navigation }) => {
             style={[styles.toggleBtn, selectedType === 'family_member' && styles.toggleActive]}
             onPress={() => setSelectedType('family_member')}
           >
-            <Text style={styles.toggleIcon}>👨‍👩‍👧</Text>
+            <Ionicons name="people-outline" size={32} color={selectedType === 'family_member' ? COLORS.primary : COLORS.textSecondary} style={styles.toggleIcon} />
             <Text style={[styles.toggleText, selectedType === 'family_member' && styles.toggleTextActive]}>Family Member</Text>
             <Text style={styles.toggleDesc}>Monitor Others</Text>
           </TouchableOpacity>

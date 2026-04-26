@@ -104,7 +104,7 @@ const QuickReplies = ({
         <Text style={styles.title}>Quick Replies</Text>
         {showClose && onClose && (
           <TouchableOpacity onPress={onClose} style={styles.closeButton}>
-            <Ionicons name="close" size={18} color={colors.textTertiary} />
+            <Ionicons name="close"size={18} color={colors.textTertiary} />
           </TouchableOpacity>
         )}
       </View>
@@ -244,10 +244,10 @@ export const EmergencyQuickReplies = ({ onSelect }) => {
 
 export const FeedbackQuickReplies = ({ onSelect }) => {
   const suggestions = [
-    { id: '1', text: '👍 Helpful', icon: 'thumbs-up' },
-    { id: '2', text: '👎 Not helpful', icon: 'thumbs-down' },
+    { id: '1', text: 'Helpful', icon: 'thumbs-up' },
+    { id: '2', text: 'Not helpful', icon: 'thumbs-down' },
     { id: '3', text: '⭐ More info', icon: 'star' },
-    { id: '4', text: '📞 Contact support', icon: 'headset' },
+    { id: '4', text: 'Contact support', icon: 'headset' },
   ];
 
   return (

@@ -61,7 +61,7 @@ const ReportsScreen = ({ navigation }) => {
 
   const renderWeekly = () => (
     <View>
-      <Card variant="elevated" style={styles.summaryCard}>
+      <Card variant="elevated"style={styles.summaryCard}>
         <Text style={styles.reportTitle}>Weekly Health Summary</Text>
         <Text style={styles.reportDate}>{getDateRange('week')}</Text>
 
@@ -78,12 +78,12 @@ const ReportsScreen = ({ navigation }) => {
 
       <Text style={styles.sectionTitle}>Vital Averages</Text>
       <View style={styles.avgGrid}>
-        <AvgCard label="Heart Rate" value={`${weeklyAvg.heartRate}`} unit="bpm" icon="❤️" color={COLORS.heart} />
-        <AvgCard label="Temperature" value={`${weeklyAvg.temperature}`} unit="°C" icon="🌡️" color={COLORS.temp} />
-        <AvgCard label="SpO2" value={`${weeklyAvg.spo2}`} unit="%" icon="🫁" color={COLORS.spo2} />
-        <AvgCard label="Stress" value={`${weeklyAvg.stress}`} unit="idx" icon="😰" color={COLORS.stress} />
-        <AvgCard label="Sleep" value={`${weeklyAvg.sleepHours}`} unit="hrs" icon="😴" color={COLORS.info} />
-        <AvgCard label="Activity" value={`${weeklyAvg.activity}`} unit="min" icon="🏃" color={COLORS.success} />
+        <AvgCard label="Heart Rate"value={`${weeklyAvg.heartRate}`} unit="bpm"icon=""color={COLORS.heart} />
+        <AvgCard label="Temperature"value={`${weeklyAvg.temperature}`} unit="°C"icon=""color={COLORS.temp} />
+        <AvgCard label="SpO2"value={`${weeklyAvg.spo2}`} unit="%"icon=""color={COLORS.spo2} />
+        <AvgCard label="Stress"value={`${weeklyAvg.stress}`} unit="idx"icon=""color={COLORS.stress} />
+        <AvgCard label="Sleep"value={`${weeklyAvg.sleepHours}`} unit="hrs"icon=""color={COLORS.info} />
+        <AvgCard label="Activity"value={`${weeklyAvg.activity}`} unit="min"icon=""color={COLORS.success} />
       </View>
 
       <Text style={styles.sectionTitle}>Daily Breakdown</Text>
@@ -113,15 +113,15 @@ const ReportsScreen = ({ navigation }) => {
       </Card>
 
       <Text style={styles.sectionTitle}>Key Insights</Text>
-      <InsightCard icon="💡" text="Your stress peaked on Wednesday. Consider scheduling relaxation activities mid-week." />
-      <InsightCard icon="📈" text={`Your average health score this week is ${healthScore}. ${healthScore >= 70 ? 'Great job!' : 'Try improving sleep and exercise.'}`} />
-      <InsightCard icon="🏃" text={`You averaged ${weeklyAvg.activity} minutes of activity. ${weeklyAvg.activity >= 30 ? 'Keep it up!' : 'Aim for 30+ minutes daily.'}`} />
+      <InsightCard icon=""text="Your stress peaked on Wednesday. Consider scheduling relaxation activities mid-week." />
+      <InsightCard icon=""text={`Your average health score this week is ${healthScore}. ${healthScore >= 70 ? 'Great job!' : 'Try improving sleep and exercise.'}`} />
+      <InsightCard icon=""text={`You averaged ${weeklyAvg.activity} minutes of activity. ${weeklyAvg.activity >= 30 ? 'Keep it up!' : 'Aim for 30+ minutes daily.'}`} />
     </View>
   );
 
   const renderMonthly = () => (
     <View>
-      <Card variant="elevated" style={styles.summaryCard}>
+      <Card variant="elevated"style={styles.summaryCard}>
         <Text style={styles.reportTitle}>Monthly Health Summary</Text>
         <Text style={styles.reportDate}>{getDateRange('month')}</Text>
 
@@ -163,15 +163,15 @@ const ReportsScreen = ({ navigation }) => {
       </Card>
 
       <Text style={styles.sectionTitle}>Achievements This Month</Text>
-      <AchievementCard icon="🏆" title="30 Day Streak" desc="You've been consistent for 30 days!" />
-      <AchievementCard icon="📉" title="Stress Reduced" desc="Your average stress dropped by 12%" />
-      <AchievementCard icon="😴" title="Better Sleep" desc="Average sleep improved by 30 minutes" />
+      <AchievementCard icon=""title="30 Day Streak"desc="You've been consistent for 30 days!" />
+      <AchievementCard icon=""title="Stress Reduced"desc="Your average stress dropped by 12%" />
+      <AchievementCard icon=""title="Better Sleep"desc="Average sleep improved by 30 minutes" />
     </View>
   );
 
   const renderStress = () => (
     <View>
-      <Card variant="elevated" style={styles.summaryCard}>
+      <Card variant="elevated"style={styles.summaryCard}>
         <Text style={styles.reportTitle}>Stress Report</Text>
         <View style={styles.stressOverview}>
           <View style={[styles.stressCircle, {
@@ -183,10 +183,10 @@ const ReportsScreen = ({ navigation }) => {
             <Text style={styles.stressLabel}>Current</Text>
           </View>
           <View style={styles.stressInfo}>
-            <InfoItem label="Weekly Avg" value="48" />
-            <InfoItem label="Monthly Avg" value="52" />
-            <InfoItem label="Peak" value="78" />
-            <InfoItem label="Lowest" value="22" />
+            <InfoItem label="Weekly Avg"value="48" />
+            <InfoItem label="Monthly Avg"value="52" />
+            <InfoItem label="Peak"value="78" />
+            <InfoItem label="Lowest"value="22" />
           </View>
         </View>
       </Card>
@@ -208,25 +208,25 @@ const ReportsScreen = ({ navigation }) => {
       </Card>
 
       <Text style={styles.sectionTitle}>Triggers & Recommendations</Text>
-      <TriggerCard trigger="Poor Sleep (<6 hrs)" impact="High" recommendation="Improve sleep hygiene. Try warm milk before bed." />
-      <TriggerCard trigger="Long Work Hours" impact="Medium" recommendation="Take 5-minute breaks every hour. Practice desk stretches." />
-      <TriggerCard trigger="Low Physical Activity" impact="Medium" recommendation="Walk for 20 minutes daily. Try morning yoga." />
+      <TriggerCard trigger="Poor Sleep (<6 hrs)"impact="High"recommendation="Improve sleep hygiene. Try warm milk before bed." />
+      <TriggerCard trigger="Long Work Hours"impact="Medium"recommendation="Take 5-minute breaks every hour. Practice desk stretches." />
+      <TriggerCard trigger="Low Physical Activity"impact="Medium"recommendation="Walk for 20 minutes daily. Try morning yoga." />
     </View>
   );
 
   const renderDosha = () => (
     <View>
-      <Card variant="elevated" style={styles.summaryCard}>
+      <Card variant="elevated"style={styles.summaryCard}>
         <Text style={styles.reportTitle}>Dosha Balance Report</Text>
         <View style={styles.doshaVisual}>
-          <DoshaCircle label="Vata" percent={dosha.vata || 33} color={COLORS.vata} />
-          <DoshaCircle label="Pitta" percent={dosha.pitta || 33} color={COLORS.pitta} />
-          <DoshaCircle label="Kapha" percent={dosha.kapha || 33} color={COLORS.kapha} />
+          <DoshaCircle label="Vata"percent={dosha.vata || 33} color={COLORS.vata} />
+          <DoshaCircle label="Pitta"percent={dosha.pitta || 33} color={COLORS.pitta} />
+          <DoshaCircle label="Kapha"percent={dosha.kapha || 33} color={COLORS.kapha} />
         </View>
         <Text style={styles.prakritiLabel}>Prakriti: {state.prakritiResult?.prakriti || 'Not assessed'}</Text>
         {dosha.imbalanceDetected && (
           <View style={styles.imbalanceAlert}>
-            <Text style={styles.imbalanceText}>⚠️ {dosha.dominantImbalance?.charAt(0).toUpperCase() + dosha.dominantImbalance?.slice(1)} imbalance detected</Text>
+            <Text style={styles.imbalanceText}> {dosha.dominantImbalance?.charAt(0).toUpperCase() + dosha.dominantImbalance?.slice(1)} imbalance detected</Text>
           </View>
         )}
       </Card>
@@ -246,10 +246,10 @@ const ReportsScreen = ({ navigation }) => {
       </Card>
 
       <Text style={styles.sectionTitle}>Balancing Tips</Text>
-      {dosha.dominantImbalance === 'vata' && <TipCard dosha="Vata" tips={['Warm, cooked foods', 'Regular routine', 'Oil massage (Abhyanga)', 'Avoid cold, dry foods']} />}
-      {dosha.dominantImbalance === 'pitta' && <TipCard dosha="Pitta" tips={['Cooling foods (cucumber, mint)', 'Avoid spicy food', 'Moonlight walks', 'Calming meditation']} />}
-      {dosha.dominantImbalance === 'kapha' && <TipCard dosha="Kapha" tips={['Light, warm foods', 'Vigorous exercise', 'Avoid daytime sleep', 'Spices like ginger & turmeric']} />}
-      {!dosha.dominantImbalance && <TipCard dosha="Balanced" tips={['Maintain current routine', 'Seasonal adjustments', 'Regular exercise', 'Mindful eating']} />}
+      {dosha.dominantImbalance === 'vata' && <TipCard dosha="Vata"tips={['Warm, cooked foods', 'Regular routine', 'Oil massage (Abhyanga)', 'Avoid cold, dry foods']} />}
+      {dosha.dominantImbalance === 'pitta' && <TipCard dosha="Pitta"tips={['Cooling foods (cucumber, mint)', 'Avoid spicy food', 'Moonlight walks', 'Calming meditation']} />}
+      {dosha.dominantImbalance === 'kapha' && <TipCard dosha="Kapha"tips={['Light, warm foods', 'Vigorous exercise', 'Avoid daytime sleep', 'Spices like ginger & turmeric']} />}
+      {!dosha.dominantImbalance && <TipCard dosha="Balanced"tips={['Maintain current routine', 'Seasonal adjustments', 'Regular exercise', 'Mindful eating']} />}
     </View>
   );
 
@@ -257,14 +257,14 @@ const ReportsScreen = ({ navigation }) => {
     const sortedRisks = Object.entries(risks).sort((a, b) => b[1] - a[1]);
     return (
       <View>
-        <Card variant="elevated" style={styles.summaryCard}>
+        <Card variant="elevated"style={styles.summaryCard}>
           <Text style={styles.reportTitle}>Disease Risk Report</Text>
           <Text style={styles.reportNote}>Currently using rule-based logic. ML engine integration in next phase.</Text>
         </Card>
 
         <Text style={styles.sectionTitle}>All Risk Predictions</Text>
         {sortedRisks.map(([key, value]) => (
-          <Card key={key} variant="elevated" style={[styles.riskCard, { borderLeftColor: getRiskColor(value) }]}>
+          <Card key={key} variant="elevated"style={[styles.riskCard, { borderLeftColor: getRiskColor(value) }]}>
             <View style={styles.riskHeader}>
               <Text style={styles.riskName}>{key.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}</Text>
               <Text style={[styles.riskPercent, { color: getRiskColor(value) }]}>{value}%</Text>
@@ -283,12 +283,12 @@ const ReportsScreen = ({ navigation }) => {
 
         <Text style={styles.sectionTitle}>Contributing Factors</Text>
         <Card variant="elevated">
-          <FactorRow factor="BMI" value={profile.bmi ? `${profile.bmi}` : 'N/A'} impact={profile.bmi > 25 ? 'High' : 'Low'} />
-          <FactorRow factor="Stress Level" value={`${profile.stress_level || 5}/10`} impact={(profile.stress_level || 5) > 6 ? 'High' : 'Low'} />
-          <FactorRow factor="Sleep" value={`${profile.sleep_duration_hours || 7} hrs`} impact={(profile.sleep_duration_hours || 7) < 6 ? 'High' : 'Low'} />
-          <FactorRow factor="Physical Activity" value={profile.physical_activity || 'Moderate'} impact={profile.physical_activity === 'low' ? 'High' : 'Low'} />
-          <FactorRow factor="Smoking" value={profile.smoking ? 'Yes' : 'No'} impact={profile.smoking ? 'High' : 'None'} />
-          <FactorRow factor="Family History" value={hasFamilyHistory(profile) ? 'Present' : 'None'} impact={hasFamilyHistory(profile) ? 'Medium' : 'None'} />
+          <FactorRow factor="BMI"value={profile.bmi ? `${profile.bmi}` : 'N/A'} impact={profile.bmi > 25 ? 'High' : 'Low'} />
+          <FactorRow factor="Stress Level"value={`${profile.stress_level || 5}/10`} impact={(profile.stress_level || 5) > 6 ? 'High' : 'Low'} />
+          <FactorRow factor="Sleep"value={`${profile.sleep_duration_hours || 7} hrs`} impact={(profile.sleep_duration_hours || 7) < 6 ? 'High' : 'Low'} />
+          <FactorRow factor="Physical Activity"value={profile.physical_activity || 'Moderate'} impact={profile.physical_activity === 'low' ? 'High' : 'Low'} />
+          <FactorRow factor="Smoking"value={profile.smoking ? 'Yes' : 'No'} impact={profile.smoking ? 'High' : 'None'} />
+          <FactorRow factor="Family History"value={hasFamilyHistory(profile) ? 'Present' : 'None'} impact={hasFamilyHistory(profile) ? 'Medium' : 'None'} />
         </Card>
       </View>
     );
@@ -348,7 +348,7 @@ const InsightCard = ({ icon, text }) => (
 );
 
 const AchievementCard = ({ icon, title, desc }) => (
-  <Card variant="elevated" style={styles.achieveCard}>
+  <Card variant="elevated"style={styles.achieveCard}>
     <Text style={styles.achieveIcon}>{icon}</Text>
     <View style={styles.achieveInfo}>
       <Text style={styles.achieveTitle}>{title}</Text>
