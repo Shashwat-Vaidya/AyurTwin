@@ -93,7 +93,42 @@ void connectWiFi() {
 float scaleAccel(int16_t v) { return v / 16384.0 * 9.81; }   // m/s^2
 float scaleGyro(int16_t v)  { return v / 131.0;        }     // °/s
 
+// ── DATA VALIDATION ───────────────────────────────────────────────────────
+bool isValidHeartRate(int hr) {
+    return hr >= 40 && hr <= 180;  // Typical wearable range
+}
+
+bool isValidSpO2(int spo2) {
+    return spo2 >= 80 && spo2 <= 100;  // Acceptable blood oxygen range
+}
+
+bool isValidTemperature(float temp) {
+    return temp >= 35.0 && temp <= 40.5;  // Human body temp range
+}
+
+bool isValidMotion(float val) {
+    return val >= -50 && val <= 50;  // Reasonable accel/gyro range
+}
+
 void uploadSensorRow(bool fingerOnSensor) {
+    // SKIP upload if data looks corrupted
+    if (fingerOnSensor && !isValidHeartRate(avgBPM)) {
+        Serial.printf("[upload SKIP] Invalid HR: %d\n", avgBPM);
+        return;
+    }
+    if (fingerOnSensor && !isValidSpO2(spo2Value)) {
+        Serial.printf("[upload SKIP] Invalid SpO2: %d\n", spo2Value);
+        return;
+    }
+    if (!isValidTemperature(bodyTemp)) {
+        Serial.printf("[upload SKIP] Invalid temp: %.2f\n", bodyTemp);
+        return;
+    }
+    if (!isValidMotion(scaleAccel(ax)) || !isValidMotion(scaleAccel(ay)) || !isValidMotion(scaleAccel(az))) {
+        Serial.printf("[upload SKIP] Invalid accel values\n");
+        return;
+    }
+
     if (WiFi.status() != WL_CONNECTED) {
         Serial.println("[upload] Wi-Fi down, reconnecting...");
         connectWiFi();
@@ -162,6 +197,14 @@ void setup() {
     Serial.println("===== AyurTwin sensor node ready =====");
     Serial.println("Posting to: " + String(SUPABASE_URL));
     Serial.println("As user_id: " + String(USER_ID));
+    
+    // Allow sensors to warm up and stabilize before first upload
+    Serial.println("Warming up sensors for 10 seconds...");
+    for (int i = 0; i < 10; i++) {
+        delay(1000);
+        Serial.print(".");
+    }
+    Serial.println("\nSensors ready!");
 }
 
 // ── LOOP ───────────────────────────────────────────────────────────────────
