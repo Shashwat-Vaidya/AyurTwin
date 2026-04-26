@@ -31,8 +31,8 @@
 #include <DallasTemperature.h>
 
 // ── CONFIG (FILL THESE) ────────────────────────────────────────────────────
-const char* WIFI_SSID     = "YOUR_WIFI_SSID";
-const char* WIFI_PASSWORD = "YOUR_WIFI_PASSWORD";
+const char* WIFI_SSID     = "Airtel_vira_5835";
+const char* WIFI_PASSWORD = "air42636";
 
 // Supabase project — REST endpoint for sensor_data table
 const char* SUPABASE_URL  = "https://vfmskkfcsxbsvghbqbrk.supabase.co/rest/v1/sensor_data";
@@ -165,23 +165,6 @@ bool validateAllSensorData(bool fingerOnSensor) {
     return true;
 }
 
-// ── DATA VALIDATION ───────────────────────────────────────────────────────
-bool isValidHeartRate(int hr) {
-    return hr >= 40 && hr <= 180;  // Typical wearable range
-}
-
-bool isValidSpO2(int spo2) {
-    return spo2 >= 80 && spo2 <= 100;  // Acceptable blood oxygen range
-}
-
-bool isValidTemperature(float temp) {
-    return temp >= 35.0 && temp <= 40.5;  // Human body temp range
-}
-
-bool isValidMotion(float val) {
-    return val >= -50 && val <= 50;  // Reasonable accel/gyro range
-}
-
 void uploadSensorRow(bool fingerOnSensor) {
     // VALIDATE before uploading
     if (!validateAllSensorData(fingerOnSensor)) {
@@ -204,8 +187,13 @@ void uploadSensorRow(bool fingerOnSensor) {
 
     StaticJsonDocument<512> doc;
     doc["user_id"]          = USER_ID;
-    doc["heart_rate"]       = fingerOnSensor ? avgBPM     : nullptr;
-    doc["spo2"]             = fingerOnSensor ? spo2Value  : nullptr;
+    if (fingerOnSensor) {
+        doc["heart_rate"]   = avgBPM;
+        doc["spo2"]         = spo2Value;
+    } else {
+        doc["heart_rate"]   = nullptr;
+        doc["spo2"]         = nullptr;
+    }
     doc["body_temperature"] = bodyTemp;
     doc["accel_x"]          = scaleAccel(ax);
     doc["accel_y"]          = scaleAccel(ay);
