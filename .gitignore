@@ -41,6 +41,16 @@ backend/.env.*
 backend/ml/model.json
 backend/ml/dataset.csv
 
+# ML Model files (too large for GitHub)
+*.pkl
+*.joblib
+*.h5
+*.weights
+*.pt
+*.pth
+*.onnx
+ayurtwin\ 3.0/ayurtwin_backend/ml_model.pkl
+
 # Generated docs / reports (regenerate with `npm run manual`)
 docs/AyurTwin_User_Manual.pdf
 
